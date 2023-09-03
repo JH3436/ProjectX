@@ -1,0 +1,31 @@
+/* 字體 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+
+/* "米字號"被用來選取HTML文檔中的所有元素 */
+* {
+  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+/* 主題顏色宣告 */
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+}
+
+/* 測試 */
+body {
+  background-color: var(--deepBlue);
+}
+button {
+  background-color: var(--orange);
+}
+span {
+  color: var(--lightGray);
+}
+
+h1 {
+  color: var(--white);
+}
