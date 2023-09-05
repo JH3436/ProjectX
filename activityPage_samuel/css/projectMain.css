@@ -1,0 +1,122 @@
+/* #picture
+{
+    background-color: black;
+    height: 200px;
+    width: 15%;
+    border-right: 11px solid #e5bb8a;
+    border-radius: 15px;
+    margin: 0px;
+    display: inline-block;
+    vertical-align:top; 
+
+} */
+:root {
+    --black: #000000;
+    --deepBlue: #14213d;
+    --blue: #416ac2;
+    --orange: #fca311;
+    --lightGray: #e5e5e5;
+    --white: #ffffff;
+}
+
+h1{
+    font-size: xx-large;
+    color: var(--white);
+
+}
+h3{
+    color: var(--lightGray);
+}
+
+#content{
+    width: 100%;
+    height: 1750px;
+    margin: 50px;
+}
+
+/* 圖片DIV CSS */
+#pictureDiv{
+    /* background-color: var(--lightGray); */
+    height: 50%;
+    width: 50%;
+    padding: 10px;
+    position: relative;
+    display: inline-block;
+    /* justify-content: flex-start */
+}
+
+#picture{
+    height: 80%;
+    width: 100%;
+}
+
+/* 報名DIV */
+#signUpDiv{
+    float:right;
+    height: 50%;
+    width: 50%;
+    padding: 10px;
+    margin-top: 50px;
+    /* display: inline-block; */
+    /* justify-content: flex-end; */
+    position: relative;
+
+}
+
+/* 按鈕 */
+#signBtn{
+    width:30%;
+    height:75px;
+    border:0;
+    background-color:#0777da;
+    color:#fff;
+    font-size: x-large;
+    border-radius:10px;
+    margin-left: 10%;
+    cursor:pointer;
+
+}
+  
+#signBtn:hover{
+    color:#0777da;
+    background-color:var(--lightGray);
+    border:2px var(--black);
+}
+
+/* 地圖DIV */
+#map{
+    width: 100%;
+    height: 250px;
+}
+
+
+/* 活動詳細DIV */
+#activityDiv{
+    background-color: var(--blue);
+    width: 100%;
+    height: 800px;
+    margin-top: 75px; 
+}
+
+#activityDetailed{
+    background-color: var(--orange);
+    width: 30%;
+    height: 75px;
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+    padding: 5px;
+    position: absolute;
+
+}
+
+#activityH3{
+    color: var(--deepBlue);
+    display: inline-block;
+    font-size: large
+    
+}
+
+/* #activityCalendar{
+    height: 20%;
+    width: 20%;
+} */

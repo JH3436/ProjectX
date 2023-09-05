@@ -1,45 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Free Web tutorials">
-        <meta name="keywords" content="event page">
-        <meta name="author" content="samuel772014">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="stylesheet" href="./projectMain.css"> 
-        <title>JOIN</title>
 
-       
-
-    </head>
-
-    <body>
-        <div id="content">
-            <div id="picture">
-
-            </div>
-            
-            
-            <div id="signUpDiv">
-                <button>我要報名</button>
-                    <button>愛心</button>
-                    <div id="activityCalendar">
-                        <link rel="stylesheet" href="./projectCalendar.css"> 
-                        <div id="calendar"></div>
-                        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-                    </div>
-                    <div id="map"></div>
-            </div>
-        <br>
-
-            <div id="activityDetailed">
-
-            </div>
-
-        </div>
-
-    </body>
-    <script>
         !function() {
 
 var today = moment();
@@ -360,28 +319,28 @@ function createElement(tagName, className, innerText) {
   return ele;
 }
 }();
-
+ 
 !function() {
 var data = [
-  { eventName: 'Lunch Meeting w/ Mark', calendar: 'Work', color: 'orange' },
-  { eventName: 'Interview - Jr. Web Developer', calendar: 'Work', color: 'orange' },
-  { eventName: 'Demo New App to the Board', calendar: 'Work', color: 'orange' },
-  { eventName: 'Dinner w/ Marketing', calendar: 'Work', color: 'orange' },
+  // { eventName: '', calendar: 'Work', color: 'orange' },
+  // { eventName: '', calendar: 'Work', color: 'orange' },
+  // { eventName: '', calendar: 'Work', color: 'orange' },
+  // { eventName: '', calendar: 'Work', color: 'orange' },
 
-  { eventName: 'Game vs Portalnd', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs Houston', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs Denver', calendar: 'Sports', color: 'blue' },
-  { eventName: 'Game vs San Degio', calendar: 'Sports', color: 'blue' },
+  // { eventName: '', calendar: 'Sports', color: 'blue' },
+  // { eventName: '', calendar: 'Sports', color: 'blue' },
+  // { eventName: '', calendar: 'Sports', color: 'blue' },
+  // { eventName: '', calendar: 'Sports', color: 'blue' },
 
-  { eventName: 'School Play', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Parent/Teacher Conference', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Pick up from Soccer Practice', calendar: 'Kids', color: 'yellow' },
-  { eventName: 'Ice Cream Night', calendar: 'Kids', color: 'yellow' },
+  // { eventName: '', calendar: 'Kids', color: 'yellow' },
+  // { eventName: '', calendar: 'Kids', color: 'yellow' },
+  // { eventName: '', calendar: 'Kids', color: 'yellow' },
+  // { eventName: '', calendar: 'Kids', color: 'yellow' },
 
-  { eventName: 'Free Tamale Night', calendar: 'Other', color: 'green' },
-  { eventName: 'Bowling Team', calendar: 'Other', color: 'green' },
-  { eventName: 'Teach Kids to Code', calendar: 'Other', color: 'green' },
-  { eventName: 'Startup Weekend', calendar: 'Other', color: 'green' }
+  // { eventName: '', calendar: 'Other', color: 'green' },
+  // { eventName: '', calendar: 'Other', color: 'green' },
+  // { eventName: '', calendar: 'Other', color: 'green' },
+  // { eventName: '', calendar: 'Other', color: 'green' }
 ];
 
 
@@ -394,6 +353,4 @@ var calendar = new Calendar('#calendar', data);
 
 }();
 
-    </script>
-
-</html>
+    
