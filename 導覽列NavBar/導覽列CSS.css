@@ -105,6 +105,7 @@ body {
     left: 10%;    /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
     z-index: 5;    /*確保不會被其他元素擋住*/
     border-radius: 10px;
+    box-shadow:0 4px 36px 1px #797979;
 }
 
 .navbar:hover #explore-dropdown {
