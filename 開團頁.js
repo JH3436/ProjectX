@@ -13,7 +13,7 @@ searchInput.addEventListener('focus', function () {
 // 添加blur事件監聽器（當失去焦點時恢復原始邊框顏色）
 searchInput.addEventListener('blur', function () {
     // 恢復原始邊框顏色為白色
-    searchInput.style.border = '6px solid var(--white)';
+    searchInput.style = "none"
 });
 
 // 下拉清單
