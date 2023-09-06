@@ -149,13 +149,13 @@ body {
 /* slogan */
 /* 新增的區塊樣式 */
 .slogan-section {
-  height: 80vh;
+  height: 70vh;
   margin-top: 2.5%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
   background-color: var(--deepBlue);
   color: var(--white);
   position: relative;
@@ -189,7 +189,6 @@ body {
   flex: 2;
   display: flex;
   align-items: right;
-
 }
 
 /* 調整圖片寬度 */
