@@ -99,10 +99,10 @@ body {
   background-color: var(--white);
   min-width: 400px;
   top: 100%;
-  left: 10%;
   /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
-  z-index: 5;
+  left: 10%;
   /*確保不會被其他元素擋住*/
+  z-index: 5;
   border-radius: 10px;
   box-shadow: 0 4px 36px 1px #797979;
 }
@@ -149,8 +149,8 @@ body {
 /* slogan */
 /* 新增的區塊樣式 */
 .slogan-section {
-  height: 70vh;
-  margin-top: 2.5%;
+  height: 100vh;
+  margin-top: 7%;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -213,12 +213,69 @@ body {
   object-fit: cover;
 }
 
-.carousel-caption {
-  background-color: rgba(0, 0, 0, 0.5); /* 設置背景色，可以是半透明的 */
-  color: #fff; /* 文字顏色 */
-  text-align: left; /* 文字對齊方式，這裡設置為左對齊 */
-  padding: 10px; /* 內邊距 */
-  max-width: 300px;
+.my-caption {
+  background-color: rgba(0, 0, 0, 0.279);
+  color: #fff;
+  text-align: left;
+  padding: 30px;
+  width: fit-content;
+  height: fit-content;
+}
+
+/* 輪播圖文字設計 */
+.carousel1 {
+  border: rgba(0, 0, 0, 0.5) 2px solid;
+  position: flex;
+  top: 18%;
+  left: 12%;
+}
+
+.carousel2 {
+  border: #fca311 2px solid;
+  position: flex;
+  top: 18%;
+  left: 50%;
+}
+
+/* moving letter特效 */
+.ml14 {
+  font-weight: 200;
+  font-size: 3.2em;
+}
+
+.ml14 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml14 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 100% 100%;
+  bottom: 0;
+}
+
+.ml14 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+
+/* 定義漸層邊框圖像 */
+.gradient-border {
+  border: 7px solid transparent;
+  /* 初始邊框為透明 */
+  border-image: linear-gradient(90deg, #fca311, #000000);
+  /* 使用線性漸變作為邊框圖像 */
+  border-image-slice: 1;
+  /* 使整個邊框都包含漸變 */
 }
 
 
@@ -233,7 +290,8 @@ body {
   opacity: 0.5;
   /*shape border*/
   border: 3px white solid;
-  border-radius: 50%; /*zero for square */
+  border-radius: 50%;
+  /*zero for square */
   /*symbol */
   color: #fff;
   /*vertical position */
@@ -246,5 +304,5 @@ body {
   height: .3rem;
   width: 3rem;
   border: 0.15rem rgb(130, 130, 131) solid;
-  
+
 }
