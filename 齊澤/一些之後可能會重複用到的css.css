@@ -5,3 +5,10 @@
         inset 0 0 0 50px #333,
         inset 0 0 0 6px rgba(255, 255, 255, 0.5);
 }
+
+/* 定義漸層邊框圖像 */
+.gradient-border {
+    border: 10px solid transparent; /* 初始邊框為透明 */
+    border-image: linear-gradient(90deg, #fca311, #000000); /* 使用線性漸變作為邊框圖像 */
+    border-image-slice: 1; /* 使整個邊框都包含漸變 */
+  }
