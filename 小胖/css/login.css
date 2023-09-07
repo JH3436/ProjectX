@@ -79,13 +79,6 @@ form{
     margin-right: 40px;
   }
 
-  .register-link{
-    text-decoration:underline;
-}
-.register-link:hover{
-    color: #9f9e9e;
-    /* 原本的灰色太淡 */
-}
   
 
 /* body鎖死id解決... */
@@ -110,6 +103,8 @@ justify-content: center
 
 
   h5:hover{
+    text-decoration:underline;
     transform: scale(1.5);
     cursor: pointer;
+    color: #9f9e9e;
   }
