@@ -16,70 +16,69 @@ html, body {
 body{
     margin: 0px;
     font-family: "Roboto";
-    background-color: var(--orange);
+    background-color: var(--deepBlue);
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
 
-.login{
-    background-color: var(--deepBlue);
+/* 按鈕的基本樣式 */
+.button {
+    background-color: #14213d;
+    color: white;
+    border: 2px solid #14213d;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px 0; /* 上下間距 */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 12rem;
+  }
+  
+  /* 滑鼠移過時的樣式 */
+  .button:hover {
+    background-color: white;
+    color: #14213d;
+  }
+  
+  .login {
+    background-color: var(--white);
     width: 350px;
-    
-    color:var(--lightGray);
+    color: var(--deepBlue);
     box-shadow: 10px 10px 25px #14213d;
-    border-radius: 10px; 
-    
-    
-}
-.login input{
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .login input {
     display: flex;
-    margin: 20px auto;
+    margin: 10px auto;
     text-align: center;
     background: none;
-    color: var(--lightGray);
+    color: var(--deepBlue);
     padding: 10px;
     border-radius: 20px;
-}
-
-.login input[type="text"],.login input[type="password"]{
-    border:0.1px solid 
-}
-
-
-
-
-.header {
+    border: 2px solid #14213d;
+  }
+  
+  .header {
     text-align: center;
-    margin: 80px auto;
-    margin-top: 10px;
-}
-
-.header h1
-{
+    margin-bottom:5rem;
+  }
+  
+  .header h1 {
     margin-right: 120px;
-}
-.header p{
-
+    margin-bottom: 1rem;
+  }
+  
+  .header p {
     margin-right: 40px;
-    
-}
-
-.login-button {
-    display: inline-block;
-    background-color: var(--deepBlue);
-    color: var(--lightGray); 
-    padding: 10px 20px; /* 內邊距，請根據你的設計更改 */
-    border: none;
-    border-radius: 20px;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 115px;
-}
+  }
+  
 
 
-/* 滑鼠懸停時的樣式 */
-.login-button:hover {
-    background-color: var(--orange); /* 滑鼠懸停時的背景顏色，請根據你的設計更改 */
-}
+  
+  
+
