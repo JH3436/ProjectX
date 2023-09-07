@@ -1,0 +1,230 @@
+/* 字體 */
+/* 分支修改測試 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+
+/* "米字號"被用來選取HTML文檔中的所有元素 */
+* {
+  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  /*當使用超連結時，頁面會平滑滾動到目標位置。 */
+}
+
+/* 主題顏色宣告 */
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --blue: #416ac2;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+}
+
+/* 頁面背景色 */
+body {
+  background-color: var(--deepBlue);
+  padding-left: 20%;
+  padding-right: 20%;
+  color: var(--white);
+}
+
+/* 導覽列 */
+.navbar {
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 10px 20px; */
+  font-size: large;
+  font-weight: bolder;
+  position: relative;
+
+}
+
+.navbar-item {
+  text-decoration: none;
+  color: var(--white);
+  margin-right: 20px;
+  position: relative;
+}
+
+.navbar-item:hover {
+  color: var(--orange);
+}
+
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  margin-right: 50px;
+}
+
+.search-input {
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.navbar-notify {
+  text-decoration: none;
+  margin-right: 20px;
+  color: var(--white);
+  background-color: var(--orange);
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.navbar-notify:hover {
+  color: var(--deepBlue);
+}
+
+.navbar-member {
+  text-decoration: none;
+  margin-right: 20px;
+  color: var(--white);
+  background-color: var(--orange);
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.navbar-member:hover {
+  color: var(--deepBlue);
+}
+
+
+/* 懸浮方框 */
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  min-width: 400px;
+  top: 100%;
+  left: 10%;
+  /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
+  z-index: 5;
+  /*確保不會被其他元素擋住*/
+  border-radius: 10px;
+  box-shadow: 0 4px 36px 1px #797979;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+.dropdown-content a:hover {
+  color: var(--orange);
+}
+
+.dropdown-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.dropdown-section {
+  flex: 1;
+}
+
+.dropdown-section {
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.dropdown-section ul {
+  list-style: none;
+  padding: 15px;
+  margin: 0%;
+}
+
+.dropdown-section ul li a {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--deepBlue);
+  /* text-align: center; */
+}
+
+/* 通知的懸浮方框 */
+.Ndropdown {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  max-width: 170px;
+  top: 100%;
+  right: 8%;
+  /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
+  z-index: 5;
+  /*確保不會被其他元素擋住*/
+  border-radius: 10px;
+  box-shadow: 0 4px 36px 1px #797979;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+
+ 
+}
+
+.Ndropdown-content a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+.Ndropdown-content a:hover {
+  color: var(--orange);
+}
+
+.Ndropdown-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.Ndropdown-section {
+  flex: 1;
+}
+
+.Ndropdown-section {
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.Ndropdown-section ul {
+  list-style: none;
+  padding: 15px;
+  margin: 0%;
+}
+
+.Ndropdown-section ul li a {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--deepBlue);
+  /* text-align: center; */
+}
+
+
+.notification-badge {
+  background-color: red;
+  color: var(--white);
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  position: relative;
+  margin-left: 10px;
+  top: -2px;
+  transition: width 0.2s, height 0.2s;
+
+}
+
+.badge-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
