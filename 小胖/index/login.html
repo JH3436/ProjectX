@@ -2,12 +2,30 @@
 
 <head>
     <link href="/小胖/css/login.css" rel="stylesheet">
-
+     <!-- 引入導覽欄的CSS文件 -->
+    <link rel="stylesheet" type="text/css" href="/導覽列Navbar/css for navbar.css">
+    <!-- BAR -->
+    <title>JO!N</title>
+    <link rel="icon" href="/導覽列Navbar/Files/小黃人.png" type="image/png" />
 </head>
-<body>
-    <!-- action這邊用以連接後端，登入訊息要用form包起來 -->
 
-    <form action="action.js" class="login">
+<body>
+<!-- BAR -->
+    <div id="navbar-container">
+
+          <!-- 導覽列設計 -->
+          <nav class="navbar" id="navbar">
+            <div class="navbar-logo">
+              <a class="navbar-item" href="xxxxxx">
+                <img src="/導覽列Navbar/Files/Logo.png" alt="logo" width="125" height="50" />
+              </a>
+          </nav>
+
+    </div>
+
+
+<!-- 帳密   -->
+    <form action="action.js" class="login" id="login">
         <div class="header">
         <h1>歡迎!</h1>
         <p>開始揪團，一起探險!</p>
@@ -24,10 +42,14 @@
         <button class="button">使用Google登入</button>
         <button class="button">使用Line登入</button>
         </div>
-  
-
+        <div class="register-link">
+            <p>註冊帳號</p>
+            </div>
     </form>
-    
+  
 </body>
+
+<!-- bar-js -->
+<script src="/導覽列Navbar/js for navbar.js"></script>
 
 </html>
