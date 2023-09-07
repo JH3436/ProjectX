@@ -144,9 +144,8 @@ body {
 }
 
 /* slogan */
-/* 新增的區塊樣式 */
 .slogan-section {
-  height: 75vh;
+  height: 80vh;
   margin-top: 7%;
   display: flex;
   align-items: flex-start;
@@ -240,6 +239,17 @@ body {
   left: 50%;
 }
 
+.carouselBtn {
+  background-color: var(--orange);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.carouselBtn:hover {
+  color: var(--deepBlue);
+  border: var(--orange) 2px solid;
+}
+
 /* moving letter特效 */
 .ml14 {
   font-weight: 200;
@@ -274,7 +284,7 @@ body {
 .gradient-border {
   border: 7px solid transparent;
   /* 初始邊框為透明 */
-  border-image: linear-gradient(90deg, #fca311, #000000);
+  border-image: linear-gradient(90deg, #fca311, #ffffff);
   /* 使用線性漸變作為邊框圖像 */
   border-image-slice: 1;
   /* 使整個邊框都包含漸變 */
