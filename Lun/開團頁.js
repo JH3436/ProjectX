@@ -60,4 +60,10 @@ notify.addEventListener('click', function (e) {
     notificationBadge.style.width = `${width}px`;
     notificationBadge.style.height = `${height}px`;
   }
-  updateBadge(999);
+  updateBadge(99);
+
+
+
+
+  // 下拉選單
+  
