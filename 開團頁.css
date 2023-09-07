@@ -67,18 +67,18 @@ body {
   margin-right: 5px;
 }
 
-.navbar-login {
+.navbar-notify {
   text-decoration: none;
   margin-right: 20px;
   color: var(--white);
   padding: 5px 15px;
 }
 
-.navbar-login:hover {
+.navbar-notify:hover {
   color: var(--orange);
 }
 
-.navbar-signin {
+.navbar-member {
   text-decoration: none;
   margin-right: 20px;
   color: var(--white);
@@ -87,7 +87,7 @@ body {
   border-radius: 5px;
 }
 
-.navbar-signin:hover {
+.navbar-member:hover {
   color: var(--deepBlue);
 }
 
