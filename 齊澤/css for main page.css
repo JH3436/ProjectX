@@ -206,6 +206,7 @@ body {
   font-weight: bold;
   text-align: center;
 }
+
 .c-item {
   height: 480px;
 }
@@ -327,20 +328,31 @@ body {
   font-weight: 500;
 }
 
-.activity-cards {
+/* cards */
+.article .cards-wrap {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 24px;
+  width: 100%;
+  justify-content: center;
 }
 
-.activity-card {
-  margin: 0;
-  border-radius: 4px;
-  border: 1px solid var(--blue);
-  box-shadow: 0px 4px 14px var(--lightGray);
+.article .cards-wrap .item {
+  width: 300px;
+  margin: 20px;
+  text-align: center;
+  box-shadow: 1px 4px 4px var(--lightGray);
+  transition: transform 0.3s ease;
 }
 
-.activity-content__image-wrapper {
-  border-radius: 2px 2px 0 0;
+.article .cards-wrap .item img {
+  width: 100%;
+}
+
+/* 活動框滑鼠懸浮設定 */
+.article .cards-wrap .item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 60px 0 rgba(129, 128, 128, 0.66);
+}
+
+.article p {
+  padding: 10px;
 }
