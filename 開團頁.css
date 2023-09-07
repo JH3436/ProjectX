@@ -71,11 +71,13 @@ body {
   text-decoration: none;
   margin-right: 20px;
   color: var(--white);
+  background-color: var(--orange);
   padding: 5px 15px;
+  border-radius: 5px;
 }
 
 .navbar-notify:hover {
-  color: var(--orange);
+  color: var(--deepBlue);
 }
 
 .navbar-member {
@@ -144,4 +146,85 @@ body {
   margin-bottom: 10px;
   color: var(--deepBlue);
   /* text-align: center; */
+}
+
+/* 通知的懸浮方框 */
+.Ndropdown {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  max-width: 170px;
+  top: 100%;
+  right: 8%;
+  /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
+  z-index: 5;
+  /*確保不會被其他元素擋住*/
+  border-radius: 10px;
+  box-shadow: 0 4px 36px 1px #797979;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+
+ 
+}
+
+.Ndropdown-content a {
+  text-decoration: none;
+  color: var(--blue);
+}
+
+.Ndropdown-content a:hover {
+  color: var(--orange);
+}
+
+.Ndropdown-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.Ndropdown-section {
+  flex: 1;
+}
+
+.Ndropdown-section {
+  font-size: 1.2rem;
+  font-weight: bold;
+  /* text-align: center; */
+}
+
+.Ndropdown-section ul {
+  list-style: none;
+  padding: 15px;
+  margin: 0%;
+}
+
+.Ndropdown-section ul li a {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--deepBlue);
+  /* text-align: center; */
+}
+
+
+.notification-badge {
+  background-color: red;
+  color: var(--white);
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  position: relative;
+  margin-left: 10px;
+  top: -2px;
+  transition: width 0.2s, height 0.2s;
+
+}
+
+.badge-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
