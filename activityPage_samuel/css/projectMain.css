@@ -64,7 +64,7 @@ h3{
 }
 
 /* 按鈕 */
-#signBtn{
+.btn{
     width:30%;
     height:75px;
     border:0;
@@ -77,7 +77,7 @@ h3{
 
 }
   
-#signBtn:hover{
+.btn:hover{
     color:#0777da;
     background-color:var(--lightGray);
     border:2px var(--black);
@@ -121,6 +121,36 @@ h3{
     flex-grow: 1;
     
 }
+
+#signDialog{
+    height: 80%;
+    width: 60%;
+    border: none;
+    background-color: var(--black);
+    box-shadow: 0 2px 6px var(--black);
+    border-radius: 32px;
+}
+
+#signDialog h2{
+    color: var(--white);
+    text-align: center; 
+}
+
+#dialogClose{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+#dialogSign{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+/* #signDialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.1);
+  } */
 
 /* #activityCalendar{
     height: 20%;

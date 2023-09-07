@@ -7,10 +7,10 @@
     <title>JO!N</title>
     <link rel="icon" href="./Files/小黃人.png" type="image/png">
     <link rel="stylesheet" href="./css/projectMain.css">
-
     <!-- Font Awesome套件引入 -->
     <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
-
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- css連結 -->
     
 </head>
@@ -93,11 +93,18 @@
             </div>
             <br>
             <div id="btnDiv">
-                <input id="signBtn" type="button" value="我要報名" >
-                <input id="signBtn" type="button" value="我有興趣" >
+                <button class="btn" id="signBtn" >我要報名</button>
+                <button class="btn" id="signBtn" >我有興趣</button>
             </div>
-                
-                
+            
+            <dialog id="signDialog" >
+                <h2>輸入你的資料 加入我們!</h2>
+                <div id="dialogDiv">
+                    <button class="btn" id="dialogClose">close</button>
+                    <button class="btn" id="dialogSign">確定</button>
+                </div>
+            </dialog>
+            
         </div>
             <br>
 
@@ -119,6 +126,6 @@
 </body>
     <script src="./js/navigationBar.js"></script>
     <script src="./js/projectCalendar.js"></script>
-
-
+    <script src="./js/sign.js"></script>
+    
 </html>
