@@ -67,7 +67,7 @@
         </div>
       </a>
 
-      <a class="navbar-item" href="#">發起揪團</a>
+      <a class="navbar-item" id="group-link" href="#">發起揪團</a>
     </div>
     <div class="navbar-right">
       <span class="search-bar">
@@ -101,6 +101,9 @@
   </div>
 
   <!-- 輪播圖介紹網站 -->
+  <h1 class="carousel-title">Where the fun begins</h1>
+  <h1 class="carousel-title">旅程的起點(哪一個標題好?)</h1>
+
   <div id="carouselExampleControls" class="carousel slide" data-bs-ride="ride" data-pause data-interval="200">
     <!-- below_indicator -->
     <div class="carousel-indicators">
@@ -133,7 +136,8 @@
           <br>
           <br>
           <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder; text-shadow: 2px 2px 1px #fca311">揪團</span>開始!</h1>
+              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder; text-shadow: 2px 2px 1px #fca311">揪團</span>開始!
+          </h1>
         </div>
       </div>
       <div class="carousel-item c-item">
@@ -148,16 +152,6 @@
         </div>
       </div>
       <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=6" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel2">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder">揪團</span>開始!</h1>
-        </div>
-      </div>
-      <div class="carousel-item c-item">
         <img src="https://picsum.photos/1820/480?random=3" class="d-block w-100 c-img" alt="...">
         <div class="carousel-caption my-caption carousel2">
           <h1>想認識新朋友?</h1>
@@ -169,6 +163,16 @@
       </div>
       <div class="carousel-item c-item">
         <img src="https://picsum.photos/1820/480?random=4" class="d-block w-100 c-img" alt="...">
+        <div class="carousel-caption my-caption carousel2">
+          <h1>想認識新朋友?</h1>
+          <br>
+          <br>
+          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
+              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder">揪團</span>開始!</h1>
+        </div>
+      </div>
+      <div class="carousel-item c-item">
+        <img src="https://picsum.photos/1820/480?random=5" class="d-block w-100 c-img" alt="...">
         <div class="carousel-caption my-caption carousel2">
           <h1>想認識新朋友?</h1>
           <br>
@@ -202,11 +206,83 @@
 
   </div>
 
-  <!-- 放個空白頁 -->
-  <section>
-    <h1>hahahahahhaa</h1>
-    <h1>hahahahahhaa</h1>
-    <h1>hahahahahhaa</h1>
+  <!-- 活動方塊 -->
+
+  <section class="activity-container">
+    <div class="activity-group-header">
+      <div class="activity-content">
+        <h2 class="activity-title">
+          活動導覽
+        </h2>
+        <h4 class="activity-small-title">
+          <p>熱門&nbsp;TOP&nbsp;3</p>
+        </h4>
+      </div>
+    </div>
+
+    <!-- 方塊們 -->
+    <div class="activity-cards">
+      <div class="activity-card">
+        <div class="activity-content__image-wrapper">
+          <img alt="" class="activity-content-image"
+            src="https://www.tensorflow.org/static/site-assets/images/marketing/cards/home-e2e-bucket1.svg?hl=zh-tw">
+        </div>
+        <div class="activity-content-under-image">
+          <a class="activity-content-title" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+            準備資料
+          </a>
+          <div class="activity-content-title">
+              <p>使用 TensorFlow 工具處理及載入資料。</p>
+          </div>
+          <div class="activity-content-external">
+            <a class="activity-anchortoexternal" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+              探索工具
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-content__image-wrapper">
+          <img alt="" class="activity-content-image"
+            src="https://www.tensorflow.org/static/site-assets/images/marketing/cards/home-e2e-bucket1.svg?hl=zh-tw">
+        </div>
+        <div class="activity-content-under-image">
+          <a class="activity-content-title" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+            準備資料
+          </a>
+          <div class="activity-content-title">
+              <p>使用 TensorFlow 工具處理及載入資料。</p>
+          </div>
+          <div class="activity-content-external">
+            <a class="activity-anchortoexternal" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+              探索工具
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-content__image-wrapper">
+          <img alt="" class="activity-content-image"
+            src="https://www.tensorflow.org/static/site-assets/images/marketing/cards/home-e2e-bucket1.svg?hl=zh-tw">
+        </div>
+        <div class="activity-content-under-image">
+          <a class="activity-content-title" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+            準備資料
+          </a>
+          <div class="activity-content-title">
+              <p>使用 TensorFlow 工具處理及載入資料。</p>
+          </div>
+          <div class="activity-content-external">
+            <a class="activity-anchortoexternal" href="https://www.tensorflow.org/learn?hl=zh-tw#prepare-data">
+              探索工具
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </section>
   <!-- JS連結 -->
   <script src="./js for main page.js"></script>

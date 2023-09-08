@@ -1,0 +1,85 @@
+/* 設置一下高度我這樣form才有辦法置中 */
+html, body {
+    height: 100%;
+  }
+
+/* 主題顏色宣告 */
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+}
+
+
+body{
+    margin: 0px;
+    font-family: "Roboto";
+    background-color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login{
+    background-color: var(--deepBlue);
+    width: 350px;
+    
+    color:var(--lightGray);
+    box-shadow: 10px 10px 25px #14213d;
+    border-radius: 10px; 
+    
+    
+}
+.login input{
+    display: flex;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    color: var(--lightGray);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.login input[type="text"],.login input[type="password"]{
+    border:0.1px solid 
+}
+
+
+
+
+.header {
+    text-align: center;
+    margin: 80px auto;
+    margin-top: 10px;
+}
+
+.header h1
+{
+    margin-right: 120px;
+}
+.header p{
+
+    margin-right: 40px;
+    
+}
+
+.login-button {
+    display: inline-block;
+    background-color: var(--deepBlue);
+    color: var(--lightGray); 
+    padding: 10px 20px; /* 內邊距，請根據你的設計更改 */
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 115px;
+}
+
+
+/* 滑鼠懸停時的樣式 */
+.login-button:hover {
+    background-color: var(--orange); /* 滑鼠懸停時的背景顏色，請根據你的設計更改 */
+}

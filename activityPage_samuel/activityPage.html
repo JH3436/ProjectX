@@ -74,36 +74,51 @@
         <div id="pictureDiv">
             <h1>衝浪</h1>
             <img src="./Files/surf.jpg" id="picture">
-            <h3>
-                衝浪是衝浪者利用衝浪板越過湧起的海浪所進行的一項水上運動，衝浪者以海浪為動力並利用自身技巧和平衡力透過衝浪板駕馭海浪。
-一道海浪從拱起到最後消失在海灘上，中間經歷幾個過程，首先，海浪會在外海拱起再一路抬升形成浪壁，接著浪頭崩落形成崩潰區，最終變成浪花往岸上推。在崩潰區時是海浪力量最大的時候，但也是最危險的地方，若是衝浪高手可以使用越浪技巧穿過崩潰區至外海等待下一道浪的到來，並藉由重力從浪壁上往下滑行，至於初學者則建議利用崩潰區後的浪花產生速度，再跟著浪的推力往岸上衝。
-            </h3>
+            <div id="morePictureDiv">
+                <img src="./Files/surf.jpg" id="morePicture" class="morePicture">
+                <img src="./Files/surf3.jpg" id="morePicture" class="morePicture">
+                <img src="./Files/手剎車.jpg" id="morePicture" class="morePicture">
+            </div>
+            
         </div>
         
         
         <div id="signUpDiv">
-            <div id="activityCalendar">
-                <link rel="stylesheet" href="./css/projectCalendar.css"> 
-                <div id="calendar"></div>
-                <script src="./js/CdnCalendar.js"></script>
+            <div id="btnDiv">
+                <button class="btn" id="signBtn" >我要報名</button>
+                <button class="btn" id="signBtn" >我有興趣</button>
             </div>
+            <br>
+            <h3>
+                衝浪是衝浪者利用衝浪板越過湧起的海浪所進行的一項水上運動，衝浪者以海浪為動力並利用自身技巧和平衡力透過衝浪板駕馭海浪。
+一道海浪從拱起到最後消失在海灘上，中間經歷幾個過程，首先，海浪會在外海拱起再一路抬升形成浪壁，接著浪頭崩落形成崩潰區，最終變成浪花往岸上推。在崩潰區時是海浪力量最大的時候，但也是最危險的地方，若是衝浪高手可以使用越浪技巧穿過崩潰區至外海等待下一道浪的到來，並藉由重力從浪壁上往下滑行，至於初學者則建議利用崩潰區後的浪花產生速度，再跟著浪的推力往岸上衝。
+            </h3>
             <br>
             <div id="mapDiv"> 
                 <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.0910174102787!2d121.3615097!3d24.860740800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34681a028c93d71d%3A0x7b2c6fa68f79ea8d!2z5Y-wN-S5mee3mg!5e0!3m2!1szh-TW!2stw!4v1693927883477!5m2!1szh-TW!2stw"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <br>
-            <div id="btnDiv">
-                <button class="btn" id="signBtn" >我要報名</button>
-                <button class="btn" id="signBtn" >我有興趣</button>
-            </div>
             
             <dialog id="signDialog" >
-                <div>
-                    <h2>輸入你的資料 加入我們!</h2>
+                <h2>選擇你的日期 加入我們!</h2>
+                
+                <div id="signTextDiv">
+                    <p>姓名:</p>
+                    <input type="text">
+                    <p>電話</p>
+                    <input type="text">
+                    <p>留言給團主</p>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
                 </div>
+                <div id="activityCalendar">
+                    <link rel="stylesheet" href="./css/projectCalendar.css"> 
+                    <div id="calendar"></div>
+                    <script src="./js/CdnCalendar.js"></script>
+                </div>
+
                 <div id="dialogDiv">
-                    <button class="btn" id="dialogClose">close</button>
-                    <button class="btn" id="dialogSign">確定</button>
+                    <button  id="dialogClose">取消</button>
+                    <button  id="dialogSign">確定</button>
                 </div>
             </dialog>
             
@@ -129,5 +144,6 @@
     <script src="./js/navigationBar.js"></script>
     <script src="./js/projectCalendar.js"></script>
     <script src="./js/sign.js"></script>
+    <script src="./js/main.js"></script>
     
 </html>

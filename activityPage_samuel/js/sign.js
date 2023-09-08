@@ -9,3 +9,9 @@
     close.addEventListener("click", function(){
       infoModal.close();
     })
+
+    $(() => {
+      $('#dialogSign').click(function(){
+        confirm('確定資料正確');
+      });
+    })
