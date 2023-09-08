@@ -23,8 +23,8 @@
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
   color: var(--white);
 }
 
@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
   font-size: large;
   font-weight: bolder;
   position: relative;
@@ -54,20 +53,57 @@ body {
 .navbar-right {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  gap: 1.2rem;
 }
 
-.search-bar {
-  margin-right: 50px;
+/* 搜尋框設計 */
+.searchInputWrapper {
+  position: relative;
 }
 
-.search-input {
-  border-radius: 5px;
-  margin-right: 5px;
+.searchInput {
+  width: 15rem;
+  height: 2rem;
+  padding: 1rem; 
+  border-radius: 2rem;
+  border: none;
+  transition: transform 0.1s ease-in-out;
+}
+
+.searchInput::placeholder {
+  color:#7e5109;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* hide the placeholder text on focus */
+.searchInput:focus::placeholder {
+  text-indent: -999px
+}
+
+.searchInput:focus {
+  outline: none;
+  transform: scale(1.1);
+  transition: all 0.1s ease-in-out;
+transition: transform 0.3s ease;
+}
+
+.searchInput:focus + .searchInputIcon {
+  color: var(--orange);
+  transform: translateX(10px);
+}
+
+.searchInputIcon {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.5rem;
+  color: var(--deepBlue);
+  transition: all 0.1s ease-in-out;
 }
 
 .navbar-login {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   padding: 5px 15px;
 }
@@ -78,7 +114,6 @@ body {
 
 .navbar-signin {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -149,12 +184,13 @@ body {
   margin-top: 7%;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-left: 5%;
   padding-right: 5%;
   background-color: var(--deepBlue);
   color: var(--white);
   position: relative;
+  gap: 8rem;
 }
 
 .slogan {
@@ -185,7 +221,7 @@ body {
   padding-left: 20px;
   flex: 2;
   display: flex;
-  align-items: right;
+  align-items: center;
 }
 
 /* 調整圖片寬度 */
@@ -282,12 +318,9 @@ body {
 
 /* 定義漸層邊框圖像 */
 .gradient-border {
-  border: 7px solid transparent;
-  /* 初始邊框為透明 */
+  border: 5px solid transparent;
   border-image: linear-gradient(90deg, #fca311, #ffffff);
-  /* 使用線性漸變作為邊框圖像 */
   border-image-slice: 1;
-  /* 使整個邊框都包含漸變 */
 }
 
 /*左右鍵*/

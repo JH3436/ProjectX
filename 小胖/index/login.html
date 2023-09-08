@@ -25,17 +25,19 @@
 
 
 <!-- 帳密   -->
-    <form action="action.js" class="login" id="login">
+    <div id="container1">
+    <form action="login.js" class="login" id="login">
         <div class="header">
         <h1>歡迎!</h1>
         <p>開始揪團，一起探險!</p>
         </div>
 
-         <input type="text" placeholder="Account帳號" />
-         <input type="password" placeholder="Password密碼" />
+            <input type="text" placeholder="Account帳號" />
+            <div class="tab"></div>
+            <input type="password" placeholder="Password密碼" />
         
          <!-- 添加按鈕容器 -->
-        <div class="button-container">
+        <div class="button-container">  
         <button class="button">Submit 登入</button>
        
         <p> - 快速登入 - </p>
@@ -43,13 +45,43 @@
         <button class="button">使用Line登入</button>
         </div>
         <div class="register-link">
-            <p>註冊帳號</p>
-            </div>
+        <h5 onclick="show_hide()">註冊帳號</h5>
+        </div>
     </form>
+</div>
+
+<div id="container2">
+    <form action="signup.js" class="login" id="login">
+        <div class="header">
+        <h1>註冊!</h1>
+        <p>開始揪團，一起探險!</p>
+        </div>
+
+            <input type="text" id="fullname" name="fullname" placeholder="暱稱" required>
+            <div class="tab"></div>
+            <input type="text" id="username2" name="username" placeholder="帳號" required>
+            <div class="tab"></div>
+            <input type="text" id="password2" name="password" placeholder="密碼" required>
+            <div class="tab"></div>
+            <input type="text" id="comfirm_password" name="comfirm_password" placeholder="確認密碼" required>
+            <div class="tab"></div>            
+           
+         <!-- 添加按鈕容器 -->
+        <div class="button-container">
+        <button class="button">註冊</button>
+       </div>
+       <div class="login-link">
+        <h5 onclick="show_hide()">登入帳號</h5>
+        </div>
+    </form>
+</div>
+    
   
+   
 </body>
 
 <!-- bar-js -->
 <script src="/導覽列Navbar/js for navbar.js"></script>
+<script src="/小胖/js/login.js"></script>
 
 </html>
