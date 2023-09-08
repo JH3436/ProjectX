@@ -155,20 +155,13 @@ h3{
     height: 80%;
     width: 60%;
     border: none;
-    background-color: rgb(148, 148, 148) ;
+    background-color: var(--black);
     box-shadow: 0 2px 6px var(--black);
     border-radius: 32px;
 }
 
-#signDialog div{
-    background-color: rgb(77, 77, 77);
+#signDialog h2{
     color: var(--white);
-    position: absolute;
-    
-    top: 0;
-    left: 0;
-    right: 0;
-
     text-align: center; 
 }
 
