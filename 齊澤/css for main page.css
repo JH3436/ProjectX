@@ -23,8 +23,8 @@
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
   color: var(--white);
 }
 
@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
   font-size: large;
   font-weight: bolder;
   position: relative;
@@ -87,12 +86,12 @@ body {
   outline: none;
   transform: scale(1.1);
   transition: all 0.1s ease-in-out;
-
+transition: transform 0.3s ease;
 }
 
 .searchInput:focus + .searchInputIcon {
   color: var(--orange);
-  transform: translateX(10px); /* 在聚焦时右移3px */
+  transform: translateX(10px);
 }
 
 .searchInputIcon {
@@ -186,12 +185,13 @@ body {
   margin-top: 7%;
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-left: 5%;
   padding-right: 5%;
   background-color: var(--deepBlue);
   color: var(--white);
   position: relative;
+  gap: 8rem;
 }
 
 .slogan {
@@ -222,7 +222,7 @@ body {
   padding-left: 20px;
   flex: 2;
   display: flex;
-  align-items: right;
+  align-items: center;
 }
 
 /* 調整圖片寬度 */
@@ -308,12 +308,9 @@ body {
 
 /* 定義漸層邊框圖像 */
 .gradient-border {
-  border: 7px solid transparent;
-  /* 初始邊框為透明 */
-  border-image: linear-gradient(90deg, #fca311, #000000);
-  /* 使用線性漸變作為邊框圖像 */
+  border: 5px solid transparent;
+  border-image: linear-gradient(90deg, #fca311, #ffffff);
   border-image-slice: 1;
-  /* 使整個邊框都包含漸變 */
 }
 
 /*左右鍵*/
