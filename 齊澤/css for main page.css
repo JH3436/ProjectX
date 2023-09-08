@@ -54,20 +54,57 @@ body {
 .navbar-right {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  gap: 1.2rem;
 }
 
-.search-bar {
-  margin-right: 50px;
+/* 搜尋框設計 */
+.searchInputWrapper {
+  position: relative;
 }
 
-.search-input {
-  border-radius: 5px;
-  margin-right: 5px;
+.searchInput {
+  width: 15rem;
+  height: 2rem;
+  padding: 1rem; 
+  border-radius: 2rem;
+  border: none;
+  transition: transform 0.1s ease-in-out;
+}
+
+.searchInput::placeholder {
+  color:#7e5109;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* hide the placeholder text on focus */
+.searchInput:focus::placeholder {
+  text-indent: -999px
+}
+
+.searchInput:focus {
+  outline: none;
+  transform: scale(1.1);
+  transition: all 0.1s ease-in-out;
+
+}
+
+.searchInput:focus + .searchInputIcon {
+  color: var(--orange);
+  transform: translateX(10px); /* 在聚焦时右移3px */
+}
+
+.searchInputIcon {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.5rem;
+  color: var(--deepBlue);
+  transition: all 0.1s ease-in-out;
 }
 
 .navbar-login {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   padding: 5px 15px;
 }
@@ -78,7 +115,6 @@ body {
 
 .navbar-signin {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
