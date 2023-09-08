@@ -101,6 +101,9 @@ justify-content: center
   visibility: hidden; 
   display: none;}  
 
+h5 {
+  transition: transform 0.3s ease;
+}
 
   h5:hover{
     text-decoration:underline;
