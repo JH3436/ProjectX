@@ -11,13 +11,24 @@
       infoModal.close();
     })
     sign.addEventListener("click", function(){
-      console.log($('calendar'));
-      confirm('確定資料正確');
-      infoModal.close();
+      var userName = $('#nameInput').val();
+      var userTel = $('#telInput').val();
+      if (userName == "" || userTel == ""){
+        alert("請輸入資料")
+      }else{
+        var n =  confirm('確定資料正確');
+        if( n == true){
+          infoModal.close();
+        }
+      }
     })
 
     
     $(() => {
+      // $('#calendar').click(function(){
+      //   console.log($('.day-number'));
+      // })
+
       // $('#signBtn').click(function(){
       //   $('#signDialog').show();
 
