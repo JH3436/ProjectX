@@ -256,7 +256,7 @@ body {
 }
 dropdown{
    display: inline-block;
-   margin: 20px 50px; 
+   margin: 250px 40px; 
 }
 dropdown label, dropdown ul li{
   display: block;
@@ -265,13 +265,13 @@ dropdown label, dropdown ul li{
   padding: 15px 20px;
 }
 dropdown label:hover, dropdown ul li:hover{
-  background: #1ABC9C;
+  background: #fca311;
   color: white;
   cursor: pointer;
 }
 dropdown label{
-  color: #1ABC9C;
-  border-left: 4px solid #1ABC9C;
+  color: #14213d;
+  /* border-left: 4px solid #1ABC9C; */
   border-radius: 0 5px 0 0; 
   position: relative;
   z-index: 2;
@@ -283,11 +283,15 @@ dropdown input ~ ul{
   position: relative;
   visibility: hidden;
   opacity: 0;
+  left: -32px;
   top: -20px;
   z-index: 1;
 }
+
+
+
 dropdown input:checked + label{
-  background: #1ABC9C;
+  background: #fca311;
   color: white;
 }
 
@@ -297,7 +301,39 @@ dropdown input:checked ~ ul{
   top: 0;
 }
 
-$colors: #E74C3C, #0072B5, #2C3E50;
+dropdown ul li:nth-child(1) {
+  color: #14213d;
+  .fa{
+    display: none;
+  }
+  &:hover {
+    background: #fca311;
+    color: white;
+  }
+}
+
+dropdown ul li:nth-child(2) {
+  color: #14213d;
+  .fa{
+    display: none;
+  }
+  &:hover {
+    background: #fca311;
+    color: white;
+  }
+}
+
+dropdown ul li:nth-child(3) {
+  color: #14213d;
+  .fa{
+      display: none;
+  }
+  &:hover {
+    background: #fca311;
+    color: white;
+  }
+}
+
 
 @for $i from 1 through length($colors) {
   dropdown ul li:nth-child(#{$i}) {

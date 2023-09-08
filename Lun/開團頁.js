@@ -65,5 +65,16 @@ notify.addEventListener('click', function (e) {
 
 
 
-  // 下拉選單
-  
+   // 取得下拉選單項目 目前無法取得
+   const dropdownItems = document.querySelectorAll('dropdown ul li');
+
+   
+   dropdownItems.forEach(item => {
+     item.addEventListener('click', function() {
+       const selectedText = this.textContent;
+       
+       const correspondingLabel = this.closest('dropdown').querySelector('label');
+       
+       correspondingLabel.textContent = selectedText;
+     });
+   });
