@@ -154,13 +154,15 @@ body {
 }
 
 /* 通知的懸浮方框 */
+
 .Ndropdown {
   display: none;
   position: absolute;
   background-color: var(--white);
-  max-width: 170px;
-  top: 100%;
-  right: 8%;
+  width: 250px;
+  height: 200px;
+  top: 80%;
+  right: 5%;
   /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
   z-index: 5;
   /*確保不會被其他元素擋住*/
@@ -226,14 +228,17 @@ body {
 .notification-badge {
   background-color: red;
   color: var(--white);
-  border-radius:999em;
-  padding: 5px 12px;
+  border-radius: 50%; /* 讓邊框裁剪成正圓 */
+  width: 20px; /* 設定寬度 */
+  height: 20px; /* 設定高度，保持相等 */
   font-size: 12px;
-  position: relative;
-  margin-left: 10px;
-  top: -2px;
-  transition: width 0.2s, height 0.2s;
-
+  position: absolute;
+  margin-left: -36px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 .badge-number {
@@ -242,7 +247,24 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 12px;
+  z-index: 2;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* 下拉選單 */
@@ -432,7 +454,14 @@ body { margin-top: 0%; }
 .calendar_content div {
     border: 1px solid transparent;
     float: left;
-}ca311
+    cursor: pointer;
+}
+
+.calendar_content ul {
+  cursor: alias; 
+}
+
+
 .calendar_content div:hover {
     border: 1px solid #dcdcdc;
     cursor: default;
