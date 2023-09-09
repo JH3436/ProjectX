@@ -50,6 +50,10 @@ body {
   color: var(--orange);
 }
 
+.navbar-item:hover #downicon {
+  color: var(--orange);
+}
+
 .navbar-right {
   display: flex;
   align-items: center;
@@ -65,19 +69,18 @@ body {
 .searchInput {
   width: 15rem;
   height: 2rem;
-  padding: 1rem; 
+  padding: 1rem;
   border-radius: 2rem;
   border: none;
   transition: transform 0.1s ease-in-out;
 }
 
 .searchInput::placeholder {
-  color:#7e5109;
+  color: #7e5109;
   font-size: 0.85rem;
   opacity: 0.7;
 }
 
-/* hide the placeholder text on focus */
 .searchInput:focus::placeholder {
   text-indent: -999px
 }
@@ -86,10 +89,10 @@ body {
   outline: none;
   transform: scale(1.1);
   transition: all 0.1s ease-in-out;
-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.searchInput:focus + .searchInputIcon {
+.searchInput:focus+.searchInputIcon {
   color: var(--orange);
   transform: translateX(10px);
 }
@@ -132,7 +135,7 @@ transition: transform 0.3s ease;
   min-width: 400px;
   top: 100%;
   /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
-  left: 10%;
+  left: 9rem;
   /*確保不會被其他元素擋住*/
   z-index: 5;
   border-radius: 10px;
@@ -217,14 +220,11 @@ transition: transform 0.3s ease;
 }
 
 .image {
-  /* position: relative; */
   padding-left: 20px;
   flex: 2;
   display: flex;
-  align-items: center;
 }
 
-/* 調整圖片寬度 */
 .image img {
   max-width: 100%;
   /*到時候根據左邊文字內容更動高度*/
@@ -372,30 +372,49 @@ transition: transform 0.3s ease;
 }
 
 /* cards */
-.article .cards-wrap {
+.cards-wrap {
   display: flex;
-  width: 100%;
   justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* 添加間距 */
 }
 
-.article .cards-wrap .item {
-  width: 300px;
-  margin: 20px;
+.item {
+  width: 25%;
   text-align: center;
   box-shadow: 1px 4px 4px var(--lightGray);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.article .cards-wrap .item img {
+.activity-img {
+  flex: 1;
+  /* 佔據1部分 */
+}
+
+.activity-text {
+  flex: 1;
+  /* 佔據2部分 */
+  padding: 10px;
+  border: 5px solid red;
+  overflow: auto;
+  text-overflow: ellipsis;
+}
+
+.item img {
   width: 100%;
+  height: auto;
 }
 
-/* 活動框滑鼠懸浮設定 */
-.article .cards-wrap .item:hover {
+.expand-button {
+  cursor: pointer;
+  color: #416ac2;
+  background-color: transparent;
+}
+
+.item:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 60px 0 rgba(129, 128, 128, 0.66);
-}
-
-.article p {
-  padding: 10px;
 }
