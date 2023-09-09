@@ -30,37 +30,37 @@ exploreDropdown.addEventListener('mouseleave', function () {
 
 
 // 通知下拉清單
+let isNotifyDropdownOpen = false;
+
+
 const notify = document.getElementById('notify');
 const notifyDropdown = document.getElementById('notify-dropdown');
 
-
 notify.addEventListener('click', function (e) {
-    e.stopPropagation(); // 阻止點擊事件冒泡
-    notifyDropdown.style.display = 'block';
-  });
-  
-  document.addEventListener('click', function () {
-    notifyDropdown.style.display = 'none';
-  });
-  
-  notifyDropdown.addEventListener('click', function (e) {
-    e.stopPropagation(); // 阻止點擊事件冒泡
-  });
+    e.stopPropagation(); // 阻止点击事件冒泡
 
-  //通知數字
-  function updateBadge(number) {
-    const badge = document.getElementById('badgeNumber');
-    const notificationBadge = document.getElementById('notificationBadge');
-    
-    badge.innerText = number;
+    if (isNotifyDropdownOpen) {
+        notifyDropdown.style.display = 'none';
+        isNotifyDropdownOpen = false;
+    } else {
+        notifyDropdown.style.display = 'block';
+        isNotifyDropdownOpen = true;
+    }
+});
+
+document.addEventListener('click', function () {
+    if (isNotifyDropdownOpen) {
+        notifyDropdown.style.display = 'none';
+        isNotifyDropdownOpen = false;
+    }
+});
+
+notifyDropdown.addEventListener('click', function (e) {
+    e.stopPropagation(); // 阻止点击事件冒泡
+});
+
+
   
-    const width = 16 + (number > 9 ? 6 : 0) + (number > 99 ? 6 : 0); // 調整寬度
-    const height = 16; // 固定高度
-  
-    notificationBadge.style.width = `${width}px`;
-    notificationBadge.style.height = `${height}px`;
-  }
-  updateBadge(99);
 
 
 
@@ -78,6 +78,20 @@ notify.addEventListener('click', function (e) {
       });
     });
   });
+
+
+    //   選取完或點擊空白處會自動縮回
+    document.addEventListener('click', function(event) {
+        var dropdowns = document.querySelectorAll('dropdown');
+        dropdowns.forEach(function(dropdown) {
+          if (!dropdown.contains(event.target) || event.target.tagName === 'LI') {
+            var input = dropdown.querySelector('input');
+            if (input.checked) {
+              input.checked = false;
+            }
+          }
+        });
+      });
 
 
 
