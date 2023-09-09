@@ -101,11 +101,15 @@
 
 
 
+
+
+
+
   <!-- 開團下拉選項 -->
 
   <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
-  <dropdown>
+  <dropdown class="A">
     <input id="toggle1" type="checkbox" checked>
     <label for="toggle1" class="animate">選擇<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
@@ -115,7 +119,7 @@
     </ul>
   </dropdown>
   
-  <dropdown>
+  <dropdown class="B">
     <input id="toggle2" type="checkbox">
     <label for="toggle2" class="animate">假如選登山<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
@@ -125,9 +129,56 @@
     </ul>
   </dropdown>
 
+
+  <!-- 日曆 -->
+
+  <dropdown class="date" id="dateRangeDisplay">
+    <input id="toggle3" type="checkbox">
+    <label for="toggle3" class="selectdate">選擇日期<i class="fa fa-bars float-right"></i></label>
+    <ul class="animate">
+      <div class="my-element">
+        <div class="calendar calendar-first" id="calendar_first">
+           <div class="calendar_header">
+             <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+             <h2></h2>
+             <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
+           </div>
+         <div class="calendar_weekdays"></div>
+         <div class="calendar_content"></div>
+       </div>
+     </div>
+    </ul>
+  </dropdown>
+
+
+  <!-- 選擇預計開團人數上下限 -->
+  <dropdown class="C">
+    <input id="toggle4" type="checkbox">
+    <label for="toggle4" class="CC">選擇預計開團人數上下限<i class="fa fa-bars float-right"></i></label>
+    <ul class="animate">
+      <li class="animate">3 - 5 人<i class="fa fa-code float-right"></i></li>
+      <li class="animate">4 - 6 人<i class="fa fa-arrows-alt float-right"></i></li>
+      <li class="animate">5 - 7人<i class="fa fa-cog float-right"></i></li>
+    </ul>
+  </dropdown>
+  
   
 
+  <!-- 選擇照片 -->
 
+  <div class="img-container">
+    <h2 class="GG" style="color: #14213d; margin-left: 123px; margin-top: -80px;">請選擇照片</h2>
+    <form action="/somewhere/to/upload" enctype="multipart/form-data">
+        <input type="file" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" />
+        <img id="preview_progressbarTW_img" src="#" />
+    </form>
+</div>
+
+
+  
+
+  <!-- JS連結 -->
+  <script src="./開團頁.js"></script>
 </body>
 
 </html>

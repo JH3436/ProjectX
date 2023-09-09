@@ -7,6 +7,7 @@
   font-family: "Noto Sans TC", sans-serif;
   font-family: "Roboto", sans-serif;
   scroll-behavior: smooth;
+  
   /*當使用超連結時，頁面會平滑滾動到目標位置。 */
 }
 
@@ -22,14 +23,18 @@
 
 /* 頁面背景色 */
 body {
+  
   background-color: var(--deepBlue);
   padding-left: 20%;
   padding-right: 20%;
   color: var(--white);
 }
 
+
+
 /* 導覽列 */
 .navbar {
+  margin-top: 0px;
   color: var(--white);
   display: flex;
   justify-content: space-between;
@@ -38,8 +43,8 @@ body {
   font-size: large;
   font-weight: bolder;
   position: relative;
-
 }
+
 
 .navbar-item {
   text-decoration: none;
@@ -260,10 +265,14 @@ dropdown{
 }
 dropdown label, dropdown ul li{
   display: block;
-  width: 200px;
+  width: 270px;
   background: #ECF0F1;
   padding: 15px 20px;
 }
+
+
+
+
 dropdown label:hover, dropdown ul li:hover{
   background: #fca311;
   color: white;
@@ -272,7 +281,7 @@ dropdown label:hover, dropdown ul li:hover{
 dropdown label{
   color: #14213d;
   /* border-left: 4px solid #1ABC9C; */
-  border-radius: 0 5px 0 0; 
+  border-radius: 5px 5px 0 0; 
   position: relative;
   z-index: 2;
 }
@@ -286,6 +295,27 @@ dropdown input ~ ul{
   left: -32px;
   top: -20px;
   z-index: 1;
+}
+
+.selectdate{
+  width: 300px;
+}
+
+.date{
+  position: absolute;
+  margin-top: 250px;
+}
+
+.C {
+  position: absolute;
+  margin-top: 700px;
+  margin-left: -730px;
+}
+
+.IMG {
+  position: absolute;
+  margin-top: 700px;
+  margin-right: -40px;
 }
 
 
@@ -335,6 +365,11 @@ dropdown ul li:nth-child(3) {
 }
 
 
+
+
+
+
+
 @for $i from 1 through length($colors) {
   dropdown ul li:nth-child(#{$i}) {
     border-left: 4px solid nth($colors, $i);
@@ -362,3 +397,111 @@ dropdown ul li:nth-child(3) {
   -moz-backface-visibility:hidden; /* Firefox */
   -ms-backface-visibility:hidden; /* Internet Explorer */
 }
+
+
+
+
+/* 日曆 */
+@import url(https://fonts.googleapis.com/css?family=Muli:400, 300);
+body { margin-top: 0%; }
+
+.calendar, .calendar_weekdays, .calendar_content {
+    max-width: 300px;
+}
+.calendar {
+    margin: auto;
+    font-family:'Muli', sans-serif;
+    font-weight: 400;
+}
+.calendar_content, .calendar_weekdays, .calendar_header {
+    position: relative;
+    overflow: hidden;
+}
+.calendar_weekdays div {
+    display:inline-block;
+    vertical-align:top;
+}
+.calendar_weekdays div, .calendar_content div {
+    width: 14.28571%;
+    overflow: hidden;
+    text-align: center;
+    background-color: transparent;
+    color: #6f6f6f;
+    font-size: 14px;
+}
+.calendar_content div {
+    border: 1px solid transparent;
+    float: left;
+}ca311
+.calendar_content div:hover {
+    border: 1px solid #dcdcdc;
+    cursor: default;
+}
+.calendar_content div.blank:hover {
+    cursor: default;
+    border: 1px solid transparent;
+}
+.calendar_content div.past-date {
+    color: #d5d5d5;
+}
+.calendar_content div.today {
+    font-weight: bold;
+    font-size: 14px;
+    color: #fca311;
+}
+.calendar_content div.selected {
+    background-color: #fca311;
+    color: #e5e5e5;
+}
+.calendar_header {
+    width: 100%;
+    text-align: center;
+}
+.calendar_header h2 {
+    padding: 0 10px;
+    font-family:'Muli', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fca311;
+    float:left;
+    width:70%;
+    margin: 0 0 10px;
+}
+button.switch-month {
+    background-color: transparent;
+    padding: 0;
+    outline: none;
+    border: none;
+    color: #fca311;
+    float: left;
+    width:15%;
+    transition: color .2s;
+}
+button.switch-month:hover {
+    color: #fca311;
+}
+
+.my-element {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 300px;
+  height: 220px;
+  border-radius: 0 0 10px 10px; 
+  background-color: #e5e5e5; 
+}
+
+
+
+/* 選擇照片 */
+.img-container {
+  position: absolute;
+  height: 300px;
+  width: 680px;
+  border: 2px solid #fca311; /* 边框宽度和颜色 */
+  padding:130px 20px 50px 120px; /* 可选，为内部内容添加一些空间 */
+  margin-left: 430px; /* 可选，为容器添加外边距 */
+  margin-top: -30px;
+  background-color: #fca311;
+}
+
