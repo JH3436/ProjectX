@@ -23,8 +23,8 @@
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
-  padding-left: 20%;
-  padding-right: 20%;
+  padding-left: 10%;
+  padding-right: 10%;
   color: var(--white);
 }
 
@@ -34,11 +34,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 10px 20px; */
   font-size: large;
   font-weight: bolder;
   position: relative;
-
 }
 
 .navbar-item {
@@ -52,24 +50,63 @@ body {
   color: var(--orange);
 }
 
+.navbar-item:hover #downicon {
+  color: var(--orange);
+}
 
 .navbar-right {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  gap: 1.2rem;
 }
 
-.search-bar {
-  margin-right: 50px;
+/* 搜尋框設計 */
+.searchInputWrapper {
+  position: relative;
 }
 
-.search-input {
-  border-radius: 5px;
-  margin-right: 5px;
+.searchInput {
+  width: 15rem;
+  height: 2rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  border: none;
+  transition: transform 0.1s ease-in-out;
+}
+
+.searchInput::placeholder {
+  color: #7e5109;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.searchInput:focus::placeholder {
+  text-indent: -999px
+}
+
+.searchInput:focus {
+  outline: none;
+  transform: scale(1.1);
+  transition: all 0.1s ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.searchInput:focus+.searchInputIcon {
+  color: var(--orange);
+  transform: translateX(10px);
+}
+
+.searchInputIcon {
+  position: absolute;
+  right: 0.8rem;
+  top: 0.5rem;
+  color: var(--deepBlue);
+  transition: all 0.1s ease-in-out;
 }
 
 .navbar-login {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   padding: 5px 15px;
 }
@@ -80,7 +117,6 @@ body {
 
 .navbar-signin {
   text-decoration: none;
-  margin-right: 20px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -91,7 +127,6 @@ body {
   color: var(--deepBlue);
 }
 
-
 /* 懸浮方框 */
 .dropdown {
   display: none;
@@ -99,10 +134,10 @@ body {
   background-color: var(--white);
   min-width: 400px;
   top: 100%;
-  left: 10%;
   /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
-  z-index: 5;
+  left: 9rem;
   /*確保不會被其他元素擋住*/
+  z-index: 5;
   border-radius: 10px;
   box-shadow: 0 4px 36px 1px #797979;
 }
@@ -145,4 +180,3 @@ body {
   color: var(--deepBlue);
   /* text-align: center; */
 }
-
