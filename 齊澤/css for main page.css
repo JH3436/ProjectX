@@ -18,6 +18,8 @@
   --orange: #fca311;
   --lightGray: #e5e5e5;
   --white: #ffffff;
+  --brown: #AD7D52;
+  --heart: #B44163;
 }
 
 /* 頁面背景色 */
@@ -332,11 +334,7 @@ body {
   /*color */
   background: #1b1b1b none repeat scroll 0 0;
   opacity: 0.5;
-  /*shape border*/
-  border: 3px white solid;
   border-radius: 50%;
-  /*zero for square */
-  /*symbol */
   color: #fff;
   /*vertical position */
   top: 40%;
@@ -350,13 +348,7 @@ body {
   border: 0.15rem rgb(130, 130, 131) solid;
 }
 
-/* 活動方塊設計 */
-.activity-container {
-  margin: 80px auto;
-  max-width: 1420px;
-  padding: 0 40px;
-  width: 100%;
-}
+/* 活動設計 */
 
 .activity-title {
   margin-top: 15%;
@@ -372,49 +364,166 @@ body {
 }
 
 /* cards */
-.cards-wrap {
+
+/* 外面多包一個div讓方塊們保持置中 */
+.card-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  /* 添加間距 */
 }
 
-.item {
-  width: 25%;
-  text-align: center;
-  box-shadow: 1px 4px 4px var(--lightGray);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.activity-img {
-  flex: 1;
-  /* 佔據1部分 */
-}
-
-.activity-text {
-  flex: 1;
-  /* 佔據2部分 */
-  padding: 10px;
-  border: 5px solid red;
-  overflow: auto;
-  text-overflow: ellipsis;
-}
-
-.item img {
+.cards {
   width: 100%;
-  height: auto;
+  display: flex;
+  justify-content: center;
+  max-width: 900px;
+  gap: 2.5rem;
 }
 
-.expand-button {
+.card--1 .card__img,
+.card--1 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=1');
+}
+
+.card--2 .card__img,
+.card--2 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=2');
+}
+
+.card--3 .card__img,
+.card--3 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=3');
+}
+
+.heart-icon:hover {
   cursor: pointer;
-  color: #416ac2;
-  background-color: transparent;
 }
 
-.item:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 60px 0 rgba(129, 128, 128, 0.66);
+.card__clock {
+  width: 18px;
+  vertical-align: middle;
+  fill: var(--deepBlue);
 }
+
+.card__time {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--deepBlue);
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.card__clock-info {
+  float: right;
+}
+
+.card__img {
+  visibility: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 235px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+
+}
+
+.card__info-hover {
+  position: absolute;
+  padding: 16px;
+  width: 100%;
+  opacity: 0;
+}
+
+.heart-icon.solid {
+  opacity: 1;
+  visibility: visible;
+}
+
+  
+.card__img--hover {
+  transition: 0.2s all ease-out;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  position: absolute;
+  height: 235px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  top: 0;
+
+}
+
+.card {
+  transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+  background-color: #fff;
+  width: 33.3%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  box-shadow: 0px 30px 40px -8px rgba(244, 242, 242, 0.466);
+  transform: scale(1.10, 1.10);
+}
+
+.card__info {
+  z-index: 2;
+  background-color: var(--white);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 16px 24px 24px 24px;
+}
+
+.liked-text {
+  color: var(--heart); 
+  font-weight: bold; 
+  position: absolute; 
+  bottom: 5px; 
+  right: 13px; 
+}
+
+.card__category {
+  font-size: 1rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.card__title {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+.card__by {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.card__author {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--brown);
+}
+
+.card:hover .card__img--hover {
+  height: 100%;
+  opacity: 0.3;
+}
+
+.card:hover .card__info {
+  background-color: transparent;
+  position: relative;
+}
+
+.card:hover .card__info-hover {
+  opacity: 1;
+  z-index: 10;
+}
+
