@@ -28,58 +28,56 @@
 </head>
 
 <body>
-  <!-- 導覽列設計 -->
-  <nav class="navbar">
-    <div class="navbar-logo">
-      <a class="navbar-item">
-        <img src="Files/Logo.png" alt="logo" width="125" height="50" />
-      </a>
-
-      <a class="navbar-item" href="#" id="explore-link">
-        探索
-        <i class="fa-sharp fa-solid fa-chevron-down" style="color: var(--white)"></i>
-
-        <div class="dropdown" id="explore-dropdown">
-          <div class="dropdown-content">
-            <div class="dropdown-section">
-              <a href="#">登山</a>
-              <ul>
-                <li style="color: var(--white)">c</li>
-                <li style="color: var(--white)">c</li>
-              </ul>
-            </div>
-            <div class="dropdown-section">
-              <a href="#">溯溪</a>
-              <ul>
-                <li><a href="#">瀑布</a></li>
-                <li><a href="#">溫泉</a></li>
-              </ul>
-            </div>
-            <div class="dropdown-section">
-              <a href="#">潛水</a>
-              <ul>
-                <li><a href="#">水肺潛水</a></li>
-                <li><a href="#">自由潛水</a></li>
-              </ul>
+    <!-- 導覽列設計 -->
+    <nav class="navbar">
+      <div class="navbar-logo">
+        <a class="navbar-item">
+          <img src="Files/Logo.png" alt="logo" width="125" height="50" />
+        </a>
+  
+        <a class="navbar-item" href="#" id="explore-link">
+          探索
+          <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+  
+          <div class="dropdown" id="explore-dropdown">
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <a href="#">登山</a>
+                <ul>
+                  <li style="color: var(--white)">c</li>
+                  <li style="color: var(--white)">c</li>
+                </ul>
+              </div>
+              <div class="dropdown-section">
+                <a href="#">溯溪</a>
+                <ul>
+                  <li><a href="#">瀑布</a></li>
+                  <li><a href="#">溫泉</a></li>
+                </ul>
+              </div>
+              <div class="dropdown-section">
+                <a href="#">潛水</a>
+                <ul>
+                  <li><a href="#">水肺潛水</a></li>
+                  <li><a href="#">自由潛水</a></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </a>
-
-      <a class="navbar-item" href="#">發起揪團</a>
-    </div>
-    <div class="navbar-right">
-      <span class="search-bar">
-        <input class="search-input" type="text" placeholder="搜尋" />
-        <a href="#">
-          <i class="fa-solid fa-magnifying-glass" style="color: var(--white)"></i>
         </a>
-      </span>
-      <a class="navbar-login" href="#">登入</a>
-      <a class="navbar-signin" href="#">註冊</a>
-    </div>
-  </nav>
-
+  
+        <a class="navbar-item" id="group-link" href="#">發起揪團</a>
+      </div>
+      <div class="navbar-right">
+        <div class="searchInputWrapper">
+          <input class="searchInput" type="text" placeholder='搜尋...'>
+          <i class="searchInputIcon fa fa-search"></i>
+          </input>
+        </div>
+        <a class="navbar-login" href="#">登入</a>
+        <a class="navbar-signin" href="#">註冊</a>
+      </div>
+    </nav>
   
   <!-- JS連結 -->
   <script src="./js for navbar.js"></script>
