@@ -38,7 +38,7 @@
 
       <a class="navbar-item" href="#" id="explore-link">
         探索
-        <i class="fa-sharp fa-solid fa-chevron-down" style="color: var(--white)"></i>
+        <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
 
         <div class="dropdown" id="explore-dropdown">
           <div class="dropdown-content">
@@ -95,7 +95,7 @@
     </div>
     <div class="image">
       <!-- 圖片 -->
-      <img src="https://picsum.photos/720/499" sizes="100vw" />
+      <img src="https://picsum.photos/1720/499" sizes="100vw" />
     </div>
   </div>
 
@@ -218,26 +218,43 @@
     </div>
 
     <!-- 方塊們 -->
-    <div class="article">
-      <div class="cards-wrap">
-        <div class="item">
-          <img src="https://picsum.photos/480/480?random=1" width="100%" alt="">
-          <p>🌸 最美花卉，專業花藝。</p>
+    <div class="cards-wrap">
+      <div class="item">
+        <div class="activity-img">
+          <img src="https://picsum.photos/120/120?random=1" alt="">
         </div>
-        <div class="item">
-          <img src="https://picsum.photos/480/480?random=2" width="100%" alt="">
+        <div class="activity-text">
+          <p class="activity-description">🌸 最美花卉，專業花藝。這是一個很長很長的內容Lorem ipsum Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Obcaecati, velit.dolor sit amet.，超出容器範圍。</p>
+          <p class="expand-button">展開</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="activity-img">
+          <img src="https://picsum.photos/480/480?random=2" alt="">
+        </div>
+        <div class="activity-text">
           <p>🌿 室內植物，生活添綠。</p>
         </div>
-        <div class="item">
-          <img src="https://picsum.photos/480/480?random=3" width="100%" alt="">
+      </div>
+      <div class="item">
+        <div class="activity-img">
+          <img src="https://picsum.photos/480/480?random=3" alt="">
+        </div>
+        <div class="activity-text">
           <p>🎁 客製設計，情感傳遞。</p>
         </div>
-        <div class="item">
-          <img src="https://picsum.photos/480/480?random=4" width="100%" alt="">
+      </div>
+      <div class="item">
+        <div class="activity-img">
+          <img src="https://picsum.photos/480/480?random=4" alt="">
+        </div>
+        <div class="activity-text">
           <p>🎁 客製設計，情感傳遞。</p>
         </div>
       </div>
     </div>
+
   </section>
   <!-- JS連結 -->
   <script src="./js for main page.js"></script>
