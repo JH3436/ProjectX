@@ -348,14 +348,18 @@ body {
   border: 0.15rem rgb(130, 130, 131) solid;
 }
 
-/* 活動設計 */
+/* 活動導覽設計 */
 
 .activity-title {
-  margin-top: 15%;
+  margin-top: 10%;
   margin-bottom: 5%;
   font-size: 48px;
   font-weight: bold;
   text-align: center;
+}
+
+.activity-content {
+  margin-top: 5%;
 }
 
 .activity-small-title {
@@ -403,6 +407,7 @@ body {
   width: 18px;
   vertical-align: middle;
   fill: var(--deepBlue);
+  padding-bottom: 3px;
 }
 
 .card__time {
@@ -526,4 +531,22 @@ body {
   opacity: 1;
   z-index: 10;
 }
+
+/* 你可能喜歡... */
+.card--4 .card__img,
+.card--4 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=4');
+}
+
+.card--5 .card__img,
+.card--5 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=5');
+}
+
+.card--6 .card__img,
+.card--6 .card__img--hover {
+  background-image: url('https://picsum.photos/1260/750?random=6');
+}
+
+
 
