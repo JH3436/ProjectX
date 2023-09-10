@@ -74,27 +74,66 @@
         <a href="#">
           <i class="fa-solid fa-magnifying-glass" style="color: var(--white)"></i>
         </a>
+        
       </span>
         <a class="navbar-notify" href="#" id="notify">通知
-          </span>
-
+          </span>    
           
         <div class="Ndropdown" id="notify-dropdown">
           <div class="Ndropdown-content">
             <div class="Ndropdown-section">
-              <ul>
-                <li class="AA" style="color: var(--black)">1. ccccccccccccccccccccccccccccccccccccc</li>
-                <li class="AA" style="color: var(--black)">2. DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</li>
+              <div class="LL">
+                <ul>
+                <li class="AA" style="color: var(--black)" >1. ccccccccccccccccccccccccccccccccccccc</li>
               </ul>
+              <ul>
+                <li class="BB" style="color: var(--black)">2. DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</li>
+              </ul>
+              </div>
+              
             </div>
           </div>
+          
         </div>
+          
       </a>
       <div class="O">
           <span class="notification-badge" id="notificationBadge">
             <span class="badge-number" id="badgeNumber">99</span>
       </div>
-      
+      <div class="pop">
+            <span>✖</span>
+            <h1>選擇合適的時間</h1>
+            <p>由於登山活動感興趣的人數已達到下限，因此請您選出您相對適合的時間 </p>
+            <p>選擇時間後將由系統判定，由最多人選擇的時間段進行開團</p>
+            <p>屆時活動時間與您所選時間不相符，您將不被加入活動內，但可以再次思考時間是否合適，再決定是否正式參加 !!</p>
+            <div class="container">
+              
+              <ul class="Cul">
+              <li class="Cli">
+                <input type="radio" id="f-option" name="selector">
+                <label for="f-option">2023/10/10 - 2023/10/03</label>
+                
+                <div class="check"></div>
+              </li>
+              
+              <li class="Cli">
+                <input type="radio" id="s-option" name="selector">
+                <label for="s-option">2023/10/10 - 2023/10/03</label>
+                
+                <div class="check"><div class="inside"></div></div>
+              </li>
+              
+              <li class="Cli">
+                <input type="radio" id="t-option" name="selector">
+                <label for="t-option">2023/10/10 - 2023/10/03</label>
+                
+                <div class="check"><div class="inside"></div></div>
+              </li>
+            </ul>
+            </div>
+          <button class="submit">提交</button>
+          </div>
 
 
       <a class="navbar-member" href="#">會員中心</a>
@@ -174,7 +213,7 @@
   <!-- 選擇照片 -->
 
   <div class="img-container">
-    <h2 class="GG" style="color: #14213d; margin-left: 123px; margin-top: -80px;">請選擇照片</h2>
+    <h2 class="GG" style="color: #14213d; margin-left: 123px; top: 580px;">請選擇照片</h2>
     <form action="/somewhere/to/upload" enctype="multipart/form-data">
         <input type="file" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" />
         <img id="preview_progressbarTW_img" src="#" />

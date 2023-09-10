@@ -29,7 +29,7 @@ exploreDropdown.addEventListener('mouseleave', function () {
 });
 
 
-// 通知下拉清單
+// 通知下拉的事件
 let isNotifyDropdownOpen = false;
 
 
@@ -37,7 +37,7 @@ const notify = document.getElementById('notify');
 const notifyDropdown = document.getElementById('notify-dropdown');
 
 notify.addEventListener('click', function (e) {
-    e.stopPropagation(); // 阻止点击事件冒泡
+    e.stopPropagation(); 
 
     if (isNotifyDropdownOpen) {
         notifyDropdown.style.display = 'none';
@@ -56,8 +56,34 @@ document.addEventListener('click', function () {
 });
 
 notifyDropdown.addEventListener('click', function (e) {
-    e.stopPropagation(); // 阻止点击事件冒泡
+    e.stopPropagation(); 
 });
+
+
+// 彈跳視窗
+$(document).ready(function () {
+    $(".AA, .BB").click(function () {
+      $(".pop").fadeIn(300);
+      positionPopup();
+    });
+  
+    $(".pop > span").click(function (e) {
+      e.stopPropagation(); 
+      $(".pop").fadeOut(300);
+    });
+  
+    $(".pop input[type=radio]").click(function (e) {
+      e.stopPropagation();
+    });
+
+    $(".submit").click(function() {
+        $(".pop").fadeOut(300);
+    });
+
+  });
+  
+
+
 
 
   
