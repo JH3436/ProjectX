@@ -1,5 +1,23 @@
-// 導覽列 
+//回到網頁頂端
 
+const scrollButton = document.getElementById("scroll-to-top");
+
+window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // 檢查滾動位置是否超過1vh
+    if (scrollY > window.innerHeight * 0.5) {
+        scrollButton.classList.remove("hidden");
+        scrollButton.style.opacity = 1;
+        scrollButton.style.pointerEvents = "auto";
+    } else {
+        scrollButton.classList.add("hidden");
+        scrollButton.style.opacity = 0;
+        scrollButton.style.pointerEvents = "none";
+    }
+});
+
+// 導覽列 
 // 下拉清單
 const exploreLink = document.getElementById('explore-link');
 const exploreDropdown = document.getElementById('explore-dropdown');
@@ -78,6 +96,8 @@ heartIcons.forEach(function (heartIcon) {
     }
   });
 });
+
+
 
 
 
