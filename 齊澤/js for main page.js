@@ -97,19 +97,7 @@ heartIcons.forEach(function (heartIcon) {
   });
 });
 
-$(document).ready(function () {
-  // 當點擊 <i class="fa-solid fa-envelope-open-text contactIcon"> 時
-  $('.contactIcon').click(function () {
-    // 顯示彈跳視窗
-    $('.popup-container').fadeIn();
-  });
 
-  // 當點擊關閉按鈕時
-  $('#close-popup').click(function () {
-    // 隱藏彈跳視窗
-    $('.popup-container').fadeOut();
-  });
-});
 
 
 
