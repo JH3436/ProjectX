@@ -1,5 +1,23 @@
-// 導覽列 
+//回到網頁頂端
 
+const scrollButton = document.getElementById("scroll-to-top");
+
+window.addEventListener("scroll", () => {
+    const scrollY = window.scrollY;
+
+    // 檢查滾動位置是否超過1vh
+    if (scrollY > window.innerHeight * 0.5) {
+        scrollButton.classList.remove("hidden");
+        scrollButton.style.opacity = 1;
+        scrollButton.style.pointerEvents = "auto";
+    } else {
+        scrollButton.classList.add("hidden");
+        scrollButton.style.opacity = 0;
+        scrollButton.style.pointerEvents = "none";
+    }
+});
+
+// 導覽列 
 // 下拉清單
 const exploreLink = document.getElementById('explore-link');
 const exploreDropdown = document.getElementById('explore-dropdown');
@@ -79,44 +97,20 @@ heartIcons.forEach(function (heartIcon) {
   });
 });
 
-
-// 介紹網站測試
-$(function(){
-  $('.mycarousel-item').eq(0).addClass('active');
-  var total = $('.mycarousel-item').length;
-  var current = 0;
-  $('#moveRight').on('click', function(){
-    var next=current;
-    current= current+1;
-    setSlide(next, current);
+$(document).ready(function () {
+  // 當點擊 <i class="fa-solid fa-envelope-open-text contactIcon"> 時
+  $('.contactIcon').click(function () {
+    // 顯示彈跳視窗
+    $('.popup-container').fadeIn();
   });
-  $('#moveLeft').on('click', function(){
-    var prev=current;
-    current = current- 1;
-    setSlide(prev, current);
+
+  // 當點擊關閉按鈕時
+  $('#close-popup').click(function () {
+    // 隱藏彈跳視窗
+    $('.popup-container').fadeOut();
   });
-  function setSlide(prev, next){
-    var slide= current;
-    if(next>total-1){
-     slide=0;
-      current=0;
-    }
-    if(next<0){
-      slide=total - 1;
-      current=total - 1;
-    }
-           $('.mycarousel-item').eq(prev).removeClass('active');
-           $('.mycarousel-item').eq(slide).addClass('active');
-      setTimeout(function(){
-
-      },800);
-    
-
-    
-    console.log('current '+current);
-    console.log('prev '+prev);
-  }
 });
+
 
 
 

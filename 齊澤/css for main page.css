@@ -25,13 +25,43 @@
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
-  padding-left: 10%;
-  padding-right: 10%;
   color: var(--white);
+}
+
+/* 回到網頁頂端圖示設計 */
+#scroll-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* 防止超連結跑出底線 */
+#scroll-to-top a {
+  text-decoration: none;
+}
+
+#scroll-to-top .homeicon-container {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: solid 3px var(--lightGray);
+  background-color: var(--deepBlue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
 }
 
 /* 導覽列 */
 .navbar {
+  padding-left: 10%;
+  padding-right: 10%;
   color: var(--white);
   display: flex;
   justify-content: space-between;
@@ -185,13 +215,13 @@ body {
 
 /* slogan */
 .slogan-section {
+  padding-left: 15%;
+  padding-right: 15%;
   height: 80vh;
   margin-top: 7%;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
-  padding-left: 5%;
-  padding-right: 5%;
   background-color: var(--deepBlue);
   color: var(--white);
   position: relative;
@@ -284,8 +314,9 @@ body {
 }
 
 .carouselBtn:hover {
-  color: var(--deepBlue);
+  color: var(--white);
   border: var(--orange) 2px solid;
+  background-color: #7979796f;
 }
 
 /* moving letter特效 */
@@ -349,6 +380,10 @@ body {
 }
 
 /* 活動導覽設計 */
+.activity-container {
+  padding-left: 10%;
+  padding-right: 10%;
+}
 
 .activity-title {
   margin-top: 10%;
@@ -446,7 +481,7 @@ body {
   visibility: visible;
 }
 
-  
+
 .card__img--hover {
   transition: 0.2s all ease-out;
   background-size: cover;
@@ -485,11 +520,11 @@ body {
 }
 
 .liked-text {
-  color: var(--heart); 
-  font-weight: bold; 
-  position: absolute; 
-  bottom: 5px; 
-  right: 13px; 
+  color: var(--heart);
+  font-weight: bold;
+  position: absolute;
+  bottom: 5px;
+  right: 13px;
 }
 
 .card__category {
@@ -535,18 +570,69 @@ body {
 /* 你可能喜歡... */
 .card--4 .card__img,
 .card--4 .card__img--hover {
-  background-image: url('https://picsum.photos/1260/750?random=4');
+  background-image: url('https://spaceholder.cc/i/1260x750?random=1');
 }
 
 .card--5 .card__img,
 .card--5 .card__img--hover {
-  background-image: url('https://picsum.photos/1260/750?random=5');
+  background-image: url('https://spaceholder.cc/i/1260x750?');
 }
 
 .card--6 .card__img,
 .card--6 .card__img--hover {
-  background-image: url('https://picsum.photos/1260/750?random=6');
+  background-image: url('https://spaceholder.cc/i/1260x750?random=3');
 }
 
 
+/* 頁底設計 */
+footer {
+  margin-top: 5%;
+}
+
+.custom-btn {
+  margin: 1rem;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.custom-btn i {
+  font-size: 23px;
+  color: var(--deepBlue);
+}
+
+.custom-btn:hover i {
+  color: var(--brown);
+}
+
+/* 彈跳視窗容器 */
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* 彈跳視窗內容 */
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  color: #14213d;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(117, 80, 80, 0.5);
+  text-align: center;
+}
+
+#close-popup {
+  margin-top: 10px;
+  cursor: pointer;
+}
 
