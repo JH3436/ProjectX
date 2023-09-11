@@ -62,7 +62,7 @@ notifyDropdown.addEventListener('click', function (e) {
 
 // 彈跳視窗
 $(document).ready(function () {
-    $(".AA, .BB").click(function () {
+    $("#AA, #BB").click(function () {
       $(".pop").fadeIn(300);
       positionPopup();
     });
@@ -77,6 +77,11 @@ $(document).ready(function () {
     });
 
     $(".submit").click(function() {
+        // if($('#f-option') ==  && $('#s-option') == "" && $('#t-option') == "")
+        // {
+        //     alert("請輸入資料")
+        // }
+        console.log(typeof($('#f-option')))
         $(".pop").fadeOut(300);
     });
 
