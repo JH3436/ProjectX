@@ -36,6 +36,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   pointer-events: none;
+  z-index: 10;
 }
 
 /* 防止超連結跑出底線 */
@@ -169,14 +170,14 @@ body {
   display: none;
   position: absolute;
   background-color: var(--white);
-  min-width: 400px;
+  min-width: 325px;
   top: 100%;
   /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
-  left: 9rem;
+  left: 22rem;
   /*確保不會被其他元素擋住*/
   z-index: 5;
   border-radius: 10px;
-  box-shadow: 0 4px 36px 1px #797979;
+  height: 150px;
 }
 
 .dropdown-content a {
@@ -191,8 +192,10 @@ body {
 .dropdown-content {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px;
   align-items: center;
+  position: relative;
+  top: -15px;
 }
 
 .dropdown-section {
@@ -223,7 +226,7 @@ body {
   padding-left: 15%;
   padding-right: 15%;
   height: 80vh;
-  margin-top: 7%;
+  margin-top: 3.5%;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
@@ -613,6 +616,136 @@ footer {
 }
 
 
+/* 聯絡我們表單 */
 
+#contactDialog {
+  border-radius: 10px;
+  padding: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-120%, -50%);
+  width: 20%;
+  max-height: 80vh;
+  background-color: var(--white);
+  /* 在這裡設置背景顏色 */
+  overflow: hidden;
+  /* 移除滾動條 */
+}
 
+/* 調整內容置中 */
+#contactDialog section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
 
+#contactBox {
+  width: 100%;
+  max-width: 70rem;
+  text-align: center;
+}
+
+#contactBox form {
+  max-width: 40rem;
+  text-align: center;
+}
+
+#contactBox form .input-box {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+}
+
+#contactBox form .input-box .input-field {
+  position: relative;
+  width: 49%;
+  margin: 0.3rem 0;
+}
+
+#contactBox form .input-box .input-field input,
+#contactBox form .textarea-field textarea {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--deepBlue);
+  border-radius: 5px;
+  border: var(--deepBlue) 0.1rem solid;
+}
+
+.submitText {
+  width: 90px;
+  height: 25px;
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--white);
+  border-radius: 15px;
+  margin-top: .7rem;
+  background-color: var(--deepBlue);
+}
+
+.submitText:hover {
+  cursor: pointer;
+  border: var(--deepBlue) 0.1rem solid;
+  background-color: var(--white);
+  color: var(--deepBlue);
+}
+
+#contactDialog .x-div {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: solid 2px var(--deepBlue);
+  background-color: var(--lightGray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  transition: all .3s;
+}
+
+#closeDialogButton {
+  cursor: pointer;
+}
+
+#contactDialog .x-div:hover {
+  animation: shake 0.3s ease-in-out;
+  
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-1.5px);
+  }
+
+  50% {
+    transform: translateX(1.5px);
+  }
+
+  75% {
+    transform: translateX(-1.5px);
+  }
+}
+
+#contactBox form .input-box .input-field input::placeholder,
+#contactBox form .textarea-field textarea::placeholder {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+#contactBox form .textarea-field textarea {
+  resize: none;
+}
