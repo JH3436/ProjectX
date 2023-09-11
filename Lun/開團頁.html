@@ -154,7 +154,7 @@
   <!-- 開團下拉選項 -->
 
   <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+  <!-- <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css"> -->
   <dropdown class="A">
     <input id="toggle1" type="checkbox" checked>
     <label for="toggle1" class="animate">選擇<i class="fa fa-bars float-right"></i></label>
@@ -211,14 +211,18 @@
   
 
   <!-- 選擇照片 -->
-
-  <div class="img-container">
-    <h2 class="GG" style="color: #14213d; margin-left: 123px; top: 580px;">請選擇照片</h2>
-    <form action="/somewhere/to/upload" enctype="multipart/form-data">
-        <input type="file" onchange="readURL(this)" targetID="preview_progressbarTW_img" accept="image/gif, image/jpeg, image/png" />
-        <img id="preview_progressbarTW_img" src="#" />
-    </form>
+<div class="ChooseFile">
+  <div hidden>
+      <input type="file" id="photo" accept="image/png, image/jpeg;capture=camera">
+    </div>
+    <label for="photo" class="button">選擇照片</label>
+    <div id="frame">
+    </div>
 </div>
+    
+
+
+<!-- 活動標題 活動內容 -->
 
 
   

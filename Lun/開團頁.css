@@ -28,6 +28,7 @@ body {
   padding-left: 20%;
   padding-right: 20%;
   color: var(--white);
+  padding-bottom: 50%;
 }
 
 
@@ -547,20 +548,6 @@ button.switch-month:hover {
 
 
 
-/* 選擇照片 */
-.img-container {
-  position: absolute;
-  height: 300px;
-  width: 680px;
-  border: 2px solid #fca311; 
-  padding:130px 20px 50px 120px;
-  margin-left: -160px; 
-  margin-top: 530px;
-  background-color: #fca311;
-}
-
-
-
 
 
 /* 彈跳視窗 */
@@ -794,6 +781,51 @@ input[type=radio]:checked ~ label{
 
 .submit:hover {
   color: var(--deepBlue);
+}
+
+
+
+/* 選擇照片 */
+.ChooseFile{
+  background-color: var(--lightGray);
+  width: 600px;
+  height: 250px;
+  position: absolute;
+  top: 700px;
+  left: 220px;
+  bottom: 150px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+
+
+.button {
+  background: var(--orange);
+  color: #fff;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  
+}
+
+#frame {
+  width: 500px;
+  height: 200px;
+  margin-left: 80px;
+  margin-top: -40px;
+  overflow: hidden;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  align-items: center;
+}
+
+img {
+  max-width: 100%;
 }
 
 
