@@ -7,7 +7,7 @@
     <title>聯絡表單</title>
 
     <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 <style>
     :root {
@@ -37,16 +37,40 @@
         scroll-behavior: smooth;
         /*當使用超連結時，頁面會平滑滾動到目標位置。 */
         font-family: "Poppins", sans-serif;
-        background-color: #14213d;
+    }
+
+    #contactDialog {
+        border-radius: 20px;
+        padding: 10%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 65%;
+        max-width: 2000px;
+        background-color: var(--deepBlue);
+        /* 在這裡設置背景顏色 */
+        overflow: hidden;
+        /* 移除滾動條 */
+    }
+
+    /* 調整內容置中 */
+    #contactDialog section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 
     #contactBox {
-        min-height: auto;
-        padding-bottom: 7rem;
+        width: 100%;
+        max-width: 70rem;
+        text-align: center;
     }
 
     #contactBox form {
-        max-width: 70rem;
+        max-width: 40rem;
         margin: 0 auto;
         /*置中*/
         text-align: center;
@@ -57,6 +81,7 @@
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+
     }
 
     #contactBox form .input-box .input-field {
@@ -95,20 +120,24 @@
     }
 
     @keyframes shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(5px);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-}
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-5px);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
+
+        75% {
+            transform: translateX(-5px);
+        }
+    }
 
     #contactBox form .input-box .input-field input::placeholder,
     #contactBox form .textarea-field textarea::placeholder {
@@ -121,39 +150,60 @@
 </style>
 
 <body>
-    <section id="contactBox">
-        <form id="myForm">
-            <div class="input-box">
-                <div class="input-field">
-                    <input type="text" name="fullName" id="name" placeholder="您的全名" required>
-                </div>
-                <div class="input-field">
-                    <input type="email" name="mail" id="email" placeholder="Email" required>
-                </div>
-            </div>
+    <button id="showContactButton" style="color: #fca311;">聯絡我們</button>
 
-            <div class="input-box">
-                <div class="input-field">
-                    <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼(格式：10碼)"
-                        pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
+    <dialog id="contactDialog">
+        <section id="contactBox">
+            <form id="myForm">
+                <div class="input-box">
+                    <div class="input-field">
+                        <input type="text" name="fullName" id="name" placeholder="您的全名" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" name="mail" id="email" placeholder="Email" required>
+                    </div>
                 </div>
-                <div class="input-field">
-                    <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
+
+                <div class="input-box">
+                    <div class="input-field">
+                        <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼(格式：10碼)"
+                            pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
+                    </div>
                 </div>
-            </div>
 
-            <div class="textarea-field">
-                <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...." required></textarea>
-            </div>
+                <div class="textarea-field">
+                    <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...."
+                        required></textarea>
+                </div>
 
-            <div>
-                <input type="submit" class="submitText" value="傳送"></input>
-            </div>
-
-        </form>
-    </section>
+                <div>
+                    <input type="submit" class="submitText" value="傳送"></input>
+                </div>
+            </form>
+        </section>
+    </dialog>
 </body>
 <script>
+    // 當按鈕點擊時，顯示 dialog
+    document.getElementById("showContactButton").addEventListener("click", function () {
+        var dialog = document.getElementById("contactDialog");
+        dialog.showModal();
+
+
+    });
+
+    // 當 dialog 關閉時，重置表單
+    document.getElementById("contactDialog").addEventListener("close", function () {
+        document.getElementById("myForm").reset();
+    });
+
+
+
+
+    //響應式表單
     $(document).ready(function () {
         $("#contactBox form input").on("input", function () {
             if (this.checkValidity()) {
