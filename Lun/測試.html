@@ -85,23 +85,22 @@ img {
   
 
   <script>
-      $(document).ready(function() {
-        $('#photo').on('change', function() {
-          const file = this.files[0];
-          const reader = new FileReader();
+  const photoInput = document.querySelector("#photo");
 
-          if (!file) {
-            return;
-          }
-
-        reader.onload = function(event) {
-         $('#frame').css('background-image', `url(${event.target.result})`);
-        }
-
-        reader.readAsDataURL(file);
+    photoInput.addEventListener("change", () => {
+      const reader  = new FileReader();
+      const file = photoInput.files[0];
+      
+      if (!file) {
+        return;
+      }
+      
+      reader.addEventListener("load", (event) => {
+        document.querySelector("#frame").style.backgroundImage = `url(${event.target.result})`;
       });
-    });
-
+      
+      reader.readAsDataURL(file);
+  });
     </script>
 
 
