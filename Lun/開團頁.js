@@ -552,25 +552,19 @@ $(document).ready(function () {
 
 
 // 選擇照片
-function readURL(input){
+$(document).ready(function() {
+    $('#photo').on('change', function() {
+      const file = this.files[0];
+      const reader = new FileReader();
 
-  if(input.files && input.files[0]){
+      if (!file) {
+        return;
+      }
 
-    var imageTagID = input.getAttribute("targetID");
-
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-
-       var img = document.getElementById(imageTagID);
-
-       img.setAttribute("src", e.target.result)
-
+    reader.onload = function(event) {
+     $('#frame').css('background-image', `url(${event.target.result})`);
     }
 
-    reader.readAsDataURL(input.files[0]);
-
-  }
-
-}
-
+    reader.readAsDataURL(file);
+  });
+});
