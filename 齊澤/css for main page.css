@@ -52,6 +52,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all .3s;
+}
+
+#scroll-to-top .homeicon-container:hover {
+  transform: scale(1.15);
 }
 
 .hidden {
