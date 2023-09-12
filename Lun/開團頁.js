@@ -568,3 +568,37 @@ $(document).ready(function() {
     reader.readAsDataURL(file);
   });
 });
+
+
+
+// 提交按鈕
+$(document).ready(function() {
+    $(".submit2").click(function() {
+      if (!$("input[name='selector']:checked").val()) {
+        alert("請檢查是否有填寫完畢");
+        return false; 
+      }
+  
+      // 檢查照片是否有選擇
+      if ($("#photo").val() === "") {
+        alert("請選擇一張照片");
+        return false; // 防止表單提交
+      }
+  
+      // 檢查活動名稱是否填寫
+      if ($("#title").val() === "") {
+        alert("請填寫活動名稱");
+        return false; 
+      }
+  
+      // 檢查活動內容是否填寫
+      if ($("#content").val() === "") {
+        alert("請填寫活動內容");
+        return false; 
+      }
+  
+      
+      return true;
+    });
+  });
+  
