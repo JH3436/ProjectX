@@ -7,6 +7,8 @@
     <title>JO!N</title>
     <link rel="icon" href="./Files/小黃人.png" type="image/png">
     <link rel="stylesheet" href="./css/projectMain.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
     <!-- Font Awesome套件引入 -->
     <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
     
@@ -103,12 +105,14 @@
                 <h2>選擇你的日期 加入我們!</h2>
                 
                 <div id="signTextDiv">
-                    <p>姓名:</p>
-                    <input type="text" id = "nameInput">
-                    <p>電話</p>
-                    <input type="text" id = "telInput">
-                    <p>留言給團主</p>
-                    <textarea id="userMessage" id="" cols="30" rows="10"></textarea>
+                    <label for="nameInput">姓名:</label>
+                    <input type="text" id = "nameInput" placeholder="王大明">
+                    <br><br><br>
+                    <label for="telInput">電話:</label>
+                    <input type="text" id = "telInput" pattern="[0-9]{10}" placeholder="0912345678">
+                    <br><br><br>
+                    <label for="userMessage">留言給團主:</label>
+                    <textarea id="userMessage"  cols="30" rows="10"></textarea>
                 </div>
                 <div id="activityCalendar">
                     <link rel="stylesheet" href="./css/projectCalendar.css"> 
@@ -145,5 +149,5 @@
     <script src="./js/projectCalendar.js"></script>
     <script src="./js/sign.js"></script>
     <script src="./js/main.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
 </html>
