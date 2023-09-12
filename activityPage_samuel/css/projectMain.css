@@ -28,9 +28,15 @@ h3{
     color: var(--lightGray);
 }
 
+button:hover{
+    transform: scale(1.1);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0,0.8);
+
+}
+
 #content{
     width: 100%;
-    height: 1750px;
+    height: 110rem;
     margin: 50px;
 }
 
@@ -46,8 +52,33 @@ h3{
 }
 
 #picture{
-    height: 80%;
+    height: 70%;
     width: 100%;
+    box-shadow:
+        0 20px 60px 0 rgba(129, 128, 128, 0.66),
+        inset 0 0 0 50px #333,
+        inset 0 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+#morePictureDiv{
+    width: 100%;
+    height: 20%;
+    /* background-color: var(--white); */
+    /* display: flexbox; */
+}
+
+#morePicture{
+    width: 31%;
+    height: 100%;
+    display: inline-flex;
+    margin: 0.9%;
+    border: 3px solid var(--lightGray);
+    
+}
+
+#morePicture:hover{
+    transform: scale(1.1);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0,0.8);
 }
 
 /* 報名DIV */
@@ -56,7 +87,7 @@ h3{
     height: 50%;
     width: 50%;
     padding: 10px;
-    margin-top: 50px;
+    margin-top: 1rem;
     /* display: inline-block; */
     /* justify-content: flex-end; */
     position: relative;
@@ -66,7 +97,7 @@ h3{
 /* 按鈕 */
 .btn{
     width:30%;
-    height:75px;
+    height: 5rem;
     border:0;
     background-color:#0777da;
     color:#fff;
@@ -86,7 +117,12 @@ h3{
 /* 地圖DIV */
 #map{
     width: 100%;
-    height: 250px;
+    height: 30rem;
+    border-radius: 32px;
+    box-shadow:
+        0 20px 60px 0 rgba(129, 128, 128, 0.66),
+        inset 0 0 0 50px #333,
+        inset 0 0 0 6px rgba(255, 255, 255, 0.5);
 }
 
 
@@ -94,16 +130,19 @@ h3{
 #activityDiv{
     background-color: var(--blue);
     width: 100%;
-    height: 800px;
+    height: 50rem;
     margin-top: 75px; 
     border: 5px solid var(--lightGray);
     border-radius: 32px;
+    
+    
+    
 }
 
 #activityDetailed{
     background-color: var(--orange);
     width: 30%;
-    height: 75px;
+    height: 5rem;
     margin-top: 2.5%;
     margin-left: 2.5%;
     padding: 5px;
@@ -111,6 +150,7 @@ h3{
     border-radius: 32px;
     display:flex;
     position: absolute;
+    
 
 }
 
@@ -121,6 +161,20 @@ h3{
     flex-grow: 1;
     
 }
+
+
+/* 彈出式頁面 */
+
+/* #signDialog{
+    opacity: 0.9;
+} */
+
+/* #activityCalendar {
+    transform: scale(0.9);
+} */
+/* #activityCalendar *{
+    transform: scale(1);
+} */
 
 #signDialog{
     height: 80%;
@@ -137,22 +191,100 @@ h3{
 }
 
 #dialogClose{
+    width:20%;
+    height: 3rem;
+    border:0;
+    background-color:#fca311;
+    color:#fff;
+    font-size: xx-large;
+    border-radius:10px;
+    margin-left: 10%;
+    cursor:pointer;
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    left: -3rem;
+    bottom: 1rem;
+}
+#dialogClose:hover{
+    color:var(--white);
+    background-color:#965d02;
+    border:2px var(--black);
 }
 
 #dialogSign{
+    width:20%;
+    height: 3rem;
+    border:0;
+    background-color:#fca311;
+    color:#fff;
+    font-size: xx-large;
+    border-radius:10px;
+    margin-left: 10%;
+    cursor:pointer;
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    right: 3rem;
+    bottom: 1rem;
+}
+
+#dialogSign:hover{
+    color:var(--white);
+    background-color:#965d02;
+    border:2px var(--black);
+}
+
+#signTextDiv{
+    width: 30rem;
+    display: inline-block;
+    position: absolute;
+    left: 3rem;
+}
+#signTextDiv p{
+    color: var(--lightGray);
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+input {
+    width: 30rem;
+    height: 3rem;
+    border: 0px;
+    margin-top: 0rem;
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: var(--lightGray);
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.15);
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: 0 0 5px 4px rgba(0, 0, 0,0.1);
+    border-radius: 30px;
+}
+textarea{
+    width: 30rem;
+    height: 9rem;
+    border: 0px;
+    margin-top: 0rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: var(--lightGray);
+    border: 1px solid rgba(255,255,255,.15);
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: 0 0 5px 4px rgba(0, 0, 0,0.1);
+    border-radius: 10px;
+}
+
+/* dialog日程表 */
+#activityCalendar{
+    
+    /* float:right; */
+    display: inline-block;
+    position: absolute;
+    top: 6rem;
+    right: 3rem;
+    
 }
 
 /* #signDialog::backdrop {
     background-color: rgba(0, 0, 0, 0.1);
   } */
-
-/* #activityCalendar{
-    height: 20%;
-    width: 20%;
-} */

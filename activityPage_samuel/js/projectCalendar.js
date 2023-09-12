@@ -52,11 +52,13 @@ Calendar.prototype.drawHeader = function() {
   this.title.innerHTML = this.current.format('MMMM YYYY');
 }
 
+//tag日期
+
 Calendar.prototype.drawMonth = function() {
   var self = this;
   
   this.events.forEach(function(ev) {
-   ev.date = self.current.clone().date(Math.random() * (29 - 1) + 1);
+   ev.date = self.current.clone().date(20);////  更改日期
   });
   
   
@@ -231,6 +233,8 @@ Calendar.prototype.openDay = function(el) {
   arrow.style.left = el.offsetLeft - el.parentNode.offsetLeft + 27 + 'px';
 }
 
+
+
 Calendar.prototype.renderEvents = function(events, ele) {
   //Remove any events in the current details element
   var currentWrapper = ele.querySelector('.events');
@@ -307,7 +311,7 @@ Calendar.prototype.prevMonth = function() {
 }
 
 window.Calendar = Calendar;
-
+// createElement()
 function createElement(tagName, className, innerText) {
   var ele = document.createElement(tagName);
   if(className) {
@@ -322,25 +326,11 @@ function createElement(tagName, className, innerText) {
  
 !function() {
 var data = [
-  // { eventName: '', calendar: 'Work', color: 'orange' },
-  // { eventName: '', calendar: 'Work', color: 'orange' },
-  // { eventName: '', calendar: 'Work', color: 'orange' },
-  // { eventName: '', calendar: 'Work', color: 'orange' },
+  { eventName: '????', calendar: 'Work', color: 'orange' },
+  { eventName: '???', calendar: 'Work', color: 'yellow' },
+  { eventName: '??', calendar: 'Work', color: 'white' },
+  { eventName: '?', calendar: 'Work', color: 'orange' },
 
-  // { eventName: '', calendar: 'Sports', color: 'blue' },
-  // { eventName: '', calendar: 'Sports', color: 'blue' },
-  // { eventName: '', calendar: 'Sports', color: 'blue' },
-  // { eventName: '', calendar: 'Sports', color: 'blue' },
-
-  // { eventName: '', calendar: 'Kids', color: 'yellow' },
-  // { eventName: '', calendar: 'Kids', color: 'yellow' },
-  // { eventName: '', calendar: 'Kids', color: 'yellow' },
-  // { eventName: '', calendar: 'Kids', color: 'yellow' },
-
-  // { eventName: '', calendar: 'Other', color: 'green' },
-  // { eventName: '', calendar: 'Other', color: 'green' },
-  // { eventName: '', calendar: 'Other', color: 'green' },
-  // { eventName: '', calendar: 'Other', color: 'green' }
 ];
 
 
