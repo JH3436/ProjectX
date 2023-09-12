@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <title>News</title>
+  <style>
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:#fff;
+}
+
+.banner {
+            background-image: url("./album/12.jpg");
+            /* 橫幅背景圖片路徑 */
+            background-size: cover;
+            height: 300px;
+            /* 調整橫幅高度 */
+            text-align: center;
+            color: white;
+            padding-top: 100px;
+        }
+
+        .banner h1 {
+            font-size: 36px;
+            /* 調整h1標題文字大小 */
+            margin-bottom: 20px;
+            /* 調整h1標題下方的間距 */
+        }
+
+        .banner p {
+            font-size: 20px;
+            /* 調整p段落文字大小 */
+        }
+
+.article-list {
+    list-style: none;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.article-item {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.article-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+.article-summary {
+    font-size: 16px;
+    color: gray;
+}
+
+.article-link {
+    display: block;
+    margin-top: 10px;
+    text-align: right;
+    color: #007bff;
+}
+
+.article-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: gray;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+  </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>最新消息</h1>
+        <p>News</p>
+    </div>
+    <div class="container">
+        <ul class="article-list" id="article-list">
+            <!-- 文章列表會被動態生成 -->
+        </ul>
+    </div>
+    <script>
+   const articles = [
+    {
+        title: 'title1',
+        summary: 'new1',
+        content: 'content1'
+    },
+    {
+        title: 'title2',
+        summary: 'news2',
+        content: 'content2'
+    }
+];
+
+// 生成文章列表
+const articleList = document.getElementById('article-list');
+articles.forEach((article, index) => {
+    const listItem = document.createElement('li');
+    listItem.className = 'article-item';
+    listItem.innerHTML = `
+        <h2 class="article-title">${article.title}</h2>
+        <p class="article-summary">${article.summary}</p>
+        <a class="article-link" href="#" onclick="showArticle(${index})">Read more --></a>
+    `;
+    articleList.appendChild(listItem);
+});
+
+// 顯示單篇文章頁面
+function showArticle(index) {
+    const article = articles[index];
+    const articlePage = `
+        <div class="container">
+            <h2 class="article-title">${article.title}</h2>
+            <p class="article-content">${article.content}</p>
+            <a class="back-link" onclick="goBack()"> <-- Back</a>
+        </div>
+    `;
+    document.body.innerHTML = articlePage;
+}
+
+// 返回文章列表
+function goBack() {
+    window.location.reload();
+}
+    </script>
+</body>
+</html>
+</head>
+<body>
+  
+</body>
+</html>
