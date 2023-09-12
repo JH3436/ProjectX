@@ -231,7 +231,6 @@
       <section class="cards">
         <article class="card card--1">
           <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-lg heart-icon"></i>
             <div class="card__clock-info">
               <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
                 <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
@@ -246,6 +245,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">個人揪團</div>
             <span class="card__category">登山</span>
             <h3 class="card__title">奇萊主北假日團</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 王大壯</a></span>
@@ -271,6 +271,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">官方活動</div>
             <span class="card__category">潛水 - 自由潛水</span>
             <h3 class="card__title">Discover the sea</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 美人魚</a></span>
@@ -295,6 +296,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">官方活動</div>
             <span class="card__category">溯溪 - 溫泉</span>
             <h3 class="card__title">雲海溫泉週末團</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 溫泉蛋</a></span>
@@ -334,6 +336,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">官方活動</div>
             <span class="card__category">登山</span>
             <h3 class="card__title">奇萊主北假日團</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 王大壯</a></span>
@@ -359,6 +362,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">官方活動</div>
             <span class="card__category">潛水 - 自由潛水</span>
             <h3 class="card__title">Discover the sea</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 美人魚</a></span>
@@ -368,7 +372,6 @@
 
         <article class="card card--6">
           <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-lg heart-icon"></i>
             <div class="card__clock-info">
               <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
                 <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
@@ -383,6 +386,7 @@
             <div class="card__img--hover"></div>
           </a>
           <div class="card__info">
+            <div class="category-box">個人揪團</div>
             <span class="card__category">溯溪 - 溫泉</span>
             <h3 class="card__title">雲海溫泉週末團</h3>
             <span class="card__by">主揪<a href="#" class="card__author" title="author"> 溫泉蛋</a></span>
@@ -425,40 +429,42 @@
         <div class="formOuter-div">
           <dialog id="contactDialog">
             <div class="x-div">
-                <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
+              <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
             </div>
             <section id="contactBox">
-                <form id="myForm">
-                    <div class="input-box">
-                        <div class="input-field">
-                            <input type="text" name="fullName" id="name" placeholder="您的全名" pattern = "^[\u4e00-\u9fa5]{2,4}$" required>
-                        </div>
-                        <div class="input-field">
-                            <input type="email" name="mail" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
-                        </div>
-                    </div>
-    
-                    <div class="input-box">
-                        <div class="input-field">
-                            <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼(格式：10碼)"
-                                pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
-                        </div>
-                        <div class="input-field">
-                            <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
-                        </div>
-                    </div>
-    
-                    <div class="textarea-field">
-                        <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...."
-                            required></textarea>
-                    </div>
-    
-                    <div>
-                        <input type="submit" class="submitText" value="傳送"></input>
-                    </div>
-                </form>
+              <form id="myForm">
+                <div class="input-box">
+                  <div class="input-field">
+                    <input type="text" name="fullName" id="name" placeholder="您的全名" pattern="^[\u4e00-\u9fa5]{2,4}$"
+                      required>
+                  </div>
+                  <div class="input-field">
+                    <input type="email" name="mail" id="email" placeholder="Email"
+                      pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                  </div>
+                </div>
+
+                <div class="input-box">
+                  <div class="input-field">
+                    <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼(格式：10碼)"
+                      pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
+                  </div>
+                  <div class="input-field">
+                    <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
+                  </div>
+                </div>
+
+                <div class="textarea-field">
+                  <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...."
+                    required></textarea>
+                </div>
+
+                <div>
+                  <input type="submit" class="submitText" value="傳送"></input>
+                </div>
+              </form>
             </section>
-        </dialog>
+          </dialog>
         </div>
       </section>
     </div>
@@ -469,7 +475,7 @@
       <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Copyright © 2023 JO!N Inc. | 保留一切權利。</p>
     </div>
   </footer>
- 
+
   <!-- JS連結 -->
   <script src="./js for main page.js"></script>
 </body>
