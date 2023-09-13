@@ -282,12 +282,9 @@ body {
   text-align: center;
 }
 
-.c-item {
-  height: 480px;
-}
-
 .c-img {
-  height: 100%;
+  width: 100%;
+  height: 380px;
   object-fit: cover;
 }
 
