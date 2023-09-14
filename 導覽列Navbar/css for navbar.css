@@ -40,6 +40,8 @@ body {
 .navbar-item {
   text-decoration: none;
   color: var(--white);
+  margin-right: 1rem;
+
 }
 
 .navbar-item:hover {
