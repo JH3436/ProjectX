@@ -35,16 +35,16 @@ button:hover{
 }
 
 #content{
-    width: 100%;
+    /* width: 100%; */
     height: 120rem;
-    margin: 50px;
+    margin: 2rem;
 }
 
 /* 圖片DIV CSS */
 #pictureDiv{
     /* background-color: var(--lightGray); */
     height: 50%;
-    width: 50%;
+    /* width: 50%; */
     padding: 10px;
     position: relative;
     display: inline-block;
@@ -73,7 +73,7 @@ button:hover{
     height: 100%;
     display: inline-flex;
     margin: 0.9%;
-    border: 3px solid var(--lightGray);
+    border: 1px solid var(--lightGray);
     
 }
 
@@ -86,7 +86,7 @@ button:hover{
 #signUpDiv{
     float:right;
     height: 50%;
-    width: 50%;
+    /* width: 50%; */
     padding: 10px;
     margin-top: 1rem;
     /* display: inline-block; */
@@ -119,8 +119,9 @@ button:hover{
 /* 地圖DIV */
 #map{
     width: 100%;
-    height: 30rem ;
+    height: 35rem ;
     border-radius: 32px;
+    display: flex;
     box-shadow:
         0 20px 60px 0 rgba(129, 128, 128, 0.66),
         inset 0 0 0 50px #333,
@@ -133,7 +134,7 @@ button:hover{
     background-color: var(--blue);
     width: 100%;
     height: 50rem;
-    margin-top: 75px; 
+    margin-top: 2rem; 
     border: 5px solid var(--lightGray);
     border-radius: 32px;
     
@@ -143,7 +144,7 @@ button:hover{
     background-color: var(--orange);
     width: 30%;
     height: 5rem;
-    margin-top: 2.5%;
+    margin-top: 1rem;
     margin-left: 2.5%;
     padding: 5px;
     border: 3px solid var(--lightGray);
