@@ -110,21 +110,21 @@
               
               <ul class="Cul">
               <li class="Cli">
-                <input type="radio" id="f-option" name="selector">
+                <input type="radio" id="f-option" name="selectorDATA">
                 <label for="f-option">2023/10/10 - 2023/10/03</label>
                 
                 <div class="check"></div>
               </li>
               
               <li class="Cli">
-                <input type="radio" id="s-option" name="selector">
+                <input type="radio" id="s-option" name="selectorDATA">
                 <label for="s-option">2023/10/10 - 2023/10/03</label>
                 
                 <div class="check"><div class="inside"></div></div>
               </li>
               
               <li class="Cli">
-                <input type="radio" id="t-option" name="selector">
+                <input type="radio" id="t-option" name="selectorDATA">
                 <label for="t-option">2023/10/10 - 2023/10/03</label>
                 
                 <div class="check"><div class="inside"></div></div>
@@ -156,7 +156,7 @@
   <!-- <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css"> -->
   <dropdown class="A">
     <input id="toggle1" type="checkbox" checked>
-    <label for="toggle1" class="animate">選擇<i class="fa fa-bars float-right"></i></label>
+    <label for="toggle1" class="animate">選擇活動<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
       <li class="animate">衝浪<i class="fa fa-code float-right"></i></li>
       <li class="animate">登山<i class="fa fa-arrows-alt float-right"></i></li>
@@ -166,7 +166,7 @@
   
   <dropdown class="B">
     <input id="toggle2" type="checkbox">
-    <label for="toggle2" class="animate">假如選登山<i class="fa fa-bars float-right"></i></label>
+    <label for="toggle2" class="animate">選擇地點<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
       <li class="animate">喬戈里峰<i class="fa fa-code float-right"></i></li>
       <li class="animate">馬特峰<i class="fa fa-arrows-alt float-right"></i></li>
@@ -176,8 +176,9 @@
 
 
   <!-- 日曆 -->
-
-  <dropdown class="date" id="dateRangeDisplay">
+  <div id="selected-date">
+    <div id="selected-range">
+        <dropdown class="date" id="dateRangeDisplay">
     <input id="toggle3" type="checkbox">
     <label for="toggle3" class="selectdate">選擇日期<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
@@ -194,6 +195,9 @@
      </div>
     </ul>
   </dropdown>
+    </div>
+  </div>
+  
 
 
   <!-- 選擇預計開團人數上下限 -->
