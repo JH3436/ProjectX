@@ -427,6 +427,21 @@ body {
   gap: 2.5rem;
 }
 
+/* 活動分類標籤 */
+.category-box {
+  border: var(--lightGray) 1px solid;
+  position: absolute;
+  top: 5px;
+  right: 5px; 
+  background-color: var(--brown); 
+  color: var(--white); 
+  padding: 5px 10px;
+  border-radius: 5px 12px 5px 5px; 
+  font-weight: 600; 
+  font-size: 0.85rem; 
+  z-index: 1; 
+}
+
 .card--1 .card__img,
 .card--1 .card__img--hover {
   background-image: url('https://picsum.photos/1260/750?random=1');
