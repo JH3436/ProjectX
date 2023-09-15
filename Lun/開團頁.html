@@ -214,14 +214,15 @@
   
 
   <!-- 選擇照片 -->
-<div class="ChooseFile">
-  <div hidden>
-      <input type="file" id="photo" accept="image/png, image/jpeg;capture=camera">
+  <div class="ChooseFile">
+    <div hidden>
+      <input type="file" id="photo" accept="image/png, image/jpeg;capture=camera" multiple>
     </div>
-    <label for="photo" class="button">選擇照片</label>
-    <div id="frame">
+    <label for="photo" class="button" id="chooseButton">選擇照片</label>
+    <div id="thumbnailsContainer">
     </div>
-</div>
+  </div>
+  
     
 
 

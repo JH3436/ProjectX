@@ -531,11 +531,92 @@ $(document).ready(function () {
 
 
 // 選擇日曆事件 
+// $(document).ready(function () {
+//     var selectedStartDate = null;
+//     var selectedEndDate = null;
+
+    
+//     $('#toggle3').on('click', function (e) {
+//         e.stopPropagation(); 
+//         $('.my-element .calendar').toggle(); 
+//     });
+
+    
+//     $(".my-element .calendar .calendar_content").on("click", 'div', function () {
+//         var clicked = $(this);
+
+//         // 取得日期那些的
+//         var selectedYear = parseInt(clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[1]);
+//         var selectedMonth = clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[0];
+//         var selectedDay = parseInt(clicked.text());
+
+//         // 轉數字
+//         var monthMapping = {
+//             "JANUARY": 0,
+//             "FEBRUARY": 1,
+//             "MARCH": 2,
+//             "APRIL": 3,
+//             "MAY": 4,
+//             "JUNE": 5,
+//             "JULY": 6,
+//             "AUGUST": 7,
+//             "SEPTEMBER": 8,
+//             "OCTOBER": 9,
+//             "NOVEMBER": 10,
+//             "DECEMBER": 11
+//         };
+
+//         selectedMonth = monthMapping[selectedMonth];
+
+//         if (selectedStartDate === null) {
+//             // 第一次選
+//             selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+//             selectedEndDate = selectedStartDate;
+//         } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+//             // 第二次選
+//             selectedEndDate = new Date(selectedYear, selectedMonth, selectedDay);
+//         } else {
+//             // 已經選兩個後 第三次重製
+//             selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+//             selectedEndDate = selectedStartDate;
+//         }
+
+//         // 更新日期显示
+//         if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+//             // 選一個
+//             $("#toggle3").next().text(formatDate(selectedStartDate));
+//         } else {
+//             // 選兩個
+//             $("#toggle3").next().text(formatDate(selectedStartDate) + " - " + formatDate(selectedEndDate));
+//         }
+//     });
+
+    
+//     $(".my-element .calendar").on("click", function (e) {
+//         e.stopPropagation();
+//     });
+
+    
+//     $(document).on('click', function () {
+//         $('.my-element .calendar').hide();
+//     });
+
+//     // "MM/DD"格式
+//     function formatDate(date) {
+//         if (date) {
+//             var month = (date.getMonth() + 1).toString().padStart(2, '0');
+//             var day = date.getDate().toString().padStart(2, '0');
+//             return month + '/' + day;
+//         }
+//         return "";
+//     }
+// });
+
+
 $(document).ready(function () {
     var selectedStartDate = null;
     var selectedEndDate = null;
 
-    
     $('#toggle3').on('click', function (e) {
         e.stopPropagation(); 
         $('.my-element .calendar').toggle(); 
@@ -545,12 +626,12 @@ $(document).ready(function () {
     $(".my-element .calendar .calendar_content").on("click", 'div', function () {
         var clicked = $(this);
 
-        // 取得日期那些的
+       
         var selectedYear = parseInt(clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[1]);
         var selectedMonth = clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[0];
         var selectedDay = parseInt(clicked.text());
 
-        // 轉數字
+       
         var monthMapping = {
             "JANUARY": 0,
             "FEBRUARY": 1,
@@ -568,25 +649,37 @@ $(document).ready(function () {
 
         selectedMonth = monthMapping[selectedMonth];
 
+        
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        
+        var selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
+
+       
+        if (selectedDate < today) {
+            return; 
+        }
+
         if (selectedStartDate === null) {
-            // 第一次選
-            selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+            
+            selectedStartDate = selectedDate;
             selectedEndDate = selectedStartDate;
         } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
-            // 第二次選
-            selectedEndDate = new Date(selectedYear, selectedMonth, selectedDay);
+            
+            selectedEndDate = selectedDate;
         } else {
-            // 已經選兩個後 第三次重製
-            selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+            
+            selectedStartDate = selectedDate;
             selectedEndDate = selectedStartDate;
         }
 
-        // 更新日期显示
+        
         if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
-            // 選一個
+            
             $("#toggle3").next().text(formatDate(selectedStartDate));
         } else {
-            // 選兩個
+            
             $("#toggle3").next().text(formatDate(selectedStartDate) + " - " + formatDate(selectedEndDate));
         }
     });
@@ -601,7 +694,12 @@ $(document).ready(function () {
         $('.my-element .calendar').hide();
     });
 
-    // "MM/DD"格式
+    
+    $(".my-element .calendar .calendar_content").on("click", function (e) {
+        e.stopPropagation();
+    });
+
+   
     function formatDate(date) {
         if (date) {
             var month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -615,27 +713,98 @@ $(document).ready(function () {
 
 
 
-
-
-
 // 選擇照片
-$(document).ready(function() {
-    $('#photo').on('change', function() {
-      const file = this.files[0];
-      const reader = new FileReader();
 
-      if (!file) {
-        return;
+
+// $(document).ready(function() {
+//     var selectedPhotos = [];
+  
+//     $('#photo').on('change', function() {
+//       const files = this.files;
+  
+//       for (let i = 0; i < files.length; i++) {
+//         const file = files[i];
+//         const reader = new FileReader();
+  
+//         if (!file || selectedPhotos.length >= 5) {
+//           break; 
+//         }
+  
+//         reader.onload = function(event) {
+//         
+//           var img = $('<img>').attr('src', event.target.result);
+//          
+//           $('#thumbnailsContainer').append(img);
+//         
+//           selectedPhotos.push(event.target.result);
+  
+//         
+//           if (selectedPhotos.length === 1) {
+//             $('#chooseButton').text('再選一張');
+//           }
+//           if (selectedPhotos.length >= 5) {
+//             $('#chooseButton').addClass('disabled');
+//             $('#chooseButton').prop('disabled', true);
+//             $('#chooseButton').off('click'); 
+  
+//             
+//             $('#chooseButton').on('click', function(event) {
+//               event.preventDefault();
+//             });
+//           }
+//         }
+  
+//         reader.readAsDataURL(file);
+//       }
+//     });
+//   });
+
+//第二版 還是有BUG 
+
+$(document).ready(function () {
+    var selectedPhotos = [];
+  
+    $('#photo').on('change', function () {
+      const files = this.files;
+  
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+  
+        if (!file || selectedPhotos.length >= 5) {
+          break; 
+        }
+  
+        reader.onload = function (event) {
+          
+          var img = $('<img>').attr('src', event.target.result);
+          
+          $('#thumbnailsContainer').prepend(img);
+          
+          selectedPhotos.unshift(event.target.result);
+  
+          
+          if (selectedPhotos.length === 1) {
+            $('#chooseButton').text('再選一張');
+          }
+          if (selectedPhotos.length >= 5) {
+            $('#chooseButton').addClass('disabled');
+            $('#chooseButton').prop('disabled', true);
+            $('#chooseButton').off('click'); 
+  
+            
+            $('#chooseButton').on('click', function (event) {
+              event.preventDefault();
+            });
+          }
+        };
+  
+        reader.readAsDataURL(file);
       }
-
-    reader.onload = function(event) {
-     $('#frame').css('background-image', `url(${event.target.result})`);
-    }
-
-    reader.readAsDataURL(file);
+    });
   });
-});
-
+  
+  
 
 
 // 提交按鈕

@@ -475,7 +475,7 @@ body { margin-top: 0%; }
     text-align: center;
     background-color: transparent;
     color: #6f6f6f;
-    font-size: 14px;
+    font-size: 20px;
 }
 .calendar_content div {
     border: 1px solid transparent;
@@ -501,8 +501,8 @@ body { margin-top: 0%; }
 }
 .calendar_content div.today {
     font-weight: bold;
-    font-size: 14px;
-    color: #fca311;
+    font-size: 20px;
+    color: var(--deepBlue);
 }
 .calendar_content div.selected {
     background-color: #fca311;
@@ -789,8 +789,8 @@ input[type=radio]:checked ~ label{
 /* 選擇照片 */
 .ChooseFile{
   background-color: var(--lightGray);
-  width: 600px;
-  height: 250px;
+  width: 800px;
+  height: 600px;
   position: absolute;
   top: 700px;
   left: 220px;
@@ -812,7 +812,7 @@ input[type=radio]:checked ~ label{
   
 }
 
-#frame {
+#thumbnailsContainer {
   width: 500px;
   height: 200px;
   margin-left: 80px;
@@ -830,6 +830,10 @@ img {
 }
 
 
+.disabled {
+  background-color: lightgray !important;
+  cursor: not-allowed !important;
+}
 
 
 
