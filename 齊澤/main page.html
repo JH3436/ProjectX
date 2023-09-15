@@ -39,53 +39,58 @@
   </div>
 
   <!-- 導覽列設計 -->
-  <div class="row navbar justify-content-between">
-    <div class="col-auto">
-      <a class="navbar-item">
-        <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
-      </a>
-    </div>
-    <div class="col-auto">
-      <a class="navbar-item" href="#" id="explore-link">
-        探索
-        <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
-      </a>
-      <div class="dropdown-content" id="explore-dropdown">
-        <div class="row">
-          <div class="col">
-            <a href="#">登山</a>
+  <div class="header">
+    <div class="row navbar justify-content-between">
+      <div class="col-auto">
+        <a class="navbar-item">
+          <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+        </a>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="explore-link">
+          探索
+          <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-content" id="explore-dropdown">
+          <div class="row">
+            <div class="col"
+              style="background: url('https://picsum.photos/240/80?random=1'); background-size: cover;">
+              <a href="#">登山</a>
+            </div>
+            <div class="col"
+              style="background: url('https://picsum.photos/240/80?random=2'); background-size: cover;">
+              <a href="#">溯溪</a>
+            </div>
+            <div class="col"
+              style="background: url('https://picsum.photos/240/80?random=3'); background-size: cover;">
+              <a href="#">潛水</a>
+            </div>
+            <div class="col"
+              style="background: url('https://picsum.photos/240/80?random=4'); background-size: cover;">
+              <a href="#">露營</a>
+            </div>
           </div>
-          <div class="col">
-            <a href="#">溯溪</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <a href="#">潛水</a>
-          </div>
-          <div class="col">
-            <a href="#">露營</a>
-          </div>
+
         </div>
       </div>
-    </div>
-    <div class="col-auto">
-      <a class="navbar-item" id="group-link" href="#">發起揪團</a>
-    </div>
-    <div class="col">
-      <!-- 填充空間 -->
-    </div>
-    <div class="col-auto">
-      <div class="searchInputWrapper">
-        <input class="searchInput" type="text" placeholder='搜尋...'>
-        <i class="searchInputIcon fa fa-search"></i>
+      <div class="col-auto">
+        <a class="navbar-item" id="group-link" href="#">發起揪團</a>
       </div>
-    </div>
-    <div class="col-auto">
-      <a class="navbar-item nav-login" href="#">登入</a>
-    </div>
-    <div class="col-auto nav-signin">
-      <a class="singin-style" href="#">註冊</a>
+      <div class="col">
+        <!-- 填充空間 -->
+      </div>
+      <div class="col-auto">
+        <div class="searchInputWrapper">
+          <input class="searchInput" type="text" placeholder='搜尋...'>
+          <i class="searchInputIcon fa fa-search"></i>
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item nav-login" href="#">登入</a>
+      </div>
+      <div class="col-auto nav-signin">
+        <a class="singin-style" href="#">註冊</a>
+      </div>
     </div>
   </div>
 
@@ -433,7 +438,7 @@
               <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
             </div>
             <section id="contactBox">
-              <form id="myForm">
+              <form>
                 <div class="input-box">
                   <div class="input-field">
                     <input type="text" name="fullName" id="name" placeholder="您的全名" pattern="^[\u4e00-\u9fa5]{2,4}$"

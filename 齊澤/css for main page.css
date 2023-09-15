@@ -65,12 +65,18 @@ body {
 }
 
 /* 導覽列 */
+.header {
+  background-color: rgba(45, 68, 119, 0.486);
+}
+
 .navbar {
-  padding-left: 10%;
-  padding-right: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
   color: var(--white);
-  font-size: large;
+  font-size: 1.25rem;
   font-weight: bolder;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 } 
 
 .navbar-item {
@@ -89,21 +95,40 @@ body {
   display: none; 
   position: absolute; 
   border-radius: 10px;
-  background-color: var(--white);
-  border: 7px solid var(--lightGray); 
   padding: 10px; 
   z-index: 999; 
-  
+}
+
+.dropdown-content .row {
+  gap: 1rem;
+}
+
+.dropdown-content .col {
+    height: 80px; 
+    width: 240px; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    border: #e5e5e5 2px solid;
+    transition: background 0.3s;
+}
+
+.dropdown-content .col:hover {
+    background: #16181d; 
+    border: var(--orange) 2px solid;
 }
 
 .dropdown-content a {
-  margin: 1rem;
   text-decoration: none;
-  color: var(--deepBlue);
+  color: var(--white);
+  font: 700;
+
 }
 
 .dropdown-content a:hover {
-  color: var(--orange);
+  color: var(--deepBlue);
 }
 
 .nav-signin {
@@ -294,12 +319,13 @@ body {
   background-color: var(--orange);
   color: var(--white);
   font-weight: 700;
+  font-size: larger;
 }
 
 .carouselBtn:hover {
   color: var(--orange);
-  border: var(--orange) 2px solid;
-  background-color: #7979796f;
+  border: var(--orange) 2.5px solid;
+  background-color: white;
 }
 
 /* moving letter特效 */
@@ -614,8 +640,8 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-120%, -50%);
-  width: 20%;
+  transform: translate(-76%, -50%);
+  width: 33%;
   max-height: 80vh;
   background-color: var(--white);
   /* 在這裡設置背景顏色 */
@@ -635,12 +661,10 @@ footer {
 
 #contactBox {
   width: 100%;
-  max-width: 70rem;
   text-align: center;
 }
 
 #contactBox form {
-  max-width: 40rem;
   text-align: center;
 }
 
@@ -661,7 +685,8 @@ footer {
 #contactBox form .textarea-field textarea {
   width: 100%;
   padding: 0.4rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   background: transparent;
   color: var(--deepBlue);
   border-radius: 5px;
@@ -670,8 +695,9 @@ footer {
 
 .submitText {
   width: 90px;
-  height: 25px;
-  font-size: 0.8rem;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
   background: transparent;
   color: var(--white);
   border-radius: 15px;
