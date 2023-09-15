@@ -529,25 +529,92 @@ $(document).ready(function () {
     }
 });
 
-// 選擇日曆事件 目前放棄
-// document.addEventListener('DOMContentLoaded', function() {
-//   const dropdownItems = document.querySelectorAll('.date ul li');
 
-//   dropdownItems.forEach(item => {
-//       item.addEventListener('click', function() {
-//           const selectedText = this.textContent;
-//           const correspondingLabel = this.closest('.date').querySelector('label');
+// 選擇日曆事件 
+$(document).ready(function () {
+    var selectedStartDate = null;
+    var selectedEndDate = null;
 
-//           correspondingLabel.textContent = selectedText;
+    
+    $('#toggle3').on('click', function (e) {
+        e.stopPropagation(); 
+        $('.my-element .calendar').toggle(); 
+    });
 
-//           const startDate = selectedText.split(' - ')[0];
-//           const endDate = selectedText.split(' - ')[1];
+    
+    $(".my-element .calendar .calendar_content").on("click", 'div', function () {
+        var clicked = $(this);
 
-//           const dateRangeDisplay = document.getElementById('dateRangeDisplay');
-//           dateRangeDisplay.textContent = `${startDate} - ${endDate}`;
-//       });
-//   });
-// });
+        // 取得日期那些的
+        var selectedYear = parseInt(clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[1]);
+        var selectedMonth = clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[0];
+        var selectedDay = parseInt(clicked.text());
+
+        // 轉數字
+        var monthMapping = {
+            "JANUARY": 0,
+            "FEBRUARY": 1,
+            "MARCH": 2,
+            "APRIL": 3,
+            "MAY": 4,
+            "JUNE": 5,
+            "JULY": 6,
+            "AUGUST": 7,
+            "SEPTEMBER": 8,
+            "OCTOBER": 9,
+            "NOVEMBER": 10,
+            "DECEMBER": 11
+        };
+
+        selectedMonth = monthMapping[selectedMonth];
+
+        if (selectedStartDate === null) {
+            // 第一次選
+            selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+            selectedEndDate = selectedStartDate;
+        } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+            // 第二次選
+            selectedEndDate = new Date(selectedYear, selectedMonth, selectedDay);
+        } else {
+            // 已經選兩個後 第三次重製
+            selectedStartDate = new Date(selectedYear, selectedMonth, selectedDay);
+            selectedEndDate = selectedStartDate;
+        }
+
+        // 更新日期显示
+        if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+            // 選一個
+            $("#toggle3").next().text(formatDate(selectedStartDate));
+        } else {
+            // 選兩個
+            $("#toggle3").next().text(formatDate(selectedStartDate) + " - " + formatDate(selectedEndDate));
+        }
+    });
+
+    
+    $(".my-element .calendar").on("click", function (e) {
+        e.stopPropagation();
+    });
+
+    
+    $(document).on('click', function () {
+        $('.my-element .calendar').hide();
+    });
+
+    // "MM/DD"格式
+    function formatDate(date) {
+        if (date) {
+            var month = (date.getMonth() + 1).toString().padStart(2, '0');
+            var day = date.getDate().toString().padStart(2, '0');
+            return month + '/' + day;
+        }
+        return "";
+    }
+});
+
+
+
+
 
 
 
@@ -574,31 +641,46 @@ $(document).ready(function() {
 // 提交按鈕
 $(document).ready(function() {
     $(".submit2").click(function() {
-      if (!$("input[name='selector']:checked").val()) {
-        alert("請檢查是否有填寫完畢");
-        return false; 
+      var isValid = true;
+
+      if ($("#toggle1").val() === "") {
+        isValid = false; 
+      }
+      
+      if ($("#toggle2").val() === "") {
+        isValid = false; 
+      }
+
+      if ($("#toggle3").val() === "") {
+        isValid = false; 
+      }
+
+      if ($("#toggle4").val() === "") {
+        isValid = false; 
       }
   
       // 檢查照片是否有選擇
       if ($("#photo").val() === "") {
-        alert("請選擇一張照片");
-        return false; // 防止表單提交
+        isValid = false; // 防止表單提交
       }
   
       // 檢查活動名稱是否填寫
       if ($("#title").val() === "") {
-        alert("請填寫活動名稱");
-        return false; 
+        isValid = false; 
       }
   
       // 檢查活動內容是否填寫
       if ($("#content").val() === "") {
-        alert("請填寫活動內容");
-        return false; 
+        isValid = false; 
       }
-  
+
+      if (!isValid) {
+        // 有任何一個條件不通過，彈出警示框
+        alert("請檢查是否有填寫完畢");
+      } else {
+        // 所有條件通過，執行提交操作
+      }
       
-      return true;
+      return isValid;
     });
-  });
-  
+});

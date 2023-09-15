@@ -39,55 +39,56 @@
   </div>
 
   <!-- 導覽列設計 -->
-  <nav class="navbar">
-    <div class="navbar-logo">
+  <div class="row navbar justify-content-between">
+    <div class="col-auto">
       <a class="navbar-item">
-        <img src="Files/Logo.png" alt="logo" id="logo" width="125" height="50" />
+        <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
       </a>
-
+    </div>
+    <div class="col-auto">
       <a class="navbar-item" href="#" id="explore-link">
         探索
         <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
-
-        <div class="dropdown" id="explore-dropdown">
-          <div class="dropdown-content">
-            <div class="dropdown-section">
-              <a href="#">登山</a>
-              <ul>
-                <li style="color: var(--white)">c</li>
-                <li style="color: var(--white)">c</li>
-              </ul>
-            </div>
-            <div class="dropdown-section">
-              <a href="#">溯溪</a>
-              <ul>
-                <li><a href="#">瀑布</a></li>
-                <li><a href="#">溫泉</a></li>
-              </ul>
-            </div>
-            <div class="dropdown-section">
-              <a href="#">潛水</a>
-              <ul>
-                <li><a href="#">水肺潛水</a></li>
-                <li><a href="#">自由潛水</a></li>
-              </ul>
-            </div>
+      </a>
+      <div class="dropdown-content" id="explore-dropdown">
+        <div class="row">
+          <div class="col">
+            <a href="#">登山</a>
+          </div>
+          <div class="col">
+            <a href="#">溯溪</a>
           </div>
         </div>
-      </a>
-
+        <div class="row">
+          <div class="col">
+            <a href="#">潛水</a>
+          </div>
+          <div class="col">
+            <a href="#">露營</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto">
       <a class="navbar-item" id="group-link" href="#">發起揪團</a>
     </div>
-    <div class="navbar-right">
+    <div class="col">
+      <!-- 填充空間 -->
+    </div>
+    <div class="col-auto">
       <div class="searchInputWrapper">
         <input class="searchInput" type="text" placeholder='搜尋...'>
         <i class="searchInputIcon fa fa-search"></i>
-        </input>
       </div>
-      <a class="navbar-login" href="#">登入</a>
-      <a class="navbar-signin" href="#">註冊</a>
     </div>
-  </nav>
+    <div class="col-auto">
+      <a class="navbar-item nav-login" href="#">登入</a>
+    </div>
+    <div class="col-auto nav-signin">
+      <a class="singin-style" href="#">註冊</a>
+    </div>
+  </div>
+
 
   <!-- slogan加插圖 -->
   <div class="slogan-section">
