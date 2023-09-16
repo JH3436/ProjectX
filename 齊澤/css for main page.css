@@ -91,12 +91,12 @@ body {
 
 /* 懸浮方框 */
 .dropdown-content {
-  margin-top: .5rem;
+  margin-top: 1rem;
   display: none;
   position: absolute;
-  border-radius: 10px;
   padding: 10px;
   z-index: 999;
+  padding: 1rem;
 }
 
 .dropdown-content .row {
@@ -122,29 +122,35 @@ body {
 }
 
 
-.dropdown-img-1, .dropdown-img-2,
-.dropdown-img-3, .dropdown-img-4 {
-  position: relative; 
-  overflow: hidden; 
-  transition: opacity 0.3s; 
+.dropdown-img-1,
+.dropdown-img-2,
+.dropdown-img-3,
+.dropdown-img-4 {
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.3s;
 }
 
-.dropdown-img-1::before, .dropdown-img-2::before,
-.dropdown-img-3::before, .dropdown-img-4::before {
-  content: ""; 
-  position: absolute; 
+.dropdown-img-1::before,
+.dropdown-img-2::before,
+.dropdown-img-3::before,
+.dropdown-img-4::before {
+  content: "";
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 1; 
-  z-index: -1; 
-  transition: all 0.3s; 
+  opacity: 1;
+  z-index: -1;
+  transition: all 0.3s;
 }
 
-.dropdown-img-1:hover::before, .dropdown-img-2:hover::before,
-.dropdown-img-3:hover::before, .dropdown-img-4:hover::before {
-  opacity: 0.7; 
+.dropdown-img-1:hover::before,
+.dropdown-img-2:hover::before,
+.dropdown-img-3:hover::before,
+.dropdown-img-4:hover::before {
+  opacity: 0.5;
   transform: scale(1.15);
 }
 
@@ -157,13 +163,13 @@ body {
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
-  transition: border .3s  ease;
+  transition: border .3s ease;
 }
 
 .dropdown-content .col:hover {
   border: var(--lightGray) solid 2.5px;
   box-shadow:
-        5px 5px 15px 0 rgba(129, 128, 128, 0.66);
+    5px 5px 15px 0 rgba(129, 128, 128, 0.66);
 }
 
 .dropdown-content a {
@@ -274,55 +280,46 @@ body {
 
 /* slogan */
 .slogan-section {
-  padding-left: 15%;
-  padding-right: 15%;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  padding-left: 10%;
+  padding-right: 10%;
   height: 80vh;
-  margin-top: 3.5%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  background-color: var(--deepBlue);
-  color: var(--white);
+  margin-top: 5%;
+  background-image: url("https://picsum.photos/1720/499");
   position: relative;
-  gap: 8rem;
+  background-size: cover;
+  margin-bottom: 6.5%;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+
 }
 
-.slogan {
-  flex: 1;
+/* 創建漸層覆蓋層 */
+.slogan-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, #14213d7c, #14213d);
+  z-index: 1;
+}
+
+
+.slogan-text h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  text-shadow: 4px 4px 5px rgb(81, 93, 104);
+}
+
+.slogan-text .slogan-lower-text {
+  font-size: 3rem;
+  font-weight: 600;
   text-align: center;
-  padding: 10px;
-  padding-right: 30px;
-}
-
-.slogan h2 {
-  margin: 0;
-  font-size: 65px;
-  font-weight: bolder;
-  text-align: left;
-}
-
-.slogan p {
-  text-align: left;
-  margin-top: 8%;
-  padding-left: 3%;
-  color: var(--lightGray);
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.image {
-  padding-left: 20px;
-  flex: 2;
-  display: flex;
-}
-
-.image img {
-  max-width: 100%;
-  /*到時候根據左邊文字內容更動高度*/
-  height: 500px;
-  border-radius: 10px;
-  box-shadow: 0 20px 60px 0 rgba(129, 128, 128, 0.66), inset 0 0 0 50px #333,
-    inset 0 0 0 6px rgba(255, 255, 255, 0.5);
 }
 
 /* 輪播圖 */
