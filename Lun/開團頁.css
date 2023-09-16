@@ -54,6 +54,7 @@ body {
   position: relative;
 }
 
+
 .navbar-item:hover {
   color: var(--orange);
 }
@@ -303,7 +304,7 @@ dropdown{
 }
 dropdown label, dropdown ul li{
   display: block;
-  width: 270px;
+  width: 300px;
   background: #ECF0F1;
   padding: 15px 20px;
 }
@@ -337,28 +338,35 @@ dropdown input ~ ul{
 
 .selectdate{
   width: 300px;
+  height: 50px; 
+  line-height: 30px; 
+  padding-top: 12px;
 }
 
-.date{
-  position: absolute;
-  margin-top: 250px;
-  right: 500px;
-}
 
 .A {
   position: absolute;
-  margin-left: -150px;
+  margin-top: 20px;
+  margin-left: 150px;
 }
 
 .B {
   position: absolute;
-  margin-left: 250px;
+  margin-top: 250px;
+  margin-left: 150px;
 }
+
+.date{
+  position: absolute;
+  margin-top: 500px;
+  margin-left: 150px;
+}
+
 
 .C {
   position: absolute;
-  margin-top: 250px;
-  margin-left: 1100px;
+  margin-top: 800px;
+  margin-left: 150px;
 }
 
 
@@ -450,7 +458,7 @@ dropdown ul li:nth-child(3) {
 
 
 /* 日曆 */
-@import url(https://fonts.googleapis.com/css?family=Muli:400, 300);
+@import url(https://fonts.googleapis.com/css?family=Muli:400);
 body { margin-top: 0%; }
 
 .calendar, .calendar_weekdays, .calendar_content {
@@ -475,7 +483,7 @@ body { margin-top: 0%; }
     text-align: center;
     background-color: transparent;
     color: #6f6f6f;
-    font-size: 20px;
+    font-size: 19px;
 }
 .calendar_content div {
     border: 1px solid transparent;
@@ -792,11 +800,12 @@ input[type=radio]:checked ~ label{
   width: 800px;
   height: 600px;
   position: absolute;
-  top: 700px;
-  left: 220px;
+  top:570px;
+  left: 820px;
   bottom: 150px;
   padding-top: 20px;
   padding-left: 20px;
+  border-radius: 10px;
 }
 
 
@@ -813,10 +822,10 @@ input[type=radio]:checked ~ label{
 }
 
 #thumbnailsContainer {
-  width: 500px;
-  height: 200px;
-  margin-left: 80px;
-  margin-top: -40px;
+  width: 400px;
+  height: 650px;
+  margin-left: 200px;
+  margin-top: -80px;
   overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
@@ -825,9 +834,26 @@ input[type=radio]:checked ~ label{
   align-items: center;
 }
 
-img {
-  max-width: 100%;
+
+
+#currentImg {
+  /* JQ 好像有優先設定權 這裡設定無效  */
+  max-width: 300px;
+  max-height: 450px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
+
+
+.button:hover {
+  color: var(--deepBlue);
+}
+
 
 
 .disabled {
@@ -835,6 +861,33 @@ img {
   cursor: not-allowed !important;
 }
 
+
+
+
+.page-button {
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+}
+
+#prevButton {
+  left: 120px; 
+}
+#prevButton:hover {
+  color: var(--deepBlue);
+}
+
+#nextButton {
+  right: 85px; 
+}
+#nextButton:hover {
+  color: var(--deepBlue);
+}
 
 
 
@@ -848,9 +901,9 @@ img {
 
 
 #inputForm {
-  margin-top: 650px;
-  margin-left: 300px;
-  width: 1000px;
+  margin-top: 230px;
+  margin-left: 235px;
+  width: 1600px;
 }
 
 #contentDisplay {
@@ -867,8 +920,8 @@ img {
 .submit2 {
   position: absolute;
   text-decoration: none;
-  top: 1000px;
-  right: 150px;
+  top: 1220px;
+  right: 280px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -881,3 +934,18 @@ img {
 .submit2:hover {
   color: var(--deepBlue);
 }
+
+
+
+
+/* 小背景 */
+.page-container {
+  background-color:lightslategray ;
+  width: 1500px;
+  height: 1100px;
+  margin-left: -200px;
+  margin-top: -100px;
+  z-index: -5;
+  border-radius: 10px;
+}
+

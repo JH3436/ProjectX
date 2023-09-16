@@ -1,139 +1,309 @@
-// 導覽列 
-
-//搜尋列focus更改顏色
-// 選擇search-input元素
-const searchInput = document.querySelector('.search-input');
-
-// 添加focus事件監聽器
-searchInput.addEventListener('focus', function () {
-    // 更改邊框顏色為橘色
-    searchInput.style.border = '6px solid var(--orange)';
-});
-
-// 添加blur事件監聽器（當失去焦點時恢復原始邊框顏色）
-searchInput.addEventListener('blur', function () {
-    // 恢復原始邊框顏色為白色
-    searchInput.style = "none"
-});
-
-// 探索下拉清單
-const exploreLink = document.getElementById('explore-link');
-const exploreDropdown = document.getElementById('explore-dropdown');
-
-exploreLink.addEventListener('mouseenter', function () {
-    exploreDropdown.style.display = 'block';
-});
-
-exploreDropdown.addEventListener('mouseleave', function () {
-    exploreDropdown.style.display = 'none';
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Font Awesome套件引入 -->
+  <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
 
 
-// 通知下拉的事件
-let isNotifyDropdownOpen = false;
-
-
-const notify = document.getElementById('notify');
-const notifyDropdown = document.getElementById('notify-dropdown');
-
-notify.addEventListener('click', function (e) {
-    e.stopPropagation(); 
-
-    if (isNotifyDropdownOpen) {
-        notifyDropdown.style.display = 'none';
-        isNotifyDropdownOpen = false;
-    } else {
-        notifyDropdown.style.display = 'block';
-        isNotifyDropdownOpen = true;
-    }
-});
-
-document.addEventListener('click', function () {
-    if (isNotifyDropdownOpen) {
-        notifyDropdown.style.display = 'none';
-        isNotifyDropdownOpen = false;
-    }
-});
-
-notifyDropdown.addEventListener('click', function (e) {
-    e.stopPropagation(); 
-});
-
-
-// 彈跳視窗
-$(document).ready(function () {
-    $("#AA, #BB").click(function () {
-      $(".pop").fadeIn(300);
-      positionPopup();
-    });
-  
-    $(".pop > span").click(function (e) {
-      e.stopPropagation(); 
-      $(".pop").fadeOut(300);
-    });
-  
-    $(".pop input[type=radio]").click(function (e) {
-      e.stopPropagation();
-    });
-
-    $(".submit").click(function() {
-        
-        var isChecked1 = $('#f-option') .is(":checked");
-        var isChecked2 = $('#s-option') .is(":checked");
-        var isChecked3 = $('#t-option').is(":checked");
-        console.log(isChecked1); //true or false
-  
-
-        if(isChecked1 == true || isChecked2 == true || isChecked3 == true){
-            $(".pop").fadeOut(300);
-        }else{
-            alert("請選擇日期");
-        }
-    });
-
-  });
-  
-
-
-
+  <!-- 引入 Bootstrap 的 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
   
 
+  <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
-   // 取得下拉選單項目 
-  document.addEventListener('DOMContentLoaded', function() {
-    const dropdownItems = document.querySelectorAll('dropdown ul li');
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+
+
+
+
+
+<!-- 純日曆CSS -->
+<style>
+@import url(https://fonts.googleapis.com/css?family=Muli:400);
+
+
+.calendar, .calendar_weekdays, .calendar_content {
+    max-width: 300px;
+}
+.calendar {
+    margin: auto;
+    font-family:'Muli', sans-serif;
+    font-weight: 400;
+}
+.calendar_content, .calendar_weekdays, .calendar_header {
+    position: relative;
+    overflow: hidden;
+}
+.calendar_weekdays div {
+    display:inline-block;
+    vertical-align:top;
+}
+.calendar_weekdays div, .calendar_content div {
+    width: 14.28571%;
+    overflow: hidden;
+    text-align: center;
+    background-color: transparent;
+    color: #6f6f6f;
+    font-size: 17.5px; 
+    /* 修改字體大小 但不包含當天日期的大小 */
+}
+.calendar_content div {
+    border: 1px solid transparent;
+    float: left;
+    cursor: pointer;
+}
+
+.calendar_content ul {
+  cursor: alias; 
+}
+
+
+.calendar_content div:hover {
+    border: 1px solid #dcdcdc;
+    cursor: default;
+}
+.calendar_content div.blank:hover {
+    cursor: default;
+    border: 1px solid transparent;
+}
+.calendar_content div.past-date {
+    color: #d5d5d5;
+}
+.calendar_content div.today {
+    font-weight: bold;
+    font-size: 18px;
+    /* 修改當天日期的大小 */
+    color: var(--deepBlue);
+}
+.calendar_content div.selected {
+    background-color: #fca311;
+    color: #e5e5e5;
+}
+.calendar_header {
+    width: 100%;
+    text-align: center;
+}
+.calendar_header h2 {
+    padding: 0 10px;
+    font-family:'Muli', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fca311;
+    float:left;
+    width:70%;
+    margin: 0 0 10px;
+}
+button.switch-month {
+    background-color: transparent;
+    padding: 0;
+    outline: none;
+    border: none;
+    color: #fca311;
+    float: left;
+    width:15%;
+    transition: color .2s;
+}
+button.switch-month:hover {
+    color: #fca311;
+}
+
+.my-element {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 300px;
+  height: 220px;
+  border-radius: 0 0 10px 10px; 
+  background-color: #e5e5e5; 
+}
+</style>
+
+
+
+
+
+
+
+<!-- 有下拉的話要加這段CSS -->
+<style>
+  *{
+   padding: 0;
+   margin: 0;
+   font-family: 'Lato', sans-serif;
+   box-sizing: border-box;
+ }
+ .float-right{
+   float: right;
+ }
+ .fa{
+  font-size: .8em;
+   line-height: 22px !important;
+ }
+ dropdown{
+    display: inline-block;
+    margin: 250px 40px; 
+ }
+ dropdown label, dropdown ul li{
+   display: block;
+   width: 270px;
+   background: #ECF0F1;
+   padding: 15px 20px;
+ }
+ 
+ 
+ 
+ 
+ dropdown label:hover, dropdown ul li:hover{
+   background: #fca311;
+   color: white;
+   cursor: pointer;
+ }
+ dropdown label{
+   color: #14213d;
+   /* border-left: 4px solid #1ABC9C; */
+   border-radius: 5px 5px 0 0; 
+   position: relative;
+   z-index: 2;
+ }
+ dropdown input{
+   display: none;
+ }
+ dropdown input ~ ul{
+   position: relative;
+   visibility: hidden;
+   opacity: 0;
+   left: -32px;
+   top: -20px;
+   z-index: 1;
+ }
+ 
+ .selectdate{
+   width: 300px;
+   height: 50px; 
+  line-height: 30px; 
+  padding-top: 12px;
+ }
+ 
+
+ /* 控制位子 */
+ .date{
+   position: absolute;
+   margin-top: 350px;
+   margin-left: 550px;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ dropdown input:checked + label{
+   background: #fca311;
+   color: white;
+ }
+ 
+ dropdown input:checked ~ ul{
+   visibility: visible;
+   opacity: 1;
+   top: 0;
+ }
+ 
+ dropdown ul li:nth-child(1) {
+   color: #14213d;
+   .fa{
+     display: none;
+   }
+   &:hover {
+     background: #fca311;
+     color: white;
+   }
+ }
+ 
+ dropdown ul li:nth-child(2) {
+   color: #14213d;
+   .fa{
+     display: none;
+   }
+   &:hover {
+     background: #fca311;
+     color: white;
+   }
+ }
+ 
+ dropdown ul li:nth-child(3) {
+   color: #14213d;
+   .fa{
+       display: none;
+   }
+   &:hover {
+     background: #fca311;
+     color: white;
+   }
+ }
+   </style>
   
-    dropdownItems.forEach(item => {
-      item.addEventListener('click', function() {
-        const selectedText = this.textContent;
-        const correspondingLabel = this.closest('dropdown').querySelector('label');
   
-        correspondingLabel.textContent = selectedText;
-      });
-    });
-  });
+
+<body>
+<!-- 日曆 無下拉版HTML-->
+<!-- <div id="selected-date">
+  <div id="selected-range">
+      <ul class="animate">
+        <div class="my-element">
+          <div class="calendar calendar-first" id="calendar_first">
+            <div class="calendar_header">
+              <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+              <h2></h2>
+              <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar_weekdays"></div>
+            <div class="calendar_content"></div>
+          </div>
+        </div>
+      </ul>
+  </div>
+</div> -->
 
 
-    //   選取完或點擊空白處會自動縮回
-    document.addEventListener('click', function(event) {
-        var dropdowns = document.querySelectorAll('dropdown');
-        dropdowns.forEach(function(dropdown) {
-          if (!dropdown.contains(event.target) || event.target.tagName === 'LI') {
-            var input = dropdown.querySelector('input');
-            if (input.checked) {
-              input.checked = false;
-            }
-          }
-        });
-      });
+<!-- 有下拉版 HTML-->
+<div id="selected-date">
+  <div id="selected-range">
+    <dropdown class="date" id="dateRangeDisplay">
+      <input id="toggle3" type="checkbox">
+      <label for="toggle3" class="selectdate">選擇日期<i class="fa fa-bars float-right"></i></label>
+      <ul class="animate">
+        <div class="my-element">
+          <div class="calendar calendar-first" id="calendar_first">
+            <div class="calendar_header">
+              <button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+              <h2></h2>
+              <button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
+            </div>
+            <div class="calendar_weekdays"></div>
+            <div class="calendar_content"></div>
+          </div>
+        </div>
+      </ul>
+    </dropdown>
+  </div>
+</div>
 
 
 
-  //日曆
-  
+<!-- 日曆JS  -->
+<script>
   $(document).ready(function () {
     function c(passed_month, passed_year, calNum) {
         var calendar = calNum == 0 ? calendars.cal1 : calendars.cal2;
@@ -528,255 +698,119 @@ $(document).ready(function () {
         return selected;
     }
 });
+</script>
 
 
-// 選擇日曆事件 
-
-
-$(document).ready(function () {
-    var selectedStartDate = null;
-    var selectedEndDate = null;
-
-    $('#toggle3').on('click', function (e) {
-        e.stopPropagation(); 
-        $('.my-element .calendar').toggle(); 
-    });
-
-    
-    $(".my-element .calendar .calendar_content").on("click", 'div', function () {
-        var clicked = $(this);
-
-       
-        var selectedYear = parseInt(clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[1]);
-        var selectedMonth = clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[0];
-        var selectedDay = parseInt(clicked.text());
-
-       
-        var monthMapping = {
-            "JANUARY": 0,
-            "FEBRUARY": 1,
-            "MARCH": 2,
-            "APRIL": 3,
-            "MAY": 4,
-            "JUNE": 5,
-            "JULY": 6,
-            "AUGUST": 7,
-            "SEPTEMBER": 8,
-            "OCTOBER": 9,
-            "NOVEMBER": 10,
-            "DECEMBER": 11
-        };
-
-        selectedMonth = monthMapping[selectedMonth];
-
-        
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        
-        var selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
-
-       
-        if (selectedDate < today) {
-            // 如果选择的日期是过去日期，清空选择
-            selectedStartDate = null;
-            selectedEndDate = null;
-        } else {
-            if (selectedStartDate === null) {
-                selectedStartDate = selectedDate;
-                selectedEndDate = selectedStartDate;
-            } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
-                selectedEndDate = selectedDate;
-            } else {
-                selectedStartDate = selectedDate;
-                selectedEndDate = selectedStartDate;
-            }
-        }
-
-        
-        if (selectedStartDate === null) {
-            // 清空日期显示
-            $("#toggle3").next().text("");
-        } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
-            $("#toggle3").next().text(formatDate(selectedStartDate));
-        } else {
-            $("#toggle3").next().text(formatDate(selectedStartDate) + " - " + formatDate(selectedEndDate));
-        }
-    });
-
-    
-    $(".my-element .calendar").on("click", function (e) {
-        e.stopPropagation();
-    });
-
-    
-    $(document).on('click', function () {
-        $('.my-element .calendar').hide();
-    });
-
-    
-    $(".my-element .calendar .calendar_content").on("click", function (e) {
-        e.stopPropagation();
-    });
-
-   
-    function formatDate(date) {
-        if (date) {
-            var month = (date.getMonth() + 1).toString().padStart(2, '0');
-            var day = date.getDate().toString().padStart(2, '0');
-            return month + '/' + day;
-        }
-        return "";
-    }
-});
-
-
-
-
-// 選擇照片
-
-
-$(document).ready(function () {
-    var selectedPhotos = [];
-    var currentPhotoIndex = -1;
+<!-- 選日期會顯示在上面的JQ -->
+<script>
+    $(document).ready(function () {
+      var selectedStartDate = null;
+      var selectedEndDate = null;
   
-    // 上一張按钮事件
-    $('#prevButton').on('click', function () {
-      if (currentPhotoIndex > 0) {
-        currentPhotoIndex--;
-        displayCurrentPhoto();
-        updateButtonStates();
-      }
-    });
+      $('#toggle3').on('click', function (e) {
+          e.stopPropagation(); 
+          $('.my-element .calendar').toggle(); 
+      });
   
-    // 下一張按钮事件
-    $('#nextButton').on('click', function () {
-      if (currentPhotoIndex < selectedPhotos.length - 1) {
-        currentPhotoIndex++;
-        displayCurrentPhoto();
-        updateButtonStates();
-      }
-    });
+      
+      $(".my-element .calendar .calendar_content").on("click", 'div', function () {
+          var clicked = $(this);
   
-    // 一開始灰
-    $('#prevButton').prop('disabled', true).addClass('disabled');
-    $('#nextButton').prop('disabled', true).addClass('disabled');
+         
+          var selectedYear = parseInt(clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[1]);
+          var selectedMonth = clicked.closest(".calendar").find(".calendar_header h2").text().split(" ")[0];
+          var selectedDay = parseInt(clicked.text());
   
-    $('#photo').on('change', function () {
-      const files = this.files;
+         
+          var monthMapping = {
+              "JANUARY": 0,
+              "FEBRUARY": 1,
+              "MARCH": 2,
+              "APRIL": 3,
+              "MAY": 4,
+              "JUNE": 5,
+              "JULY": 6,
+              "AUGUST": 7,
+              "SEPTEMBER": 8,
+              "OCTOBER": 9,
+              "NOVEMBER": 10,
+              "DECEMBER": 11
+          };
   
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
+          selectedMonth = monthMapping[selectedMonth];
   
-        if (!file || selectedPhotos.length >= 5) {
-          break;
-        }
-  
-        reader.onload = function (event) {
           
-          selectedPhotos.push(event.target.result);
-          currentPhotoIndex = selectedPhotos.length - 1; 
-          displayCurrentPhoto();
-          updateButtonStates();
+          var today = new Date();
+          today.setHours(0, 0, 0, 0);
   
-          if (selectedPhotos.length === 1) {
-            $('#chooseButton').text('再選一張');
+          
+          var selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
+  
+         
+          if (selectedDate < today) {
+              selectedStartDate = null;
+              selectedEndDate = null;
+          } else {
+              if (selectedStartDate === null) {
+                  selectedStartDate = selectedDate;
+                  selectedEndDate = selectedStartDate;
+              } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+                  selectedEndDate = selectedDate;
+              } else {
+                  selectedStartDate = selectedDate;
+                  selectedEndDate = selectedStartDate;
+              }
           }
   
-          if (selectedPhotos.length >= 5) {
-            $('#chooseButton').addClass('disabled');
-            $('#chooseButton').prop('disabled', true);
-            $('#chooseButton').off('click');
-  
-            $('#chooseButton').on('click', function (event) {
-              event.preventDefault();
-            });
+          
+          if (selectedStartDate === null) {
+              $("#toggle3").next().text("");
+          } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
+              $("#toggle3").next().text(formatDate(selectedStartDate));
+          } else {
+              $("#toggle3").next().text(formatDate(selectedStartDate) + " - " + formatDate(selectedEndDate));
           }
-        };
+      });
   
-        reader.readAsDataURL(file);
-      }
-    });
+      
+      $(".my-element .calendar").on("click", function (e) {
+          e.stopPropagation();
+      });
   
-    
-    function displayCurrentPhoto() {
-      if (selectedPhotos.length > 0) {
-        $('#thumbnailsContainer img').remove();
-        var currentImg = $('<img>').attr('src', selectedPhotos[currentPhotoIndex]);
-        currentImg.css('max-width', '100%');
-        currentImg.css('max-height', '100%');
-        currentImg.css('width', 'auto');
-        currentImg.css('height', 'auto');
-        $('#thumbnailsContainer').prepend(currentImg);
-      }
-    }
+      
+      $(document).on('click', function () {
+          $('.my-element .calendar').hide();
+      });
   
-    
-    function updateButtonStates() {
-      if (currentPhotoIndex === 0) {
-        $('#prevButton').prop('disabled', true).addClass('disabled');
-      } else {
-        $('#prevButton').prop('disabled', false).removeClass('disabled');
-      }
+      
+      $(".my-element .calendar .calendar_content").on("click", function (e) {
+          e.stopPropagation();
+      });
   
-      if (currentPhotoIndex === selectedPhotos.length - 1) {
-        $('#nextButton').prop('disabled', true).addClass('disabled');
-      } else {
-        $('#nextButton').prop('disabled', false).removeClass('disabled');
+     
+      function formatDate(date) {
+          if (date) {
+              var month = (date.getMonth() + 1).toString().padStart(2, '0');
+              var day = date.getDate().toString().padStart(2, '0');
+              return month + '/' + day;
+          }
+          return "";
       }
-    }
   });
   
+  document.addEventListener('click', function (event) {
+          var dateRangeDisplay = document.getElementById('dateRangeDisplay');
+          var toggle3 = document.getElementById('toggle3');
+          var selectdate = document.querySelector('.selectdate');
   
-  
-  
+          
+          if (!dateRangeDisplay.contains(event.target) && event.target !== toggle3 && event.target !== selectdate) {
+              toggle3.checked = false; 
+          }
+      });
+  </script>
   
 
 
-// 提交按鈕
-$(document).ready(function() {
-    $(".submit2").click(function() {
-      var isValid = true;
-
-      if ($("#toggle1").val() === "") {
-        isValid = false; 
-      }
-      
-      if ($("#toggle2").val() === "") {
-        isValid = false; 
-      }
-
-      if ($("#toggle3").val() === "") {
-        isValid = false; 
-      }
-
-      if ($("#toggle4").val() === "") {
-        isValid = false; 
-      }
-  
-      // 檢查照片是否有選擇
-      if ($("#photo").val() === "") {
-        isValid = false; // 防止表單提交
-      }
-  
-      // 檢查活動名稱是否填寫
-      if ($("#title").val() === "") {
-        isValid = false; 
-      }
-  
-      // 檢查活動內容是否填寫
-      if ($("#content").val() === "") {
-        isValid = false; 
-      }
-
-      if (!isValid) {
-        // 有任何一個條件不通過，彈出警示框
-        alert("請檢查是否有填寫完畢");
-      } else {
-        // 所有條件通過，執行提交操作
-      }
-      
-      return isValid;
-    });
-});
+</body>
+</html>
