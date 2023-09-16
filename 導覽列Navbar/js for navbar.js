@@ -1,5 +1,4 @@
-// 導覽列 
-
+// 導覽列
 $(document).ready(function() {
   // 選取探索按鈕
   var exploreLink = $("#explore-link");

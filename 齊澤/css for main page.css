@@ -151,7 +151,7 @@ body {
 .dropdown-img-3:hover::before,
 .dropdown-img-4:hover::before {
   opacity: 0.5;
-  transform: scale(1.15);
+  transform: scale(1.25);
 }
 
 
