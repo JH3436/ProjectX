@@ -138,9 +138,9 @@ document.getElementById("contactDialog").addEventListener("close", function () {
 $(document).ready(function () {
   $("#contactBox form input").on("input", function () {
     if (this.checkValidity()) {
-      $(this).css("border", "0.1rem rgba(48, 230, 106, 0.749) solid");
+      $(this).css("border", "0.2rem green solid");
     } else {
-      $(this).css("border", "0.1rem red solid");
+      $(this).css("border", "0.2rem red solid");
     }
   });
 });
