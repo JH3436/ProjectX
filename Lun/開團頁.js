@@ -708,6 +708,8 @@ $(document).ready(function () {
         currentImg.css('max-height', '100%');
         currentImg.css('width', 'auto');
         currentImg.css('height', 'auto');
+        currentImg.css('margin-right', '0px');
+
         $('#thumbnailsContainer').prepend(currentImg);
       }
     }

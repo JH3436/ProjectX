@@ -822,9 +822,9 @@ input[type=radio]:checked ~ label{
 }
 
 #thumbnailsContainer {
-  width: 400px;
+  width: 550px;
   height: 650px;
-  margin-left: 200px;
+  margin-left: 185px;
   margin-top: -80px;
   overflow: hidden;
   background-size: contain;
@@ -836,8 +836,8 @@ input[type=radio]:checked ~ label{
 
 
 
-#currentImg {
-  /* JQ 好像有優先設定權 這裡設定無效  */
+/* JQ 好像有優先設定權 這裡設定無效  */
+/* #currentImg {
   max-width: 300px;
   max-height: 450px;
   display: block;
@@ -847,7 +847,7 @@ input[type=radio]:checked ~ label{
   right: 0;
   bottom: 0;
   margin: auto;
-}
+} */
 
 
 .button:hover {
@@ -864,6 +864,7 @@ input[type=radio]:checked ~ label{
 
 
 
+
 .page-button {
   background: var(--orange);
   color: #fff;
@@ -875,8 +876,20 @@ input[type=radio]:checked ~ label{
   bottom: 30px;
 }
 
+.DEL-button{
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+}
+
+
 #prevButton {
-  left: 120px; 
+  right: 290px; 
 }
 #prevButton:hover {
   color: var(--deepBlue);
@@ -887,6 +900,56 @@ input[type=radio]:checked ~ label{
 }
 #nextButton:hover {
   color: var(--deepBlue);
+}
+
+#pageP{
+   margin-top: 30px;
+   color: #14213d;
+   margin-left: 50px;
+}
+
+#DELButton {
+  right: 180px; 
+}
+#DELButton:hover{
+  color: var(--deepBlue);
+}
+
+
+.box1 {
+  width: 100px;
+  height: 100px;
+  font-style: 5px solid var(--deepBlue);
+  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
+  margin-top: -550px;
+  margin-left: 50px;
+}
+
+.box2 {
+  width: 100px;
+  height: 100px;
+  font-style: 5px solid var(--deepBlue);
+  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.box3 {
+  width: 100px;
+  height: 100px;
+  font-style: 5px solid var(--deepBlue);
+  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.box4 {
+  width: 100px;
+  height: 100px;
+  font-style: 5px solid var(--deepBlue);
+  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
+  margin-top: 10px;
+  margin-left: 50px;
 }
 
 
