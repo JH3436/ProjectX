@@ -225,7 +225,7 @@ body {
 
 .searchInput::placeholder {
   color: #7e5109;
-  font-size: 0.85rem;
+  font-size: 1rem;
   opacity: 0.7;
 }
 
@@ -237,7 +237,7 @@ body {
   outline: none;
   transform: scale(1.1);
   transition: all 0.1s ease-in-out;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .searchInput:focus+.searchInputIcon {
@@ -286,11 +286,10 @@ body {
   padding-left: 10%;
   padding-right: 10%;
   height: 80vh;
-  margin-top: 5%;
+  margin-top: 80px;
   background-image: url("https://picsum.photos/1720/499");
   position: relative;
   background-size: cover;
-  margin-bottom: 6.5%;
   background-repeat: no-repeat;
   background-position: center center;
 
@@ -322,116 +321,207 @@ body {
   text-align: center;
 }
 
-/* 輪播圖 */
-.carousel-title {
-  margin-bottom: 5%;
-  font-size: 48px;
+/* 網站介紹 */
+.intro-title {
+  margin-top: 4%;
+  font-size: 3.5rem;
   font-weight: bold;
   text-align: center;
 }
 
-.c-img {
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
+.intro-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 70vh;
+  transition: 0.25s;
 }
 
-.my-caption {
-  background-color: rgba(0, 0, 0, 0.279);
-  color: #fff;
-  text-align: left;
-  padding: 30px;
-  width: fit-content;
-  height: fit-content;
+.intro-div .options {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; 
+  overflow: hidden;
+  min-width: 600px;
+  max-width: 1200px;
+  width: calc(100% - 100px);
+  height: 400px;
 }
 
-/* 輪播圖文字設計 */
-.carousel1 {
-  border: rgba(0, 0, 0, 0.5) 2px solid;
-  position: flex;
-  top: 18%;
-  left: 12%;
+@media screen and (max-width: 718px) {
+  .intro-div .options {
+    min-width: 520px;
+  }
+
+  .intro-div .options .option:nth-child(5) {
+    display: none;
+  }
 }
 
-.carousel2 {
-  border: #fca311 2px solid;
-  position: flex;
-  top: 18%;
-  left: 50%;
+@media screen and (max-width: 638px) {
+  .intro-div .options {
+    min-width: 440px;
+  }
+
+  .intro-div .options .option:nth-child(4) {
+    display: none;
+  }
 }
 
-.carouselBtn {
-  background-color: var(--orange);
-  color: var(--white);
-  font-weight: 700;
-  font-size: larger;
+@media screen and (max-width: 558px) {
+  .intro-div .options {
+    min-width: 360px;
+  }
+
+  .intro-div .options .option:nth-child(3) {
+    display: none;
+  }
 }
 
-.carouselBtn:hover {
-  color: var(--orange);
-  border: var(--orange) 2.5px solid;
-  background-color: white;
+@media screen and (max-width: 478px) {
+  .intro-div .options {
+    min-width: 280px;
+  }
+
+  .intro-div .options .option:nth-child(2) {
+    display: none;
+  }
 }
 
-/* moving letter特效 */
-.ml14 {
-  font-weight: 200;
-  font-size: 3.2em;
-}
-
-.ml14 .text-wrapper {
+.intro-div .options .option {
   position: relative;
-  display: inline-block;
-  padding-top: 0.1em;
-  padding-right: 0.05em;
-  padding-bottom: 0.15em;
+  overflow: hidden;
+  min-width: 60px;
+  margin: 10px;
+  background: var(--optionBackground, var(--defaultBackground, #E6E9ED));
+  cursor: pointer;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
 }
 
-.ml14 .line {
+.intro-div .options .option:nth-child(1) {
+  --defaultBackground: #AC92EC;
+}
+
+.intro-div .options .option:nth-child(2) {
+  --defaultBackground: #FC6E51;
+}
+
+.intro-div .options .option:nth-child(3) {
+  --defaultBackground: #FFCE54;
+}
+
+.intro-div .options .option:nth-child(4) {
+  --defaultBackground: #2ECC71;
+}
+
+.intro-div .options .option:nth-child(5) {
+  --defaultBackground: #5D9CEC;
+}
+
+.intro-div .options .option:nth-child(6) {
+  --defaultBackground: #a92895;
+}
+
+.intro-div .options .option.active {
+  flex-grow: 10000;
+  transform: scale(1);
+  margin: 0px;
+  border-radius: 40px;
+  background-size: auto 100%;
+}
+
+.intro-div .options .option.active .shadow {
+  box-shadow: inset 0 -120px 120px -120px black, inset 0 -120px 120px -100px black;
+}
+
+.intro-div .options .option.active .label {
+  bottom: 20px;
+  left: 20px;
+}
+
+.intro-div .options .option.active .label .info>div {
+  left: 0px;
+  opacity: 1;
+}
+
+.intro-div .options .option:not(.active) {
+  flex-grow: 1;
+  border-radius: 30px;
+}
+
+.intro-div .options .option:not(.active) .shadow {
+  bottom: -40px;
+  box-shadow: inset 0 -120px 0px -120px black, inset 0 -120px 0px -100px black;
+}
+
+.intro-div .options .option:not(.active) .label {
+  bottom: 10px;
+  left: 10px;
+}
+
+.intro-div .options .option:not(.active) .label .info>div {
+  left: 20px;
   opacity: 0;
+}
+
+.intro-div .options .option .shadow {
   position: absolute;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: #fff;
-  transform-origin: 100% 100%;
-  bottom: 0;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 120px;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
 }
 
-.ml14 .letter {
-  display: inline-block;
-  line-height: 1em;
+.intro-div .options .option .label {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  height: 40px;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
 }
 
-/* 定義漸層邊框圖像 */
-.gradient-border {
-  border: 5px solid transparent;
-  border-image: linear-gradient(90deg, #fca311, #ffffff);
-  border-image-slice: 1;
+.intro-div .options .option .label .icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: white;
+  color: var(--defaultBackground);
 }
 
-/*左右鍵*/
-.carousel-control-prev,
-.carousel-control-next {
-  /*size */
-  height: 50px;
-  width: 50px;
-  /*color */
-  background: #1b1b1b none repeat scroll 0 0;
-  opacity: 0.5;
-  border-radius: 50%;
-  color: #fff;
-  /*vertical position */
-  top: 40%;
-  margin: 25px;
+.intro-div .options .option .label .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  color: var(--white);
+  background-color: rgba(128, 128, 128, 0.591);
+  text-shadow:  2px 2px 2px #553a0f;
 }
 
-/*carousel indicators */
-.carousel-indicators .test {
-  height: 0.3rem;
-  width: 3rem;
-  border: 0.15rem rgb(130, 130, 131) solid;
+.intro-div .options .option .label .info>div {
+  position: relative;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
 }
+
+.intro-div .options .option .label .info .main {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.intro-div .options .option .label .info .sub {
+  transition-delay: 0.1s;
+  font-size: 1.2rem;
+}
+
 
 /* 活動導覽設計 */
 .activity-container {
@@ -440,7 +530,6 @@ body {
 }
 
 .activity-title {
-  margin-top: 10%;
   margin-bottom: 5%;
   font-size: 48px;
   font-weight: bold;
