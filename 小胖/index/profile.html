@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- 引入外部CSS -->
+    <link href="/小胖/css/profile.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <!-- css連結，確保在Bootsrap之下 -->
+    <link rel="stylesheet" href="css for main page.css" />
+
+    <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>會員頁面</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- A區塊 -->
+        <div class="A">
+            <div class="item border-success">A1</div>
+            <div class="item border-success A2">
+                <!-- A2上半部：大頭貼 -->
+                <div class="profile-section">
+                    <img src="/齊澤/Files/小黃人.png" alt="大頭貼" class="profile-pic">
+                </div>
+                
+                <!-- A2下半部：列表 -->
+                <div class="A2-lower">
+                    <div class="menu-item-container">
+                        <a href="#" class="menu-item" data-content="intro">自我介紹</a>
+                    </div>
+                    <div class="menu-item-container">
+                        <a href="#" class="menu-item" data-content="activity">活動參與</a>
+                    </div>
+                    <div class="menu-item-container">
+                        <a href="#" class="menu-item" data-content="settings">資料設定</a>
+                    </div>
+                    <div class="menu-item-container">
+                        <a href="#" class="menu-item" data-content="delete">刪除帳號</a>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="item border-success">A3</div>
+            <div class="item border-success">A4</div>
+        </div>
+
+        <!-- B區塊 -->
+        <div class="B">
+            <div class="item border-primary">B1</div>
+            <div class="item border-primary">
+                <div class="B2">
+                    <div class="B2-content" id="intro-section" style="display: block">
+                        <!-- 自我介紹的HTML結構 -->
+                        <div>
+                            <h2>自我介紹</h2>
+                        </div>
+                        <div>
+                            <p>這裡是自我介紹的內容...</p>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="B2-content" id="activity-section" style="display: none;">
+                        <!-- 活動參與的HTML結構 -->
+                        <h2>活動參與</h2>
+                        <div>這裡是活動的列表...</div>
+                    </div>
+                
+                    <div class="B2-content" id="settings-section" style="display: none;">
+                        <!-- 資料設定的HTML結構 -->
+                        <h2>資料設定</h2>
+                        <div>
+                                          <!-- No Labels Form -->
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <input type="text" class="form-control" placeholder="綽號">
+                </div>
+                <div class="col-md-6">
+                  <input type="email" class="form-control" placeholder="電子信箱">
+                </div>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" placeholder="密碼">
+                </div>
+                <div class="col-md-6">
+                    <input type="password" class="form-control" placeholder="再次輸入密碼">
+                  </div>
+                
+                  <!-- 需要調整的按鈕 -->
+                <div class="">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End No Labels Form -->
+                        </div>
+                    </div>
+                
+                    <div class="B2-content" id="delete-section" style="display: none;">
+                        <!-- 刪除帳號的HTML結構 -->
+                        <h2>刪除帳號</h2>
+                        <div>確定要刪除帳號嗎？</div>
+                    </div>
+                </div>
+                </div>
+            <div class="item border-primary">B3</div>
+        </div>
+    </div>
+
+</body>
+<script src="/小胖/js/profile.js"></script>
+</html>
