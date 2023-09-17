@@ -36,14 +36,26 @@ button:hover{
 
 #content{
     width: 100%;
-    height: 120rem;
+    height: 60rem;
     margin: 50px;
+    display: inline-flex;
+    margin-top: 0rem;
+    background-color: yellow;
+}
+
+#contentBottom{
+    width: 100%;
+    height: 60rem;
+    margin: 50px;
+    display: inline-flex;
+    margin-top: 0rem;
+    background-color: yellow;
 }
 
 /* 圖片DIV CSS */
 #pictureDiv{
     /* background-color: var(--lightGray); */
-    height: 50%;
+    height: 100%;
     width: 50%;
     padding: 10px;
     position: relative;
@@ -69,7 +81,7 @@ button:hover{
 }
 
 #morePicture{
-    width: 31%;
+    width: 29%;
     height: 100%;
     display: inline-flex;
     margin: 0.9%;
@@ -84,12 +96,12 @@ button:hover{
 
 /* 報名DIV */
 #signUpDiv{
-    float:right;
+    /* float:right; */
     height: 50%;
     width: 50%;
     padding: 10px;
     margin-top: 1rem;
-    /* display: inline-block; */
+    display: inline-block;
     /* justify-content: flex-end; */
     position: relative;
 
@@ -107,13 +119,25 @@ button:hover{
     border-radius:10px;
     margin-left: 10%;
     cursor:pointer;
-
 }
   
 #signBtn:hover{
     color:var(--deepBlue);
     background-color:var(--lightGray);
     border:2px var(--black);
+}
+
+#followBtn{
+    width:70%;
+    height: 5rem;
+    border:0;
+    background-color:#fca311  ;
+    color:var(--black);
+    font-size: xx-large;
+    font-weight: 1000;
+    border-radius:10px;
+    margin-left: 10%;
+    cursor:pointer;
 }
 
 /* 地圖DIV */
@@ -131,37 +155,121 @@ button:hover{
 /* 活動詳細DIV */
 #activityDiv{
     background-color: var(--blue);
-    width: 100%;
-    height: 50rem;
-    margin-top: 75px; 
+    width: 75%;
+    height: auto;
+    margin-top: 1rem; 
     border: 5px solid var(--lightGray);
     border-radius: 32px;
+    display: inline-block;
+    background-color: rgb(250, 250, 250);
     
+}
+#activityDiv h1{
+
+    text-align: center;   
+    color: #000000;
+}
+
+.experienceShare{
+    height: 14rem;
+    width: 85%;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    display: inline-flex;
+    border: 2px solid #000000;
+    border-radius: 32px;
+    padding: 1rem;
+}
+
+.experienceShare:hover{
+    transform: scale(1.1);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0,0.8);
+}
+
+.experienceShare img{
+    height: 13rem;
+    width: 13rem;
+    display: inline-block;
+    
+
+}
+.experienceShare h3{
+    margin: 1rem;
+    color: var(--black);
+}
+
+#activityDetailedDiv{
+    width: 20rem;
 }
 
 #activityDetailed{
     background-color: var(--orange);
-    width: 30%;
-    height: 5rem;
+    width: 80%;
+    height: 20rem;
     margin-top: 2.5%;
+    margin-right: 2.5%;
     margin-left: 2.5%;
     padding: 5px;
     border: 3px solid var(--lightGray);
     border-radius: 32px;
-    display:flex;
-    position: absolute;
-    
-
+    display: inline-block;
+    text-align: center;
 }
 
+#organiserDiv{
+    background-color: var(--orange);
+    width: 80%;
+    height: 20rem;
+    margin-top: 2.5%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    padding: 10px;
+    border: 3px solid var(--lightGray);
+    border-radius: 32px;
+    
+}
+
+#activityLabel{
+    color: var(--deepBlue);
+    font-size: large;
+    flex-grow: 1;
+    
+}
 #activityH3{
     color: var(--deepBlue);
-    display: inline-block;
+    
     flex-grow: 1;
     
 }
 
+#organiserDiv{
+    background-color: var(--orange);
+    width: 80%;
+    height: auto;
+    margin-top: 2.5%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    padding: 5px;
+    border: 3px solid var(--lightGray);
+    border-radius: 32px;
+    text-align: center;
+}
 
+#organiserDiv img{
+    height: 13rem;
+    width: 13rem;
+    margin-top: 2.5%;
+    margin-right: 8%;
+    margin-left: 8%;
+    border-radius: 32px;
+}
+
+#organiserDiv label{
+    color: #000000;
+    margin-top: 2rem;
+    margin-right: 8%;
+    margin-left: 8%;
+}
 /* 彈出式頁面 */
 
 /* #signDialog{

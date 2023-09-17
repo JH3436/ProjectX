@@ -72,9 +72,9 @@
     </nav>
 
 
+    <h1>衝浪</h1>
     <div id="content">
         <div id="pictureDiv">
-            <h1>衝浪</h1>
             <img src="./Files/surf.jpg" id="picture">
             <div id="morePictureDiv">
                 <img src="./Files/surf.jpg" id="morePicture" class="morePicture">
@@ -87,8 +87,8 @@
         
         <div id="signUpDiv">
             <div id="btnDiv">
-                <button class="btn" id="signBtn" >我要報名</button>
-                <button class="btn" id="signBtn" >我有興趣</button>
+                <!-- <button class="btn" id="signBtn" >我要報名</button> -->
+                <button class="btn" id="followBtn" >追蹤活動通知</button>
             </div>
             <br>
             <h3>
@@ -101,47 +101,45 @@
             </div>
             <br>
             
-            <dialog id="signDialog" >
-                <h2>選擇你的日期 加入我們!</h2>
-                
-                <div id="signTextDiv">
-                    <label for="nameInput">姓名:</label>
-                    <input type="text" id = "nameInput" placeholder="王大明">
-                    <br><br><br>
-                    <label for="telInput">電話:</label>
-                    <input type="text" id = "telInput" pattern="[0-9]{10}" placeholder="0912345678">
-                    <br><br><br>
-                    <label for="userMessage">留言給團主:</label>
-                    <textarea id="userMessage"  cols="30" rows="10"></textarea>
-                </div>
-                <div id="activityCalendar">
-                    <link rel="stylesheet" href="./css/projectCalendar.css"> 
-                    <div id="calendar"></div>
-                    <script src="./js/CdnCalendar.js"></script>
-                </div>
-
-                <div id="dialogDiv">
-                    <button  id="dialogClose">取消</button>
-                    <button  id="dialogSign">確定</button>
-                </div>
-            </dialog>
+            
             
         </div>
-            <br>
-
+    </div>
+            
+    <div id="contentBottom">
         <div id="activityDiv">
-            <div id="activityDetailed">
-                <h3 id="activityH3">希望人數:</h3>
-                <h3 id="activityH3">2人</h3>
-                <h3 id="activityH3">自備:</h3>
-                <h3 id="activityH3">衝浪板</h3>
-                <h3 id="activityH3">金額:</h3>
-                <h3 id="activityH3">$0</h3>
+            <h1>路線分享</h1>  
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
+            </div>
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
+            </div>
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
             </div>
 
         </div>
-
+        <div id="activityDetailedDiv">
+            <div id="activityDetailed">
+                <br>
+                <label id="activityLabel">希望人數:</label>
+                <h3 id="activityH3">2人</h3>
+                <label id="activityLabel">自備:</label>
+                <h3 id="activityH3">衝浪板</h3>
+                <label id="activityLabel">金額:</label>
+                <h3 id="activityH3">$0</h3>
+            </div>
+            
+        </div>    
     </div>
+    
 
     <!-- JS連結 -->
 </body>
