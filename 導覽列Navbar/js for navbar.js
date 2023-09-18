@@ -30,4 +30,12 @@ $(document).ready(function() {
         exploreDropdown.css("display", "none")
       }
     )
+
+    //點擊鈴鐺後，數字通知消失
+    // 使用事件委託，當點擊<i>元素時執行以下操作
+  $('.notification').on('click', 'i', function() {
+    // 移除包含.notification--num的元素
+    $(this).parent().find('.notification--num').remove();
+  });
 });
+

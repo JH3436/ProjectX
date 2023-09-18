@@ -20,6 +20,7 @@
   --white: #ffffff;
   --brown: #AD7D52;
   --heart: #B44163;
+  --lightBlue-bg: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -253,15 +254,7 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-.navbar-login {
-  text-decoration: none;
-  color: var(--white);
-  padding: 5px 15px;
-}
 
-.navbar-login:hover {
-  color: var(--orange);
-}
 
 .navbar-signin {
   text-decoration: none;
