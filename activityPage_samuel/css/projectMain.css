@@ -34,22 +34,45 @@ button:hover{
 
 }
 
+#linkWord{
+    margin-left: 15rem
+}
+
+#titleWord{
+    text-align: center;
+    font-size: 5rem;
+}
+
 #content{
-    width: 100%;
-    height: 60rem;
-    margin: 50px;
+    width: 85rem;
+    height: 65rem;
+    /* margin: 50px; */
+    padding: 1%;
+    margin-left: 15rem ;
+    margin-right: 15rem;
     display: inline-flex;
     margin-top: 0rem;
-    background-color: yellow;
+    border-top: 5px solid var(--black);
+    border-right: 5px solid var(--black);
+    border-left: 5px solid var(--black);
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgba(61, 61, 61, 0.788);
 }
 
 #contentBottom{
-    width: 100%;
-    height: 60rem;
-    margin: 50px;
+    width: 85rem;
+    height: 70rem;
+    margin-top: 90px;
+    margin-left: 15rem ;
+    margin-right: 15rem;
     display: inline-flex;
     margin-top: 0rem;
-    background-color: yellow;
+    border-bottom: 5px solid var(--black);
+    border-right: 5px solid var(--black);
+    border-left: 5px solid var(--black);
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgba(61, 61, 61, 0.788);
+    
 }
 
 /* 圖片DIV CSS */
@@ -143,7 +166,7 @@ button:hover{
 /* 地圖DIV */
 #map{
     width: 100%;
-    height: 30rem ;
+    height: 25rem ;
     border-radius: 32px;
     box-shadow:
         0 20px 60px 0 rgba(129, 128, 128, 0.66),
@@ -174,7 +197,7 @@ button:hover{
     height: 14rem;
     width: 85%;
     margin-top: 1rem;
-    margin-left: 2rem;
+    margin-left: 3rem;
     display: inline-flex;
     border: 2px solid #000000;
     border-radius: 32px;
@@ -283,7 +306,7 @@ button:hover{
     transform: scale(1);
 } */
 
-#signDialog{
+/* #signDialog{
     height: 80%;
     width: 60%;
     border: none;
@@ -392,18 +415,17 @@ textarea{
     text-shadow: 0 1px 2px rgba(0,0,0,.1);
     box-shadow: 0 0 5px 4px rgba(0, 0, 0,0.1);
     border-radius: 10px;
-}
+} */
 
 /* dialog日程表 */
-#activityCalendar{
+/* #activityCalendar{
     
-    /* float:right; */
     display: inline-block;
     position: absolute;
     top: 6rem;
     right: 3rem;
     
-}
+} */
 
 
 
