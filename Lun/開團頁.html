@@ -153,7 +153,7 @@
 
 
 
-<div class="page-container">
+<div class="page-container"> </div>
   <!-- 開團下拉選項 -->
 
   <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
@@ -220,30 +220,28 @@
   <!-- 選擇照片 -->
   <div class="ChooseFile">
     <div hidden>
-      <input type="file" id="photo" accept="image/png, image/jpeg;capture=camera" multiple>
+      <input type="file" id="photo" accept="image/png, image/jpeg, image/gif, image/bmp;capture=camera" multiple>
+
     </div>
     <label for="photo" class="button" id="chooseButton">選擇照片</label>
   
     <div id="thumbnailsContainer">
   
     </div>
-    <div>
-      <div class="box1"> <li style="color: black;">選到的照片</li> </div>
-      <div class="box2"> <li style="color: black;">選到的照片</li> </div>
-      <div class="box3"> <li style="color: black;">選到的照片</li> </div>
-      <div class="box4"> <li style="color: black;">選到的照片</li> </div>
-    </div>
+    
   
     <button id="DELButton" class="DEL-button">刪除這張</button>
     
     <button id="prevButton" class="page-button">上一張</button>
     <button id="nextButton" class="page-button">下一張</button>
-    <div>
-      <ul>
-        <li id="pageP">1/10</li>
-      </ul>
+   
+  <div>
+      <div class="box1"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
+      <div class="box2"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
+      <div class="box3"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
+      <div class="box4"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
+      <div class="box5"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
     </div>
-  
   </div>
 
 
@@ -261,10 +259,7 @@
         <label for="content">活動內容</label>
         <textarea class="form-control" id="content" rows="5" placeholder="例 : 第一日到a點 晚餐烤乳豬..."></textarea>
       </div>
-      <!-- <input type="submit" class="btn btn-primary col col-md-2 offset-md-5" id="formSubmit"> -->
     </form>
-
-    <!-- <div class="container-fluid col-md-8 offset-md-2" id="contentDisplay"> -->
 
   </div>
   </div>
@@ -272,7 +267,7 @@
 
   <!-- 提交按鈕 -->
   <button class="submit2">提交</button>
-</div>
+
 
 
 

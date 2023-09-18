@@ -19,6 +19,7 @@
   --orange: #fca311;
   --lightGray: #e5e5e5;
   --white: #ffffff;
+  --navbarBC: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -346,27 +347,31 @@ dropdown input ~ ul{
 
 .A {
   position: absolute;
-  margin-top: 20px;
-  margin-left: 150px;
+  margin-top: -1276px;
+  margin-left: 790px;
+  z-index: 50;
 }
 
 .B {
   position: absolute;
-  margin-top: 250px;
-  margin-left: 150px;
+  margin-top: -1040px;
+  margin-left: 790px;
+  z-index: 51;
 }
 
 .date{
   position: absolute;
-  margin-top: 500px;
-  margin-left: 150px;
+  margin-top: -800px;
+  margin-left: 790px;
+  z-index: 52;
 }
 
 
 .C {
   position: absolute;
-  margin-top: 800px;
-  margin-left: 150px;
+  margin-top: -500px;
+  margin-left: 790px;
+  z-index: 54;
 }
 
 
@@ -797,12 +802,12 @@ input[type=radio]:checked ~ label{
 /* 選擇照片 */
 .ChooseFile{
   background-color: var(--lightGray);
-  width: 800px;
-  height: 600px;
+  width: 600px;
+  height: 750px;
   position: absolute;
-  top:570px;
-  left: 820px;
-  bottom: 150px;
+  top:190px;
+  left: 490px;
+  bottom: 10px;
   padding-top: 20px;
   padding-left: 20px;
   border-radius: 10px;
@@ -822,10 +827,10 @@ input[type=radio]:checked ~ label{
 }
 
 #thumbnailsContainer {
-  width: 550px;
-  height: 650px;
-  margin-left: 185px;
-  margin-top: -80px;
+  width: 400px;
+  height: 550px;
+  margin-left: 80px;
+  margin-top: 0px;
   overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
@@ -919,38 +924,48 @@ input[type=radio]:checked ~ label{
 .box1 {
   width: 100px;
   height: 100px;
-  font-style: 5px solid var(--deepBlue);
-  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
-  margin-top: -550px;
-  margin-left: 50px;
+  border: 2px solid var(--lightGray); 
+  margin-top: 160px;
+  margin-left: -20px;
+  border-radius: 10px;
 }
 
 .box2 {
   width: 100px;
   height: 100px;
-  font-style: 5px solid var(--deepBlue);
-  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
-  margin-top: 10px;
-  margin-left: 50px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 105px;
+  border-radius: 10px;
 }
 
 .box3 {
   width: 100px;
   height: 100px;
-  font-style: 5px solid var(--deepBlue);
-  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
-  margin-top: 10px;
-  margin-left: 50px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 230px;
+  border-radius: 10px;
 }
 
 .box4 {
   width: 100px;
   height: 100px;
-  font-style: 5px solid var(--deepBlue);
-  border: 2px solid var(--deepBlue); /* 边框样式，可以根据需要更改颜色和宽度 */
-  margin-top: 10px;
-  margin-left: 50px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 355px;
+  border-radius: 10px;
 }
+
+.box5 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 480px;
+  border-radius: 10px;
+}
+
 
 
 
@@ -964,17 +979,16 @@ input[type=radio]:checked ~ label{
 
 
 #inputForm {
-  margin-top: 230px;
-  margin-left: 235px;
-  width: 1600px;
+  margin-top: -350px;
+  margin-left: -380px;
+  width: 1965px;
 }
-
 #contentDisplay {
-  margin-top: 300px;
+  top: 300px;
 }
 
 .card {
-  margin-top: 20px;
+  top: 20px;
 }
 
 
@@ -983,8 +997,8 @@ input[type=radio]:checked ~ label{
 .submit2 {
   position: absolute;
   text-decoration: none;
-  top: 1220px;
-  right: 280px;
+  top: 1370px;
+  right: 840px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -1003,11 +1017,11 @@ input[type=radio]:checked ~ label{
 
 /* 小背景 */
 .page-container {
-  background-color:lightslategray ;
-  width: 1500px;
-  height: 1100px;
-  margin-left: -200px;
-  margin-top: -100px;
+  background-color:var(--navbarBC) ;
+  width: 13S00px;
+  height: 1300px;
+  margin-left: 50px;
+  margin-top: 100px;
   z-index: -5;
   border-radius: 10px;
 }

@@ -578,7 +578,6 @@ $(document).ready(function () {
 
        
         if (selectedDate < today) {
-            // 如果选择的日期是过去日期，清空选择
             selectedStartDate = null;
             selectedEndDate = null;
         } else {
@@ -595,7 +594,6 @@ $(document).ready(function () {
 
         
         if (selectedStartDate === null) {
-            // 清空日期显示
             $("#toggle3").next().text("");
         } else if (selectedStartDate.getTime() === selectedEndDate.getTime()) {
             $("#toggle3").next().text(formatDate(selectedStartDate));
@@ -706,10 +704,6 @@ $(document).ready(function () {
         var currentImg = $('<img>').attr('src', selectedPhotos[currentPhotoIndex]);
         currentImg.css('max-width', '100%');
         currentImg.css('max-height', '100%');
-        currentImg.css('width', 'auto');
-        currentImg.css('height', 'auto');
-        currentImg.css('margin-right', '0px');
-
         $('#thumbnailsContainer').prepend(currentImg);
       }
     }
