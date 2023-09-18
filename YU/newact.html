@@ -21,11 +21,14 @@
     /* 下拉 */
     .radio-item {
     position: relative;
-    width: 132px;
-    height: 44px;
-    line-height: 44px;
+    width: 130px;
+    height: 19px;
+    line-height: 30px;
     float: left;
-    margin-right: 12px;
+    margin-right: 36px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
 }
 
 .radio-item input {
@@ -34,24 +37,26 @@
     opacity: 0;
     appearance: none;
     position: absolute;
-    left: 0;
+    left: 10;
     top: 0;
 }
 
 .radio-item label {
     position: absolute;
-    left: 0;
+    left: 30;
     top: 0;
-    width: 120px;
+    width: 100px; /* 较小的宽度 */
     height: 36px;
     line-height: 36px;
-    padding: 4px 6px;
+    padding: 4px 4px;
     background-color: #14213d;
-    border: #FFFFFF;
+    border: 1px solid #FFFFFF;
     border-radius: 6px;
     z-index: -1;
     display: flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .radio-item label i {
@@ -67,10 +72,6 @@
     transform: rotate(-45deg);
     display: none;
 
-}
-
-.radio-item span {
-    margin-left: 32px;
 }
 
 .radio-item input:checked + label {
@@ -121,15 +122,6 @@
       margin: 20px;
     }
 
-    #search-input,
-    #calendar-input,
-    #submit-button {
-      flex: 1;
-      margin-right: 60px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-
     /*換頁css*/
     .panel-control {
   position:absolute;
@@ -138,25 +130,24 @@
 .tab-group label {
   display:inline-block;
   padding: 10px 30px;
-  border:1px solid #fca311;
+  border:1px solid white;
   border-bottom:none;
-  background-color: #fca311;
+  background-color: white;
   bottom:-1px;
   position:relative;
+  width: 300px;
 }
 .content-group {
-  border:1px solid #fca311;
-  padding: 20px;
+  border: white 1px;
+  padding: 10px;
 }
 .content{display:none;}
 
 #radio1:checked ~ .tab-group [for="radio1"],
-#radio2:checked ~ .tab-group [for="radio2"],
-#radio3:checked ~ .tab-group [for="radio3"]{background-color: #ccc;}
+#radio2:checked ~ .tab-group [for="radio2"]{background-color: #fca311; color: #FFFFFF;}
 
 #radio1:checked ~ .content-group .content1,
-#radio2:checked ~ .content-group .content2,
-#radio3:checked ~ .content-group .content3 {display:block}
+#radio2:checked ~ .content-group .content2{display:block}
   </style>
 
 </head>
@@ -215,42 +206,35 @@
   <br>
   <section>
     <div class="main">
-      <p>想參加的活動：</p>
-      <div class="radio clearfix">
-          <div class="radio-item">
-              <input type="radio" name="zhiye" id="" value=""/>
-              <label>
-                  <i class="disc"></i>
-                  <i class="active"></i>
+        <p style="margin-left: 50px; font-size: larger;">想參加的活動：</p>
+        <div class="radio clearfix">
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                  <span>&#10004;&nbsp;&nbsp;&nbsp;登山</span> 
               </label>
-              <span>登山</span>
-          </div>
-          <div class="radio-item">
-              <input type="radio" name="zhiye" id="" value="" checked/>
-              <label>
-                  <i class="disc"></i>
-                  <i class="active"></i>
-              </label>
-              <span>衝浪</span>
-          </div>
-          <div class="radio-item">
-              <input type="radio" name="zhiye" id="" value=""/>
-              <label>
-                  <i class="disc"></i>
-                  <i class="active"></i>
-              </label>
-              <span>潛水</span>
-          </div>
-          <div class="radio-item">
-            <input type="radio" name="zhiye" id="" value=""/>
-            <label>
-                <i class="disc"></i>
-                <i class="active"></i>
-            </label>
-            <span>溯溪</span>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value="" checked/>
+                <label>
+                  <span>&#10004;&nbsp;&nbsp;&nbsp;衝浪</span>
+                </label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                    <span>&#10004;&nbsp;&nbsp;&nbsp;潛水</span>
+                </label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                    <span>&#10004;&nbsp;&nbsp;&nbsp;溯溪</span>
+                </label>
+            </div>
         </div>
-      </div>
-    </select>
+    </div>
+</section>
     
     <br><br>
     <div class="panel-group">
