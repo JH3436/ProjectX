@@ -1,29 +1,41 @@
-// 導覽列 
+// 導覽列
+$(document).ready(function() {
+  // 選取探索按鈕
+  var exploreLink = $("#explore-link");
+  // 選取下拉內容
+  var exploreDropdown = $("#explore-dropdown");
+  //選取揪團按鈕
+  var groupBtn = $("#group-link");
 
-//搜尋列focus更改顏色
-// 選擇search-input元素
-const searchInput = document.querySelector('.search-input');
+  exploreLink.hover(
+    function() {
+      // 滑鼠進入時顯示下拉內容
+      exploreDropdown.css("display", "block");
+    
+  });
 
-// 添加focus事件監聽器
-searchInput.addEventListener('focus', function () {
-    // 更改邊框顏色為橘色
-    searchInput.style.border = '6px solid var(--orange)';
+  exploreDropdown.hover(
+    function() {
+      // 滑鼠進入下拉內容時保持顯示
+      exploreDropdown.css("display", "block");
+    },
+    function() {
+      // 滑鼠離開下拉內容時隱藏
+      exploreDropdown.css("display", "none");
+    }
+  );
+    //滑鼠移動到揪團也會讓下拉消失
+    groupBtn.hover(
+      function() {
+        exploreDropdown.css("display", "none")
+      }
+    )
+
+    //點擊鈴鐺後，數字通知消失
+    // 使用事件委託，當點擊<i>元素時執行以下操作
+  $('.notification').on('click', 'i', function() {
+    // 移除包含.notification--num的元素
+    $(this).parent().find('.notification--num').remove();
+  });
 });
 
-// 添加blur事件監聽器（當失去焦點時恢復原始邊框顏色）
-searchInput.addEventListener('blur', function () {
-    // 恢復原始邊框顏色為白色
-    searchInput.style = "none"
-});
-
-// 下拉清單
-const exploreLink = document.getElementById('explore-link');
-const exploreDropdown = document.getElementById('explore-dropdown');
-
-exploreLink.addEventListener('mouseenter', function () {
-    exploreDropdown.style.display = 'block';
-});
-
-exploreDropdown.addEventListener('mouseleave', function () {
-    exploreDropdown.style.display = 'none';
-});

@@ -1,0 +1,236 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JO!N</title>
+    <link rel="icon" href="./導覽列Navbar/Files/小黃人.png" type="image/png" />
+  
+    <!-- Font Awesome套件引入 -->
+    <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+  
+  
+    <!-- 引入 Bootstrap 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  
+    <!-- css連結 -->
+    <link rel="stylesheet" href="./導覽列Navbar/css for navbar.css" />
+  
+    <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+  
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script><style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+
+* {
+  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+}
+
+body {
+  background-color: var(--deepBlue);
+}
+button {
+  background-color: var(--orange);
+}
+span {
+  color: var(--lightGray);
+}
+
+h1 {
+  color: var(--white);
+}
+    .category-dropdown {
+            float: left; 
+        }
+
+        button[type="submit"] {
+            float: left;
+            margin-left: 10px; 
+        }
+
+    .act .wrap {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .act .wrap .item {
+        width: 300px;
+        margin: 20px;
+        color: black;
+        background-color: #ffffff;
+        text-align: center;
+        box-shadow: 1px 4px 4px gray;
+        transition: transform 0.3s ease;
+    }
+
+    .act .wrap .item img {
+        width: 100%;
+    }
+
+    .act .wrap .item:hover {
+        transform: scale(1.05);
+    }
+
+    .act h1 {
+        font-size: 26px;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .act p {
+        padding: 10px;
+    }
+
+.category-dropdown {
+    margin: 20px;
+}
+
+#category-select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#category-select::-ms-expand {
+    display: none;
+}
+
+#category-select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+#category-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url("arrow-down.png") no-repeat right center;
+    padding-right: 30px;
+}
+
+#category-select option {
+    font-size: 16px;
+}
+
+.category-form {
+            display: flex; 
+            align-items: center; 
+}
+
+        .category-dropdown {
+            flex: 1; 
+            margin-right: 10px; 
+        }
+
+        
+</style>
+  <!-- 導覽列設計 -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a class="navbar-item">
+        <img src="./導覽列Navbar/Files/Logo.png" alt="logo" width="125" height="50" />
+      </a>
+
+      <a class="navbar-item" href="#" id="explore-link">
+        探索
+        <i class="fa-sharp fa-solid fa-chevron-down" style="color: var(--white)"></i>
+
+        <div class="dropdown" id="explore-dropdown">
+          <div class="dropdown-content">
+            <div class="dropdown-section">
+              <a href="#">登山</a>
+              <ul>
+                <li style="color: var(--white)">c</li>
+                <li style="color: var(--white)">c</li>
+              </ul>
+            </div>
+            <div class="dropdown-section">
+              <a href="#">溯溪</a>
+              <ul>
+                <li><a href="#">瀑布</a></li>
+                <li><a href="#">溫泉</a></li>
+              </ul>
+            </div>
+            <div class="dropdown-section">
+              <a href="#">潛水</a>
+              <ul>
+                <li><a href="#">水肺潛水</a></li>
+                <li><a href="#">自由潛水</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a class="navbar-item" href="#">發起揪團</a>
+    </div>
+    <div class="navbar-right">
+      <span class="search-bar">
+        <input class="search-input" type="text" placeholder="搜尋" />
+        <a href="#">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--white)"></i>
+        </a>
+      </span>
+      <a class="navbar-login" href="#">登入</a>
+      <a class="navbar-signin" href="#">註冊</a>
+    </div>
+  </nav>
+  <script src="./導覽列Navbar/js for navbar.js"></script>
+
+
+<!-- 分類 -->
+<section>
+    <form id="category-form" action="submit.php" method="post">
+        <div class="category-dropdown">
+            <label for="category-select">選擇分類：</label>
+            <select id="category-select" name="category">
+                <option value="all">所有</option>
+                <option value="beach">登山</option>
+                <option value="adventure">溯溪</option>
+                <option value="culture">潛水</option>
+                <option value="nature">衝浪</option>
+            </select>
+        </div>
+        <button type="submit" style="color: #ffffff;">送出</button>
+    </form>
+</section>
+
+<br><br><br>
+<div class="act">
+    <div class="Service0">
+</div>
+    <div class="wrap">
+        <div class="item">
+            <img src="./--.jpeg" width="100%" alt="">
+            <p>潛水</p>
+        </div>
+        <div class="item">
+            <img src="./--.jpeg" width="100%" alt="">
+            <p>潛水</p>
+        </div>
+        <div class="item">
+            <img src="./--.jpeg" width="100%" alt="">
+            <p>潛水</p>
+        </div>
+        <div class="item">
+            <img src="./--.jpeg" width="100%" alt="">
+            <p>潛水</p>
+        </div>
+        
+    </div>
+</div>
+</div>
+</html>

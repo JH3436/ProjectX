@@ -1,3 +1,20 @@
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --blue: #416ac2;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+  --brown: #AD7D52;
+  --heart: #B44163;
+}
+
+/* 頁面背景色 */
+body {
+  background-color: var(--deepBlue);
+  color: var(--white);
+}
+
 /* 設置一下高度我這樣form才有辦法置中 */
 html, body {
     height: 100%;
@@ -13,73 +30,99 @@ html, body {
 }
 
 
-body{
-    margin: 0px;
-    font-family: "Roboto";
-    background-color: var(--orange);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+form{
+  display: block;
+  align-items: center;
+  justify-content: center;
 
 }
 
-.login{
-    background-color: var(--deepBlue);
+/* 按鈕的基本樣式 */
+.button {
+    background-color: #14213d;
+    color: white;
+    border: 2px solid #14213d;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px 0; /* 上下間距 */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 12rem;
+  }
+  
+  /* 滑鼠移過時的樣式 */
+  .button:hover {
+    background-color: white;
+    color: #14213d;
+  }
+  
+  .login {
+    background-color: var(--white);
     width: 350px;
-    
-    color:var(--lightGray);
+    color: var(--deepBlue);
     box-shadow: 10px 10px 25px #14213d;
-    border-radius: 10px; 
-    
-    
-}
-.login input{
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    max-height: 600px; /* 設置最大高度，根據需要更改 */
+
+
+  }
+  
+  .login input {
     display: flex;
-    margin: 20px auto;
+    margin: 10px auto;
     text-align: center;
     background: none;
-    color: var(--lightGray);
+    color: var(--deepBlue);
     padding: 10px;
     border-radius: 20px;
-}
-
-.login input[type="text"],.login input[type="password"]{
-    border:0.1px solid 
-}
-
-
-
-
-.header {
+    border: 2px solid #14213d;
+  }
+  
+  .header {
     text-align: center;
-    margin: 80px auto;
-    margin-top: 10px;
-}
-
-.header h1
-{
+    margin-bottom:5rem;
+  }
+  
+  .header h1 {
     margin-right: 120px;
-}
-.header p{
-
+    margin-bottom: 1rem;
+  }
+  
+  .header p {
     margin-right: 40px;
-    
+  }
+
+  
+
+/* body鎖死id解決... */
+#login {
+  margin: 0 auto; /* 實現水平置中 */
+  margin-top: 3rem;
 }
 
-.login-button {
-    display: inline-block;
-    background-color: var(--deepBlue);
-    color: var(--lightGray); 
-    padding: 10px 20px; /* 內邊距，請根據你的設計更改 */
-    border: none;
-    border-radius: 20px;
-    text-decoration: none;
+#navbar{
+display: flex;
+margin-top: 3rem;
+justify-content: center
+
+}
+.navbar:hover{
+  transform: scale(1.5);
+}
+
+#container2{
+  visibility: hidden; 
+  display: none;}  
+
+h5 {
+  transition: transform 0.3s ease;
+}
+
+  h5:hover{
+    text-decoration:underline;
+    transform: scale(1.5);
     cursor: pointer;
-    margin-left: 115px;
-}
-
-
-/* 滑鼠懸停時的樣式 */
-.login-button:hover {
-    background-color: var(--orange); /* 滑鼠懸停時的背景顏色，請根據你的設計更改 */
-}
+    color: #9f9e9e;
+  }

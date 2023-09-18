@@ -1,0 +1,152 @@
+/* 主題顏色宣告 */
+:root {
+    --black: #000000;
+    --deepBlue: #14213d;
+    --orange: #fca311;
+    --lightGray: #e5e5e5;
+    --white: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--deepBlue);
+    padding: 40px;  /* 給整體頁面四周一個間距 */
+    color: white;  /* 使文字為白色以便在深藍色背景上閱讀 */
+    
+}
+.grid-container {
+    display: grid;
+    grid-template-rows: 0.5fr 1fr 3fr 0.5fr;
+    height: calc(100vh - 80px);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    border-radius: 15px;
+    padding: 20px 0; /* 只留上下的padding，去除左右的padding */
+}
+
+.top,
+.top-section, 
+.bottom-section2, 
+.left-column, 
+.upper-right, 
+.lower-right {
+    border-style: inset;
+    border: 1px solid red;  /* 使用白色作為邊線顏色 */
+}
+
+.top, .top-section, .bottom-section, .bottom-section2 {
+    padding: 20px 0;  /* 給內部區域一些間距 */
+}
+
+.top{
+    background-color: #d0d0d0; /* 暫時使用此顏色 */
+    margin-bottom: 10px;  /*跟下面的topsec隔一下距離*/
+}
+.top-section {
+    background-color: #e0e0e0; /* 暫時使用此顏色，您可以換成背景圖 */
+}
+
+.bottom-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 左右各佔一半 */
+    column-gap: 20px;  /* 這裡設定了中間的空隙為20px，您可以根據需要調整 */
+}
+
+.left-column {
+    background-color: #d0d0d0; /* 暫時使用此顏色 */
+}
+
+.right-column {
+    display: grid;
+    grid-template-rows: 1fr 1fr; /* 上下各佔一半 */
+}
+
+.upper-right {
+    background-color: #c0c0c0; /* 暫時使用此顏色 */
+}
+
+.lower-right {
+    background-color: #b0b0b0; /* 暫時使用此顏色 */
+}
+
+
+
+
+.bottom-section2 {
+    background-color: #f0f0f0; /* 暫時使用此顏色，您可以更改 */
+}
+
+
+
+.left-column, .right-column {
+    margin:0; /* 移除margin */
+    row-gap:  20px;
+}
+
+/* 用新增新容器的方式不影響排版 */
+.content-padding {
+    padding: 20px;
+}
+
+/* ----上面都是grid調整---- */
+
+
+
+
+
+.cover-photo {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background-image: url("/activityPage_samuel/Files/surf.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.edit-cover-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.info-section {
+    position: relative;
+    padding-top: 50px;
+    text-align: left;
+}
+
+.avatar-container {
+    position: absolute;
+    top: -75px;
+    left: 20px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.user-name {
+    font-size: 24px;
+    margin-left: 200px; /* 根據大頭貼和間距調整 */
+}
+

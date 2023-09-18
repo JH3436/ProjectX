@@ -1,0 +1,132 @@
+.container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 0.5fr 1.2fr;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.A, .B {
+    height: 100%;
+}
+
+.A {
+    display: grid;
+    gap: 20px;
+    grid-template-rows: 0.01fr 2fr 1fr 0.5fr;
+    padding: 0; /* 確保A沒有左右內距 */
+}
+
+.B {
+    display: grid;
+    gap: 20px;
+    grid-template-rows: 0.01fr 3fr 1fr;
+}
+
+.item {
+    display: flex;
+  
+    border: 1px solid;
+}
+
+.border-success {
+    background-color: #dff0d8;
+    border-color: #4CAF50;
+}
+
+.border-primary {
+    background-color: #c6e0f5;
+    border-color: #2196F3;
+}
+
+.profile-pic-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33%;
+}
+
+.profile-pic {
+    border-radius: 50%;
+    max-width: 80%;
+    height: auto;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: center; /* 使內容居中 */
+    align-items: center;
+    padding-top: 20px;
+}
+
+.A2 {
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    padding: 0;
+    row-gap: 30px;
+}
+
+
+.A2-lower {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0;
+    width: 100%;
+    justify-content: normal;
+    height: 250px;  /* 你可以根據需要調整這個值 */
+
+}
+
+
+.menu-item {
+    display: block;
+    background-color: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 90%;
+    margin: 0 auto;  /* 上下邊距設為0，左右邊距自動，使元素在容器中水平居中 */
+    box-sizing: border-box;
+     border-radius: 20px;  /* 或其他你希望的圓角大小 */
+    
+}
+
+.menu-item:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.menu-item:active {
+    background-color: #d0d0d0;
+    transform: scale(1);
+}
+
+/* 我在這裡搞了一條線，chatGPT用了個偽元素 */
+
+.profile-section {
+    /* ... 其他原本的樣式 ... */
+    position: relative; /* 設置為 relative 以便於定位偽元素 */
+}
+
+.profile-section::after {
+    content: "";
+    position: absolute;
+    bottom: -15px; /* 調整位置，使其下移10px */
+    left: 10%; /* 讓線從左邊25%的位置開始，使其短一些 */
+    right: 10%; /* 讓線在右邊25%的位置結束 */
+    height: 1px;
+    background-color: #ccc;
+}
+
+
+/* 這邊開始設計B2 */
+
+/* 設計自我介紹 */
+
+
