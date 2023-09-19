@@ -2,30 +2,83 @@
 
 <head>
     <link href="/小胖/css/login.css" rel="stylesheet">
-
+    <!-- BAR -->
+    <title>JO!N</title>
+    <link rel="icon" href="/導覽列Navbar/Files/小黃人.png" type="image/png" />
 </head>
-<body>
-    <!-- action這邊用以連接後端，登入訊息要用form包起來 -->
 
-    <form action="action.js" class="login">
+<body>
+<!-- BAR -->
+    <div id="navbar-container">
+
+          <!-- 導覽列設計 -->
+          <nav class="navbar" id="navbar">
+            <div class="navbar-logo">
+              <a class="navbar-item" href="xxxxxx">
+                <img src="/導覽列Navbar/Files/Logo.png" alt="logo" width="125" height="50" />
+              </a>
+          </nav>
+
+    </div>
+
+
+<!-- 帳密   -->
+    <div id="container1">
+    <form action="login.js" class="login" id="login">
         <div class="header">
         <h1>歡迎!</h1>
         <p>開始揪團，一起探險!</p>
         </div>
-        
 
-         <input type="text" placeholder="Account帳號" />
-         <input type="password" placeholder="Password密碼" />
-         <input type="submit" value="Submit 提交"/>
-         <!-- Google 登入按鈕 -->
-         <a href="https://accounts.google.com/your-authentication-link-here" class="login-button">
-        Google 登入
-        </a>
-        <a href="https://accounts.google.com/your-authentication-link-here" class="login-button">
-            line 登入
-            </a>
+            <input type="text" placeholder="帳號" />
+            <div class="tab"></div>
+            <input type="password" placeholder="密碼" />
+        
+         <!-- 添加按鈕容器 -->
+        <div class="button-container">  
+        <button class="button">登入</button>
+       
+        <p> - 快速登入 - </p>
+        <button class="button">使用Google登入</button>
+        <button class="button">使用Line登入</button>
+        </div>
+        <div class="register-link">
+        <h5 onclick="show_hide()">註冊帳號</h5>
+        </div>
     </form>
-    
+</div>
+
+<div id="container2">
+    <form action="signup.js" class="login" id="login">
+        <div class="header">
+        <h1>註冊!</h1>
+        <p>開始揪團，一起探險!</p>
+        </div>
+
+            <input type="text" id="fullname" name="fullname" placeholder="暱稱" required>
+            <div class="tab"></div>
+            <input type="text" id="username2" name="username" placeholder="帳號" required>
+            <div class="tab"></div>
+            <input type="text" id="password2" name="password" placeholder="密碼" required>
+            <div class="tab"></div>
+            <input type="text" id="comfirm_password" name="comfirm_password" placeholder="確認密碼" required>
+            <div class="tab"></div>            
+           
+         <!-- 添加按鈕容器 -->
+        <div class="button-container">
+        <button class="button">註冊</button>
+       </div>
+       <div class="login-link">
+        <h5 onclick="show_hide()">登入帳號</h5>
+        </div>
+    </form>
+</div>
+
+   
 </body>
+
+<!-- bar-js -->
+<script src="/導覽列Navbar/js for navbar.js"></script>
+<script src="/小胖/js/login.js"></script>
 
 </html>

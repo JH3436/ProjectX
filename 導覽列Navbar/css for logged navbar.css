@@ -12,12 +12,15 @@
 
 /* 主題顏色宣告 */
 :root {
-  --black: #000000;
-  --deepBlue: #14213d;
-  --blue: #416ac2;
-  --orange: #fca311;
-  --lightGray: #e5e5e5;
-  --white: #ffffff;
+    --black: #000000;
+    --deepBlue: #14213d;
+    --blue: #416ac2;
+    --orange: #fca311;
+    --lightGray: #e5e5e5;
+    --white: #ffffff;
+    --brown: #AD7D52;
+    --heart: #B44163;
+    --lightBlue-bg: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -215,8 +218,6 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-
-
 .navbar-signin {
   text-decoration: none;
   color: var(--white);
@@ -227,4 +228,53 @@ body {
 
 .navbar-signin:hover {
   color: var(--deepBlue);
+}
+
+/* 小鈴鐺 */
+.notification {
+    position: relative;
+    display: inline-block; 
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .notification--num {
+    position: absolute; 
+    top: -10px; 
+    right: -15px; 
+    width: 25px; 
+    height: 25px; 
+    background-color: var(--heart); 
+    border-radius: 50%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: var(--white); 
+    font-size: 14px;
+    padding: 1px;
+  }
+
+  .notification:hover .notification--num{
+    animation: shake 0.3s ease-in-out;
+    
+  }
+
+  @keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(1px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
 }
