@@ -10,86 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <title>JO!N</title>
-    <link rel="icon" href="./導覽列Navbar/Files/小黃人.png" type="image/png" />
+    <link rel="icon" href="../導覽列Navbar/Files/小黃人.png" type="image/png" />
     <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="./導覽列Navbar/css for navbar.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./導覽列Navbar/css for navbar.css" />
+    <link rel="stylesheet" href="./select.css" />
   </head>
 
   <style>
-    /* 下拉 */
-    .radio-item {
-    position: relative;
-    width: 130px;
-    height: 19px;
-    line-height: 30px;
-    float: left;
-    margin-right: 36px;
-    align-items: center;
-    justify-content: center;
-    margin-left: 50px;
-}
-
-.radio-item input {
-    width: 120px;
-    height: 44px;
-    opacity: 0;
-    appearance: none;
-    position: absolute;
-    left: 10;
-    top: 0;
-}
-
-.radio-item label {
-    position: absolute;
-    left: 30;
-    top: 0;
-    width: 100px; /* 较小的宽度 */
-    height: 36px;
-    line-height: 36px;
-    padding: 4px 4px;
-    background-color: #14213d;
-    border: 1px solid #FFFFFF;
-    border-radius: 6px;
-    z-index: -1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.radio-item label i {
-    display: inline-block;
-    margin-left: 6px;
-}
-
-.radio-item label i.active {
-    width: 12px;
-    height: 6px;
-    border-left: 2px solid #FFFFFF;
-    border-bottom: 2px solid #14213d;
-    transform: rotate(-45deg);
-    display: none;
-
-}
-
-.radio-item input:checked + label {
-    background: #FFFFFF ;
-    color: #14213d;
-}
-
-.radio-item input:checked + label i.disc {
-    display: none;
-}
-
-.radio-item input:checked + label i.active {
-    display: block;
-}
-
-.radio-item input:checked + label + span {
-    color: #14213d;
-}
     /* 瀑布 */
     #photo-gallery {
       column-count: 3;
@@ -156,8 +85,8 @@
   <div class="header">
     <div class="row navbar justify-content-between">
       <div class="col-auto">
-        <a class="navbar-item">
-          <img src="./導覽列Navbar/Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+        <a class="navbar-item" href="#" id="home">
+          <img src="../導覽列Navbar/Files/Logo.png" alt="logo" id="logo" width="200" height="60" />
         </a>
       </div>
       <div class="col-auto">
@@ -196,15 +125,18 @@
         </div>
       </div>
       <div class="col-auto">
-        <a class="navbar-item nav-login" href="#">登入</a>
+        <div class="notification">
+          <i class="fa-solid fa-bell fa-lg" style="color: #ffffff;"></i>
+          <span class="notification--num">5</span>
+        </div>
       </div>
       <div class="col-auto nav-signin">
-        <a class="singin-style" href="#">註冊</a>
+        <a class="singin-style" href="#">會員中心</a>
       </div>
     </div>
   </div>
   <br>
-  <section>
+  <!-- <section>
     <div class="main">
         <p style="margin-left: 50px; font-size: larger;">想參加的活動：</p>
         <div class="radio clearfix">
@@ -234,8 +166,22 @@
             </div>
         </div>
     </div>
-</section>
-    
+</section> -->
+
+<div class="section">
+  <div class="container">
+    <d class="row justify-content-center">
+            <input class="checkbox-all" type="radio" id="color" name="color" checked/>
+            <label for="color">全部</label>
+            <input class="checkbox-alizarin" type="radio" name="color" id="color-1"/>
+            <label for="color-1">登山</label>
+            <input class="checkbox-wisteria" type="radio" name="color" id="color-2"/>
+            <label for="color-2">潛水</label>
+            <input class="checkbox-emerland" type="radio" name="color" id="color-3"/>
+            <label for="color-3">衝浪</label>
+            <input class="checkbox-belizehole" type="radio" name="color" id="color-4"/>
+            <label for="color-4">溯溪</label>
+            <input class="checkbox-sunflower" type="radio" name="color" id="color-5"/>
     <br><br>
     <div class="panel-group">
       <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
