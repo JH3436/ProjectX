@@ -31,14 +31,14 @@ body {
 
 /* 導覽列 */
 .header {
-  background-color: rgba(45, 68, 119, 0.486);
+  background-color: var(--lightBlue-bg);
 }
 
 .navbar {
   margin-left: 10%;
   margin-right: 10%;
   color: var(--white);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: bolder;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -180,8 +180,8 @@ body {
 }
 
 .searchInput {
-  width: 15rem;
-  height: 2rem;
+  width: 18rem;
+  height: 2.5rem;
   padding: 1rem;
   border-radius: 2rem;
   border: none;
@@ -190,8 +190,9 @@ body {
 
 .searchInput::placeholder {
   color: #7e5109;
-  font-size: 1rem;
-  opacity: 0.7;
+  font-size: 1.25rem;
+  opacity: 0.85;
+  font-weight: 600;
 }
 
 .searchInput:focus::placeholder {
@@ -217,6 +218,8 @@ body {
   color: var(--deepBlue);
   transition: all 0.1s ease-in-out;
 }
+
+
 
 .navbar-signin {
   text-decoration: none;
