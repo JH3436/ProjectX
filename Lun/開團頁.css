@@ -296,7 +296,7 @@ body {
   float: right;
 }
 .fa{
- font-size: .8em;
+ font-size: 1em;
   line-height: 22px !important;
 }
 dropdown{
@@ -339,7 +339,7 @@ dropdown input ~ ul{
 
 .selectdate{
   width: 300px;
-  height: 50px; 
+  height: 58px; 
   line-height: 30px; 
   padding-top: 12px;
 }
@@ -374,7 +374,9 @@ dropdown input ~ ul{
   z-index: 54;
 }
 
-
+.CC{
+  height: 58px;
+}
 
 
 
@@ -514,7 +516,7 @@ body { margin-top: 0%; }
 }
 .calendar_content div.today {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 19px;
     color: var(--deepBlue);
 }
 .calendar_content div.selected {
@@ -533,7 +535,7 @@ body { margin-top: 0%; }
     color: #fca311;
     float:left;
     width:70%;
-    margin: 0 0 10px;
+    margin: 0 0 15px;
 }
 button.switch-month {
     background-color: transparent;
@@ -809,7 +811,7 @@ input[type=radio]:checked ~ label{
   left: 490px;
   bottom: 10px;
   padding-top: 20px;
-  padding-left: 20px;
+  padding-left: 25px;
   border-radius: 10px;
 }
 
@@ -827,10 +829,10 @@ input[type=radio]:checked ~ label{
 }
 
 #thumbnailsContainer {
-  width: 400px;
-  height: 550px;
-  margin-left: 80px;
-  margin-top: 0px;
+  width: 500px;
+  height: 600px;
+  margin-left: 50px;
+  margin-top: 50px;
   overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
@@ -841,18 +843,7 @@ input[type=radio]:checked ~ label{
 
 
 
-/* JQ 好像有優先設定權 這裡設定無效  */
-/* #currentImg {
-  max-width: 300px;
-  max-height: 450px;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-} */
+
 
 
 .button:hover {
@@ -878,7 +869,7 @@ input[type=radio]:checked ~ label{
   border-radius: 8px;
   cursor: pointer;
   position: absolute;
-  bottom: 30px;
+  top: 20px;
 }
 
 .DEL-button{
@@ -889,19 +880,19 @@ input[type=radio]:checked ~ label{
   border-radius: 8px;
   cursor: pointer;
   position: absolute;
-  bottom: 30px;
+  top: 20px;
 }
 
 
 #prevButton {
-  right: 290px; 
+  right: 150px; 
 }
 #prevButton:hover {
   color: var(--deepBlue);
 }
 
 #nextButton {
-  right: 85px; 
+  right: 25px; 
 }
 #nextButton:hover {
   color: var(--deepBlue);
@@ -914,7 +905,7 @@ input[type=radio]:checked ~ label{
 }
 
 #DELButton {
-  right: 180px; 
+  right: 285px; 
 }
 #DELButton:hover{
   color: var(--deepBlue);
@@ -925,8 +916,8 @@ input[type=radio]:checked ~ label{
   width: 100px;
   height: 100px;
   border: 2px solid var(--lightGray); 
-  margin-top: 160px;
-  margin-left: -20px;
+  margin-top: 50px;
+  margin-left: -25px;
   border-radius: 10px;
 }
 
@@ -935,7 +926,7 @@ input[type=radio]:checked ~ label{
   height: 100px;
   border: 2px solid var(--lightGray); 
   margin-top: -100px;
-  margin-left: 105px;
+  margin-left: 102px;
   border-radius: 10px;
 }
 
@@ -944,7 +935,7 @@ input[type=radio]:checked ~ label{
   height: 100px;
   border: 2px solid var(--lightGray); 
   margin-top: -100px;
-  margin-left: 230px;
+  margin-left: 228px;
   border-radius: 10px;
 }
 
@@ -953,7 +944,7 @@ input[type=radio]:checked ~ label{
   height: 100px;
   border: 2px solid var(--lightGray); 
   margin-top: -100px;
-  margin-left: 355px;
+  margin-left: 353px;
   border-radius: 10px;
 }
 
@@ -962,7 +953,7 @@ input[type=radio]:checked ~ label{
   height: 100px;
   border: 2px solid var(--lightGray); 
   margin-top: -100px;
-  margin-left: 480px;
+  margin-left: 478px;
   border-radius: 10px;
 }
 
@@ -979,17 +970,21 @@ input[type=radio]:checked ~ label{
 
 
 #inputForm {
-  margin-top: -350px;
+  margin-top: -380px;
   margin-left: -380px;
-  width: 1965px;
+  width: 1970px;
+  resize: none;
 }
 #contentDisplay {
   top: 300px;
+  resize: none;
 }
 
 .card {
   top: 20px;
+  resize: none;
 }
+
 
 
 
@@ -998,20 +993,25 @@ input[type=radio]:checked ~ label{
   position: absolute;
   text-decoration: none;
   top: 1370px;
-  right: 840px;
+  right: 800px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
   border-radius: 5px;
-  width: 150PX;
-  height: 60PX;
-  font-size: 30PX;
+  width: 250PX;
+  height: 80PX;
+  font-size: 60PX;
 }
 
 .submit2:hover {
   color: var(--deepBlue);
 }
 
+.label-text {
+  font-size: 35px;
+  display: block;
+  margin-bottom: 10px; /* 调整上方提示与文本框之间的间距 */
+}
 
 
 
