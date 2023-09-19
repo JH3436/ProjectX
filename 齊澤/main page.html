@@ -39,179 +39,141 @@
   </div>
 
   <!-- 導覽列設計 -->
-  <nav class="navbar">
-    <div class="navbar-logo">
-      <a class="navbar-item">
-        <img src="Files/Logo.png" alt="logo" id="logo" width="125" height="50" />
-      </a>
-
-      <a class="navbar-item" href="#" id="explore-link">
-        探索
-        <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
-
-        <div class="dropdown" id="explore-dropdown">
-          <div class="dropdown-content">
-            <div class="dropdown-section">
+  <div class="header">
+    <div class="row navbar justify-content-between">
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="home">
+          <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+        </a>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="explore-link">
+          探索
+          <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-content" id="explore-dropdown">
+          <div class="row">
+            <div class="col dropdown-img-1">
               <a href="#">登山</a>
-              <ul>
-                <li style="color: var(--white)">c</li>
-                <li style="color: var(--white)">c</li>
-              </ul>
             </div>
-            <div class="dropdown-section">
+            <div class="col dropdown-img-2">
               <a href="#">溯溪</a>
-              <ul>
-                <li><a href="#">瀑布</a></li>
-                <li><a href="#">溫泉</a></li>
-              </ul>
             </div>
-            <div class="dropdown-section">
+            <div class="col dropdown-img-3">
               <a href="#">潛水</a>
-              <ul>
-                <li><a href="#">水肺潛水</a></li>
-                <li><a href="#">自由潛水</a></li>
-              </ul>
+            </div>
+            <div class="col dropdown-img-4">
+              <a href="#">露營</a>
             </div>
           </div>
-        </div>
-      </a>
 
-      <a class="navbar-item" id="group-link" href="#">發起揪團</a>
-    </div>
-    <div class="navbar-right">
-      <div class="searchInputWrapper">
-        <input class="searchInput" type="text" placeholder='搜尋...'>
-        <i class="searchInputIcon fa fa-search"></i>
-        </input>
+        </div>
       </div>
-      <a class="navbar-login" href="#">登入</a>
-      <a class="navbar-signin" href="#">註冊</a>
+      <div class="col-auto">
+        <a class="navbar-item" id="group-link" href="#">發起揪團</a>
+      </div>
+      <div class="col">
+        <!-- 填充空間 -->
+      </div>
+      <div class="col-auto">
+        <div class="searchInputWrapper">
+          <input class="searchInput" type="text" placeholder='搜尋...'>
+          <i class="searchInputIcon fa fa-search"></i>
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#">登入</a>
+      </div>
+      <div class="col-auto nav-signin">
+        <a class="singin-style" href="#">註冊</a>
+      </div>
     </div>
-  </nav>
+  </div>
+
 
   <!-- slogan加插圖 -->
   <div class="slogan-section">
-    <div class="slogan">
+    <div class="slogan-text">
       <!-- Slogan 文本 -->
-      <h2>一起探索...</h2>
-      <h2>台灣的美吧!</h2>
-      <p>現在就揪團出去玩✌️✌️✌️</p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-        deleniti est quaerat, officia nesciunt sit itaque! Sapiente obcaecati
-        laborum rem.
-      </p>
-    </div>
-    <div class="image">
-      <!-- 圖片 -->
-      <img src="https://picsum.photos/1720/499" sizes="100vw" />
+      <h2>一起探索台灣的美吧!</h2>
+      <h2 class="slogan-lower-text">以社群的力量找到同好</h2>
     </div>
   </div>
 
-  <!-- 輪播圖介紹網站 -->
-  <h1 class="carousel-title">與新朋友一起展開新旅程🏕️</h1>
+  <!-- 網站介紹設計 -->
+  <h1 class="intro-title">與新朋友一起展開新旅程🏕️</h1>
 
-  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-pause data-bs-interval="2000">
-    <!-- below_indicator -->
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="0" class="active test"
-        aria-current="true" aria-label="Slide 1">
-      </button>
-      <button class="test" type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="1"
-        aria-label="Slide 2">
-      </button>
-      <button class="test" type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="2"
-        aria-label="Slide 3">
-      </button>
-      <button class="test" type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="3"
-        aria-label="Slide 4">
-      </button>
-      <button class="test" type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="4"
-        aria-label="Slide 5">
-      </button>
-      <button class="test" type="button" data-bs-target="#carouselExampleControls" data-bs-slide-to="5"
-        aria-label="Slide 6">
-
-      </button>
-    </div>
-
-    <div class="carousel-inner">
-      <div class="carousel-item active c-item">
-        <img src="https://picsum.photos/1820/480?random=1" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel1 gradient-border">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder; text-shadow: 2px 2px 1px #fca311">揪團</span>開始!
-          </h1>
+  <div class="intro-div">
+    <div class="options">
+      <div class="option active"
+        style="--optionBackground:url(https://picsum.photos/2500/799?random=1);">
+        <div class="shadow"></div>
+        <div class="label">
+          <div class="icon">
+            <i class="fa-solid fa-1"></i>
+          </div>
+          <div class="info">
+            <div class="main">身邊總是找不到喜愛戶外活動的朋友?</div>
+            <div class="sub">試試我們的揪團系統!</div>
+          </div>
         </div>
       </div>
-      <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=2" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel2 gradient-border">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder;text-shadow: 2px 2px 1px #fca311;">揪團</span>開始!
-          </h1>
+      <div class="option"
+        style="--optionBackground:url(https://picsum.photos/1800/799?random=2);">
+        <div class="shadow"></div>
+        <div class="label">
+          <div class="icon">
+            <i class="fa-solid fa-2"></i>
+          </div>
+          <div class="info">
+            <div class="main">台灣有哪些秘境?</div>
+            <div class="sub">讓JO!N報你栽!</div>
+          </div>
         </div>
       </div>
-      <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=3" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel2 gradient-border">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder">揪團</span>開始!</h1>
+      <div class="option"
+        style="--optionBackground:url(https://picsum.photos/1800/799?random=3);">
+        <div class="shadow"></div>
+        <div class="label">
+          <div class="icon">
+            <i class="fa-solid fa-3"></i>
+          </div>
+          <div class="info">
+            <div class="main">不確定何時有活動?</div>
+            <div class="sub">收藏活動! 讓你不再錯過感興趣的戶外活動</div>
+          </div>
         </div>
       </div>
-      <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=4" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel2 gradient-border">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder">揪團</span>開始!</h1>
+      <div class="option"
+        style="--optionBackground:url(https://picsum.photos/1800/799?random=4);">
+        <div class="shadow"></div>
+        <div class="label">
+          <div class="icon">
+            <i class="fa-solid fa-4"></i>
+          </div>
+          <div class="info">
+            <div class="main">blablablabla</div>
+            <div class="sub">Omuke trughte a otufta lore Lorem ipsum dolor sit amet.</div>
+          </div>
         </div>
       </div>
-      <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=5" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption my-caption carousel2 gradient-border">
-          <h1>想認識新朋友?</h1>
-          <br>
-          <br>
-          <h1>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 從<span
-              style="color: var(--blue); font-size: 4.5rem; font-weight: bolder">揪團</span>開始!</h1>
-        </div>
-      </div>
-      <div class="carousel-item c-item">
-        <img src="https://picsum.photos/1820/480?random=6" class="d-block w-100 c-img" alt="...">
-        <div class="carousel-caption carousel5" style="height: auto; width: auto;">
-          <h1 class="display-1 fw-bold text-capitalize mb-5 ml14">
-            <span class="text-wrapper">
-              <span class="letters" style="text-shadow: 1px 1px 13px var(--deepBlue);">我想揪團!</span>
-              <span class="line"></span>
-            </span>
-          </h1>
-          <a href="#"><button class="btn carouselBtn">註冊去!</button></a>
+      <div class="option"
+        style="--optionBackground:url(https://picsum.photos/1800/799?random=5);">
+        <div class="shadow"></div>
+        <div class="label">
+          <div class="icon">
+            <i class="fa-solid fa-5"></i>
+          </div>
+          <div class="info">
+            <div class="main">還在等什麼?</div>
+            <div class="sub">往下滑看更多活動!!</div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- 左右按鈕 -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-
   </div>
+
+
 
   <!-- 活動導覽方塊 -->
   <section class="activity-container">
@@ -432,7 +394,7 @@
               <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
             </div>
             <section id="contactBox">
-              <form id="myForm">
+              <form>
                 <div class="input-box">
                   <div class="input-field">
                     <input type="text" name="fullName" id="name" placeholder="您的全名" pattern="^[\u4e00-\u9fa5]{2,4}$"

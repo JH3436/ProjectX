@@ -7,7 +7,6 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
   <head>
-    <!-- 其他標頭內容... -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <title>JO!N</title>
@@ -19,6 +18,79 @@
   </head>
 
   <style>
+    /* 下拉 */
+    .radio-item {
+    position: relative;
+    width: 130px;
+    height: 19px;
+    line-height: 30px;
+    float: left;
+    margin-right: 36px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.radio-item input {
+    width: 120px;
+    height: 44px;
+    opacity: 0;
+    appearance: none;
+    position: absolute;
+    left: 10;
+    top: 0;
+}
+
+.radio-item label {
+    position: absolute;
+    left: 30;
+    top: 0;
+    width: 100px; /* 较小的宽度 */
+    height: 36px;
+    line-height: 36px;
+    padding: 4px 4px;
+    background-color: #14213d;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.radio-item label i {
+    display: inline-block;
+    margin-left: 6px;
+}
+
+.radio-item label i.active {
+    width: 12px;
+    height: 6px;
+    border-left: 2px solid #FFFFFF;
+    border-bottom: 2px solid #14213d;
+    transform: rotate(-45deg);
+    display: none;
+
+}
+
+.radio-item input:checked + label {
+    background: #FFFFFF ;
+    color: #14213d;
+}
+
+.radio-item input:checked + label i.disc {
+    display: none;
+}
+
+.radio-item input:checked + label i.active {
+    display: block;
+}
+
+.radio-item input:checked + label + span {
+    color: #14213d;
+}
+    /* 瀑布 */
     #photo-gallery {
       column-count: 3;
       column-gap: 10px;
@@ -28,15 +100,10 @@
 
     .gallery-item {
       border: 1px solid white;
-      /* 边框颜色 */
       border-radius: 3px;
-      /* 边框圆角 */
       margin-bottom: 10px;
-      /* 图片底部间距 */
       overflow: hidden;
-      /* 隐藏边框溢出的内容 */
       padding: 5px;
-      /* 添加边框和内容之间的内边距 */
     }
 
     img {
@@ -55,134 +122,234 @@
       margin: 20px;
     }
 
-    #search-input,
-    #calendar-input,
-    #submit-button {
-      flex: 1;
-      margin-right: 60px;
-      border: 1px solid #ccc;
-      /* 边框 */
-      border-radius: 3px;
-      /* 边框圆角 */
-    }
+    /*換頁css*/
+    .panel-control {
+  position:absolute;
+  opacity:0;
+}
+.tab-group label {
+  display:inline-block;
+  padding: 10px 30px;
+  border:1px solid white;
+  border-bottom:none;
+  background-color: white;
+  bottom:-1px;
+  position:relative;
+  width: 300px;
+}
+.content-group {
+  border: white 1px;
+  padding: 10px;
+}
+.content{display:none;}
+
+#radio1:checked ~ .tab-group [for="radio1"],
+#radio2:checked ~ .tab-group [for="radio2"]{background-color: #fca311; color: #FFFFFF;}
+
+#radio1:checked ~ .content-group .content1,
+#radio2:checked ~ .content-group .content2{display:block}
   </style>
 
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="navbar-logo">
-      <a class="navbar-item">
-        <img src="./導覽列Navbar/Files/Logo.png" alt="logo" width="125" height="50" />
-      </a>
-
-      <a class="navbar-item" href="#" id="explore-link">
-        探索
-        <i class="fa-sharp fa-solid fa-chevron-down" style="color: var(--white)"></i>
-
-        <div class="dropdown" id="explore-dropdown">
-          <div class="dropdown-content">
-            <div class="dropdown-section">
+  <div class="header">
+    <div class="row navbar justify-content-between">
+      <div class="col-auto">
+        <a class="navbar-item">
+          <img src="./導覽列Navbar/Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+        </a>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="explore-link">
+          探索
+          <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-content" id="explore-dropdown">
+          <div class="row">
+            <div class="col dropdown-img-1">
               <a href="#">登山</a>
-              <ul>
-                <li style="color: var(--white)">c</li>
-                <li style="color: var(--white)">c</li>
-              </ul>
             </div>
-            <div class="dropdown-section">
+            <div class="col dropdown-img-2">
               <a href="#">溯溪</a>
-              <ul>
-                <li><a href="#">瀑布</a></li>
-                <li><a href="#">溫泉</a></li>
-              </ul>
             </div>
-            <div class="dropdown-section">
+            <div class="col dropdown-img-3">
               <a href="#">潛水</a>
-              <ul>
-                <li><a href="#">水肺潛水</a></li>
-                <li><a href="#">自由潛水</a></li>
-              </ul>
+            </div>
+            <div class="col dropdown-img-4">
+              <a href="#">露營</a>
             </div>
           </div>
-        </div>
-      </a>
 
-      <a class="navbar-item" href="#">發起揪團</a>
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" id="group-link" href="#">發起揪團</a>
+      </div>
+      <div class="col">
+        <!-- 填充空間 -->
+      </div>
+      <div class="col-auto">
+        <div class="searchInputWrapper">
+          <input class="searchInput" type="text" placeholder='搜尋...'>
+          <i class="searchInputIcon fa fa-search"></i>
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item nav-login" href="#">登入</a>
+      </div>
+      <div class="col-auto nav-signin">
+        <a class="singin-style" href="#">註冊</a>
+      </div>
     </div>
-    <div class="navbar-right">
-      <span class="search-bar">
-        <input class="search-input" type="text" placeholder="搜尋" />
-        <a href="#">
-          <i class="fa-solid fa-magnifying-glass" style="color: var(--white)"></i>
-        </a>
-      </span>
-      <a class="navbar-login" href="#">登入</a>
-      <a class="navbar-signin" href="#">註冊</a>
-    </div>
-  </nav>
+  </div>
   <br>
   <section>
-    <label for="category-select">選擇分類：</label>
-    <select id="search-input">
-      <option value="category1">登山</option>
-      <option value="category2">溯溪</option>
-      <option value="category3">潛水</option>
-    </select>
-    <input type="date" id="calendar-input">
-    <button id="submit-button" class="navbar-signin">查詢</button>
+    <div class="main">
+        <p style="margin-left: 50px; font-size: larger;">想參加的活動：</p>
+        <div class="radio clearfix">
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                  <span>&#10004;&nbsp;&nbsp;&nbsp;登山</span> 
+              </label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value="" checked/>
+                <label>
+                  <span>&#10004;&nbsp;&nbsp;&nbsp;衝浪</span>
+                </label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                    <span>&#10004;&nbsp;&nbsp;&nbsp;潛水</span>
+                </label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="zhiye" id="" value=""/>
+                <label>
+                    <span>&#10004;&nbsp;&nbsp;&nbsp;溯溪</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</section>
     
     <br><br>
-    <section id="photo-gallery">
-      <div class="gallery-item">
-        <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">鳶嘴山</a>
+    <div class="panel-group">
+      <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
+      <input type="radio" name="panel-radio" id="radio2" class="panel-control">
+      <input type="radio" name="panel-radio" id="radio3" class="panel-control">
+      <div class="tab-group">
+        <label for="radio1" class="active">揪團中</label>
+        <label for="radio2">已成團</label>
       </div>
-      <div class="gallery-item">
-        <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
-      </div>
-      <div class="gallery-item">
-        <a href="../牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
-      </div>
-      <div class="gallery-item">
-        <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
-      </div>
-    </section>
+      <div class="content-group">
+        <div class="content content1"><section id="photo-gallery">
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">鳶嘴山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="../牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+        </section></div>
+        <div class="content content2"><section id="photo-gallery">
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">鳶嘴山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/龍洞.jpeg" data-lightbox="gallery"><img src="./photo/龍洞.jpeg">龍洞</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="../牛奶.jpeg" data-lightbox="gallery"><img src="./photo/牛奶.jpeg">牛奶湖</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/鳶嘴.jpeg" data-lightbox="gallery"><img src="./photo/鳶嘴.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/慕谷慕魚.jpg" data-lightbox="gallery"><img src="./photo/慕谷慕魚.jpg">慕谷慕魚</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/111.jpeg" data-lightbox="gallery"><img src="./photo/111.jpeg">登山</a>
+          </div>
+          <div class="gallery-item">
+            <a href="./photo/--.jpeg" data-lightbox="gallery"><img src="./photo/--.jpeg">潛水</a>
+          </div>
+        </section></div>
+    </div>
+    
 
+    <script src="./js for navbar.js"></script>
 </body>
 
 

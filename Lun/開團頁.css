@@ -19,6 +19,7 @@
   --orange: #fca311;
   --lightGray: #e5e5e5;
   --white: #ffffff;
+  --navbarBC: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -53,6 +54,7 @@ body {
   margin-right: 20px;
   position: relative;
 }
+
 
 .navbar-item:hover {
   color: var(--orange);
@@ -303,7 +305,7 @@ dropdown{
 }
 dropdown label, dropdown ul li{
   display: block;
-  width: 270px;
+  width: 300px;
   background: #ECF0F1;
   padding: 15px 20px;
 }
@@ -337,28 +339,39 @@ dropdown input ~ ul{
 
 .selectdate{
   width: 300px;
+  height: 50px; 
+  line-height: 30px; 
+  padding-top: 12px;
 }
 
-.date{
-  position: absolute;
-  margin-top: 250px;
-  right: 500px;
-}
 
 .A {
   position: absolute;
-  margin-left: -150px;
+  margin-top: -1276px;
+  margin-left: 790px;
+  z-index: 50;
 }
 
 .B {
   position: absolute;
-  margin-left: 250px;
+  margin-top: -1040px;
+  margin-left: 790px;
+  z-index: 51;
 }
+
+.date{
+  position: absolute;
+  margin-top: -800px;
+  margin-left: 790px;
+  z-index: 52;
+}
+
 
 .C {
   position: absolute;
-  margin-top: 250px;
-  margin-left: 1100px;
+  margin-top: -500px;
+  margin-left: 790px;
+  z-index: 54;
 }
 
 
@@ -450,7 +463,7 @@ dropdown ul li:nth-child(3) {
 
 
 /* 日曆 */
-@import url(https://fonts.googleapis.com/css?family=Muli:400, 300);
+@import url(https://fonts.googleapis.com/css?family=Muli:400);
 body { margin-top: 0%; }
 
 .calendar, .calendar_weekdays, .calendar_content {
@@ -475,7 +488,7 @@ body { margin-top: 0%; }
     text-align: center;
     background-color: transparent;
     color: #6f6f6f;
-    font-size: 14px;
+    font-size: 19px;
 }
 .calendar_content div {
     border: 1px solid transparent;
@@ -501,8 +514,8 @@ body { margin-top: 0%; }
 }
 .calendar_content div.today {
     font-weight: bold;
-    font-size: 14px;
-    color: #fca311;
+    font-size: 20px;
+    color: var(--deepBlue);
 }
 .calendar_content div.selected {
     background-color: #fca311;
@@ -790,13 +803,14 @@ input[type=radio]:checked ~ label{
 .ChooseFile{
   background-color: var(--lightGray);
   width: 600px;
-  height: 250px;
+  height: 750px;
   position: absolute;
-  top: 700px;
-  left: 220px;
-  bottom: 150px;
+  top:190px;
+  left: 490px;
+  bottom: 10px;
   padding-top: 20px;
   padding-left: 20px;
+  border-radius: 10px;
 }
 
 
@@ -812,11 +826,11 @@ input[type=radio]:checked ~ label{
   
 }
 
-#frame {
-  width: 500px;
-  height: 200px;
+#thumbnailsContainer {
+  width: 400px;
+  height: 550px;
   margin-left: 80px;
-  margin-top: -40px;
+  margin-top: 0px;
   overflow: hidden;
   background-size: contain;
   background-repeat: no-repeat;
@@ -825,11 +839,132 @@ input[type=radio]:checked ~ label{
   align-items: center;
 }
 
-img {
-  max-width: 100%;
+
+
+/* JQ 好像有優先設定權 這裡設定無效  */
+/* #currentImg {
+  max-width: 300px;
+  max-height: 450px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+} */
+
+
+.button:hover {
+  color: var(--deepBlue);
 }
 
 
+
+.disabled {
+  background-color: lightgray !important;
+  cursor: not-allowed !important;
+}
+
+
+
+
+
+.page-button {
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+}
+
+.DEL-button{
+  background: var(--orange);
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+}
+
+
+#prevButton {
+  right: 290px; 
+}
+#prevButton:hover {
+  color: var(--deepBlue);
+}
+
+#nextButton {
+  right: 85px; 
+}
+#nextButton:hover {
+  color: var(--deepBlue);
+}
+
+#pageP{
+   margin-top: 30px;
+   color: #14213d;
+   margin-left: 50px;
+}
+
+#DELButton {
+  right: 180px; 
+}
+#DELButton:hover{
+  color: var(--deepBlue);
+}
+
+
+.box1 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: 160px;
+  margin-left: -20px;
+  border-radius: 10px;
+}
+
+.box2 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 105px;
+  border-radius: 10px;
+}
+
+.box3 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 230px;
+  border-radius: 10px;
+}
+
+.box4 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 355px;
+  border-radius: 10px;
+}
+
+.box5 {
+  width: 100px;
+  height: 100px;
+  border: 2px solid var(--lightGray); 
+  margin-top: -100px;
+  margin-left: 480px;
+  border-radius: 10px;
+}
 
 
 
@@ -844,17 +979,16 @@ img {
 
 
 #inputForm {
-  margin-top: 650px;
-  margin-left: 300px;
-  width: 1000px;
+  margin-top: -350px;
+  margin-left: -380px;
+  width: 1965px;
 }
-
 #contentDisplay {
-  margin-top: 300px;
+  top: 300px;
 }
 
 .card {
-  margin-top: 20px;
+  top: 20px;
 }
 
 
@@ -863,8 +997,8 @@ img {
 .submit2 {
   position: absolute;
   text-decoration: none;
-  top: 1000px;
-  right: 150px;
+  top: 1370px;
+  right: 840px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -877,3 +1011,18 @@ img {
 .submit2:hover {
   color: var(--deepBlue);
 }
+
+
+
+
+/* 小背景 */
+.page-container {
+  background-color:var(--navbarBC) ;
+  width: 13S00px;
+  height: 1300px;
+  margin-left: 50px;
+  margin-top: 100px;
+  z-index: -5;
+  border-radius: 10px;
+}
+

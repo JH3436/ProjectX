@@ -1,4 +1,19 @@
+:root {
+  --black: #000000;
+  --deepBlue: #14213d;
+  --blue: #416ac2;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+  --brown: #AD7D52;
+  --heart: #B44163;
+}
 
+/* 頁面背景色 */
+body {
+  background-color: var(--deepBlue);
+  color: var(--white);
+}
 
 /* 設置一下高度我這樣form才有辦法置中 */
 html, body {

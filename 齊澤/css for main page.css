@@ -20,6 +20,7 @@
   --white: #ffffff;
   --brown: #AD7D52;
   --heart: #B44163;
+  --lightBlue-bg: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -65,39 +66,149 @@ body {
 }
 
 /* 導覽列 */
+.header {
+  background-color: rgba(45, 68, 119, 0.486);
+}
+
 .navbar {
-  padding-left: 10%;
-  padding-right: 10%;
+  margin-left: 10%;
+  margin-right: 10%;
   color: var(--white);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: large;
+  font-size: 1.25rem;
   font-weight: bolder;
-  position: relative;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .navbar-item {
   text-decoration: none;
   color: var(--white);
-  margin-right: 20px;
-  position: relative;
+  margin-right: 1rem;
 }
 
 .navbar-item:hover {
   color: var(--orange);
 }
 
-.navbar-item:hover #downicon {
+/* 懸浮方框 */
+.dropdown-content {
+  margin-top: 1rem;
+  display: none;
+  position: absolute;
+  padding: 10px;
+  z-index: 999;
+  padding: 1rem;
+}
+
+.dropdown-content .row {
+  gap: 1rem;
+}
+
+
+/* 圖片位址 */
+.dropdown-img-1::before {
+  background: url('https://picsum.photos/240/80?random=1');
+}
+
+.dropdown-img-2::before {
+  background-image: url('https://picsum.photos/240/80?random=2');
+}
+
+.dropdown-img-3::before {
+  background-image: url('https://picsum.photos/240/80?random=3');
+}
+
+.dropdown-img-4::before {
+  background-image: url('https://picsum.photos/240/80?random=4');
+}
+
+
+.dropdown-img-1,
+.dropdown-img-2,
+.dropdown-img-3,
+.dropdown-img-4 {
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.3s;
+}
+
+.dropdown-img-1::before,
+.dropdown-img-2::before,
+.dropdown-img-3::before,
+.dropdown-img-4::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: -1;
+  transition: all 0.3s;
+}
+
+.dropdown-img-1:hover::before,
+.dropdown-img-2:hover::before,
+.dropdown-img-3:hover::before,
+.dropdown-img-4:hover::before {
+  opacity: 0.5;
+  transform: scale(1.25);
+}
+
+
+.dropdown-content .col {
+  height: 60px;
+  width: 240px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  transition: border .3s ease;
+}
+
+.dropdown-content .col:hover {
+  border: var(--lightGray) solid 2.5px;
+  box-shadow:
+    5px 5px 15px 0 rgba(129, 128, 128, 0.66);
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  color: var(--white);
+  font: 700;
+}
+
+.dropdown-content a:hover {
+  transform: scale(1.2);
+  transition: all 0.3s ease;
+}
+
+.nav-signin {
+  background-color: var(--orange);
+  padding: 2.5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.1s, border 0.1s;
+  /* 添加過渡效果 */
+}
+
+.nav-signin:hover {
+  background: transparent;
+  border: solid 1.5px var(--orange);
+}
+
+.singin-style {
+  text-decoration: none;
+  color: var(--white);
+  transition: color 0.1s;
+  /* 添加過渡效果 */
+}
+
+.singin-style:hover {
   color: var(--orange);
 }
 
-.navbar-right {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 1.2rem;
-}
+
 
 /* 搜尋框設計 */
 .searchInputWrapper {
@@ -115,7 +226,7 @@ body {
 
 .searchInput::placeholder {
   color: #7e5109;
-  font-size: 0.85rem;
+  font-size: 1rem;
   opacity: 0.7;
 }
 
@@ -127,7 +238,7 @@ body {
   outline: none;
   transform: scale(1.1);
   transition: all 0.1s ease-in-out;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .searchInput:focus+.searchInputIcon {
@@ -143,15 +254,7 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-.navbar-login {
-  text-decoration: none;
-  color: var(--white);
-  padding: 5px 15px;
-}
 
-.navbar-login:hover {
-  color: var(--orange);
-}
 
 .navbar-signin {
   text-decoration: none;
@@ -165,227 +268,253 @@ body {
   color: var(--deepBlue);
 }
 
-/* 懸浮方框 */
-.dropdown {
-  display: none;
-  position: absolute;
-  background-color: var(--white);
-  min-width: 325px;
-  top: 100%;
-  /*這裡我是暴力調整，如果頁面寬度過窄，懸浮的方框就不會跟"探索"對齊了*/
-  left: 22rem;
-  /*確保不會被其他元素擋住*/
-  z-index: 5;
-  border-radius: 10px;
-  height: 150px;
-}
 
-.dropdown-content a {
-  text-decoration: none;
-  color: var(--blue);
-}
 
-.dropdown-content a:hover {
-  color: var(--orange);
-}
-
-.dropdown-content {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  align-items: center;
-  position: relative;
-  top: -15px;
-}
-
-.dropdown-section {
-  flex: 1;
-}
-
-.dropdown-section {
-  font-size: 1.2rem;
-  font-weight: bold;
-  /* text-align: center; */
-}
-
-.dropdown-section ul {
-  list-style: none;
-  padding: 15px;
-  margin: 0%;
-}
-
-.dropdown-section ul li a {
-  font-size: 1rem;
-  margin-bottom: 10px;
-  color: var(--deepBlue);
-  /* text-align: center; */
-}
 
 /* slogan */
 .slogan-section {
-  padding-left: 15%;
-  padding-right: 15%;
+  display: flex;
+  justify-content: center; /* 水平置中 */
+  align-items: center; /* 垂直置中 */
+  padding-left: 10%;
+  padding-right: 10%;
   height: 80vh;
-  margin-top: 3.5%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  background-color: var(--deepBlue);
-  color: var(--white);
+  margin-top: 80px;
+  background-image: url("https://picsum.photos/1720/499");
   position: relative;
-  gap: 8rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+
+
 }
 
-.slogan {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  padding-right: 30px;
-}
-
-.slogan h2 {
-  margin: 0;
-  font-size: 65px;
-  font-weight: bolder;
-  text-align: left;
-}
-
-.slogan p {
-  text-align: left;
-  margin-top: 8%;
-  padding-left: 3%;
-  color: var(--lightGray);
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.image {
-  padding-left: 20px;
-  flex: 2;
-  display: flex;
-}
-
-.image img {
-  max-width: 100%;
-  /*到時候根據左邊文字內容更動高度*/
-  height: 500px;
-  border-radius: 10px;
-  box-shadow: 0 20px 60px 0 rgba(129, 128, 128, 0.66), inset 0 0 0 50px #333,
-    inset 0 0 0 6px rgba(255, 255, 255, 0.5);
-}
-
-/* 輪播圖 */
-.carousel-title {
-  margin-bottom: 5%;
-  font-size: 48px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.c-item {
-  height: 480px;
-}
-
-.c-img {
-  height: 100%;
-  object-fit: cover;
-}
-
-.my-caption {
-  background-color: rgba(0, 0, 0, 0.279);
-  color: #fff;
-  text-align: left;
-  padding: 30px;
-  width: fit-content;
-  height: fit-content;
-}
-
-/* 輪播圖文字設計 */
-.carousel1 {
-  border: rgba(0, 0, 0, 0.5) 2px solid;
-  position: flex;
-  top: 18%;
-  left: 12%;
-}
-
-.carousel2 {
-  border: #fca311 2px solid;
-  position: flex;
-  top: 18%;
-  left: 50%;
-}
-
-.carouselBtn {
-  background-color: var(--orange);
-  color: var(--white);
-  font-weight: 700;
-}
-
-.carouselBtn:hover {
-  color: var(--white);
-  border: var(--orange) 2px solid;
-  background-color: #7979796f;
-}
-
-/* moving letter特效 */
-.ml14 {
-  font-weight: 200;
-  font-size: 3.2em;
-}
-
-.ml14 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.1em;
-  padding-right: 0.05em;
-  padding-bottom: 0.15em;
-}
-
-.ml14 .line {
-  opacity: 0;
+/* 創建漸層覆蓋層 */
+.slogan-section::after {
+  content: "";
   position: absolute;
+  top: 0;
   left: 0;
-  height: 2px;
   width: 100%;
-  background-color: #fff;
-  transform-origin: 100% 100%;
-  bottom: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, #14213d7c, #14213d);
+  z-index: 1;
 }
 
-.ml14 .letter {
-  display: inline-block;
-  line-height: 1em;
+
+.slogan-text h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  text-shadow: 4px 4px 5px rgb(81, 93, 104);
 }
 
-/* 定義漸層邊框圖像 */
-.gradient-border {
-  border: 5px solid transparent;
-  border-image: linear-gradient(90deg, #fca311, #ffffff);
-  border-image-slice: 1;
+.slogan-text .slogan-lower-text {
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-/*左右鍵*/
-.carousel-control-prev,
-.carousel-control-next {
-  /*size */
-  height: 50px;
-  width: 50px;
-  /*color */
-  background: #1b1b1b none repeat scroll 0 0;
-  opacity: 0.5;
-  border-radius: 50%;
-  color: #fff;
-  /*vertical position */
-  top: 40%;
-  margin: 25px;
+/* 網站介紹 */
+.intro-title {
+  margin-top: 4%;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-align: center;
 }
 
-/*carousel indicators */
-.carousel-indicators .test {
-  height: 0.3rem;
-  width: 3rem;
-  border: 0.15rem rgb(130, 130, 131) solid;
+.intro-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  height: 70vh;
+  transition: 0.25s;
 }
+
+.intro-div .options {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; 
+  overflow: hidden;
+  min-width: 600px;
+  max-width: 1200px;
+  width: calc(100% - 100px);
+  height: 400px;
+}
+
+@media screen and (max-width: 718px) {
+  .intro-div .options {
+    min-width: 520px;
+  }
+
+  .intro-div .options .option:nth-child(5) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 638px) {
+  .intro-div .options {
+    min-width: 440px;
+  }
+
+  .intro-div .options .option:nth-child(4) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 558px) {
+  .intro-div .options {
+    min-width: 360px;
+  }
+
+  .intro-div .options .option:nth-child(3) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .intro-div .options {
+    min-width: 280px;
+  }
+
+  .intro-div .options .option:nth-child(2) {
+    display: none;
+  }
+}
+
+.intro-div .options .option {
+  position: relative;
+  overflow: hidden;
+  min-width: 60px;
+  margin: 10px;
+  background: var(--optionBackground, var(--defaultBackground, #E6E9ED));
+  cursor: pointer;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.intro-div .options .option:nth-child(1) {
+  --defaultBackground: #AC92EC;
+}
+
+.intro-div .options .option:nth-child(2) {
+  --defaultBackground: #FC6E51;
+}
+
+.intro-div .options .option:nth-child(3) {
+  --defaultBackground: #FFCE54;
+}
+
+.intro-div .options .option:nth-child(4) {
+  --defaultBackground: #2ECC71;
+}
+
+.intro-div .options .option:nth-child(5) {
+  --defaultBackground: #5D9CEC;
+}
+
+.intro-div .options .option:nth-child(6) {
+  --defaultBackground: #a92895;
+}
+
+.intro-div .options .option.active {
+  flex-grow: 10000;
+  transform: scale(1);
+  margin: 0px;
+  border-radius: 40px;
+  background-size: auto 100%;
+}
+
+.intro-div .options .option.active .shadow {
+  box-shadow: inset 0 -120px 120px -120px black, inset 0 -120px 120px -100px black;
+}
+
+.intro-div .options .option.active .label {
+  bottom: 20px;
+  left: 20px;
+}
+
+.intro-div .options .option.active .label .info>div {
+  left: 0px;
+  opacity: 1;
+}
+
+.intro-div .options .option:not(.active) {
+  flex-grow: 1;
+  border-radius: 30px;
+}
+
+.intro-div .options .option:not(.active) .shadow {
+  bottom: -40px;
+  box-shadow: inset 0 -120px 0px -120px black, inset 0 -120px 0px -100px black;
+}
+
+.intro-div .options .option:not(.active) .label {
+  bottom: 10px;
+  left: 10px;
+}
+
+.intro-div .options .option:not(.active) .label .info>div {
+  left: 20px;
+  opacity: 0;
+}
+
+.intro-div .options .option .shadow {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 120px;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.intro-div .options .option .label {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  height: 40px;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.intro-div .options .option .label .icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  max-width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: white;
+  color: var(--defaultBackground);
+}
+
+.intro-div .options .option .label .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  color: var(--white);
+  background-color: rgba(128, 128, 128, 0.591);
+  text-shadow:  2px 2px 2px #553a0f;
+}
+
+.intro-div .options .option .label .info>div {
+  position: relative;
+  transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
+}
+
+.intro-div .options .option .label .info .main {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.intro-div .options .option .label .info .sub {
+  transition-delay: 0.1s;
+  font-size: 1.2rem;
+}
+
 
 /* 活動導覽設計 */
 .activity-container {
@@ -394,7 +523,6 @@ body {
 }
 
 .activity-title {
-  margin-top: 10%;
   margin-bottom: 5%;
   font-size: 48px;
   font-weight: bold;
@@ -432,14 +560,14 @@ body {
   border: var(--lightGray) 1px solid;
   position: absolute;
   top: 5px;
-  right: 5px; 
-  background-color: var(--brown); 
-  color: var(--white); 
+  right: 5px;
+  background-color: var(--brown);
+  color: var(--white);
   padding: 5px 10px;
-  border-radius: 5px 12px 5px 5px; 
-  font-weight: 600; 
-  font-size: 0.85rem; 
-  z-index: 1; 
+  border-radius: 5px 12px 5px 5px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  z-index: 1;
 }
 
 .card--1 .card__img,
@@ -639,8 +767,8 @@ footer {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-120%, -50%);
-  width: 20%;
+  transform: translate(-76%, -50%);
+  width: 33%;
   max-height: 80vh;
   background-color: var(--white);
   /* 在這裡設置背景顏色 */
@@ -660,12 +788,10 @@ footer {
 
 #contactBox {
   width: 100%;
-  max-width: 70rem;
   text-align: center;
 }
 
 #contactBox form {
-  max-width: 40rem;
   text-align: center;
 }
 
@@ -686,7 +812,8 @@ footer {
 #contactBox form .textarea-field textarea {
   width: 100%;
   padding: 0.4rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   background: transparent;
   color: var(--deepBlue);
   border-radius: 5px;
@@ -695,8 +822,9 @@ footer {
 
 .submitText {
   width: 90px;
-  height: 25px;
-  font-size: 0.8rem;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
   background: transparent;
   color: var(--white);
   border-radius: 15px;
@@ -732,7 +860,7 @@ footer {
 
 #contactDialog .x-div:hover {
   animation: shake 0.3s ease-in-out;
-  
+
 }
 
 @keyframes shake {
