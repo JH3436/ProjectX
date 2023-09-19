@@ -1,0 +1,126 @@
+<mxfile host="app.diagrams.net" modified="2023-08-30T07:44:02.700Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="17T4H6YjzgqgHffkLzCW" version="21.7.0" type="google" pages="2">
+  <diagram name="第 1 页" id="WogbE28WqHVJHlojPfiT">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-1" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;首頁標籤&lt;/font&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry width="920" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-2" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;圖片&lt;/font&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="60" width="500" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-3" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="60" width="420" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-4" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="520" width="920" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-6" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;報名按鈕(成團才會可以點)&lt;br&gt;&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-8" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;目前活動開放日期&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="140" width="380" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-9" value="這是愛心&amp;lt;3" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-10" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;活動內容&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="550" width="480" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-12" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;地圖資料&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="340" width="380" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-13" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;人數&amp;nbsp; 金額&amp;nbsp; &amp;nbsp;自備品&amp;nbsp; &amp;nbsp;&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="55" y="570" width="405" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1k-PtIg1xqwLuuQd3lpo-14" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;當天報名人數&lt;br&gt;&lt;/font&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="540" width="380" height="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7q2vfJpzKUCi6OWNkiuF" name="第 2 页">
+    <mxGraphModel dx="1434" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-1" value="&lt;font style=&quot;vertical-align: inherit;&quot;&gt;&lt;font style=&quot;vertical-align: inherit;&quot;&gt;首頁標籤&lt;/font&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="3.75" width="1070" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-3" value="網頁名稱" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="11.25" width="200" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-4" value="戶外活動" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="10" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-6" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="18.75" width="30" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-7" value="球類運動" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="11.25" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-8" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="23.75" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-9" value="登入" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="970" y="21.880000000000003" width="90" height="36.25" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="73.75" width="1070" height="1006.25" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-11" value="喊口號" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="80" width="1030" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-12" value="輪播圖" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="80" width="440" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-13" value="???" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="390" width="1020" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-14" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="480" width="1020" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-15" value="熱門活動1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="254" y="500" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-16" value="熱門活動2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="505" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-17" value="熱門活動3" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="500" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-19" value="愛心" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="500" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-20" value="愛心" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="505" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-21" value="愛心" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="500" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-22" value="TOP3&lt;br&gt;活動" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="480" width="120" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-23" value="???" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="680" width="1020" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-24" value="已開團活動" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="680" width="120" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-25" value="活動1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="254" y="685" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-26" value="活動2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="680" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-27" value="活動3" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="685" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="xxkPgHsgow0FjWKm0yYf-28" value="聯絡方式" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry y="860" width="1070" height="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
