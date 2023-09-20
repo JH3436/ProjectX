@@ -64,7 +64,7 @@ document.addEventListener(
   false
 );
 
-  // 點擊某一個通之後，圓點顯示灰色，表示已讀
+  // 點擊某一個通知後，圓點顯示灰色，表示已讀
   $(document).ready(function () {
     $(".popup-content").click(function () {
         $(this).find(".notification-dot").css("color", "#999b9f");
