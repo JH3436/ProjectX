@@ -195,3 +195,88 @@
 </div>
 
 
+ <!-- 頁底設計 -->
+ <footer class="text-center text-white" style="background-color: var(--white)">
+  <div class="container pt-4">
+    <section class="mb-4">
+      <span style="color: var(--black); font-size: 1.25rem;font-weight: bold;">聯絡我們<i class="fa-solid fa-caret-right"></i></span>
+      <!-- Facebook -->
+      <a class="custom-btn" href="#!">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <!-- Twitter -->
+      <a class="custom-btn" href="#!">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a class="custom-btn" href="#!">
+        <i class="fab fa-instagram"></i>
+      </a>
+
+      <!-- Github -->
+      <a class="custom-btn" href="#!">
+        <i class="fab fa-github"></i>
+      </a>
+      <!-- Contact Us-->
+      <a class="custom-btn contactIcon" id="showContactButton">
+        <i class="fa-solid fa-envelope-open-text contactIcon"></i>
+      </a>
+
+      <!-- 表單Dialog -->
+      <div class="formOuter-div">
+        <dialog id="contactDialog">
+          <div class="x-div">
+            <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
+          </div>
+          <section id="contactBox">
+            <form>
+              <div class="input-box">
+                <div class="input-field">
+                  <input type="text" name="fullName" id="name" placeholder="您的全名" pattern="^[\u4e00-\u9fa5]{2,4}$"
+                    required>
+                </div>
+                <div class="input-field">
+                  <input type="email" name="mail" id="email" placeholder="Email"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                </div>
+              </div>
+
+              <div class="input-box">
+                <div class="input-field">
+                  <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼 (格式：10碼)"
+                    pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
+                </div>
+                <div class="input-field">
+                  <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
+                </div>
+              </div>
+
+              <div class="textarea-field">
+                <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...."
+                  required></textarea>
+              </div>
+
+              <div>
+                <input type="submit" class="submitText" value="傳送"></input>
+              </div>
+            </form>
+          </section>
+        </dialog>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- Copyright -->
+  <div class="text-center text-dark p-3" style="background-color: var(--lightGray); font-size: 1.2rem;font-weight: 600;">
+    <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Copyright © 2023 JO!N Inc. | 保留一切權利。</p>
+  </div>
+</footer>
+
+<!-- JS連結 -->
+<script src="./開團頁2.js"></script>
+</body>
+
+</html>
