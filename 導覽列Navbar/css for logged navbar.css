@@ -12,15 +12,15 @@
 
 /* 主題顏色宣告 */
 :root {
-    --black: #000000;
-    --deepBlue: #14213d;
-    --blue: #416ac2;
-    --orange: #fca311;
-    --lightGray: #e5e5e5;
-    --white: #ffffff;
-    --brown: #AD7D52;
-    --heart: #B44163;
-    --lightBlue-bg: rgba(45, 68, 119, 0.486);
+  --black: #000000;
+  --deepBlue: #14213d;
+  --blue: #416ac2;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+  --brown: #ad7d52;
+  --heart: #b44163;
+  --lightBlue-bg: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
@@ -31,14 +31,14 @@ body {
 
 /* 導覽列 */
 .header {
-  background-color: rgba(45, 68, 119, 0.486);
+  background-color: var(--lightBlue-bg);
 }
 
 .navbar {
   margin-left: 10%;
   margin-right: 10%;
   color: var(--white);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: bolder;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -68,24 +68,22 @@ body {
   gap: 1rem;
 }
 
-
 /* 圖片位址 */
 .dropdown-img-1::before {
-  background: url('https://picsum.photos/240/80?random=1');
+  background: url("https://picsum.photos/240/80?random=1");
 }
 
 .dropdown-img-2::before {
-  background-image: url('https://picsum.photos/240/80?random=2');
+  background-image: url("https://picsum.photos/240/80?random=2");
 }
 
 .dropdown-img-3::before {
-  background-image: url('https://picsum.photos/240/80?random=3');
+  background-image: url("https://picsum.photos/240/80?random=3");
 }
 
 .dropdown-img-4::before {
-  background-image: url('https://picsum.photos/240/80?random=4');
+  background-image: url("https://picsum.photos/240/80?random=4");
 }
-
 
 .dropdown-img-1,
 .dropdown-img-2,
@@ -119,7 +117,6 @@ body {
   transform: scale(1.25);
 }
 
-
 .dropdown-content .col {
   height: 60px;
   width: 240px;
@@ -128,13 +125,12 @@ body {
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
-  transition: border .3s ease;
+  transition: border 0.3s ease;
 }
 
 .dropdown-content .col:hover {
   border: var(--lightGray) solid 2.5px;
-  box-shadow:
-    5px 5px 15px 0 rgba(129, 128, 128, 0.66);
+  box-shadow: 5px 5px 15px 0 rgba(129, 128, 128, 0.66);
 }
 
 .dropdown-content a {
@@ -172,16 +168,14 @@ body {
   color: var(--orange);
 }
 
-
-
 /* 搜尋框設計 */
 .searchInputWrapper {
   position: relative;
 }
 
 .searchInput {
-  width: 15rem;
-  height: 2rem;
+  width: 18rem;
+  height: 2.5rem;
   padding: 1rem;
   border-radius: 2rem;
   border: none;
@@ -190,12 +184,13 @@ body {
 
 .searchInput::placeholder {
   color: #7e5109;
-  font-size: 1rem;
-  opacity: 0.7;
+  font-size: 1.25rem;
+  opacity: 0.85;
+  font-weight: 600;
 }
 
 .searchInput:focus::placeholder {
-  text-indent: -999px
+  text-indent: -999px;
 }
 
 .searchInput:focus {
@@ -205,7 +200,7 @@ body {
   transition: transform 0.2s ease;
 }
 
-.searchInput:focus+.searchInputIcon {
+.searchInput:focus + .searchInputIcon {
   color: var(--orange);
   transform: translateX(10px);
 }
@@ -231,7 +226,7 @@ body {
 }
 
 /* 小鈴鐺 */
-.notification {
+/* .notification {
     position: relative;
     display: inline-block; 
     margin-right: 10px;
@@ -277,4 +272,161 @@ body {
   75% {
     transform: translateX(-2px);
   }
+} */
+
+/* 鈴鐺+下拉 */
+.notification-wrapper {
+  position: relative;
+}
+
+button.notification {
+  position: relative;
+  /* margin-right: 1em; */
+  border-radius: 5px;
+  background: none;
+  border: none;
+}
+
+button.notification i {
+  margin: 0.5rem;
+}
+
+button.notification span {
+  position: absolute;
+  user-select: none;
+  cursor: default;
+  font-size: 1rem;
+  background: var(--heart);
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--white);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -0.33rem;
+  right: 0;
+  box-sizing: border-box;
+}
+
+button.notification:hover span {
+  animation-name: scaleCount;
+  animation-iteration-count: 1;
+  animation-timing-function: all;
+  animation-duration: 1s;
+  animation-delay: 0s;
+}
+
+@keyframes scaleCount {
+  0% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(0.5);
+  }
+
+  80% {
+    transform: scale(1.25);
+  }
+}
+
+.notification-popup {
+  display: none;
+  cursor: default;
+  font-weight: 300;
+  color: #000000;
+  position: absolute;
+  z-index: 999;
+  top: 56px;
+  right: 50%;
+  transform: translateX(1em);
+  width: 400px;
+  background: white;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  box-shadow: 0.5rem 0.5rem 2rem 0 rgba(247, 245, 245, 0.26);
+  animation-name: dropPanel;
+  animation-iteration-count: 1;
+  animation-timing-function: all;
+  animation-duration: 0.75s;
+}
+
+@keyframes dropPanel {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) scaleY(0.5);
+  }
+}
+
+.notification-popup.active {
+  display: block;
+  overflow: hidden;
+}
+
+.notification-popup__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #416ac22c;
+  border-bottom: 2px solid var(--lightGray);
+}
+
+.notification-popup__header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--black);
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+
+.notification-popup__header button {
+  float: right;
+  border: none;
+  background: none;
+}
+
+.notification-popup__header button i {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+.notification-popup .popup-content {
+  
+  padding-top: 3%;
+  border-bottom: var(--lightGray) solid 2px;
+  align-items: center;
+}
+
+.notification-popup .popup-content .fa-newspaper {
+  padding-left: 7%;
+}
+
+.notification-popup .popup-content .notification-message {
+  text-align: left;
+}
+
+.notification-popup .popup-content h4 {
+  color: var(--deepBlue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.notification-popup .popup-content:hover {
+  border-bottom: #416ac2 2.5px solid;
+  border-top: #416ac2 2.5px solid;
+  cursor: pointer;
+}
+
+.notification-popup .popup-content span {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
 }

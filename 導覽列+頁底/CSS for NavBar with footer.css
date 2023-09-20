@@ -18,12 +18,51 @@
   --orange: #fca311;
   --lightGray: #e5e5e5;
   --white: #ffffff;
+  --brown: #AD7D52;
+  --heart: #B44163;
+  --lightBlue-bg: rgba(45, 68, 119, 0.486);
 }
 
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
   color: var(--white);
+}
+
+/* 回到網頁頂端圖示設計 */
+#scroll-to-top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 防止超連結跑出底線 */
+#scroll-to-top a {
+  text-decoration: none;
+}
+
+#scroll-to-top .homeicon-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: solid 3px var(--lightGray);
+  background-color: var(--deepBlue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+}
+
+#scroll-to-top .homeicon-container:hover {
+  transform: scale(1.15);
+}
+
+.hidden {
+  display: none;
 }
 
 /* 導覽列 */
@@ -228,4 +267,167 @@ body {
 
 .navbar-signin:hover {
   color: var(--deepBlue);
+}
+
+
+
+
+
+
+/* 頁底設計 */
+footer {
+  margin-top: 5%;
+}
+
+.custom-btn {
+  margin: 1rem;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.custom-btn i {
+  font-size: 2rem;
+  color: var(--deepBlue);
+}
+
+.custom-btn:hover i {
+  color: var(--brown);
+}
+
+
+/* 聯絡我們表單 */
+
+#contactDialog {
+  border-radius: 10px;
+  padding: 15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-76%, -50%);
+  width: 33%;
+  max-height: 80vh;
+  background-color: var(--white);
+  /* 在這裡設置背景顏色 */
+  overflow: hidden;
+  /* 移除滾動條 */
+}
+
+/* 調整內容置中 */
+#contactDialog section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+
+#contactBox {
+  width: 100%;
+  text-align: center;
+}
+
+#contactBox form {
+  text-align: center;
+}
+
+#contactBox form .input-box {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+}
+
+#contactBox form .input-box .input-field {
+  position: relative;
+  width: 49%;
+  margin: 0.3rem 0;
+}
+
+#contactBox form .input-box .input-field input,
+#contactBox form .textarea-field textarea {
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--deepBlue);
+  border-radius: 5px;
+  border: var(--deepBlue) 0.1rem solid;
+}
+
+.submitText {
+  width: 90px;
+  height: 30px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--white);
+  border-radius: 15px;
+  margin-top: .7rem;
+  background-color: var(--deepBlue);
+}
+
+.submitText:hover {
+  cursor: pointer;
+  border: var(--deepBlue) 0.1rem solid;
+  background-color: var(--white);
+  color: var(--deepBlue);
+}
+
+#contactDialog .x-div {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: solid 2px var(--deepBlue);
+  background-color: var(--lightGray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  transition: all .3s;
+}
+
+#closeDialogButton {
+  cursor: pointer;
+}
+
+#contactDialog .x-div:hover {
+  animation: shake 0.3s ease-in-out;
+
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-1.5px);
+  }
+
+  50% {
+    transform: translateX(1.5px);
+  }
+
+  75% {
+    transform: translateX(-1.5px);
+  }
+}
+
+#contactBox form .input-box .input-field input::placeholder,
+#contactBox form .textarea-field textarea::placeholder {
+  color: gray;
+  font-size: 1.2rem;
+}
+
+#contactBox form .textarea-field textarea {
+  resize: none;
 }
