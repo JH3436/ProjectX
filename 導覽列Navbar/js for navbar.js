@@ -63,3 +63,17 @@ document.addEventListener(
   },
   false
 );
+
+  // 點擊某一個通之後，圓點顯示灰色，表示已讀
+  $(document).ready(function () {
+    $(".popup-content").click(function () {
+        $(this).find(".notification-dot").css("color", "#999b9f");
+    });
+
+    // 監聽read-all按鈕的點擊事件
+    $(".read-all").click(function () {
+      // 選擇所有的notification-dot元素並改變顏色
+      $(".notification-dot").css("color", "#999b9f");
+  });
+  
+});
