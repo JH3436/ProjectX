@@ -43,13 +43,20 @@ button:hover{
     font-size: 5rem;
 }
 
+.mycontainer {
+    padding-left: 5%;
+    padding-right: 5%;
+    display: flex;
+    justify-content: center;
+}
+
 #content{
     width: 85rem;
     height: 65rem;
     /* margin: 50px; */
     padding: 1%;
-    margin-left: 15rem ;
-    margin-right: 15rem;
+    /* margin-left: 15rem ;
+    margin-right: 15rem; */
     display: inline-flex;
     margin-top: 0rem;
     border-top: 5px solid var(--black);
@@ -63,8 +70,8 @@ button:hover{
     width: 85rem;
     height: 70rem;
     margin-top: 90px;
-    margin-left: 15rem ;
-    margin-right: 15rem;
+    /* margin-left: 15rem ;
+    margin-right: 15rem; */
     display: inline-flex;
     margin-top: 0rem;
     border-bottom: 5px solid var(--black);
