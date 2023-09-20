@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-.radio-container {
-  display: flex; /* 使用 Flexbox 布局 */
-}
-
-[type="radio"] {
-  position: absolute;
-  left: -9999px;
+body{
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 3rem;
+	line-height: 1.7;
+	color: #c4c3ca;
+	background-color: #1f2029;
+	overflow-x: hidden;
 }
 
 .section{
@@ -26,8 +27,8 @@
   padding-left: 12px;
   padding-right: 12px;
   cursor: pointer;
-  line-height: 30px;
-  font-size: 13px;
+  line-height: 60px;
+  font-size: 3rem;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 500;
@@ -84,7 +85,7 @@
 
 .checkbox-all:checked + label:after,
 .checkbox-all:not(:checked) + label:after{
-  background-color: #000;
+  background-color: #fca311;
 }
 
 .checkbox-alizarin:checked + label:after,
@@ -107,7 +108,88 @@
   background-color: #fca311;
 }
 
-.checkbox-sunflower:checked + label:after,
-.checkbox-sunflower:not(:checked) + label:after{
-  background-color: #fca311;
+.box{
+  border-radius: 4px;
+  box-shadow: 6px 7px 28px 0 rgba(16, 16, 16, 0.7);
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.3s linear;
+}
+.box.alizarin{
+  border: 3px solid #e74c3c;
+}
+.box.wisteria{
+  border: 3px solid #8e44ad;
+}
+.box.emerland{
+  border: 3px solid #2ecc71;
+}
+.box.belizehole{
+  border: 3px solid #2980b9;
+}
+
+.box.alizarin,
+.box.wisteria,
+.box.emerland,
+.box.belizehole{
+  opacity: 0;
+  transform: scale(0);
+  padding: 0;
+  margin: 0;
+  visibility: hidden;
+  border-width: 0;
+}
+.checkbox-all:checked ~ .box.alizarin,
+.checkbox-all:checked ~ .box.wisteria,
+.checkbox-all:checked ~ .box.emerland,
+.checkbox-all:checked ~ .box.belizehole,
+.checkbox-alizarin:checked ~ .box.alizarin,
+.checkbox-wisteria:checked ~ .box.wisteria,
+.checkbox-emerland:checked ~ .box.emerland,
+.checkbox-belizehole:checked ~ .box.belizehole{
+  opacity: 1;
+  min-height: 140px;
+  min-width: calc(22% - 28px);
+  padding: 0 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+  visibility: visible;
+  transform: scale(1);
+  border-width: 3px;
+}
+@media (max-width: 1199px) {
+	.checkbox-all:checked ~ .box.alizarin,
+	.checkbox-all:checked ~ .box.wisteria,
+	.checkbox-all:checked ~ .box.emerland,
+	.checkbox-all:checked ~ .box.belizehole,
+  	.checkbox-alizarin:checked ~ .box.alizarin,
+  	.checkbox-wisteria:checked ~ .box.wisteria,
+  	.checkbox-emerland:checked ~ .box.emerland,
+  	.checkbox-belizehole:checked ~ .box.belizehole{
+    	min-width: calc(32% - 28px);
+  	}
+}
+@media (max-width: 991px) {	
+	.checkbox-all:checked ~ .box.alizarin,
+	.checkbox-all:checked ~ .box.wisteria,
+	.checkbox-all:checked ~ .box.emerland,
+	.checkbox-all:checked ~ .box.belizehole,
+  	.checkbox-alizarin:checked ~ .box.alizarin,
+  	.checkbox-wisteria:checked ~ .box.wisteria,
+  	.checkbox-emerland:checked ~ .box.emerland,
+  	.checkbox-belizehole:checked ~ .box.belizehole{
+		min-width: calc(50% - 28px);
+  	}
+}
+@media (max-width: 575px) {	
+	.checkbox-all:checked ~ .box.alizarin,
+	.checkbox-all:checked ~ .box.wisteria,
+	.checkbox-all:checked ~ .box.emerland,
+	.checkbox-all:checked ~ .box.belizehole,	
+  	.checkbox-alizarin:checked ~ .box.alizarin,
+  	.checkbox-wisteria:checked ~ .box.wisteria,
+  	.checkbox-emerland:checked ~ .box.emerland,
+  	.checkbox-belizehole:checked ~ .box.belizehole{
+   	 	min-width: calc(100% - 28px);
+  	}
 }
