@@ -290,13 +290,11 @@ Calendar.prototype.drawLegend = function() {
       memo.push(e);
     }
     return memo;
-  }, []).forEach(function(e) {
-    var parts = e.split('|');
-    var entry = createElement('span', 'entry ' +  parts[1], parts[0]);
-    legend.appendChild(entry);
-  });
-  this.el.appendChild(legend);
+  }, [])
+  
 }
+
+//月份前後
 
 Calendar.prototype.nextMonth = function() {
   this.current.add('months', 1);
@@ -327,10 +325,7 @@ function createElement(tagName, className, innerText) {
 !function() {
 var data = [
   { eventName: '????', calendar: 'Work', color: 'orange' },
-  { eventName: '???', calendar: 'Work', color: 'yellow' },
-  { eventName: '??', calendar: 'Work', color: 'white' },
-  { eventName: '?', calendar: 'Work', color: 'orange' },
-
+  
 ];
 
 
