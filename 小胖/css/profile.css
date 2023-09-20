@@ -1,9 +1,10 @@
-.container {
+
+
+.dora {
     display: grid;
     gap: 20px;
     grid-template-columns: 0.5fr 1.2fr;
     align-items: center;
-    height: 100vh;
     padding: 20px;
 }
 
@@ -13,19 +14,19 @@
 
 .A {
     display: grid;
-    gap: 20px;
-    grid-template-rows: 0.01fr 2fr 1fr 0.5fr;
+    ;
+    
     padding: 0; /* 確保A沒有左右內距 */
 }
 
 .B {
     display: grid;
     gap: 20px;
-    grid-template-rows: 0.01fr 3fr 1fr;
+    
 }
 
 .item {
-    display: flex;
+    display: inline-block;
   
     border: 1px solid;
 }
