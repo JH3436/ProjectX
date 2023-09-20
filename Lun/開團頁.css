@@ -912,50 +912,6 @@ input[type=radio]:checked ~ label{
 }
 
 
-.box1 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: 50px;
-  margin-left: -25px;
-  border-radius: 10px;
-}
-
-.box2 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 102px;
-  border-radius: 10px;
-}
-
-.box3 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 228px;
-  border-radius: 10px;
-}
-
-.box4 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 353px;
-  border-radius: 10px;
-}
-
-.box5 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 478px;
-  border-radius: 10px;
-}
 
 
 
@@ -972,7 +928,7 @@ input[type=radio]:checked ~ label{
 #inputForm {
   margin-top: -380px;
   margin-left: -380px;
-  width: 1970px;
+  width: 1270px;
   resize: none;
 }
 #contentDisplay {
