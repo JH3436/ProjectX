@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聯絡表單</title>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Font Awesome套件引入 -->
+    <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    :root {
+        --black: #000000;
+        --deepBlue: #14213d;
+        --blue: #416ac2;
+        --orange: #fca311;
+        --lightGray: #e5e5e5;
+        --white: #ffffff;
+        --brown: #AD7D52;
+        --heart: #B44163;
+    }
+
+    #contactBox #changeColor {
+        color: var(--white);
+    }
+
+    body {
+        background-color: #B44163;
+    }
+
+    * {
+        /* *被用來選取HTML文檔中的所有元素*/
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        /* 讓邊框隨著margin, padding等設定跟著移動*/
+        text-decoration: none;
+        border: none;
+        outline: none;
+        scroll-behavior: smooth;
+        /*當使用超連結時，頁面會平滑滾動到目標位置。 */
+        font-family: "Poppins", sans-serif;
+    }
+
+    #contactDialog {
+        border-radius: 10px;
+        padding: 15px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30%;
+        max-height: 80vh;
+        background-color: var(--white);
+        /* 在這裡設置背景顏色 */
+        overflow: hidden;
+        /* 移除滾動條 */
+    }
+
+    /* 調整內容置中 */
+    #contactDialog section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+    }
+
+    #contactBox {
+        width: 100%;
+        max-width: 70rem;
+        text-align: center;
+    }
+
+    #contactBox form {
+        max-width: 40rem;
+        text-align: center;
+    }
+
+    #contactBox form .input-box {
+        /* position: relative; */
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+    }
+
+    #contactBox form .input-box .input-field {
+        position: relative;
+        width: 49%;
+        margin: 0.3rem 0;
+        /*上下0.8*/
+    }
+
+    #contactBox form .input-box .input-field input,
+    #contactBox form .textarea-field textarea {
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1rem;
+        background: transparent;
+        color: var(--deepBlue);
+        border-radius: 5px;
+        border: var(--deepBlue) 0.1rem solid;
+    }
+
+    .submitText {
+        width: 90px;
+        height: 25px;
+        font-size: 0.8rem;
+        background: transparent;
+        color: var(--white);
+        border-radius: 15px;
+        margin-top: .7rem;
+        background-color: var(--deepBlue);
+    }
+
+    .submitText:hover {
+        animation: shake 0.4s ease-in-out;
+        cursor: pointer;
+        border: var(--deepBlue) 0.1rem solid;
+        background-color: var(--white);
+        color: var(--deepBlue);
+    }
+
+    #contactDialog .x-div {
+        width: 23px;
+        height: 23px;
+        border-radius: 50%;
+        border: solid 2px var(--deepBlue);
+        background-color: var(--lightGray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        
+    }
+    
+    #closeDialogButton {
+        transition: all .3s;
+        cursor: pointer;
+    }
+
+    #closeDialogButton:hover {
+        animation: shake;
+    }
+
+
+
+
+
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-5px);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
+
+        75% {
+            transform: translateX(-5px);
+        }
+    }
+
+    #contactBox form .input-box .input-field input::placeholder,
+    #contactBox form .textarea-field textarea::placeholder {
+        color: #ad7c5281;
+        font-size: 0.6rem;
+    }
+
+    #contactBox form .textarea-field textarea {
+        resize: none;
+    }
+</style>
+
+<body>
+    <button id="showContactButton" style="color: #fca311;">聯絡我們</button>
+
+    <dialog id="contactDialog">
+        <div class="x-div">
+            <i id="closeDialogButton" class="fa-solid fa-xmark"></i>
+        </div>
+        <section id="contactBox">
+            <form id="myForm">
+                <div class="input-box">
+                    <div class="input-field">
+                        <input type="text" name="fullName" id="name" placeholder="您的全名" required>
+                    </div>
+                    <div class="input-field">
+                        <input type="email" name="mail" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <div class="input-field">
+                        <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="手機號碼(格式：10碼)"
+                            pattern="[0-9]{10}" maxlength="10" required title="請輸入10位數字手機號碼(TW)">
+                    </div>
+                    <div class="input-field">
+                        <input type="text" name="emailSubject" id="emailSubjest" placeholder="Email標題" required>
+                    </div>
+                </div>
+
+                <div class="textarea-field">
+                    <textarea name="wrotetext" id="message" cols="15" rows="10" placeholder="您的訊息...."
+                        required></textarea>
+                </div>
+
+                <div>
+                    <input type="submit" class="submitText" value="傳送"></input>
+                </div>
+            </form>
+        </section>
+    </dialog>
+</body>
+<script>
+    // 當按鈕點擊時，顯示 dialog
+    document.getElementById("showContactButton").addEventListener("click", function () {
+        var dialog = document.getElementById("contactDialog");
+        dialog.showModal();
+
+
+    });
+
+    // 當關閉按鈕被點擊時，關閉 dialog
+    document.getElementById("closeDialogButton").addEventListener("click", function () {
+        var dialog = document.getElementById("contactDialog");
+        dialog.close();
+    });
+
+    // 當 dialog 關閉時，重置表單
+    document.getElementById("contactDialog").addEventListener("close", function () {
+        document.getElementById("myForm").reset();
+    });
+
+
+
+
+    //響應式表單
+    $(document).ready(function () {
+        $("#contactBox form input").on("input", function () {
+            if (this.checkValidity()) {
+                $(this).css("border", "0.1rem rgba(48, 230, 106, 0.749) solid");
+            } else {
+                $(this).css("border", "0.1rem red solid");
+            }
+        });
+    });
+
+    //alert表單內容
+    document.getElementById("myForm").onsubmit = function (event) {
+        // 獲取表單元素
+        var form = event.target;
+        // 獲取各input元素的值
+        var name = form.elements["name"].value;
+        var email = form.elements["email"].value;
+        var emailSubject = form.elements["emailSubject"].value;
+        var mobileNumber = form.elements["mobileNumber"].value;
+        var message = form.elements["message"].value;
+
+        // 彈出視窗顯示表單內容
+        alert(
+            `姓名：${name}\n電子郵件：${email}\n郵件標題：${emailSubject}\n手機號碼：${mobileNumber}\n訊息：${message}`
+        );
+    };
+</script>
+
+</html>
