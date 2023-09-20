@@ -43,6 +43,13 @@ button:hover{
     font-size: 5rem;
 }
 
+.mycontainer {
+    padding-left: 10%;
+    padding-right: 10%;
+    display: flex;
+    justify-content: center;
+}
+
 #content{
     width: 85rem;
     height: 65rem;
