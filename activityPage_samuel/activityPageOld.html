@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JO!N</title>
+    <link rel="icon" href="./Files/小黃人.png" type="image/png">
+    <!-- <link rel="stylesheet" href="./css/projectMain.css"> -->
+    
+    <link rel="stylesheet" href="./css/navigationBar.css">
+    
+    <!-- 引入 Bootstrap 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
+    <!-- Font Awesome套件引入 -->
+    <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- css連結 -->
+    
+</head>
+
+<body>
+    <!-- 導覽列設計 -->
+    <div class="header">
+        <div class="row navbar justify-content-between">
+          <div class="col-auto">
+            <a class="navbar-item" href="#" id="home">
+              <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+            </a>
+          </div>
+          <div class="col-auto">
+            <a class="navbar-item" href="#" id="explore-link">
+              探索
+              <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-content" id="explore-dropdown">
+              <div class="row">
+                <div class="col dropdown-img-1">
+                  <a href="#">登山</a>
+                </div>
+                <div class="col dropdown-img-2">
+                  <a href="#">溯溪</a>
+                </div>
+                <div class="col dropdown-img-3">
+                  <a href="#">潛水</a>
+                </div>
+                <div class="col dropdown-img-4">
+                  <a href="#">露營</a>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+          <div class="col-auto">
+            <a class="navbar-item" id="group-link" href="#">發起揪團</a>
+          </div>
+          <div class="col">
+            <!-- 填充空間 -->
+          </div>
+          <div class="col-auto">
+            <div class="searchInputWrapper">
+              <input class="searchInput" type="text" placeholder='搜尋...'>
+              <i class="searchInputIcon fa fa-search"></i>
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="notification">
+              <i class="fa-solid fa-bell fa-lg" style="color: #ffffff;"></i>
+              <span class="notification--num">5</span>
+            </div>
+          </div>
+          <div class="col-auto nav-signin">
+            <a class="singin-style" href="#">會員中心</a>
+          </div>
+        </div>
+      </div>
+    
+
+
+    <h1>衝浪</h1>
+    <div id="content">
+        <div id="pictureDiv">
+            <img src="./Files/surf.jpg" id="picture">
+            <div id="morePictureDiv">
+                <img src="./Files/surf.jpg" id="morePicture" class="morePicture">
+                <img src="./Files/surf3.jpg" id="morePicture" class="morePicture">
+                <img src="./Files/手剎車.jpg" id="morePicture" class="morePicture">
+            </div>
+            
+        </div>
+        
+        
+        <div id="signUpDiv">
+            <div id="btnDiv">
+                <button class="btn" id="followBtn" >追蹤活動通知</button>
+            </div>
+            <br>
+            <h3>
+                衝浪是衝浪者利用衝浪板越過湧起的海浪所進行的一項水上運動，衝浪者以海浪為動力並利用自身技巧和平衡力透過衝浪板駕馭海浪。
+一道海浪從拱起到最後消失在海灘上，中間經歷幾個過程，首先，海浪會在外海拱起再一路抬升形成浪壁，接著浪頭崩落形成崩潰區，最終變成浪花往岸上推。在崩潰區時是海浪力量最大的時候，但也是最危險的地方，若是衝浪高手可以使用越浪技巧穿過崩潰區至外海等待下一道浪的到來，並藉由重力從浪壁上往下滑行，至於初學者則建議利用崩潰區後的浪花產生速度，再跟著浪的推力往岸上衝。
+            </h3>
+            <br>
+            <div id="mapDiv"> 
+                <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.0910174102787!2d121.3615097!3d24.860740800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34681a028c93d71d%3A0x7b2c6fa68f79ea8d!2z5Y-wN-S5mee3mg!5e0!3m2!1szh-TW!2stw!4v1693927883477!5m2!1szh-TW!2stw"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <br>
+            
+            
+            
+        </div>
+    </div>
+            
+    <div id="contentBottom">
+        <div id="activityDiv">
+            <h1>路線分享</h1>  
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
+            </div>
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
+            </div>
+            <div class="experienceShare">
+                <img src="./Files/exp1.jpg" >
+                <h3>為這到手馬上為什麼武漢，快樂的小朋友，自己的來是得有，明年幹說這來發是當可以有限：是看動畫過敏差不多的比完全，不舒服知道是同時是關要時候我。實在是以我也很⋯到底在一真可以播觀樣的遺，他有在只是發現獨歡這種當：樣的，以前或樂的被人要說的道什麼。
+                </h3>
+            </div>
+
+        </div>
+        <div id="activityDetailedDiv">
+            <div id="activityDetailed">
+                <br>
+                <label id="activityLabel">希望人數:</label>
+                <h3 id="activityH3">2人</h3>
+                <label id="activityLabel">自備:</label>
+                <h3 id="activityH3">衝浪板</h3>
+                <label id="activityLabel">金額:</label>
+                <h3 id="activityH3">$0</h3>
+            </div>
+            
+        </div>    
+    </div>
+    
+
+    <!-- JS連結 -->
+</body>
+    <script src="./js/navigationBar.js"></script>
+    <script src="./js/projectCalendar.js"></script>
+    <script src="./js/sign.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
+</html>

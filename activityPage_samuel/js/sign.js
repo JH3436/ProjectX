@@ -5,7 +5,7 @@
     let close=document.querySelector("#dialogClose");
     let sign=document.querySelector("#dialogSign");
     btn.addEventListener("click", function(){
-      infoModal.showModal();
+      infoModal.showModal();      
     })
     close.addEventListener("click", function(){
       infoModal.close();
@@ -22,6 +22,8 @@
         }
       }
     })
+
+    
 
     
     $(() => {
