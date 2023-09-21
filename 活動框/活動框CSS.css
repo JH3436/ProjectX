@@ -61,6 +61,7 @@
   justify-content: center;
   max-width: 1200px;
   gap: 2.5rem;
+  flex-direction: row;
 }
 
 /* 活動分類標籤 */
@@ -159,7 +160,7 @@
 .card {
   transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
-  width: 33.3%;
+  width: 33.33%; 
   position: relative;
   border-radius: 12px;
   overflow: hidden;
