@@ -56,16 +56,30 @@ document.addEventListener(
   false
 );
 
-let unreadMessagesCount = 3; // 初始化目前的未讀訊息數量，這裡假設有3條未讀訊息
+// 初始化目前的未讀訊息數量，這裡假設有3條未讀訊息
+
+let unreadMessagesCount = 3; 
 
 // 點擊某一個通知後，圓點顯示灰色，表示已讀
 $(document).ready(function () {
   $(".popup-content").click(function () {
-    $(this).find(".notification-dot").css("color", "#999b9f");
-    // 更新未讀訊息數量，減少1
+    const notificationDot = $(this).find(".notification-dot");
+    if (notificationDot.css("color") === "rgb(153, 155, 159)") {
+      // 如果圓點是灰色，表示已讀，將其設置為未讀（藍色）
+      notificationDot.css("color", "#0860f7");
+       // 增加未讀訊息數量
+       unreadMessagesCount++;
+       // 更新通知鈴鐺上的數字
+       updateNotificationCount();
+    } else {
+        // 如果圓點是藍色，表示未讀，將其設置為已讀（灰色）
+        notificationDot.css("color", "#999b9f");
+         // 更新未讀訊息數量，減少1
     unreadMessagesCount--;
     // 更新通知鈴鐺上的數字
     updateNotificationCount();
+    }
+   
   });
 
   // 監聽read-all按鈕的點擊事件
@@ -80,6 +94,7 @@ $(document).ready(function () {
 });
 
 
+//更新通知數函式
 function updateNotificationCount() {
   // 選擇通知鈴鐺上的數字元素
   const notificationNum = $(".notification--num");
