@@ -225,54 +225,7 @@ body {
   color: var(--deepBlue);
 }
 
-/* 小鈴鐺 */
-/* .notification {
-    position: relative;
-    display: inline-block; 
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .notification--num {
-    position: absolute; 
-    top: -10px; 
-    right: -15px; 
-    width: 25px; 
-    height: 25px; 
-    background-color: var(--heart); 
-    border-radius: 50%;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    color: var(--white); 
-    font-size: 14px;
-    padding: 1px;
-  }
 
-  .notification:hover .notification--num{
-    animation: shake 0.3s ease-in-out;
-    
-  }
-
-  @keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-2px);
-  }
-
-  50% {
-    transform: translateX(1px);
-  }
-
-  75% {
-    transform: translateX(-2px);
-  }
-} */
 
 /* 鈴鐺+下拉 */
 .notification-wrapper {
@@ -506,12 +459,8 @@ button.notification:hover span {
   }
   
  
+  
 
-  
-  .CC{
-    height: 58px;
-  }
-  
   
   
   dropdown input:checked + label{
@@ -559,17 +508,20 @@ button.notification:hover span {
   }
   
   
-  .dropdownALL {
-    margin: auto;
+
+
+  .NumberofpeopleA {
+    width: 100%; /* 使輸入元素寬度100% */
+    border-radius: 0 0 5px 5px; 
+}
+.NumberofpeopleB {
+  width: 100%; /* 使輸入元素寬度100% */
+  border-radius: 0 0 5px 5px; 
 }
 
-.container {
-    padding-left: 0;
-    padding-right: 0;
+#other{
+  border-radius: 0 0 5px 5px; 
 }
-
-  
-  
   
   
   
@@ -726,7 +678,7 @@ button.switch-month:hover {
 .custom-box {
     background-color: var(--lightBlue-bg);
     border-radius: 10px;
-    height: 330px;
+    height: 400px;
     margin-top: 10px;
     min-height: 200px; /* 设置一个最小高度，以确保元素有足够的高度显示内容 */
 }
@@ -739,7 +691,7 @@ button.switch-month:hover {
 .Pbox {
     background-color: #14213d;
     border-radius: 10px;
-    margin-top: -400px;
+    margin-top: -450px;
     min-height: 200px;
     position: relative;
 }
@@ -754,21 +706,36 @@ button.switch-month:hover {
     right: 685px;
 }
 
+
+
+
+
+
+
+
+
 .custom-button {
+  background-color: var(--orange);
+    border-radius: 5px;
+    transition: background-color 0.1s, border 0.1s;
     float: right;
     margin-right: 5px;
     background-color: var(--orange);
     border: none;
     color: #ffffff;
     cursor: pointer;
-    font-weight: normal;
+    /* font-weight: normal; */
     border-radius: 5px;
     padding: 5px 8px;
 }
 
 .custom-button:hover{
-    color: #14213d;
+  background: transparent;
+    border: solid 1.5px var(--orange);
+  color: var(--orange);
+  color: var(--orange);
 }
+
 
 .custom-button:nth-child(3),
 .custom-button:nth-child(4) {
