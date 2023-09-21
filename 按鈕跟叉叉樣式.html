@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板</title>
+
+    <!-- Font Awesome套件引入 -->
+    <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+
+
+    <!-- 引入 Bootstrap 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <!-- css連結，確保在Bootsrap之下 -->
+    <link rel="stylesheet" href="css for main page.css" />
+
+    <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- moving letter特效引入 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+
+<style>
+    :root {
+        --black: #000000;
+        --deepBlue: #14213d;
+        --blue: #416ac2;
+        --orange: #fca311;
+        --lightGray: #e5e5e5;
+        --white: #ffffff;
+        --brown: #AD7D52;
+        --heart: #B44163;
+        --lightBlue-bg: rgba(45, 68, 119, 0.486);
+    }
+
+    body {
+
+        background-color: rgb(66, 66, 160)
+    }
+    /* 只是排版 */
+    .hey {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* 只是背景 */
+    .bg {
+        position: relative;
+        margin: 50px;
+        width: 400px;
+        height: 400px;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bg2 {
+        margin: 50px;
+        width: 400px;
+        height: 400px;
+        background-color: var(--deepBlue);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 叉叉*/
+    .x-div {
+        width: 37px;
+        height: 37px;
+        border-radius: 50%;
+        border: solid 3px var(--deepBlue);
+        background-color: var(--lightGray);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        transition: all .3s;
+    }
+
+    /* 移動到XX上會抖動 */
+    .x-div:hover {
+        animation: shake 0.3s ease-in-out;
+    }
+
+    /* 抖動動畫 */
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-1.5px);
+        }
+
+        50% {
+            transform: translateX(1.5px);
+        }
+
+        75% {
+            transform: translateX(-1.5px);
+        }
+    }
+
+    /* 橘色按鈕 */
+
+    /* 外框設計 */
+    .org-btn {
+        width: fit-content;
+        border: var(--orange) 2px solid;
+        padding: 2.5px 12.5px;
+        border-radius: 5px;
+        transition: all 0.1s ease;
+    }
+
+    .org-btn:hover {
+        background-color: var(--brown);
+        border: var(--orange) 2px solid;
+    }
+
+    /* 文字設計 */
+    .org-btn-text-style {
+        font-size: 1.5rem;
+        font-weight: bolder;
+        text-decoration: none;
+        color: var(--orange);
+        transition: color 0.1s;
+        /* 添加過渡效果 */
+    }
+
+    .org-btn-text-style:hover {
+        color: var(--white);
+    }
+
+    /* 藍色按鈕 */
+    .blue-btn {
+        width: fit-content;
+        padding: 2.5px 20.5px;
+        font-size: 1.6rem;
+        font-weight: bolder;
+        border-radius: 15px;
+        background-color: var(--deepBlue);
+        transition: all 0.1s ease;
+    }
+
+    .blue-btn:hover {
+        cursor: pointer;
+        border: var(--deepBlue) 2px solid;
+        background-color: var(--white);
+    }
+
+    .blue-btn-text-style {
+        color: var(--white);
+        text-decoration: none;
+        transition: all 0.1s ease;
+    }
+
+    .blue-btn-text-style:hover {
+        color: var(--deepBlue);
+    }
+</style>
+
+<body>
+    <div class="hey row">
+        <!-- 這裡是叉叉 -->
+        <div class="col-auto bg">
+            <div class="x-div">
+                <i id="closeDialogButton" class="fa-solid fa-xmark fa-lg"></i>
+            </div>
+        </div>
+
+        <!-- 橘色按鈕 -->
+        <div class="col-auto bg2">
+            <div class="org-btn">
+                <a class="org-btn-text-style" href="#">註冊</a>
+            </div>
+        </div>
+
+        <!-- 藍色按鈕 -->
+        <div class="col-auto bg">
+            <div class="blue-btn">
+                <a class="blue-btn-text-style" href="#">傳送</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
