@@ -347,30 +347,30 @@ dropdown input ~ ul{
 
 .A {
   position: absolute;
-  margin-top: -1276px;
-  margin-left: 790px;
+  margin-top: -670px;
+  margin-left: -90px;
   z-index: 50;
 }
 
 .B {
   position: absolute;
-  margin-top: -1040px;
-  margin-left: 790px;
+  margin-top: -670px;
+  margin-left: 230px;
   z-index: 51;
 }
 
 .date{
   position: absolute;
-  margin-top: -800px;
-  margin-left: 790px;
+  margin-top: -670px;
+  margin-left: 550px;
   z-index: 52;
 }
 
 
 .C {
   position: absolute;
-  margin-top: -500px;
-  margin-left: 790px;
+  margin-top: -670px;
+  margin-left: 875px;
   z-index: 54;
 }
 
@@ -804,10 +804,10 @@ input[type=radio]:checked ~ label{
 .ChooseFile{
   background-color: var(--lightGray);
   width: 600px;
-  height: 750px;
+  height: 450px;
   position: absolute;
-  top:190px;
-  left: 490px;
+  top:305px;
+  left: 290px;
   bottom: 10px;
   padding-top: 20px;
   padding-left: 25px;
@@ -828,9 +828,9 @@ input[type=radio]:checked ~ label{
 }
 
 #thumbnailsContainer {
-  width: 500px;
-  height: 600px;
-  margin-left: 50px;
+  width: 400px;
+  height: 300px;
+  margin: auto;
   margin-top: 50px;
   overflow: hidden;
   background-size: contain;
@@ -911,52 +911,6 @@ input[type=radio]:checked ~ label{
 }
 
 
-.box1 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: 50px;
-  margin-left: -25px;
-  border-radius: 10px;
-}
-
-.box2 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 102px;
-  border-radius: 10px;
-}
-
-.box3 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 228px;
-  border-radius: 10px;
-}
-
-.box4 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 353px;
-  border-radius: 10px;
-}
-
-.box5 {
-  width: 100px;
-  height: 100px;
-  border: 2px solid var(--lightGray); 
-  margin-top: -100px;
-  margin-left: 478px;
-  border-radius: 10px;
-}
-
-
 
 
 
@@ -969,9 +923,9 @@ input[type=radio]:checked ~ label{
 
 
 #inputForm {
-  margin-top: -380px;
-  margin-left: -380px;
-  width: 1970px;
+  margin-top: -545px;
+  margin-left: 230px;
+  width: 1270px;
   resize: none;
 }
 #contentDisplay {
@@ -991,8 +945,8 @@ input[type=radio]:checked ~ label{
 .submit2 {
   position: absolute;
   text-decoration: none;
-  top: 1370px;
-  right: 800px;
+  bottom: 170px;
+  right: 340px;
   color: var(--white);
   background-color: var(--orange);
   padding: 5px 15px;
@@ -1017,10 +971,10 @@ input[type=radio]:checked ~ label{
 /* 小背景 */
 .page-container {
   background-color:var(--navbarBC) ;
-  width: 13S00px;
-  height: 1300px;
-  margin-left: 50px;
-  margin-top: 100px;
+  width: 1500px;
+  height: 700px;
+  margin-left:-190px;
+  margin-top: 80px;
   z-index: -5;
   border-radius: 10px;
 }
