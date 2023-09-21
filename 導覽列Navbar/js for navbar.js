@@ -26,16 +26,8 @@ $(document).ready(function () {
   groupBtn.hover(function () {
     exploreDropdown.css("display", "none");
   });
-
-
-
-//點擊鈴鐺後，數字通知消失
-// 使用事件委託，當點擊<i>元素時執行以下操作
-  $(".notification").on("click", "i", function () {
-    // 移除包含.notification--num的元素
-    $(this).parent().find(".notification--num").remove();
-  });
 });
+
 
 //鈴鐺+下拉
 $(".notification").on("click", function () {
@@ -52,28 +44,51 @@ $(".notification").on("click", function () {
 document.addEventListener(
   "click",
   function (event) {
-      // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
-      if (
-          event.target.closest(".notification") == null &&
-          event.target.closest(".notification-popup") == null
-      ) {
-          console.log("remove active click outside");
-          $(".notification-popup").removeClass("active");
-      }
+    // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
+    if (
+      event.target.closest(".notification") == null &&
+      event.target.closest(".notification-popup") == null
+    ) {
+      console.log("remove active click outside");
+      $(".notification-popup").removeClass("active");
+    }
   },
   false
 );
 
-  // 點擊某一個通知後，圓點顯示灰色，表示已讀
-  $(document).ready(function () {
-    $(".popup-content").click(function () {
-        $(this).find(".notification-dot").css("color", "#999b9f");
-    });
+let unreadMessagesCount = 3; // 初始化目前的未讀訊息數量，這裡假設有3條未讀訊息
 
-    // 監聽read-all按鈕的點擊事件
-    $(".read-all").click(function () {
-      // 選擇所有的notification-dot元素並改變顏色
-      $(".notification-dot").css("color", "#999b9f");
+// 點擊某一個通知後，圓點顯示灰色，表示已讀
+$(document).ready(function () {
+  $(".popup-content").click(function () {
+    $(this).find(".notification-dot").css("color", "#999b9f");
+    // 更新未讀訊息數量，減少1
+    unreadMessagesCount--;
+    // 更新通知鈴鐺上的數字
+    updateNotificationCount();
   });
-  
+
+  // 監聽read-all按鈕的點擊事件
+  $(".read-all").click(function () {
+    // 選擇所有的notification-dot元素並改變顏色
+    $(".notification-dot").css("color", "#999b9f");
+    // 將未讀訊息數量設置為0
+    unreadMessagesCount = 0;
+    // 更新通知鈴鐺上的數字
+    updateNotificationCount();
+  });
 });
+
+
+function updateNotificationCount() {
+  // 選擇通知鈴鐺上的數字元素
+  const notificationNum = $(".notification--num");
+  if (unreadMessagesCount > 0) {
+      // 如果還有未讀訊息，顯示數字並更新內容
+      notificationNum.text(unreadMessagesCount);
+      notificationNum.show();
+  } else {
+      // 如果沒有未讀訊息，隱藏數字
+      notificationNum.hide();
+  }
+}
