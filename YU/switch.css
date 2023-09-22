@@ -48,18 +48,18 @@
     /* ON */
     .cktoggle_inner:before { 
         content: "已成團";
-        padding-left: 10px;
+        padding-left: 30px;
         background-color: #14213d;
         color: #FFFFFF;
-        text-align: left;
+        text-align: left ;
     }
 
     /* OFF */
     .cktoggle_inner:after { 
-        content: "揪團中";
-        padding-right: 10px;
+        content: "    揪團中";
+        padding-right: 30px;
         background-color: #EEEEEE;
-        color: #999999;
+        color: #14213d;
         text-align: right;
     }
 
