@@ -1,164 +1,237 @@
-
 * {
-    font-family: "Noto Sans TC", sans-serif;
-    font-family: "Roboto", sans-serif;
-    scroll-behavior: smooth;
-    /*當使用超連結時，頁面會平滑滾動到目標位置。 */
-  }
+  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth;
+  /*當使用超連結時，頁面會平滑滾動到目標位置。 */
+}
 
 
 :root {
-    --black: #000000;
-    --deepBlue: #14213d;
-    --blue: #416ac2;
-    --orange: #fca311;
-    --lightGray: #e5e5e5;
-    --white: #ffffff;
-    --brown: #AD7D52;
-    --heart: #B44163;
-    --lightBlue-bg: rgba(45, 68, 119, 0.486);
-  }
+  --black: #000000;
+  --deepBlue: #14213d;
+  --blue: #416ac2;
+  --orange: #fca311;
+  --lightGray: #e5e5e5;
+  --white: #ffffff;
+  --brown: #AD7D52;
+  --heart: #B44163;
+  --lightBlue-bg: rgba(45, 68, 119, 0.486);
+}
+
 .mycontainer {
-    padding-left: 5%;
-    padding-right: 5%;
-    display: flex;
-    justify-content: center;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
-.titleDiv{
-    width: 100%;
-    height: 8rem;
-    margin-top: 2rem;    
-    display: inline-flex;
+/* 麵包屑 */
+#linkWordDiv {
+  margin-top: 1%;
 }
 
-#linkWordDiv{
-    width: 60%;
-    
+#linkWordDiv h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  text-align: left;
 }
 
-#describeDiv{
-    width: 40%;
-    height: 100%;
-    display: inline-flex;
-    /* background-color: #AD7D52; */
+.reg-and-like-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 12%;
+  margin-bottom: 2%;
+}
+/* 報名按鈕 */
+.register-btn {
+  width: fit-content;
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
 }
 
-#describeDiv img{
-    margin-left: 5%;
-    width: 4rem;
-    height: 4rem;
-
+.register-btn:hover {
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
 }
 
-#describeDiv p{
-    font-size: x-large;
-     
+/* 文字設計 */
+.register-btn-text-style {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  text-decoration: none;
+  color: var(--orange);
+  transition: color 0.1s;
 }
 
-#heartDiv{
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-  /* 水平置中 */
-    justify-content: center;    
-  /* 垂直置中 */
-    align-items: center;     
-    margin-left: 1rem;
-    /* background-color: #B44163; */
-    border: 5px solid #1C6EA4;
-    border-radius: 9px;
+.register-btn-text-style:hover {
+  color: var(--white);
+}
+
+/* 點擊愛心 */
+.heart-inner .heart-icon {
+  cursor: pointer;
+}
+
+.heart-inner {
+  margin-top: 10px;
+}
+
+.hit-style {
+  display: none;
+  margin-top: 10px;
+  padding-left: 5.3px;
+  font-size: 1rem;
+  position: absolute;
+  animation: bounceIn 0.4s ease forwards; 
+}
+
+.heart-inner .heart-icon:hover+.hit-style {
+  display: block;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 
-
+/* 輪播圖 */
+.carouselDiv {
+  display: flex;
+  justify-content: center;
+}
 
 /* 圖片 */
-#pictureDiv{
-    box-shadow:
-        0 20px 60px 0 rgba(129, 128, 128, 0.66),
-        inset 0 0 0 50px #333,
-        inset 0 0 0 6px rgba(255, 255, 255, 0.5);
-    position: relative;
+#pictureDiv {
+  box-shadow:
+    0 10px 50px 0 rgba(129, 128, 128, 0.66),
+    inset 0 0 0 50px #333,
+    inset 0 0 0 6px rgba(255, 255, 255, 0.5);
+  position: relative;
 }
 
 .carousel {
-    position: relative;
-  }
-  .carousel-item img {
-    object-fit: cover;
-  }
-  #carousel-thumbs {
-    background: rgba(255,255,255,.3);
-    bottom: 0;
-    left: 0;
-    padding: 0 50px;
-    right: 0;
-  }
-  #carousel-thumbs img {
-    border: 10px solid transparent;
-    cursor: pointer;
-  }
-  #carousel-thumbs img:hover {
-    transform: scale(1.05);
-    
-  }
-  #carousel-thumbs .selected img {
-    border: 4px solid var(--deepBlue);
-  }
-  .carousel-control-prev,
-  .carousel-control-next {
-    width: 50px;
-  }
-  @media all and (max-width: 767px) {
-    .carousel-container #carousel-thumbs img {
-      border-width: 3px;
-    }
-  }
-  @media all and (min-width: 576px) {
-    .carousel-container #carousel-thumbs {
-      position: absolute;
-    }
-  }
-  @media all and (max-width: 576px) {
-    .carousel-container #carousel-thumbs {
-      background: #ccccce;
-    }
-  }
-
-  /* 圖片手動修改 */
-
-/* 活動內容文字 */
-#activityDetailedDiv{
-    height: 50rem;
-    margin-top: 5rem;
-    /* background-color: #333; */
-    display: inline-flex;
+  position: relative;
 }
 
-#activityIntroduce{
-    height: 100%;
-    display: inline-block;
+.carousel-item img {
+  object-fit: cover;
+}
+
+#carousel-thumbs {
+  background: rgba(255, 255, 255, .3);
+  bottom: 0;
+  left: 0;
+  padding: 0 50px;
+  right: 0;
+}
+
+#carousel-thumbs img {
+  border: 10px solid transparent;
+  cursor: pointer;
+}
+
+#carousel-thumbs img:hover {
+  transform: scale(1.05);
 
 }
 
-
-
-#activityInformationDiv{
-    position: relative;
+#carousel-thumbs .selected img {
+  border: 4px solid var(--deepBlue);
 }
 
-#activityInformation{
-    width: 50%;
-    height: 30rem;
-    /* background-color: #1d1509; */
-    
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+}
+
+@media all and (max-width: 767px) {
+  .carousel-container #carousel-thumbs img {
+    border-width: 3px;
+  }
+}
+
+@media all and (min-width: 576px) {
+  .carousel-container #carousel-thumbs {
     position: absolute;
-    top: 3;
-    left: 0;
-    right: 0;
-    margin: auto;
+  }
 }
-#activityInformation div{
-    margin: 1rem;
+
+@media all and (max-width: 576px) {
+  .carousel-container #carousel-thumbs {
+    background: #ccccce;
+  }
 }
+
+/* 圖片手動修改 */
+
+
+
+/* 活動內容資訊 */
+.activity-info {
+  padding-left: 13%;
+  padding-right: 13%;
+  margin: 2%;
+}
+
+.activity-info .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.activity_about {
+  background-color: var(--lightBlue-bg);
+  border-radius: 10px;
+  padding: 3%;
+  width: 30vw;
+}
+
+.activity_about h1,
+.activity_info h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  padding-bottom: 2%;
+  color: var(--orange);
+}
+
+
+.activity_about h3,
+.activity_about h4 {
+  font-size: 1.55rem;
+  /* 修改字體大小 */
+  font-weight: 800;
+  /* 修改字體粗細 */
+}
+
+.activity_about ul,
+.activity_about p {
+  font-size: 1.5rem;
+  /* 修改字體大小 */
+  font-weight: 400;
+  /* 修改字體粗細 */
+}
+
+.activity_info {
+  margin-left:5% ;
+  background-color: var(--lightBlue-bg);
+  border-radius: 10px;
+  padding: 3%;
+  height: fit-content;
+}
+
+.activity_info td {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding-bottom: 1%;
+}
+
