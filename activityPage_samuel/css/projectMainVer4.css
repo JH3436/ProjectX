@@ -175,25 +175,12 @@
 
 /* 圖片手動修改 */
 
-
-
 /* 活動內容資訊 */
-.activity-info {
-  padding-left: 13%;
-  padding-right: 13%;
-  margin: 2%;
-}
-
-.activity-info .row {
-  display: flex;
-  justify-content: space-between;
-}
 
 .activity_about {
   background-color: var(--lightBlue-bg);
   border-radius: 10px;
-  padding: 3%;
-  width: 30vw;
+  padding: 2%;
 }
 
 .activity_about h1,
@@ -222,10 +209,10 @@
 }
 
 .activity_info {
-  margin-left:5% ;
   background-color: var(--lightBlue-bg);
   border-radius: 10px;
-  padding: 3%;
+  padding: 2%;
+  width: auto;
   height: fit-content;
 }
 
