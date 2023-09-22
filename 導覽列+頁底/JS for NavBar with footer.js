@@ -134,10 +134,7 @@ document.getElementById("myForm").onsubmit = function (event) {
   var mobileNumber = form.elements["mobileNumber"].value;
   var message = form.elements["message"].value;
 
-  // 彈出視窗顯示表單內容
-  alert(
-    `姓名：${name}\n電子郵件：${email}\n郵件標題：${emailSubject}\n手機號碼：${mobileNumber}\n訊息：${message}`
-  );
+ 
 };
 
 
