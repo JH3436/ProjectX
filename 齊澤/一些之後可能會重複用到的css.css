@@ -8,11 +8,22 @@
 
 /* 定義漸層邊框圖像 */
 .gradient-border {
-    border: 10px solid transparent; /* 初始邊框為透明 */
-    border-image: linear-gradient(90deg, #fca311, #000000); /* 使用線性漸變作為邊框圖像 */
-    border-image-slice: 1; /* 使整個邊框都包含漸變 */
-  }
+    /* 初始邊框為透明 */
+    border: 10px solid transparent;
+    /* 使用線性漸變作為邊框圖像 */
+    border-image: linear-gradient(90deg, #fca311, #000000);
+    /* 使整個邊框都包含漸變 */
+    border-image-slice: 1;
+}
 
 
-  /* 假圖網站：space */
-  /* https://spaceholder.cc/ */
+彈出視窗後模糊原視窗背景
+#contactDialog::backdrop {
+    /* 設定模糊半徑，調整數值以達到所需的效果 */
+    backdrop-filter: blur(10px);
+    /* 背景透明度 */
+    opacity: 1;
+}
+
+/* 假圖網站：space */
+/* https://spaceholder.cc/ */
