@@ -754,6 +754,8 @@ footer {
 
 
 /* 聯絡我們表單 */
+
+/* 背景模糊 */
 #contactDialog::backdrop {
   backdrop-filter: blur(10px); /* 設定模糊半徑，調整數值以達到所需的效果 */
   opacity: 1; /* 背景透明度 */
@@ -764,9 +766,9 @@ footer {
   border-radius: 10px;
   padding: 15px;
   position: fixed;
-  top: 50%;
+  top: 70%;
   left: 50%;
-  transform: translate(-76%, -50%);
+  transform: translate(-75%, -50%);
   width: 33%;
   max-height: 80vh;
   background-color: var(--white);
@@ -777,7 +779,7 @@ footer {
 
 /* 調整內容置中 */
 #contactDialog section {
-  margin-top: 10px;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   justify-content: center;
