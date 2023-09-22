@@ -12,9 +12,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
   <!-- css連結，確保在Bootsrap之下 -->
   <link rel="stylesheet" href="../導覽列+頁底/CSS for NavBar with footer.css" />
-  <link rel="stylesheet" href="/YU/act.css" />
-  <link rel="stylesheet" href="/YU/select.css" />
   <link rel="stylesheet" href="/YU/switch.css" />
+  <link rel="stylesheet" href="/YU/select.css" />
+  <link rel="stylesheet" href="/YU/act.css" />
   <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- moving letter特效引入 -->
@@ -124,14 +124,28 @@
 </div>
     </div> -->
     <br><br><br>
-    <div class="topnav">
+  <section class="actselect">
+    <div class="centered-container">
+     <div class="topnav">
       <a href="#all">ALL</a>
       <a href="#mountain">登山</a>
       <a href="#diving">潛水</a>
       <a href="#camping">露營</a>
       <a href="#river">溯溪</a>
+      &emsp;&emsp;
+      <div class="swi">
+      <div class="cktoggle">
+      <input type="checkbox" class="cktoggle_checkbox" id="cktoggle_id2" checked>
+      <label class="cktoggle_label" for="cktoggle_id2">
+          <span class="cktoggle_inner"></span>
+          <span class="cktoggle_circle"></span>
+      </label>
+     </div>
     </div>
-    <br>
+     </div>
+  </section>
+  <br>
+  <br>
   
   <!-- 活動導覽方塊 -->
   <section class="activity-container">
@@ -144,7 +158,6 @@
   <div class="card-div">
     <section class="cards">
       <article class="card card--1">
-      <div class="card card--1">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -166,7 +179,6 @@
 
 
         <article class="card card--2">
-          <div class="card card--2">
         <div class="card__info-hover">
           <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
           <div class="card__clock-info">
@@ -191,7 +203,6 @@
 
 
       <article class="card card--3">
-        <div class="card card--3">
         <div class="card__info-hover">
           <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
           <div class="card__clock-info">
@@ -214,7 +225,6 @@
       </article>
 
       <article class="card card--4">
-        <div class="card card--4">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -236,7 +246,6 @@
       </article>
 
       <article class="card card--5">
-        <div class="card card--5">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -258,7 +267,6 @@
       </article>
 
       <article class="card card--6">
-        <div class="card card--6">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -280,7 +288,6 @@
       </article>
 
       <article class="card card--7">
-        <div class="card card--7">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -302,7 +309,6 @@
       </article>
 
       <article class="card card--8">
-        <div class="card card--8">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -324,7 +330,6 @@
       </article>
 
       <article class="card card--9">
-        <div class="card card--9">
         <div class="card__info-hover">
           <div class="card__clock-info">
             <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
@@ -348,12 +353,19 @@
   </div>
 
   </section>
-
-  <!-- 添加 "READ MORE" 按钮 -->
-  <br><br><br>
-  <div class="d-grid gap-2 col-6 mx-auto">
-  <button type="button" class="btn btn-secondary btn-lg">READ MORE</button>
+<br><br>
+  <!-- 分頁 -->
+  <div class="pagination">
+    <a href="#">&laquo;</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">6</a>
+    <a href="#">&raquo;</a>
   </div>
+  
 
   <!-- 頁底設計 -->
   <footer class="text-center text-white" style="background-color: var(--white)">
