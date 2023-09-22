@@ -233,7 +233,6 @@ body {
 
 button.notification {
   position: relative;
-  /* margin-right: 1em; */
   border-radius: 5px;
   background: none;
   border: none;
@@ -247,16 +246,17 @@ button.notification span {
   position: absolute;
   user-select: none;
   cursor: default;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   background: var(--heart);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
   color: var(--white);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  top: -0.33rem;
+  top: -10px;
   right: 0;
   box-sizing: border-box;
 }
