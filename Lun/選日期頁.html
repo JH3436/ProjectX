@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="./選日期頁.css" rel="stylesheet">
+    <!-- BAR -->
+    <title>JO!N</title>
+    <link rel="icon" href="./LOGO/小黃人.png" type="image/png" />
+</head>
+
+<body>
+    <!-- BAR -->
+    <div id="navbar-container">
+
+        <!-- 導覽列設計 -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-logo">
+                <a class="navbar-item" href="../齊澤/main page.html">
+                    <img src="./LOGO/標誌.png" alt="logo" width="125" height="50" />
+                </a>
+        </nav>
+
+    </div>
+
+
+    <!-- 帳密   -->
+    <div id="container1">
+        <form action="login.js" class="login" id="login">
+            <div class="header">
+                <h1>您好,親愛的會員</h1>
+                <p>我們非常高興您對這次活動感興趣！請在選擇日期截止日之前，選擇您最適合的時間</p>
+                <p>選擇日期截止日之前，都可以透過會員中心去編輯選擇的日期</p>
+                <p>選擇日期截止後將由系統判定，由最多人選擇的時間段進行開團</p>
+                <p>屆時活動時間與您所選時間不相符，您將不被加入活動內，但可以再次思考時間是否合適，再決定是否正式參加 !!</p>
+                <div class="container">
+                    <ul class="Cul">
+                        <li class="Cli">
+                            <input type="radio" id="f-option" name="selectorDATA">
+                            <label for="f-option">2023/09/29 - 2023/10/01</label>
+                            <div class="check"></div>
+                        </li>
+                        <li class="Cli">
+                            <input type="radio" id="s-option" name="selectorDATA">
+                            <label for="s-option">2023/10/07 - 2023/10/10</label>
+                            <div class="check"></div>
+                        </li>
+                        <li class="Cli">
+                            <input type="radio" id="t-option" name="selectorDATA">
+                            <label for="t-option">2023/10/14 - 2023/10/15</label>
+                            <div class="check"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 添加按鈕容器 -->
+            <div class="button-container">
+                <button class="button">提交</button>
+            </div>
+            <div class="register-link">
+                <a href="../小胖/index/profile.html"><h5 onclick="show_hide()">返回會員中心</h5></a>
+            </div>
+    </div>
+    </form>
+    </div>
+
+
+
+
+</body>
+
+<!-- bar-js -->
+<script src="/導覽列Navbar/js for navbar.js"></script>
+<script src="./選日期頁.js"></script>
+
+</html>
