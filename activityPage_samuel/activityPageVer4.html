@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JO!N</title>
+  <link rel="icon" href="./Files/小黃人.png" type="image/png" />
+
+  
+  <!-- Font Awesome套件引入 -->
+  <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+
+
+  <!-- 引入 Bootstrap 的 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+  <!-- css連結 -->
+  <link rel="stylesheet" href="./css/navigationBar.css" />
+  <link rel="stylesheet" href="./css/projectMainVer4.css" />
+
+  <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+</head>
+
+<body>
+  <!-- 導覽列設計 -->
+  <div class="header">
+    <div class="row navbar justify-content-between">
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="home">
+          <img src="Files/Logo.png" alt="logo" id="logo" width="150" height="50" />
+        </a>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#" id="explore-link">
+          探索
+          <i id="downicon" class="fa-sharp fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="dropdown-content" id="explore-dropdown">
+          <div class="row">
+            <div class="col dropdown-img-1">
+              <a href="#">登山</a>
+            </div>
+            <div class="col dropdown-img-2">
+              <a href="#">溯溪</a>
+            </div>
+            <div class="col dropdown-img-3">
+              <a href="#">潛水</a>
+            </div>
+            <div class="col dropdown-img-4">
+              <a href="#">露營</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" id="group-link" href="#">發起揪團</a>
+      </div>
+      <div class="col">
+        <!-- 填充空間 -->
+      </div>
+      <div class="col-auto">
+        <div class="searchInputWrapper">
+          <input class="searchInput" type="text" placeholder='搜尋...'>
+          <i class="searchInputIcon fa fa-search"></i>
+        </div>
+      </div>
+      <div class="col-auto">
+        <a class="navbar-item" href="#">登入</a>
+      </div>
+      <div class="col-auto nav-signin">
+        <a class="singin-style" href="#">註冊</a>
+      </div>
+    </div>
+  </div>
+  <div class="titleDiv mycontainer" >
+        <div id="linkWordDiv">
+            <h1 id="linkWord ">探索 > 地點:宜蘭 > 活動:衝浪</h1>
+        </div>
+        <div id="describeDiv">
+            <p>點按愛心獲取通知</p>
+            <img src="./Files/fast-forward.png" alt="">
+            <div id="heartDiv">
+                <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+            </div>    
+        </div>
+        
+
+  </div>
+  <div class="mycontainer  ">
+        <div class="carousel-container position-relative  col-lg-8" id="pictureDiv">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-slide-number="0">
+              <img src="https://source.unsplash.com/Pn6iimgM-wo/1600x900/" class="d-block w-100" alt="..." data-remote="https://source.unsplash.com/Pn6iimgM-wo/" data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+            </div>
+            <div class="carousel-item" data-slide-number="1">
+              <img src="https://source.unsplash.com/tXqVe7oO-go/1600x900/" class="d-block w-100" alt="..." data-remote="https://source.unsplash.com/tXqVe7oO-go/" data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+            </div>
+            <div class="carousel-item" data-slide-number="2">
+              <img src="https://source.unsplash.com/qlYQb7B9vog/1600x900/" class="d-block w-100" alt="..." data-remote="https://source.unsplash.com/qlYQb7B9vog/" data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+            </div>
+            <div class="carousel-item" data-slide-number="3">
+              <img src="https://source.unsplash.com/QfEfkWk1Uhk/1600x900/" class="d-block w-100" alt="..." data-remote="https://source.unsplash.com/QfEfkWk1Uhk/" data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+            </div>
+            <div class="carousel-item" data-slide-number="4">
+              <img src="https://source.unsplash.com/CSIcgaLiFO0/1600x900/" class="d-block w-100" alt="..." data-remote="https://source.unsplash.com/CSIcgaLiFO0/" data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Carousel Navigation -->
+        <div id="carousel-thumbs" class="carousel slide " data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row mx-0">
+                <div id="carousel-selector-0" class="thumb col-sm-1 col-lg-3 px-1 py-2 selected" data-target="#myCarousel" data-slide-to="0">
+                  <img src="https://source.unsplash.com/Pn6iimgM-wo/600x400/" class="img-fluid" alt="...">
+                </div>
+                <div id="carousel-selector-1" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel" data-slide-to="1">
+                  <img src="https://source.unsplash.com/tXqVe7oO-go/600x400/" class="img-fluid" alt="...">
+                </div>
+                <div id="carousel-selector-2" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel" data-slide-to="2">
+                  <img src="https://source.unsplash.com/qlYQb7B9vog/600x400/" class="img-fluid" alt="...">
+                </div>
+                <div id="carousel-selector-3" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel" data-slide-to="3">
+                  <img src="https://source.unsplash.com/QfEfkWk1Uhk/600x400/" class="img-fluid" alt="...">
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+        </div> <!-- /row -->
+        
+    </div>
+    <div class="mycontainer  ">
+        <div class="col-lg-9" id="activityDetailedDiv">
+            <!-- <p>123</p> -->
+            <div id="activityIntroduce" class="col-lg-6">
+                <h1 class="display-1">活動介紹</h1>
+                <p class="h4">
+                    衝浪的刺激象徵著獨立面對挑戰的人生態度，從追浪、起撐到滑行水面。每到衝浪季節，衝浪同好們集聚海岸線，共享逐浪、踏浪、駕馭海風的極限樂趣。
+                </p>
+                <br>
+                <p class="h4">
+                    現代衝浪的起源大概可以追溯回二十世紀初的夏威夷（Hawaii）群島，當時波利尼西亞人（Polynesians）從塔西堤島（Tahiti）、馬克薩斯島（Marquesas）進入到夏威夷群島，當時的波利尼西亞人（Polynesians）將趴在 Paipo 板上玩浪的文化帶入夏威夷（Hawaii）群島，而在當地逐漸演變出站立式衝浪的風格。
+                    後來隨著西方文化的輸入，新傳教士開始影響波利尼西亞人（Polynesians）的生活型態，傳教士們提倡少玩樂、多工作、多閱讀的經濟思維。接著猶太人的到來更加深度的掌控當地人民的各種運動活動，衝浪活動還因此差點絕跡。還好後來由文學家傑克·倫敦（Jack London），記者兼滾石樂隊亞歷山大·休姆·福特（Alexander Hume Ford）和衝浪專家喬治·弗里斯（George Freeth）這三人聯手透過他們各自的強項復興了衝浪這項運動。
+                    夏威夷（Hawaii）可以說是衝浪者們的經典衝浪勝地，擁有一年四季都可以前往衝浪的優勢，此外將衝浪文化結合夏威夷（Hawaii）的海島生活絕對是令世界旅客流連忘返的迷人魅力。
+                    早期的衝浪板是用木頭製成的，體積小卻非常重。而現代衝浪板大多由玻璃纖維（Fiberglass）、環氧樹脂（Epoxy）製作，更輕便且堅固耐用。
+                </p>
+            </div>
+            <div id="activityInformationDiv" class="col-lg-6">
+                <div id="activityInformation" >
+                    <h1 class="display-1">活動詳細</h1>
+                    <div>
+                        <label id="activityLabel">最低希望人數:</label>
+                        <br>
+                        <p class="h2"p id="activityH3">2人</p>
+                    </div>
+                    <div>
+                        <label id="activityLabel">最多人數:</label>
+                        <p class="h2"p id="activityH3">10人</p>
+                    </div>
+                    <div>
+                        <label id="activityLabel">開團統計截止日期</label>
+                        <br>
+                        <p class="h2"p id="activityH3">2023/09/20</p>
+                    </div>
+                    <div>
+                        <label id="activityLabel">自備物品</label>
+                        <br>
+                        <p class="h2"p id="activityH3">衝浪板</p>
+                    </div>
+                    <div>
+                        <label id="activityLabel">活動地點:</label>
+                        <br>
+                        <a class="h2" href="https://www.google.com/maps/d/viewer?mid=1d13v2snRc6xaA7hWbCb5TiiBM-Y&hl=en&ll=21.451206175352173%2C-157.883152&z=11">夏威夷</a>
+                    </div>
+                    
+            </div>
+        </div>
+
+    </div>
+
+ 
+  
+  <!-- JS連結 -->
+</body >
+    <script src="./js/mainVer4.js"></script>
+    <script src="./js/navigationBar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
+
+</html>
