@@ -814,10 +814,10 @@ footer {
   border-radius: 15px;
   margin-top: .7rem;
   background-color: var(--deepBlue);
+  cursor: pointer;
 }
 
 .submitText:hover {
-  cursor: pointer;
   border: var(--deepBlue) 2px solid;
   background-color: var(--white);
   color: var(--deepBlue);
