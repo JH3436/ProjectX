@@ -9,17 +9,19 @@
   --heart: #B44163;
 }
 
-.container-loginandregister{
+.container-loginandregister {
   display: flex;
   justify-content: center;
+  padding-top: 25px;
 }
 
 input::placeholder {
-  color:#9f9e9e;
+  color: #9f9e9e;
   font-size: 1.5em;
- 
-  
+
+
 }
+
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
@@ -27,9 +29,10 @@ body {
 }
 
 /* 設置一下高度我這樣form才有辦法置中 */
-html, body {
-    height: 100%;
-  }
+html,
+body {
+  height: 100%;
+}
 
 /* 主題顏色宣告 */
 :root {
@@ -41,7 +44,7 @@ html, body {
 }
 
 
-form{
+form {
   display: block;
   align-items: center;
   justify-content: center;
@@ -50,117 +53,129 @@ form{
 
 /* 按鈕的基本樣式 */
 .button {
-    background-color: #14213d;
-    color: white;
-    border: 2px solid #14213d;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin: 10px 0; /* 上下間距 */
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    width: 12rem;
-    font-size: 1rem;
-    
-  }
-  
-  /* 滑鼠移過時的樣式 */
-  .button:hover {
-    background-color: white;
-    color: #14213d;
-  }
-  
-  .login {
-    background-color: var(--white);
-    width: 350px;
-    color: var(--deepBlue);
-    box-shadow: 10px 10px 25px #14213d;
-    border-radius: 10px;
-    text-align: center;
-    padding: 20px;
-    max-height: 750px; /* 設置最大高度，根據需要更改 */
+  background-color: #14213d;
+  color: white;
+  border: 2px solid #14213d;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 10px 0;
+  /* 上下間距 */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 12rem;
+  font-size: 1rem;
+
+}
+
+/* 滑鼠移過時的樣式 */
+.button:hover {
+  background-color: white;
+  color: #14213d;
+}
+
+.login {
+  background-color: var(--white);
+  width: 350px;
+  color: var(--deepBlue);
+  box-shadow: 10px 10px 25px #14213d;
+  border-radius: 10px;
+  text-align: center;
+  padding: 20px;
+  max-height: 750px;
+  /* 設置最大高度，根據需要更改 */
 
 
-  }
-  
-  .login input {
-    display: flex;
-    margin: 10px auto;
-    text-align: center;
-    background: none;
-    color: var(--deepBlue);
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid #14213d;
-  }
-  
-  .headerforwelcome {
-    text-align: center;
-    margin-bottom:5rem;
-  }
-  
-  .headerforwelcome h1 {
-    margin-right: 120px;
-    margin-bottom: 1rem;
-  }
-  
-  .headerforwelcome p {
-    margin-right: 40px;
-  }
+}
 
-  .headerforregister{
-    text-align: center;
-    margin-bottom:5rem;
-  }
+.login input {
+  display: flex;
+  margin: 10px auto;
+  text-align: center;
+  background: none;
+  color: var(--deepBlue);
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid #14213d;
+}
+
+.headerforwelcome {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.headerforwelcome h1 {
+  margin-right: 120px;
+  margin-bottom: 1rem;
+}
+
+.headerforwelcome p {
+  margin-right: 40px;
+}
+
+.headerforregister {
+  text-align: center;
+  margin-bottom: 5rem;
+}
 
 
-  .headerforregister h1 {
-    margin-right: 120px;
-    margin-bottom: 1rem;
-  }
-  
-  .headerforregister p {
-    margin-right: 40px;
-  }
+.headerforregister h1 {
+  margin-right: 120px;
+  margin-bottom: 1rem;
+}
+
+.headerforregister p {
+  margin-right: 40px;
+}
+
 /* body鎖死id解決... */
 #login {
-  margin: 0 auto; /* 實現水平置中 */
+  margin: 0 auto;
+  /* 實現水平置中 */
   margin-top: 3rem;
 }
 
-#navbar{
-display: flex;
-margin-top: 3rem;
-justify-content: center
 
+#container2 {
+  visibility: hidden;
+  display: none;
 }
-.navbar:hover{
-  transform: scale(1.5);
-}
-
-#container2{
-  visibility: hidden; 
-  display: none;}  
 
 .register-link {
+  margin-top: 10px;
   transition: transform 0.3s ease;
+  text-decoration: underline;
 }
 
-.register-link:hover{
-    text-decoration:underline;
-    transform: scale(1.5);
-    cursor: pointer;
-    color: #9f9e9e;
-  }
+.register-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #9f9e9e;
+}
 
-  .login-link {
-    transition: transform 0.3s ease;
-  }
-  
-  .login-link :hover{
-      text-decoration:underline;
-      transform: scale(1.5);
-      cursor: pointer;
-      color: #9f9e9e;
-    }
+.login-link {
+  margin-top: 20px;
+  transition: transform 0.3s ease;
+  text-decoration: underline;
+}
 
+.login-link :hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #9f9e9e;
+}
 
+.quicklogin{
+  margin-top:20px ;
+}
+
+.forget {
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+  text-decoration: underline;
+}
+
+.forget:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #9f9e9e;
+}
