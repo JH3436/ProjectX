@@ -1,8 +1,12 @@
+.swi {
+    float: right;
+    width: 20%;
+    margin-top: -55px;
+}
+
 .cktoggle {
     position: absolute;
-    width: 120px; /* 全按鈕寬度 */
-    top: 50px;
-    left: 50px;
+    width: 160px; /* 全按鈕寬度 */
 }
 
 /* 原按鈕樣式隱藏 */
@@ -32,9 +36,9 @@
         display: block;
         float: left;
         width: 50%; /* before和after各佔50% */
-        height: 40px; /* 全按鈕高度 */
-        line-height: 42px; /* ON OFF文字高度 */
-        font-size: 16px;
+        height: 50px; /* 全按鈕高度 */
+        line-height: 50px; /* ON OFF文字高度 */
+        font-size: 1.3rem;
         color: white;
         font-family: Trebuchet, Arial, sans-serif;
         font-weight: bold;
@@ -43,31 +47,32 @@
 
     /* ON */
     .cktoggle_inner:before { 
-        content: "ON";
-        padding-left: 10px;
+        content: "已成團";
+        padding-left: 30px;
         background-color: #14213d;
         color: #FFFFFF;
+        text-align: left ;
     }
 
     /* OFF */
     .cktoggle_inner:after { 
-        content: "OFF";
-        padding-right: 10px;
+        content: "    揪團中";
+        padding-right: 30px;
         background-color: #EEEEEE;
-        color: #999999;
+        color: #14213d;
         text-align: right;
     }
 
 /* 上面的小圓 */
 .cktoggle_circle { 
     display: block;
-    width: 20px; /* 小圓寬度 */
-    height: 20px; /* 小圓高度 */
-    margin: 0px; /* 小圓距離上下左右margin */
+    width: 35px; /* 小圓寬度 */
+    height: 35px; /* 小圓高度 */
+    margin: auto; /* 小圓距離上下左右margin */
     background: white;
     position: absolute;
-    top: 9px; /* 距離上邊緣 左右是和一開始的位置有關 */
-    right: 85px; /* uncheck時 小圓移動到離右側距離XXpx位置 */
+    top: 10px; /* 距離上邊緣 左右是和一開始的位置有關 */
+    right: 118px; /* uncheck時 小圓移動到離右側距離XXpx位置 */
     border: 3px solid #416ac2; /* 小圓外框顏色 */
     border-radius: 100px;
     transition: right 0.3s ease-in 0s;

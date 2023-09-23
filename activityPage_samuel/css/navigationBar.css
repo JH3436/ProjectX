@@ -28,7 +28,7 @@ background-color: rgba(45, 68, 119, 0.486);
 margin-left: 10%;
 margin-right: 10%;
 color: var(--white);
-font-size: 1.25rem;
+font-size: 1.75rem;
 font-weight: bolder;
 padding-top: 1rem;
 padding-bottom: 1rem;
@@ -139,28 +139,28 @@ transition: all 0.3s ease;
 }
 
 .nav-signin {
-background-color: var(--orange);
-padding: 2.5px 10px;
-border-radius: 5px;
-transition: background-color 0.1s, border 0.1s;
-/* 添加過渡效果 */
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
 }
 
 .nav-signin:hover {
-background: transparent;
-border: solid 1.5px var(--orange);
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
 }
 
 .singin-style {
-text-decoration: none;
-color: var(--white);
-transition: color 0.1s;
-/* 添加過渡效果 */
+  text-decoration: none;
+  color: var(--orange);
+  transition: color 0.1s;
+  /* 添加過渡效果 */
 }
 
 .singin-style:hover {
-color: var(--orange);
+  color: var(--white);
 }
+
 
 
 
@@ -206,18 +206,6 @@ right: 0.8rem;
 top: 0.5rem;
 color: var(--deepBlue);
 transition: all 0.1s ease-in-out;
-}
-
-.navbar-signin {
-text-decoration: none;
-color: var(--white);
-background-color: var(--orange);
-padding: 5px 15px;
-border-radius: 5px;
-}
-
-.navbar-signin:hover {
-color: var(--deepBlue);
 }
 
 /* 小鈴鐺 */
