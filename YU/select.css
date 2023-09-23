@@ -39,7 +39,8 @@
 .pagination {
   display: inline-block;
   position: absolute;
-  left: 37%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pagination a {
