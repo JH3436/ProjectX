@@ -222,3 +222,194 @@
   padding-bottom: 1%;
 }
 
+
+
+/* 懸浮聊天室按鈕 */
+
+.label-container{
+	position:fixed;
+	bottom:3rem;
+	right:15rem;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	
+    display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+.float{
+	position:fixed;
+	width:5rem;
+	height:5rem;
+	bottom:3rem;
+	right:10rem;
+	background-color:var(--orange);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float img{
+    margin-top: 0.5rem;
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.my-float{
+	font-size:24px;
+	margin-top:18px;
+}
+
+a.float + div.label-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.float:hover + div.label-container{
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 聊天室彈出 */
+
+
+
+#dialogDiv{
+    background-color: var(--black);
+    /* height: 30rem; */
+    margin-top: 10rem;
+    overflow-y: 10rem;
+    padding: 5rem;
+}
+
+/* 聊天室 */
+
+
+
+
+
+
+
+  .commentDiv{
+    display: flex;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .profile{
+    background-image: center;
+    background-position: fixed;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    margin: 2% 2% 3% 2%;
+    z-index:2;
+    position: relative;
+  }
+  
+  .comment-box{
+    height: 3rem;
+    width: auto;
+    margin-left: 3% 0 0 0;
+    /* background: gray; */
+    padding: 1rem;
+  }
+
+  #replyBtn{
+    text-align: right;
+  }
+
+  .replydiv{
+    width: auto;
+    border-radius: 20px;
+    display: inline-flex;
+  }
+
+  .reply-box{
+    height: 1rem;
+    width: auto;
+    border-radius: 20px;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #userName{
+    margin-bottom: 0;
+  }
+  
+  #userReply{
+    margin-top: 0;
+    margin-left: 1rem;
+  }
+
+  .replyImg{
+    /* border: 10px solid #000000; */
+    background-image: center;
+    background-position: fixed;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin: 2% 2% 3% 2%;
+    z-index:2;
+    position: relative;
+    display: inline-flex;
+  }
+
+  .messageDiv{
+    display:block;
+    width: auto; 
+    padding: 1rem;   
+  }
+  
+  .messageBox{
+    margin-top: 1rem;
+    margin-left: 2rem;
+  }
+  
+  .messageBox input{
+    width: 30rem;
+    height: 2rem;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: rgb(173, 173, 173);
+  }
+
+.message-board::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.message-board::-webkit-scrollbar
+{
+    width: 12px;
+	background-color: #F5F5F5;
+}
+
+.message-board::-webkit-scrollbar-thumb
+{
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+.message-board::-webkit-scrollbar-thumb:hover {
+    background: #303030; 
+  }

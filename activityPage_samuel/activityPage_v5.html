@@ -225,9 +225,74 @@
   </div>
 
 
+<!-- 懸浮聊天室按鈕 -->
+
+
+<a href="#" class="float" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <img src="./Files/conversation.png"></img>
+</a>
+<div class="label-container">
+  <div class="label-text">點選開啟活動聊天室
+  </div>
+  <i class="fa fa-play label-arrow "></i>
+</div>
+
+<!-- 彈出Modal -->
+
+<div class="modal fade "  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="dialogDiv">
+      <div >
+        <div class="commentDiv">
+          <img class="profile" src="./Files/ma.jpg" width="50"/>
+          <div class="messageDiv">
+            <p>馬英九</p>
+            <div class="comment-box">???????????????????????????????????????????
+            <p id="replyBtn">回覆</p>
+          </div>
+            <!-- 回覆DIV -->
+            <div class="replyDiv">
+              <i class="fa-solid fa-turn-up fa-rotate-90"></i>
+              <img class="replyImg" src="./Files/ma.jpg" width="50"/>
+              <div style="display: inline-block;">
+                <div class="reply-box">
+                  <p id="userName">馬英九</p>
+                  <p id="userReply">OK阿版面又爆了</p>
+                </div>
+              </div>
+            <div class="replyDiv">
+              <i class="fa-solid fa-turn-up fa-rotate-90"></i>
+              <img class="replyImg" src="./Files/ma.jpg" width="50"/>
+              <div style="display: inline-block;">
+                <div class="reply-box">
+                  <p id="userName">馬英九</p>
+                  <p id="userReply">OK阿是要爆幾次了??</p>
+                </div>
+              </div>
+              <!-- 回覆輸入DIV -->
+              <!-- <div class="messageBox">
+                <i class="fa-solid fa-turn-up fa-rotate-90"></i>
+                  <input id="messageText" type="text" placeholder="回覆">
+              </div> -->
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+</div>
+ 
+
+
+
+
+
 
 </body>
 <!-- JS連結 -->
+
 <script src="./js/navigationBar.js"></script>
 <script src="./js/mainVer4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"
