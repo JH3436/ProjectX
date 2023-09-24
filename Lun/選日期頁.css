@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
-
+* {
+    font-family: "Noto Sans TC", sans-serif;
+    font-family: "Roboto", sans-serif;
+    scroll-behavior: smooth;
+    /*當使用超連結時，頁面會平滑滾動到目標位置。 */
+  }
 
 :root {
     --black: #000000;
@@ -35,7 +40,6 @@ form {
     display: block;
     align-items: center;
     justify-content: center;
-
 }
 
 /* 按鈕的基本樣式 */
@@ -50,6 +54,7 @@ form {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     width: 12rem;
+    font-weight:700;
 }
 
 /* 滑鼠移過時的樣式 */
@@ -120,13 +125,21 @@ form {
     display: none;
 }
 
-h5 {
-    transition: transform 0.3s ease;
+.register-link {
+    margin-top: 3%;
+}
+.register-link a {
+    text-decoration: none;
 }
 
-h5:hover {
-    text-decoration: underline;
-    transform: scale(1.5);
+.register-link a span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.register-link a:hover span {
+    transform: scale(1.1);
     cursor: pointer;
     color: #9f9e9e;
 }
@@ -147,8 +160,6 @@ h5:hover {
 
 
 /* 選擇日期 */
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
 
 .container {
     display: block;
