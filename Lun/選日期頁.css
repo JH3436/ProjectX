@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+
+
 :root {
     --black: #000000;
     --deepBlue: #14213d;
@@ -16,10 +19,7 @@ body {
 }
 
 /* 設置一下高度我這樣form才有辦法置中 */
-html,
-body {
-    height: 100%;
-}
+
 
 /* 主題顏色宣告 */
 :root {
@@ -45,7 +45,7 @@ form {
     border: 2px solid #14213d;
     border-radius: 20px;
     padding: 10px 20px;
-    margin-top: 0px ;
+    margin-top: 40px ;
     /* 上下間距 */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
@@ -164,7 +164,6 @@ h5:hover {
     list-style: none;
     margin: 0;
     padding: 0;
-    overflow: auto;
 }
 
 Cul {
@@ -206,7 +205,7 @@ ul li label {
 }
 
 ul li:hover label {
-    color: var(--lightGray);
+    color: var(--blue);
 }
 
 ul li .check {
@@ -224,7 +223,7 @@ ul li .check {
 }
 
 ul li:hover .check {
-    border: 5px solid var(--lightGray);
+    border: 5px solid  var(--blue);
 }
 
 ul li .check::before {
