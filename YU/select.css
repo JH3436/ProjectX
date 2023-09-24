@@ -1,0 +1,63 @@
+.actselect {
+  float: left;
+  width: 80%;
+  margin-top: auto;
+}
+
+.topnav {
+  background-color: #14213d;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.topnav .cktoggle {
+  margin-left: auto;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  border-bottom: 2px solid transparent;
+}
+
+.topnav a:hover {
+  border-bottom: 2px solid #fca311;
+}
+
+.topnav a.active {
+  border-bottom: 2px solid #fca311;
+}
+
+.pagination {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pagination a {
+  color: white;
+  font-size: 1.3rem;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #416ac2;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}

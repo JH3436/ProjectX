@@ -95,6 +95,7 @@ document.getElementById("showContactButton").addEventListener("click", function 
   var dialog = document.getElementById("contactDialog");
   dialog.showModal();
 
+
 });
 
 // 當關閉按鈕被點擊時，關閉 dialog
@@ -133,6 +134,7 @@ document.getElementById("myForm").onsubmit = function (event) {
   var mobileNumber = form.elements["mobileNumber"].value;
   var message = form.elements["message"].value;
 
+ 
 };
 
 

@@ -1,0 +1,166 @@
+<!-- 用ajax將這個對象作為JSON數據發送到控制器的指定路徑。
+    ($.ajax({
+            type: 'POST',
+            url: '/YourController/YourAction', // 替換成你的控制器路徑
+            data: JSON.stringify(imageData),
+            contentType: 'application/json',)
+
+  
+    
+    或是用form name屬性的方式丟給controller( [HttpPost]!!!!!) -->
+
+
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖片裁剪與預覽</title>
+    <!-- 引入 Croppie 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <!-- 引入 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 引入 Croppie 的 JavaScript 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+    <style>
+        /* 樣式化裁剪框 */
+        .crop-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        /* 自定義裁剪框樣式，將其位置調整到旁邊 */
+        .custom-crop-box {
+            position: absolute;
+            top: 0;
+            left: 320px; /* 調整左側間距以將其移動到旁邊 */
+            width: 200px;
+            height: 200px;
+        }
+
+        /* 樣式化預覽框 */
+        .preview-container {
+            width: 100%;
+            height: auto;
+        }
+
+        .preview-container img {
+            max-width: 100%; /* 最大寬度為容器寬度的100% */
+            max-height: 100%; /* 最大高度為容器高度的100% */
+        }
+    </style>
+</head>
+<body>
+    <h1>圖片裁剪與預覽</h1>
+
+    <!-- 文件上傳表單 -->
+    <input type="file" id="image-input" accept="image/*">
+
+    <!-- 裁剪容器 -->
+    
+        <!-- 用於顯示裁剪框 -->
+        <div id="crop-box" class="custom-crop-box"></div>
+   
+
+    <!-- 裁剪後的圖像預覽 -->
+    <h2>裁剪後的圖像預覽</h2>
+    <div id="cropped-image-container" class="preview-container">
+        <img id="cropped-image" src="" alt="裁剪後的圖像">
+    </div>
+
+    <!-- 裁剪後的圖像數據（base64格式） -->
+    <input type="hidden" id="croppedImageData" name="croppedImageData">
+
+    <!-- 裁剪按鈕 -->
+    <button type="button" id="crop-button">裁剪圖像</button>
+
+    <!-- 用於提交裁剪結果的按鈕 -->
+    <button type="button" id="submit-button">提交裁剪後的圖像</button>
+
+    <!-- 使用 Croppie 初始化裁剪容器 -->
+    <script>
+        // 創建 Croppie 實例
+        var croppie;
+
+        // 初始化 Croppie 實例
+        function initializeCroppie() {
+            croppie = new Croppie(document.getElementById('crop-box'), {
+                enableExif: true,
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'square'
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                }
+            });
+        }
+
+        // 文件上傳的事件處理程序
+        $('#image-input').on('change', function () {
+            var input = this;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // 將原始圖像加載到 Croppie 實例中
+                    $('#original-image').attr('src', e.target.result);
+                    croppie.bind({
+                        url: e.target.result
+                    });
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+        // 設置裁剪框的事件處理程序，以便與原始圖像關聯
+        croppie = new Croppie(document.getElementById('crop-box'), {
+            enableExif: true,
+            viewport: {
+                width: 200,
+                height: 200,
+                type: 'square'
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+
+        // 裁剪圖像的事件處理程序
+        $('#crop-button').on('click', function () {
+            croppie.result('base64').then(function (result) {
+                // 顯示裁剪後的圖像預覽
+                $('#cropped-image').attr('src', result);
+                // 將裁剪後的圖像 base64 數據設置到隱藏的 input 中，以便提交到後端
+                $('#croppedImageData').val(result);
+            });
+        });
+
+        // 預覽裁剪後的圖像的事件處理程序
+        $('#preview-button').on('click', function () {
+            // 在此處添加代碼以實現預覽裁剪結果的邏輯
+        });
+
+        // 提交裁剪後的圖像的事件處理程序
+        $('#submit-button').on('click', function () {
+            croppie.result('base64').then(function (result) {
+                // 將裁剪後的圖片 base64 資料顯示在控制台
+                console.log('裁剪後的圖片資料：', result);
+
+                // 在此處添加代碼以將裁剪後的圖片資料提交到後端
+                // 可以使用 AJAX 或表單提交方式
+                
+            });
+        });
+
+        // 調用初始化函數以設置 Croppie 實例
+        initializeCroppie();
+    </script>
+</body>
+</html>
