@@ -145,27 +145,25 @@ body {
 }
 
 .nav-signin {
-  background-color: var(--orange);
-  padding: 2.5px 10px;
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
   border-radius: 5px;
-  transition: background-color 0.1s, border 0.1s;
-  /* 添加過渡效果 */
+  transition: all 0.1s ease;
 }
 
 .nav-signin:hover {
-  background: transparent;
-  border: solid 1.5px var(--orange);
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
 }
 
 .singin-style {
   text-decoration: none;
-  color: var(--white);
+  color: var(--orange);
   transition: color 0.1s;
-  /* 添加過渡效果 */
 }
 
 .singin-style:hover {
-  color: var(--orange);
+  color: var(--white);
 }
 
 /* 搜尋框設計 */
@@ -458,7 +456,8 @@ button.notification:hover span {
     padding-top: 12px;
   }
   
- 
+
+
   
 
   
@@ -715,14 +714,13 @@ button.switch-month:hover {
 
 
 .custom-button {
-  background-color: var(--orange);
     border-radius: 5px;
     transition: background-color 0.1s, border 0.1s;
     float: right;
     margin-right: 5px;
-    background-color: var(--orange);
-    border: none;
-    color: #ffffff;
+    background-color: var(--lightBlue-bgIO);
+    border: var(--orange) 2px solid;
+    color: var(--orange);
     cursor: pointer;
     /* font-weight: normal; */
     border-radius: 5px;
@@ -730,10 +728,10 @@ button.switch-month:hover {
 }
 
 .custom-button:hover{
-  background: transparent;
-    border: solid 1.5px var(--orange);
-  color: var(--orange);
-  color: var(--orange);
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
+
+  color: var(--white);
 }
 
 
@@ -743,30 +741,29 @@ button.switch-month:hover {
 }
 
 .submit {
-    background-color: var(--orange);
-    padding: 2.5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.1s, border 0.1s;
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
     /* 添加過渡效果 */
   }
   
   .submit:hover {
-    background: transparent;
-    border: solid 1.5px var(--orange);
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
   }
 
 
 
 .submit {
-    text-decoration: none;
-    color: var(--white);
-    transition: color 0.1s;
-    margin-bottom: 5px;
+  text-decoration: none;
+  color: var(--orange);
+  transition: color 0.1s;
     /* 添加過渡效果 */
   }
   
   .submit:hover {
-    color: var(--orange);
+    color: var(--white);
   }
 
   .submitBtn {
