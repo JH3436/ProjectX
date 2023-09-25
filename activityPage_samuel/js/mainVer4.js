@@ -1,4 +1,6 @@
 
+
+
 //輪播圖的JS好像會吃其他的，所以我放在最上面
 
 //愛心設計
@@ -53,25 +55,25 @@ $('#myCarousel').on('slide.bs.carousel', function (e) {
   $('[id=carousel-selector-' + id + ']').addClass('selected');
 });
 // when user swipes, go next or previous
-$('#myCarousel').swipe({
-  fallbackToMouseEvents: true,
-  swipeLeft: function (e) {
-    $('#myCarousel').carousel('next');
-    //   console.log("swipeLeft");
-  },
-  swipeRight: function (e) {
-    $('#myCarousel').carousel('prev');
-    //   console.log("swipeRight");
-  },
-  allowPageScroll: 'vertical',
-  preventDefaultEvents: false,
-  threshold: 75
-});
+// $('#myCarousel').swipe({
+//   fallbackToMouseEvents: true,
+//   swipeLeft: function (e) {
+//     $('#myCarousel').carousel('next');
+//     //   console.log("swipeLeft");
+//   },
+//   swipeRight: function (e) {
+//     $('#myCarousel').carousel('prev');
+//     //   console.log("swipeRight");
+//   },
+//   allowPageScroll: 'vertical',
+//   preventDefaultEvents: false,
+//   threshold: 75
+// });
 
-//   $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-//     event.preventDefault();
-//     $(this).ekkoLightbox();
-//   });
+  // $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+  //   event.preventDefault();
+  //   $(this).ekkoLightbox();
+  // });
 
 
 $('#myCarousel .carousel-item img').on('click', function (e) {
@@ -80,3 +82,12 @@ $('#myCarousel .carousel-item img').on('click', function (e) {
 });
 
 
+$(document).on('toggle.bs.modal', '.modal fade', function () {
+  $('.modal:visible').length && $(document.body).addClass('modal-open');
+});
+
+var myModalEl = document.getElementById('exampleModal')
+myModalEl.addEventListener('hidden.bs.modal', function (event) {
+  console.log("??");
+  window.location.reload();
+})

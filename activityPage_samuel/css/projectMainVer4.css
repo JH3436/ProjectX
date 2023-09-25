@@ -16,7 +16,9 @@
   --brown: #AD7D52;
   --heart: #B44163;
   --lightBlue-bg: rgba(45, 68, 119, 0.486);
+  --darkgray: #89989c
 }
+
 
 .mycontainer {
   padding-left: 15%;
@@ -221,4 +223,209 @@
   font-weight: 700;
   padding-bottom: 1%;
 }
+
+
+
+/* 懸浮聊天室按鈕 */
+
+.label-container{
+	position:fixed;
+	bottom:3rem;
+	right:15rem;
+	display:table;
+	visibility: hidden;
+}
+
+.label-text{
+	color:#FFF;
+	background:rgba(51,51,51,0.5);
+	display:table-cell;
+	vertical-align:middle;
+	padding:10px;
+	border-radius:3px;
+}
+
+.label-arrow{
+	
+    display:table-cell;
+	vertical-align:middle;
+	color:#333;
+	opacity:0.5;
+}
+
+.float{
+	position:fixed;
+	width:4rem;
+	height:4rem;
+	bottom:3rem;
+	right:10rem;
+	background-color:var(--orange);
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float:hover{
+    opacity: 0.8;
+}
+
+.float i{
+    margin-top: 2rem;
+    height: 80%;
+    width: 80%;
+}
+
+.my-float{
+	font-size:24px;
+	margin-top:18px;
+}
+
+a.float + div.label-container {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.float:hover + div.label-container{
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 聊天室彈出 */
+
+
+
+#dialogDiv{
+    background-color: var(--black);
+    height: auto;
+    margin-top: 10rem;
+    padding: 5rem;
+}
+
+/* 聊天室 */
+
+
+
+#messageBoardTitle{
+    width: 100%;
+    height: 6rem;
+    border-bottom: 0.5rem solid var(--white);
+    padding: 1rem;
+}
+
+
+  .commentDiv{
+    display: block;
+    height: auto;
+    margin-top: 2rem;
+    border: 1px solid var(--white) ;
+    background-color: var(--black);
+    padding: 2rem;
+  }
+
+  .userCommentDiv{
+    width: 100%;
+    height: auto;
+    /* margin-top: 1rem; */
+    display: inline-flex;
+    background-color: var(--black);
+  }
+
+  
+  .profile{
+    background-image: center;
+    background-position: fixed;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 0 2% 3% 2%;
+    position: relative;
+  }
+  
+  .comment-box{
+    height: auto;
+    width: 75%;
+    margin-bottom: 1rem;
+    /* background: gray; */
+    overflow-wrap: break-word;
+    /* padding: 1rem; */
+  }
+
+  .commentBtnDiv{
+    width: 100%;
+    height: 3rem;
+    /* background-color: #B44163; */
+  }
+
+
+  .userCommentDivRight{
+    width: 80%;
+  }
+
+  .replyBtn{
+    height: 100%;
+    width: auto;
+    display: inline-flex;
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+  }
+  .replyBtn:hover {
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
+  }
+
+  .replyBtn p{
+    margin-right: 1rem;
+  }
+
+  .replyDiv{
+    width: 80%;
+    margin-left: 5%;
+    /* margin: 3% 0 0 0;  */
+    /* border-radius: 20px; */
+    /* display: inline-flex; */
+  }
+
+  .replyTextDiv{
+    margin-top:1rem; ;
+    border-top: 0.5px solid var(--white);
+    padding-top: 1rem;
+  }
+
+  .userCommentDivRight textarea{
+    width: 100%;
+  }
+
+  /* 留言按鈕 */
+  .messageBtn {
+    width: fit-content;
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+  }
+  
+  .messageBtn:hover {
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
+  }
+
+  .messageBtn-text-style {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+  }
+  
+  .messageBtn-text-style:hover {
+    color: var(--white);
+  }
+
+  
 
