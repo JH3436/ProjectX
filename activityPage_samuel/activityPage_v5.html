@@ -125,19 +125,19 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" data-slide-number="0">
-              <img src="https://picsum.photos/1600/900?random=1" class="d-block w-100" alt="..." data-type="image"
+              <img src="./Files/手剎車.jpg" class="d-block w-100" alt="..." data-type="image"
                 data-toggle="lightbox" data-gallery="example-gallery">
             </div>
             <div class="carousel-item" data-slide-number="1">
-              <img src="https://picsum.photos/1600/900?random=2" class="d-block w-100" alt="..." data-type="image"
+              <img src="./Files/surf3.jpg" class="d-block w-100" alt="..." data-type="image"
                 data-toggle="lightbox" data-gallery="example-gallery">
             </div>
             <div class="carousel-item" data-slide-number="2">
-              <img src="https://picsum.photos/1600/900?random=3" class="d-block w-100" alt="..." data-type="image"
+              <img src="./Files/surf2.jpg" class="d-block w-100" alt="..." data-type="image"
                 data-toggle="lightbox" data-gallery="example-gallery">
             </div>
             <div class="carousel-item" data-slide-number="3">
-              <img src="https://picsum.photos/1600/900?random=4" class="d-block w-100" alt="..." data-type="image"
+              <img src="./Files/surf.jpg" class="d-block w-100" alt="..." data-type="image"
                 data-toggle="lightbox" data-gallery="example-gallery">
             </div>
           </div>
@@ -150,19 +150,19 @@
               <div class="row mx-0">
                 <div id="carousel-selector-0" class="thumb col-sm-1 col-lg-3 px-1 py-2 selected"
                   data-target="#myCarousel" data-slide-to="0">
-                  <img src="https://picsum.photos/1600/900?random=1" class="img-fluid" alt="...">
+                  <img src="./Files/手剎車.jpg" class="img-fluid" alt="...">
                 </div>
                 <div id="carousel-selector-1" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                   data-slide-to="1">
-                  <img src="https://picsum.photos/1600/900?random=2" class="img-fluid" alt="...">
+                  <img src="./Files/surf3.jpg" class="img-fluid" alt="...">
                 </div>
                 <div id="carousel-selector-2" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                   data-slide-to="2">
-                  <img src="https://picsum.photos/1600/900?random=3" class="img-fluid" alt="...">
+                  <img src="./Files/surf2.jpg" class="img-fluid" alt="...">
                 </div>
                 <div id="carousel-selector-3" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                   data-slide-to="3">
-                  <img src="https://picsum.photos/1600/900?random=4" class="img-fluid" alt="...">
+                  <img src="./Files/surf.jpg" class="img-fluid" alt="...">
                 </div>
               </div>
             </div>
@@ -245,52 +245,71 @@
       <div>
         <div id="messageBoardTitle">
           <p class="h1">討論區</p>
+          <div id="discussBtn">建立討論</div>
         </div>
+
+        <!-- 討論輸入區 -->
+        <div class="commentDiv" id="discussInput">
+          <div class="userCommentDiv">
+            <img class="profile" src="./Files/godtone.png" />
+            <div class="userCommentDivRight">
+              <p class="h3 align-self-center">嘎痛</p>
+              <div class="discuss-box align-self-start">
+                <textarea name="" id="discussTextArea" cols="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+              </div> 
+            </div>
+          </div>
+          <div class="commentBtnDiv">
+            <div class="publishBtn">
+              <p class="h3">發表</p>
+              <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+            </div>
+          </div>
+        </div>
+          
         
+      </div>
+        
+        <!-- 討論區 -->
         <div class="commentDiv">
           <div class="userCommentDiv">
             <img class="profile" src="./Files/ma.jpg" />
             <div class="userCommentDivRight">
               <p class="h3 align-self-center">馬英九</p>
-              <div class="comment-box align-self-start">太多了期待年月日旅人的我覺得，天使麼意了，了這樣帥哥會不會快樂的有什麼，要基本道出了孩子的愛能啦三一樣的。
-
-                交換已，底有沒但也。突然後覺得身邊，樣的人起來作進去，的很虎杖換了得出現在一，超可愛⋯很得開心覺得子的覺謝超大習慣。
-                
-                謝你的上種好可愛。了啊哭要假年失。的話如果還是是我的，可是但因為什麼鬼嗎沒來說這到底在，興趣我之前想買麻煩的不知了，後就一般的要注意：那就人的但不知。
-                
-                終於合放一愛愛麼要：所有很多的那種，山我剛開心嗚嗚嗚還：分望有過現在立刻，自己都有點不非了好，大然就是。</div> 
+              <div class="comment-box align-self-start">望有過現在立刻，自己都有點不非了好，大然就是。</div> 
             </div>
           </div>
           <div class="commentBtnDiv">
-            <div class="replyBtn">
-              <p class="h3">查看回覆</p>
+            <div class="replyBtn" id="replyBtn" >
+              <p class="h3">回覆</p>
               <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
             </div>
           </div>
           <div class="replyDiv">
             <div class="userCommentDiv">
-              <img class="profile" src="./Files/ma.jpg" />
+              <img class="profile" src="./Files/lai.jpg" />
               <div class="userCommentDivRight">
-                <p class="h3 align-self-center">馬英九</p>
+                <p class="h3 align-self-center">ㄌㄨㄚˋ </p>
                 <div class="comment-box align-self-start">嗚嗚還：分望有過現在立刻，自己都有點不非了好，大然就是。</div> 
               </div>
             </div>
           </div>
           <div class="replyDiv">
             <div class="userCommentDiv">
-              <img class="profile" src="./Files/ma.jpg" />
+              <img class="profile" src="./Files/tsai2.jpg" />
               <div class="userCommentDivRight">
-                <p class="h3 align-self-center">馬英九</p>
+                <p class="h3 align-self-center">ㄘㄨㄚˋ</p>
                 <div class="comment-box align-self-start">這次一定不炸版</div> 
               </div>
             </div>
           </div>
+          
           <div class="replyTextDiv">
             <div class="userCommentDiv">
-              <img class="profile" src="./Files/ma.jpg" />
+              <img class="profile" src="./Files/godtone.png" />
               <div class="userCommentDivRight">
-                <p class="h3 align-self-center">馬英九</p>
-                <textarea name="" id="" cols="col-auto" rows="3"></textarea>
+                <p class="h3 align-self-center">嘎痛</p>
+                <textarea name="" id="replyTextArea" cols="col-auto" rows="1"></textarea>
                 <div class="messageBtn">
                   <a class="messageBtn-text-style" href="#">
                     留言
@@ -299,12 +318,30 @@
               </div>
             </div>
           </div>
+        
         </div>
+
         
-        
-              </div>  
+
+        <!-- 討論輸入區 -->
+        <!-- <div class="replyTextDiv">
+          <div class="userCommentDiv">
+            <img class="profile" src="./Files/ma.jpg" />
+            <div class="userCommentDivRight">
+              <p class="h3 align-self-center">馬英九</p>
+              <textarea name="" id="" cols="col-auto" rows="3"></textarea>
+              <div class="messageBtn">
+                <a class="messageBtn-text-style" href="#">
+                  留言
+                </a>
+              </div> 
             </div>
           </div>
+        </div> -->
+        
+    </div>  
+  </div>
+</div>
         </div>
         
       </div>      
@@ -325,5 +362,5 @@
 <script src="./js/mainVer4.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"
   integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
-
+<script></script>
 </html>
