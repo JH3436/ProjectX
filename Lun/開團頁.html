@@ -84,10 +84,10 @@
             <div class="Ndropdown-section">
               <div class="LL">
                 <ul>
-                  <li id="AA" style="color: var(--black)">1. ccccccccccccccccccccccccccccccccccccc</li>
+                  <li id="AA" style="color: var(--black)">1. cccccccccc</li>
                 </ul>
                 <ul>
-                  <li id="BB" style="color: var(--black)">2. DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</li>
+                  <li id="BB" style="color: var(--black)">2.DDDDDDDD</li>
                 </ul>
               </div>
 
@@ -103,39 +103,29 @@
       </div>
       <div class="pop">
         <span>✖</span>
-        <p>由於登山活動感興趣的人數已達到下限，因此請您選出您相對適合的時間 </p>
+        <p>我們非常高興您對這次活動感興趣！請在活動截止日期之前，選擇您最適合的時間 </p>
         <p>選擇時間後將由系統判定，由最多人選擇的時間段進行開團</p>
         <p>屆時活動時間與您所選時間不相符，您將不被加入活動內，但可以再次思考時間是否合適，再決定是否正式參加 !!</p>
         <div class="container">
-
           <ul class="Cul">
             <li class="Cli">
               <input type="radio" id="f-option" name="selectorDATA">
-              <label for="f-option">2023/10/10 - 2023/10/03</label>
-
+              <label for="f-option">2023/09/29 - 2023/10/01</label>
               <div class="check"></div>
             </li>
-
             <li class="Cli">
               <input type="radio" id="s-option" name="selectorDATA">
-              <label for="s-option">2023/10/10 - 2023/10/03</label>
-
+              <label for="s-option">2023/10/07 - 2023/10/10</label>
               <div class="check">
                 <div class="inside"></div>
               </div>
             </li>
-
             <li class="Cli">
               <input type="radio" id="t-option" name="selectorDATA">
-              <label for="t-option">2023/10/10 - 2023/10/03</label>
-
-              <div class="check">
-                <div class="inside"></div>
-              </div>
+              <label for="t-option">2023/10/14 - 2023/10/15</label>
             </li>
           </ul>
         </div>
-        <button class="submit">提交</button>
       </div>
 
 
@@ -153,14 +143,14 @@
 
 
 
-<div class="page-container"> </div>
+  <div class="page-container"> </div>
   <!-- 開團下拉選項 -->
 
   <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
   <!-- <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css"> -->
   <dropdown class="A">
     <input id="toggle1" type="checkbox" checked>
-    <label for="toggle1" class="animate">選擇活動<i class="fa fa-bars float-right"></i></label>
+    <label for="toggle1" class="animate" style="font-size: 20px;">選擇活動<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
       <li class="animate">衝浪<i class="fa fa-code float-right"></i></li>
       <li class="animate">登山<i class="fa fa-arrows-alt float-right"></i></li>
@@ -170,7 +160,7 @@
 
   <dropdown class="B">
     <input id="toggle2" type="checkbox">
-    <label for="toggle2" class="animate">選擇地點<i class="fa fa-bars float-right"></i></label>
+    <label for="toggle2" class="animate" style="font-size: 20px;">選擇地點<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
       <li class="animate">喬戈里峰<i class="fa fa-code float-right"></i></li>
       <li class="animate">馬特峰<i class="fa fa-arrows-alt float-right"></i></li>
@@ -184,7 +174,8 @@
     <div id="selected-range">
       <dropdown class="date" id="dateRangeDisplay">
         <input id="toggle3" type="checkbox">
-        <label for="toggle3" class="selectdate">選擇日期<i class="fa fa-bars float-right"></i></label>
+        <label for="toggle3" class="selectdate" style="font-size: 20px;">選擇日期<i
+            class="fa fa-bars float-right"></i></label>
         <ul class="animate">
           <div class="my-element">
             <div class="calendar calendar-first" id="calendar_first">
@@ -207,7 +198,7 @@
   <!-- 選擇預計開團人數上下限 -->
   <dropdown class="C">
     <input id="toggle4" type="checkbox">
-    <label for="toggle4" class="CC">選擇開團人數<i class="fa fa-bars float-right"></i></label>
+    <label for="toggle4" class="CC" style="font-size: 20px;">選擇開團人數<i class="fa fa-bars float-right"></i></label>
     <ul class="animate">
       <li class="animate">3 - 5 人<i class="fa fa-code float-right"></i></li>
       <li class="animate">4 - 6 人<i class="fa fa-arrows-alt float-right"></i></li>
@@ -223,25 +214,19 @@
       <input type="file" id="photo" accept="image/png, image/jpeg, image/gif, image/bmp;capture=camera" multiple>
 
     </div>
-    <label for="photo" class="button" id="chooseButton">選擇照片</label>
-  
+    <label for="photo" class="button" id="chooseButton" style="font-size: 25px;">選擇照片</label>
+
     <div id="thumbnailsContainer">
-  
+
     </div>
-    
-  
-    <button id="DELButton" class="DEL-button">刪除這張</button>
-    
-    <button id="prevButton" class="page-button">上一張</button>
-    <button id="nextButton" class="page-button">下一張</button>
-   
-  <div>
-      <div class="box1"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
-      <div class="box2"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
-      <div class="box3"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
-      <div class="box4"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
-      <div class="box5"> <li style="color: lightgray; padding-top: 38%; padding-left:10px;">選到的照片</li> </div>
-    </div>
+
+
+    <button id="DELButton" class="DEL-button" style="font-size: 25px;">刪除這張</button>
+
+    <button id="prevButton" class="page-button" style="font-size: 25px;">上一張</button>
+    <button id="nextButton" class="page-button" style="font-size: 25px;">下一張</button>
+
+
   </div>
 
 
@@ -252,18 +237,26 @@
   <div class="Eventname">
     <form id="inputForm">
       <div class="form-group col col-md-6 offset-md-3">
-        <label for="title">活動名稱</label>
+        <label for="title" style="font-size: 35px;">活動名稱</label>
         <input type="text" id="title" class="form-control" placeholder="例 : 眠月線3日遊">
       </div>
       <div class=" col col-md-6 offset-md-3">
-        <label for="content">活動內容</label>
-        <textarea class="form-control" id="content" rows="5" placeholder="例 : 第一日到a點 晚餐烤乳豬..."></textarea>
+        <label for="content" style="font-size: 35px;"">活動內容</label>
+        <textarea class=" form-control" id="content" rows="5" placeholder="例 : 第一日到a點 晚餐烤乳豬..."></textarea>
       </div>
     </form>
 
   </div>
   </div>
   </div>
+
+
+  <!-- 貼心提醒 -->
+
+
+
+
+
 
   <!-- 提交按鈕 -->
   <button class="submit2">提交</button>
