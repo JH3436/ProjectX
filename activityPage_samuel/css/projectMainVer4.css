@@ -19,7 +19,9 @@
   --darkgray: #89989c
 }
 
-
+body{
+    overflow:auto !important;
+}
 .mycontainer {
   padding-left: 15%;
   padding-right: 15%;
@@ -128,6 +130,8 @@
 
 .carousel-item img {
   object-fit: cover;
+  height: 35rem;
+  width: 50rem;
 }
 
 #carousel-thumbs {
@@ -141,6 +145,9 @@
 #carousel-thumbs img {
   border: 10px solid transparent;
   cursor: pointer;
+  /* 統一調整小圖 */
+  height: 8rem;
+  width: 12rem;
 }
 
 #carousel-thumbs img:hover {
@@ -176,6 +183,8 @@
 }
 
 /* 圖片手動修改 */
+
+
 
 /* 活動內容資訊 */
 
@@ -312,9 +321,93 @@ a.float:hover + div.label-container{
     height: 6rem;
     border-bottom: 0.5rem solid var(--white);
     padding: 1rem;
+    display:inline-flex;
 }
 
+#discussInput{
+    display:none
+}
 
+#discussBtn {
+    width: fit-content;
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    margin-left: 70%;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+  }
+  
+  #discussBtn:hover {
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
+  }
+
+  #discussBtn {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+  }
+  
+  #discussBtn:hover {
+    color: var(--white);
+  }
+
+  .discuss-box{
+    height: auto;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* background: gray; */
+    overflow-wrap: break-word;
+    /* padding: 1rem; */
+  }
+
+  .discuss-box textarea{
+    width: 100%;
+  }
+
+
+/* 討論輸入按鈕 */
+
+.publishBtn{
+    height: 100%;
+    width: auto;
+    display: inline-flex;
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+  }
+
+  .publishBtn i{
+    color: var(--white);
+  }
+  
+  .publishBtn:hover {
+    color: var(--white);
+  }
+
+  .publishBtn:hover {
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
+  }
+
+  .publishBtn p{
+    margin-right: 1rem;
+  }
+/* 討論區 */
   .commentDiv{
     display: block;
     height: auto;
@@ -372,7 +465,21 @@ a.float:hover + div.label-container{
     border-radius: 5px;
     transition: all 0.1s ease;
     float: right;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
   }
+
+  .replyBtn i{
+    color: var(--white);
+  }
+  
+  .replyBtn:hover {
+    color: var(--white);
+  }
+
   .replyBtn:hover {
     background-color: var(--brown);
     border: var(--orange) 2px solid;
@@ -394,10 +501,12 @@ a.float:hover + div.label-container{
     margin-top:1rem; ;
     border-top: 0.5px solid var(--white);
     padding-top: 1rem;
+    display: none;
   }
 
-  .userCommentDivRight textarea{
-    width: 100%;
+  .replyTextDiv textarea{
+    width: 80%;
+    background-color: gray;
   }
 
   /* 留言按鈕 */

@@ -44,10 +44,10 @@ if ($(window).width() < 575) {
   });
 }
 // Hide slide arrows if too few items.
-if ($('#carousel-thumbs .carousel-item').length < 2) {
-  $('#carousel-thumbs [class^=carousel-control-]').remove();
-  $('.machine-carousel-container #carousel-thumbs').css('padding', '0 5px');
-}
+// if ($('#carousel-thumbs .carousel-item').length < 2) {
+//   $('#carousel-thumbs [class^=carousel-control-]').remove();
+//   $('.machine-carousel-container #carousel-thumbs').css('padding', '0 5px');
+// }
 // when the carousel slides, auto update
 $('#myCarousel').on('slide.bs.carousel', function (e) {
   var id = parseInt($(e.relatedTarget).attr('data-slide-number'));
@@ -86,8 +86,97 @@ $(document).on('toggle.bs.modal', '.modal fade', function () {
   $('.modal:visible').length && $(document.body).addClass('modal-open');
 });
 
-var myModalEl = document.getElementById('exampleModal')
-myModalEl.addEventListener('hidden.bs.modal', function (event) {
-  console.log("??");
-  window.location.reload();
-})
+// var myModalEl = document.getElementById('exampleModal')
+// myModalEl.addEventListener('hidden.bs.modal', function (event) {
+//   console.log("??");
+//   window.location.reload();
+// })
+
+// 聊天室
+$(document).ready(function(){
+  $("#discussBtn").click(function(){
+    $("#discussInput").toggle();
+
+  })
+});
+
+ 
+$(document).on("click", ".replyBtn", function(){
+    $($(this).parent().parent().children(".replyTextDiv")).toggle();
+  });
+
+ 
+
+
+$(document).ready(function(){
+  $(".publishBtn").click(function(){
+    var temp = $("#discussTextArea").val();
+    if (temp == ""){
+      alert("請輸入文字")
+    }else{
+      var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val())
+      if(sure == true){
+        $("#dialogDiv").append(
+          `<div class="commentDiv">
+          <div class="userCommentDiv">
+            <img class="profile" src="./Files/godtone.png "/>
+            <div class="userCommentDivRight">
+              <p class="h3 align-self-center">嘎痛</p>
+              <div class="comment-box align-self-start">` + temp + `</div> 
+            </div>
+          </div>
+          <div class="commentBtnDiv">
+            <div class="replyBtn" id="replyBtn" >
+              <p class="h3">回覆</p>
+              <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+            </div>
+          </div>
+          
+          <div class="replyTextDiv">
+            <div class="userCommentDiv">
+              <img class="profile" src="./Files/godtone.png" />
+              <div class="userCommentDivRight">
+                <p class="h3 align-self-center">嘎痛</p>
+                <textarea name="" id="replyTextArea" cols="col-auto" rows="1"></textarea>
+                <div class="messageBtn">
+                  <a class="messageBtn-text-style" href="#">
+                    留言
+                  </a>
+                </div> 
+              </div>
+            </div>
+          </div>
+        
+        </div>`
+        )
+        alert("討論提交成功")
+        $("#discussTextArea").val("");
+      }
+    }
+  })
+});
+
+$(document).on("click", ".messageBtn", function(){
+  var temp =  $(this).parent().children("#replyTextArea").val()
+  if(temp == ""){
+    alert("請輸入文字")
+  }else{
+    var sure = confirm("確定提交留言\n\n" + $(this).parent().children("#replyTextArea").val())
+    if(sure == true){
+      
+      $($(this).parent().parent().parent()).before(
+        `<div class="replyDiv">
+        <div class="userCommentDiv">
+          <img class="profile" src="./Files/godtone.png" />
+          <div class="userCommentDivRight">
+            <p class="h3 align-self-center">嘎痛</p>
+            <div class="comment-box align-self-start">` + temp + `</div> 
+          </div>
+        </div>
+      </div>`
+      )
+    }
+    alert("留言成功");
+    $(this).parent().children("#replyTextArea").val("");
+  }
+});
