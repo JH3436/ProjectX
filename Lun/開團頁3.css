@@ -145,27 +145,25 @@ body {
 }
 
 .nav-signin {
-  background-color: var(--orange);
-  padding: 2.5px 10px;
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
   border-radius: 5px;
-  transition: background-color 0.1s, border 0.1s;
-  /* 添加過渡效果 */
+  transition: all 0.1s ease;
 }
 
 .nav-signin:hover {
-  background: transparent;
-  border: solid 1.5px var(--orange);
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
 }
 
 .singin-style {
   text-decoration: none;
-  color: var(--white);
+  color: var(--orange);
   transition: color 0.1s;
-  /* 添加過渡效果 */
 }
 
 .singin-style:hover {
-  color: var(--orange);
+  color: var(--white);
 }
 
 /* 搜尋框設計 */
@@ -225,54 +223,7 @@ body {
   color: var(--deepBlue);
 }
 
-/* 小鈴鐺 */
-/* .notification {
-    position: relative;
-    display: inline-block; 
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .notification--num {
-    position: absolute; 
-    top: -10px; 
-    right: -15px; 
-    width: 25px; 
-    height: 25px; 
-    background-color: var(--heart); 
-    border-radius: 50%;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    color: var(--white); 
-    font-size: 14px;
-    padding: 1px;
-  }
 
-  .notification:hover .notification--num{
-    animation: shake 0.3s ease-in-out;
-    
-  }
-
-  @keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-2px);
-  }
-
-  50% {
-    transform: translateX(1px);
-  }
-
-  75% {
-    transform: translateX(-2px);
-  }
-} */
 
 /* 鈴鐺+下拉 */
 .notification-wrapper {
@@ -505,13 +456,10 @@ button.notification:hover span {
     padding-top: 12px;
   }
   
- 
+
 
   
-  .CC{
-    height: 58px;
-  }
-  
+
   
   
   dropdown input:checked + label{
@@ -559,17 +507,20 @@ button.notification:hover span {
   }
   
   
-  .dropdownALL {
-    margin: auto;
+
+
+  .NumberofpeopleA {
+    width: 100%; /* 使輸入元素寬度100% */
+    border-radius: 0 0 5px 5px; 
+}
+.NumberofpeopleB {
+  width: 100%; /* 使輸入元素寬度100% */
+  border-radius: 0 0 5px 5px; 
 }
 
-.container {
-    padding-left: 0;
-    padding-right: 0;
+#other{
+  border-radius: 0 0 5px 5px; 
 }
-
-  
-  
   
   
   
@@ -726,7 +677,7 @@ button.switch-month:hover {
 .custom-box {
     background-color: var(--lightBlue-bg);
     border-radius: 10px;
-    height: 330px;
+    height: 400px;
     margin-top: 10px;
     min-height: 200px; /* 设置一个最小高度，以确保元素有足够的高度显示内容 */
 }
@@ -739,7 +690,7 @@ button.switch-month:hover {
 .Pbox {
     background-color: #14213d;
     border-radius: 10px;
-    margin-top: -400px;
+    margin-top: -450px;
     min-height: 200px;
     position: relative;
 }
@@ -754,21 +705,35 @@ button.switch-month:hover {
     right: 685px;
 }
 
+
+
+
+
+
+
+
+
 .custom-button {
+    border-radius: 5px;
+    transition: background-color 0.1s, border 0.1s;
     float: right;
     margin-right: 5px;
-    background-color: var(--orange);
-    border: none;
-    color: #ffffff;
+    background-color: var(--lightBlue-bgIO);
+    border: var(--orange) 2px solid;
+    color: var(--orange);
     cursor: pointer;
-    font-weight: normal;
+    /* font-weight: normal; */
     border-radius: 5px;
     padding: 5px 8px;
 }
 
 .custom-button:hover{
-    color: #14213d;
+  background-color: var(--brown);
+  border: var(--orange) 2px solid;
+
+  color: var(--white);
 }
+
 
 .custom-button:nth-child(3),
 .custom-button:nth-child(4) {
@@ -776,30 +741,29 @@ button.switch-month:hover {
 }
 
 .submit {
-    background-color: var(--orange);
-    padding: 2.5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.1s, border 0.1s;
+  border: var(--orange) 2px solid;
+  padding: 2.5px 12.5px;
+  border-radius: 5px;
+  transition: all 0.1s ease;
     /* 添加過渡效果 */
   }
   
   .submit:hover {
-    background: transparent;
-    border: solid 1.5px var(--orange);
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
   }
 
 
 
 .submit {
-    text-decoration: none;
-    color: var(--white);
-    transition: color 0.1s;
-    margin-bottom: 5px;
+  text-decoration: none;
+  color: var(--orange);
+  transition: color 0.1s;
     /* 添加過渡效果 */
   }
   
   .submit:hover {
-    color: var(--orange);
+    color: var(--white);
   }
 
   .submitBtn {

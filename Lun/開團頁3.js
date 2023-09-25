@@ -99,10 +99,87 @@ $(document).ready(function () {
         });
       });
   
+
+
+
+    
+    
+
+
+
+
+
+
+
+
+
   
   
-  
-  
+// 取得輸入人數
+$(document).ready(function() {
+    // 取得下限
+const dropdownInputsA = $('dropdown input.NumberofpeopleA');
+
+dropdownInputsA.each(function() {
+    $(this).on('input', function() {
+        const inputValue = $(this).val();
+        const numericValue = inputValue.replace(/[^0-9]/g, ''); // 过滤非数字字符
+
+        const correspondingLabel = $(this).closest('dropdown').find('label.CC');
+
+        // 顯示在上面後 顯示 下限_人 底線是輸入的數字
+        if (numericValue) {
+            correspondingLabel.text('下限 ' + numericValue + ' 人');
+        } else {
+            correspondingLabel.text('輸入人數下限');
+        }
+    });
+});
+
+// 取得上限
+const dropdownInputsB = $('dropdown input.NumberofpeopleB');
+
+dropdownInputsB.each(function() {
+    $(this).on('input', function() {
+        const inputValue = $(this).val();
+        const numericValue = inputValue.replace(/[^0-9]/g, ''); // 过滤非数字字符
+
+        const correspondingLabel = $(this).closest('dropdown').find('label.CC');
+
+        // 顯示在上面後 顯示 下限_人 底線是輸入的數字
+        if (numericValue) {
+            correspondingLabel.text('上限 ' + numericValue + ' 人');
+        } else {
+            correspondingLabel.text('輸入人數上限');
+        }
+    });
+});
+
+
+
+    // 選取完或點擊空白處會自動縮回
+    $(document).click(function(event) {
+        var dropdowns = $('dropdown');
+        dropdowns.each(function() {
+            if (!$(this).is(event.target) && $(this).has(event.target).length === 0) {
+                var input = $(this).find('input');
+                if (input.prop('checked')) {
+                    input.prop('checked', false);
+                }
+            }
+        });
+    });
+
+    // 只能輸入數字
+    
+    $('.NumberofpeopleA, .NumberofpeopleB').on('input', function() {
+        const inputValue = $(this).val();
+        const sanitizedValue = inputValue.replace(/[^0-9]/g, ''); // 去除非数字字符
+    
+        $(this).val(sanitizedValue); // 更新输入框的值为去除非数字字符后的值
+    });
+    
+});
   
   
   

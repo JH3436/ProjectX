@@ -9,6 +9,17 @@
   --heart: #B44163;
 }
 
+.container-loginandregister{
+  display: flex;
+  justify-content: center;
+}
+
+input::placeholder {
+  color:#9f9e9e;
+  font-size: 1.5em;
+ 
+  
+}
 /* 頁面背景色 */
 body {
   background-color: var(--deepBlue);
@@ -48,6 +59,8 @@ form{
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     width: 12rem;
+    font-size: 1rem;
+    
   }
   
   /* 滑鼠移過時的樣式 */
@@ -64,7 +77,7 @@ form{
     border-radius: 10px;
     text-align: center;
     padding: 20px;
-    max-height: 600px; /* 設置最大高度，根據需要更改 */
+    max-height: 750px; /* 設置最大高度，根據需要更改 */
 
 
   }
@@ -80,22 +93,34 @@ form{
     border: 2px solid #14213d;
   }
   
-  .header {
+  .headerforwelcome {
     text-align: center;
     margin-bottom:5rem;
   }
   
-  .header h1 {
+  .headerforwelcome h1 {
     margin-right: 120px;
     margin-bottom: 1rem;
   }
   
-  .header p {
+  .headerforwelcome p {
     margin-right: 40px;
   }
 
-  
+  .headerforregister{
+    text-align: center;
+    margin-bottom:5rem;
+  }
 
+
+  .headerforregister h1 {
+    margin-right: 120px;
+    margin-bottom: 1rem;
+  }
+  
+  .headerforregister p {
+    margin-right: 40px;
+  }
 /* body鎖死id解決... */
 #login {
   margin: 0 auto; /* 實現水平置中 */
@@ -116,13 +141,26 @@ justify-content: center
   visibility: hidden; 
   display: none;}  
 
-h5 {
+.register-link {
   transition: transform 0.3s ease;
 }
 
-  h5:hover{
+.register-link:hover{
     text-decoration:underline;
     transform: scale(1.5);
     cursor: pointer;
     color: #9f9e9e;
   }
+
+  .login-link {
+    transition: transform 0.3s ease;
+  }
+  
+  .login-link :hover{
+      text-decoration:underline;
+      transform: scale(1.5);
+      cursor: pointer;
+      color: #9f9e9e;
+    }
+
+

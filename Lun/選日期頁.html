@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="./選日期頁.css" rel="stylesheet">
+    <!-- BAR -->
+    <title>JO!N</title>
+    <link rel="icon" href="./LOGO/小黃人.png" type="image/png" />
+</head>
+
+<body>
+
+
+    <!-- 帳密   -->
+    <div id="container1">
+        <form action="login.js" class="login" id="login">
+            <div class="header">
+                <h1>您好,親愛的會員</h1>
+                <p style="font-size: 21px;">當您在選擇日期截止日之前，都可以編輯您最適合的時間。</p>
+                <p style="font-size: 21px;">選擇日期截止後，系統將根據最多人選擇的時間段來安排活動。</p>
+                <p style="font-size: 21px;">如果最終活動時間與您所選的時間不符，您將無法參加活動。</p>
+                <p style="font-size: 21px;">但您可以再次考慮時間，然後再決定是否參加。</p>
+                <div class="container">
+                    <ul class="Cul">
+                        <li class="Cli">
+                            <input type="radio" id="f-option" name="selectorDATA">
+                            <label for="f-option">2023/09/29 - 2023/10/01</label>
+                            <div class="check"></div>
+                        </li>
+                        <li class="Cli">
+                            <input type="radio" id="s-option" name="selectorDATA">
+                            <label for="s-option">2023/10/07 - 2023/10/10</label>
+                            <div class="check"></div>
+                        </li>
+                        <li class="Cli">
+                            <input type="radio" id="t-option" name="selectorDATA">
+                            <label for="t-option">2023/10/14 - 2023/10/15</label>
+                            <div class="check"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 添加按鈕容器 -->
+            <div class="button-container">
+                <button class="button" style="font-size: 20px;">提交</button>
+            </div>
+            <div class="register-link">
+                <a href="../小胖/index/profile.html">
+                    <span onclick="show_hide()">返回會員中心</span>
+                </a>
+            </div>
+    </div>
+    </form>
+    </div>
+
+
+
+
+</body>
+
+<!-- bar-js -->
+<script src="/導覽列Navbar/js for navbar.js"></script>
+<script src="./選日期頁.js"></script>
+
+</html>
