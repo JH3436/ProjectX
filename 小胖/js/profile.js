@@ -10,8 +10,8 @@ document.querySelectorAll('.menu-item').forEach(item => {
         const content = this.getAttribute('data-content');
 
         switch(content) {
-            case 'intro':
-                document.getElementById('intro-section').style.display = 'block';
+            case 'likeit':
+                document.getElementById('likeit-section').style.display = 'block';
                 break;
             case 'activity':
                 document.getElementById('activity-section').style.display = 'block';
