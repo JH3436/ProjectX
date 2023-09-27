@@ -67,7 +67,7 @@ CREATE TABLE VoteRecord (
 );
 go
 
-
+--test
 
 
 
