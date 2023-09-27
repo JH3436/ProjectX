@@ -1,0 +1,34 @@
+
+
+Razor卡片迴圈
+
+
+<div class="container">
+    <!-- 卡片容器 -->
+    <div class="card-container row">
+        <!-- 使用循环生成卡片 -->
+        @for (int i = 0; i < Model.CardData.Count; i++)
+        {
+            // 判断是否需要开始新的卡片行
+            if (i % 6 == 0)
+            {
+                // 关闭上一页的卡片行
+                if (i > 0)
+                {
+                    </div>
+                }
+                // 开始新的卡片行
+                <div class="card-row">
+            }
+            // 生成卡片
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Deal @(i + 1)</h5>
+                        <p class="card-text">@Model.CardData[i]</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

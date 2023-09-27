@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 添加 Bootstrap 样式表链接 -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Card Layout with Vertical Margin</title>
+  <style>
+    .card-button-container {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 10px;
+    }
+
+    .card-title::before {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      /* 調整位置，使其下移10px */
+      left: 10%;
+      /* 讓線從左邊25%的位置開始，使其短一些 */
+      right: 10%;
+      /* 讓線在右邊25%的位置結束 */
+      height: 1px;
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- 第一组卡片：A 和 B -->
+    <div class="row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card my-3 ">
+          <div class="card-body">
+            <h5 class="card-title">Deal 1</h5>
+            <span class="card-text">Card A</span>
+            
+
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card my-3">
+          <div class="card-body">
+            <h5 class="card-title">Deal 2</h5>
+            <span class="card-text">Card B</span>
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第二组卡片：C 和 D -->
+    <div class="row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card my-3">
+          <div class="card-body">
+            <h5 class="card-title">Deal 3</h5>
+            <span class="card-text">Card C</span>
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card my-3">
+          <div class="card-body">
+            <h5 class="card-title">Deal 4</h5>
+            <span class="card-text">Card D</span>
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 第三组卡片：E 和 F -->
+    <div class="row">
+      <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card my-3">
+          <div class="card-body">
+            <h5 class="card-title">Deal 5</h5>
+            <span class="card-text">Card E</span>
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card my-3">
+          <div class="card-body">
+            <h5 class="card-title">Deal 6</h5>
+            <span class="card-text">Card F</span>
+            <div class="card-button-container">
+              <button class="btn btn-primary">編輯</button>
+              <button class="btn btn-danger">刪除</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加 Bootstrap JavaScript 和 jQuery 链接 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

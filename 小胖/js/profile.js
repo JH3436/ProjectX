@@ -14,13 +14,13 @@ document.querySelectorAll('.menu-item').forEach(item => {
                 document.getElementById('likeit-section').style.display = 'block';
                 break;
             case 'activity':
-                document.getElementById('activity-section').style.display = 'block';
+                document.getElementById('signup-section').style.display = 'block';
                 break;
             case 'settings':
                 document.getElementById('settings-section').style.display = 'block';
                 break;
             case 'delete':
-                document.getElementById('delete-section').style.display = 'block';
+                document.getElementById('personal-section').style.display = 'block';
                 break;
         }
     });

@@ -1,0 +1,43 @@
+
+
+.list-card{
+    width:100%;
+    margin:10px;
+    border:1px solid rgba(1,1,1,0.1);
+    border-radius:5px;
+    overflow:hidden;
+    padding:0;
+    background-color:var(--white);
+    display:flex;
+    align-items:top;
+    }
+    
+    .list-cards .list-card:nth-child(1),.list-cards .list-card:nth-child(2){
+    margin-top:0;
+    }
+    
+    .list-cards .list-card section{
+    width:100%;
+    position:relative;
+    overflow:hidden;
+    }
+    
+    .list-cards .list-card section:nth-child(1){
+    padding:0.5rem 1rem;
+    }
+    
+    .list-cards .list-card section img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    }
+    
+    .list-cards .list-card section p{
+    line-height:1.4em;
+    font-size:13px;
+    }
+    
+    .list-cards .list-card section .price{
+    font-size:1.3em;
+    }
+    

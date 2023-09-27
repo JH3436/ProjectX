@@ -30,7 +30,7 @@
     <!-- css連結，確保在Bootsrap之下 -->
     <link rel="stylesheet" href="/導覽列Navbar/css for logged navbar.css" />
 
-    <link href="/齊澤/css for main page.css" rel="stylesheet">
+    <link href="/小胖/css/james.css" rel="stylesheet">
     <link href="/小胖/css/profile.css" rel="stylesheet">
 
     <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
@@ -120,264 +120,213 @@
         <div class="row dora">
             <!-- A區塊 -->
             <div class="col-3">
+                <div class="container">
 
+                    <div class="item A2">
 
-                <div class="item A2">
-                    <!-- A2上半部：大頭貼 -->
-                    <div class="profile-section">
-                        <img src="/齊澤/Files/小黃人.png" alt="大頭貼" class="profile-pic">
+                        <!-- A2上半部：大頭貼 -->
+                        <div class="profile-section">
+                            <img src="/齊澤/Files/小黃人.png" alt="大頭貼" class="profile-pic">
+                        </div>
+
+                        <!-- A2下半部：列表 -->
+                        <div class="A2-lower">
+                            <div class="menu-item-container">
+                                <a href="#" class="menu-item" data-content="likeit">已收藏的活動</a>
+                            </div>
+                            <div class="menu-item-container">
+                                <a href="#" class="menu-item" data-content="activity">已報名的活動</a>
+                            </div>
+                            <div class="menu-item-container">
+                                <a href="#" class="menu-item" data-content="settings">個人資料</a>
+                            </div>
+                            <div class="menu-item-container">
+                                <a href="#" class="menu-item" data-content="delete">個人揪團</a>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <!-- A2下半部：列表 -->
-                    <div class="A2-lower">
-                        <div class="menu-item-container">
-                            <a href="#" class="menu-item" data-content="likeit">有興趣的活動</a>
-                        </div>
-                        <div class="menu-item-container">
-                            <a href="#" class="menu-item" data-content="activity">已報名的活動</a>
-                        </div>
-                        <div class="menu-item-container">
-                            <a href="#" class="menu-item" data-content="settings">個人資料</a>
-                        </div>
-                        <div class="menu-item-container">
-                            <a href="#" class="menu-item" data-content="delete">AABBCCDD</a>
-                        </div>
-                    </div>
 
                 </div>
-
-
             </div>
 
             <!-- B區塊 -->
             <div class="col-7">
 
-                <div class="item">
-                    <div class="B2">
-                        <div class="B2-content" id="likeit-section">
-                            <!-- 自我介紹的HTML結構 -->
+                <!-- 已收藏 -->
+                <div class="B2 B2-content" id="likeit-section">
+                    <div class="container">
+                        <!-- 第一组卡片：A 和 B -->
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 1</h5>
+                                        <span class="card-text">Card A</span>
 
-                            <!-- Main content START -->
 
-
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-
-                                    <div class="card-ex">
-                                        <div class="card__img"></div>
-                                        <a href="#" class="card_link">
-
-                                        </a>
-                                        <div class="card__info">
-                                            <span class="card__category">登山</span>
-                                            <h3 class="card__title">奇萊主北假日團</h3>
-                                            <button>刪除</button>
-                                            <button>編輯</button>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-
-                                    <div class="card-ex">
-                                        <div class="card__img"></div>
-                                        <a href="#" class="card_link">
-
-                                        </a>
-                                        <div class="card__info">
-                                            <span class="card__category">登山</span>
-                                            <h3 class="card__title">奇萊主北假日團</h3>
-                                            <button>刪除</button>
-                                            <button>編輯</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-
-                                    <div class="card-ex">
-                                        <div class="card__img"></div>
-                                        <a href="#" class="card_link">
-
-                                        </a>
-                                        <div class="card__info">
-                                            <span class="card__category">登山</span>
-                                            <h3 class="card__title">奇萊主北假日團</h3>
-                                            <button>刪除</button>
-                                            <button>編輯</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-
-                                    <div class="card-ex">
-                                        <div class="card__img"></div>
-                                        <a href="#" class="card_link">
-
-                                        </a>
-                                        <div class="card__info">
-                                            <span class="card__category">登山</span>
-                                            <h3 class="card__title">奇萊主北假日團</h3>
-                                            <button>刪除</button>
-                                            <button>編輯</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- row-row之間間隙 -->
-                                <div class="mb-4"></div>
-
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-
-                                    <div class="card-ex">
-                                        <div class="card__img"></div>
-                                        <a href="#" class="card_link">
-
-                                        </a>
-                                        <div class="card__info">
-                                            <span class="card__category">登山</span>
-                                            <h3 class="card__title">奇萊主北假日團</h3>
-                                            <button>刪除</button>
-                                            <button>編輯</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <!-- 添加更多的卡片 -->
                             </div>
-
-
+                            <div class="col-sm-6">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 2</h5>
+                                        <span class="card-text">Card B</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Main content END -->
-                    </div>
 
-
-                    <!-- 已報名活動 -->
-                    <div class="B2-content" id="settings-section" style="display: none;">
-
-
-                        <div>
-
-                            <!-- Main content START -->
-                            <div class="col-lg-12">
-
-
-
-                                <div class="vstack gap-4">
-                                    <!-- Verified message -->
-
-
-                                    <!-- Personal info START -->
-                                    <div class="card border col-12">
-                                        <!-- Card header -->
-                                        <div class="card-header border-bottom">
-                                            <h4 class="card-header-title">資料設定</h4>
+                        <!-- 第二组卡片：C 和 D -->
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 3</h5>
+                                        <span class="card-text">Card C</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
                                         </div>
-
-                                        <!-- Card body START -->
-                                        <div class="card-body">
-                                            <!-- Form START -->
-                                            <form class="row g-3">
-                                                <!-- Profile photo -->
-
-
-                                                <!-- Name -->
-                                                <div class="col-md-4">
-                                                    <label class="form-label">綽號<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" value="山道猴子">
-                                                </div>
-
-                                                <!-- Email -->
-                                                <div class="col-md-4">
-                                                    <label class="form-label">電子信箱<span
-                                                            class="text-danger">*</span></label>
-                                                    <input type="email" class="form-control" value="hello@gmail.com">
-                                                </div>
-
-
-
-                                                <div class="col-12 text-end">
-                                                    <a href="#" class="btn btn-primary mb-0">儲存變更</a>
-                                                </div>
-                                            </form>
-                                            <!-- Form END -->
-                                        </div>
-                                        <!-- Card body END -->
-                                        <!-- Card body START -->
-                                        <div class="card-header border-bottom">
-                                            <h4 class="card-header-title">更新密碼</h4>
-
-
-                                        </div>
-
-                                        <form class="card-body col-12">
-                                            <!-- Current password -->
-                                            <div class="mb-3 col-3">
-                                                <label class="form-label">目前密碼</label>
-                                                <input class="form-control" type="password">
-                                            </div>
-                                            <!-- New password -->
-                                            <div class="mb-3 col-3">
-                                                <label class="form-label"> 輸入新密碼</label>
-                                                <div class="input-group">
-                                                    <input class="form-control fakepassword" type="password"
-                                                        id="psw-input">
-                                                </div>
-                                            </div>
-                                            <!-- Confirm -->
-                                            <div class="mb-3 col-3">
-                                                <label class="form-label">再次輸入新密碼</label>
-                                                <input class="form-control" type="password">
-                                            </div>
-
-                                            <div class="col-12 text-end">
-                                                <a href="#" class="btn btn-primary mb-0">儲存變更</a>
-                                            </div>
-                                        </form>
                                     </div>
-                                    <!-- Card body END -->
-
                                 </div>
                             </div>
-                            <!-- Main content END -->
+                            <div class="col-sm-6">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 4</h5>
+                                        <span class="card-text">Card D</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- 第三组卡片：E 和 F -->
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 5</h5>
+                                        <span class="card-text">Card E</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 6</h5>
+                                        <span class="card-text">Card F</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 第四组卡-->
+
+
+                    </div>
+                    <!-- Main content END -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary prev-page">上一頁</button>
+                        <button class="btn btn-primary next-page">下一頁</button>
+                    </div>
+                </div>
+
+                <!-- 已報名 -->
+                <div class="B2-content" id="signup-section" style="display: none;">
+
+                    <div class="container">
+                        <!-- 第一组卡片：A 和 B -->
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 1</h5>
+                                        <span class="card-text">Card A</span>
+
+
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 2</h5>
+                                        <span class="card-text">Card B</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="B2-content" id="delete-section" style="display: none;">
-                        <!-- 刪除帳號的HTML結構 -->
 
-                        <div>
 
-                            <!-- Personal info START -->
-                            <div class="card border">
-                                <!-- Card header -->
-                                <div class="card-header border-bottom">
-                                    <h4 class="card-header-title">自主揪團</h4>
+                <!-- 個人資料 -->
+                <div class="B2-content" id="settings-section" style="display: none;">
+                </div>
 
-                                </div>
+                <!-- 個人揪團 -->
+                <div class="B2-content" id="personal-section" style="display: none;">
+                    <div class="container">
+                        <!-- 第一组卡片：A 和 B -->
+                        <div class="row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 1</h5>
+                                        <span class="card-text">Card A</span>
 
-                                <!-- Card body START -->
-                                <div class="card-body">
-                                    <!-- Form START -->
-                                    <div>
-                                        內容aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                                        <div class="text-end">
-                                            <button>刪除</button>
-                                            <button>編輯</button>
+
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
                                         </div>
                                     </div>
-                                    <!-- Form END -->
                                 </div>
-                                <!-- Card body END -->
                             </div>
-                            <!-- Personal info END -->
-
-
+                            <div class="col-sm-6">
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Deal 2</h5>
+                                        <span class="card-text">Card B</span>
+                                        <div class="card-button-container">
+                                            <button class="btn btn-primary">編輯</button>
+                                            <button class="btn btn-danger">刪除</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

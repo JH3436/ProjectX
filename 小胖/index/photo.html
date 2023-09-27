@@ -13,6 +13,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,8 @@
         .custom-crop-box {
             position: absolute;
             top: 0;
-            left: 320px; /* 調整左側間距以將其移動到旁邊 */
+            left: 320px;
+            /* 調整左側間距以將其移動到旁邊 */
             width: 200px;
             height: 200px;
         }
@@ -47,11 +49,14 @@
         }
 
         .preview-container img {
-            max-width: 100%; /* 最大寬度為容器寬度的100% */
-            max-height: 100%; /* 最大高度為容器高度的100% */
+            max-width: 100%;
+            /* 最大寬度為容器寬度的100% */
+            max-height: 100%;
+            /* 最大高度為容器高度的100% */
         }
     </style>
 </head>
+
 <body>
     <h1>圖片裁剪與預覽</h1>
 
@@ -59,10 +64,10 @@
     <input type="file" id="image-input" accept="image/*">
 
     <!-- 裁剪容器 -->
-    
-        <!-- 用於顯示裁剪框 -->
-        <div id="crop-box" class="custom-crop-box"></div>
-   
+
+    <!-- 用於顯示裁剪框 -->
+    <div id="crop-box" class="custom-crop-box"></div>
+
 
     <!-- 裁剪後的圖像預覽 -->
     <h2>裁剪後的圖像預覽</h2>
@@ -155,7 +160,7 @@
 
                 // 在此處添加代碼以將裁剪後的圖片資料提交到後端
                 // 可以使用 AJAX 或表單提交方式
-                
+
             });
         });
 
@@ -163,4 +168,5 @@
         initializeCroppie();
     </script>
 </body>
+
 </html>

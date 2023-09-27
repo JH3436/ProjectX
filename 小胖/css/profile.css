@@ -34,7 +34,7 @@ body {
 
 .dora {
 
-    gap: 20px;
+    
     /* align-items: center; */
     padding: 20px;
 }
@@ -149,4 +149,27 @@ body {
 
 /* 這邊開始設計B2 */
 
-/* 設計自我介紹 */
+
+.card-button-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+  }
+
+  .card-title::before {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    /* 調整位置，使其下移10px */
+    left: 10%;
+    /* 讓線從左邊25%的位置開始，使其短一些 */
+    right: 10%;
+    /* 讓線在右邊25%的位置結束 */
+    height: 1px;
+    background-color: #ccc;
+  }
+
+  .card{
+    height: 150px;
+  }
