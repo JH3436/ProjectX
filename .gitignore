@@ -405,3 +405,5 @@ FodyWeavers.xsd
 *.cache
 
 MVC_Project/MVC_Project/obj/
+
+MVC_Project/MVC_Project/bin/Debug/
