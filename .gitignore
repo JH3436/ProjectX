@@ -399,3 +399,9 @@ FodyWeavers.xsd
 
 #I added
 *.vsidx
+
+*.v2
+
+*.cache
+
+MVC_Project/MVC_Project/obj/
