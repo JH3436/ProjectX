@@ -5,7 +5,7 @@ use ProjectX
 go
 
 --活動資料表
-CREATE TABLE Activity (
+CREATE TABLE MyActivity (
     ActivityID INT identity(1,1) PRIMARY KEY,
     ActivityName NVARCHAR(255) UNIQUE, -- 唯一約束，確保活動名稱的唯一性
     Category NVARCHAR(255),
@@ -44,7 +44,7 @@ CREATE TABLE [Group] (
     Organizer INT,  
     OriginalActivityID INT,  
     CONSTRAINT FK_Organizer FOREIGN KEY (Organizer) REFERENCES [Member](UserID),
-    CONSTRAINT FK_OriginalActivity FOREIGN KEY (OriginalActivityID) REFERENCES Activity(ActivityID)
+    CONSTRAINT FK_OriginalActivity FOREIGN KEY (OriginalActivityID) REFERENCES MyActivity(ActivityID)
 );
 go
 
@@ -54,7 +54,7 @@ CREATE TABLE VoteTime (
     ActivityID INT,               
     StartDate DATE,               
     VoteCount INT,                   
-    CONSTRAINT FK_VoteTime_Activity FOREIGN KEY (ActivityID) REFERENCES Activity(ActivityID)
+    CONSTRAINT FK_VoteTime_Activity FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID)
 );
 go
 
@@ -65,7 +65,7 @@ CREATE TABLE VoteRecord (
     ActivityID INT,
     VoteResult DATE,
     CONSTRAINT FK_VoteRecord_UserID FOREIGN KEY (UserID) REFERENCES [Member](UserID),
-    CONSTRAINT FK_VoteRecord_ActivityID FOREIGN KEY (ActivityID) REFERENCES Activity(ActivityID)
+    CONSTRAINT FK_VoteRecord_ActivityID FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID)
 );
 go
 
@@ -85,7 +85,7 @@ CREATE TABLE ActivityLikes (
     UserID INT,
     ActivityID INT,
     CONSTRAINT FK_UserID FOREIGN KEY (UserID) REFERENCES [Member](UserID),
-    CONSTRAINT FK_ActivityID FOREIGN KEY (ActivityID) REFERENCES Activity(ActivityID),
+    CONSTRAINT FK_ActivityID FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID),
     CONSTRAINT UQ_UserActivityLike UNIQUE (UserID, ActivityID)
 );
 go
@@ -108,7 +108,7 @@ CREATE TABLE Photos (
     ActivityID INT,
     GroupID INT,
     PhotoPath NVARCHAR(255) NOT NULL,
-    CONSTRAINT FK_Activity_Photo FOREIGN KEY (ActivityID) REFERENCES Activity(ActivityID),
+    CONSTRAINT FK_Activity_Photo FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID),
     CONSTRAINT FK_Group_Photo FOREIGN KEY (GroupID) REFERENCES [Group](GroupID)
 );
 go
@@ -121,7 +121,7 @@ CREATE TABLE Chat (
     ChatContent NVARCHAR(MAX) NOT NULL,    
     ToWhom INT,                            
     ChatTime DATETIME DEFAULT SYSDATETIME(),
-    FOREIGN KEY (ActivityID) REFERENCES Activity(ActivityID),
+    FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID),
     FOREIGN KEY (UserID) REFERENCES [Member](UserID),
 	-- 外鍵約束，參考留言板ID (ChatID) 作為回覆對象
     FOREIGN KEY (ToWhom) REFERENCES Chat(ChatID)
