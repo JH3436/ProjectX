@@ -1,7 +1,35 @@
+using Microsoft.EntityFrameworkCore;
+using MVC_Project.Models;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//連接
+builder.Services.AddDbContext<ProjectXContext>(
+      options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection")));
+
+//JSON
+builder.Services
+    .AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;    //讓property不要變小寫
+        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);  //編碼全放
+        options.JsonSerializerOptions.WriteIndented = true;  //自動排版JSON輸出
+    });
+
+// CORS連線
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy => {
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                      });
+});
 
 var app = builder.Build();
 
@@ -15,6 +43,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+//CORS
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseRouting();
 
