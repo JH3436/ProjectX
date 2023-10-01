@@ -12,6 +12,8 @@ builder.Services.AddControllersWithViews();
 //³s±µ
 builder.Services.AddDbContext<ProjectXContext>(
       options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection")));
+builder.Services.AddDbContext<ProjectXContext>(
+      options => options.UseSqlServer(builder.Configuration.GetConnectionString("JamesProjectXconnection")));
 
 //JSON
 builder.Services
