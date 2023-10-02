@@ -18,7 +18,7 @@ CREATE TABLE MyActivity (
 go
 
 --會員資料表
-CREATE TABLE Member (
+CREATE TABLE [Member] (
     UserID INT IDENTITY(1,1) PRIMARY KEY,
     Nickname NVARCHAR(50) UNIQUE,  
     Account NVARCHAR(50) UNIQUE,  
@@ -27,7 +27,6 @@ CREATE TABLE Member (
     Phone NVARCHAR(20) UNIQUE,
 	Intro NVARCHAR(MAX),
 	UserPhoto VARBINARY(MAX),
-    LoginMethod NVARCHAR(50)      
 );
 go
 
@@ -79,7 +78,7 @@ CREATE TABLE Registration (
 go
 
 --活動收藏資料表
-CREATE TABLE ActivityLikes (
+CREATE TABLE LikeRecord (
     LikeRecordID INT IDENTITY(1,1) PRIMARY KEY,
     UserID INT,
     ActivityID INT,
@@ -90,7 +89,7 @@ CREATE TABLE ActivityLikes (
 go
 
 -- 通知資料表
-CREATE TABLE Notification (
+CREATE TABLE [Notification] (
     NotificationID INT PRIMARY KEY IDENTITY(1,1),
     UserID INT NOT NULL, 
     NotificationContent NVARCHAR(MAX) NOT NULL,
@@ -101,14 +100,21 @@ CREATE TABLE Notification (
 );
 go
 
---活動照片資料表
-CREATE TABLE Photos (
-    PhotoID INT PRIMARY KEY IDENTITY(1,1),
+--官方活動照片資料表
+CREATE TABLE OfficialPhoto (
+    OfficialPhotoID INT PRIMARY KEY IDENTITY(1,1),
     ActivityID INT,
-    GroupID INT,
-    PhotoData NVARCHAR(max) NOT NULL,
+    PhotoPath NVARCHAR(max) NOT NULL,
     CONSTRAINT FK_Activity_Photo FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID),
-    CONSTRAINT FK_Group_Photo FOREIGN KEY (GroupID) REFERENCES [Group](GroupID)
+);
+go
+
+--個人開團活動照片資料表
+CREATE TABLE PersonalPhoto (
+    PersonalPhotoID INT PRIMARY KEY IDENTITY(1,1),
+    GroupID INT,
+    PhotoData VARBINARY(MAX) NOT NULL,
+    CONSTRAINT FK_PersonalPhoto_Group FOREIGN KEY (GroupID) REFERENCES [Group](GroupID),
 );
 go
 
@@ -140,6 +146,8 @@ CREATE TABLE Contact (
 go
 
 --假資料
+
+--活動資料表
 INSERT INTO [dbo].[MyActivity]
            ([ActivityName]
            ,[Category]
@@ -184,6 +192,7 @@ INSERT INTO [dbo].[MyActivity]
            '2024-03-01')
 GO
 
+--會員資料表
 INSERT INTO [dbo].[Member]
            ([Nickname]
            ,[Account]
@@ -191,15 +200,15 @@ INSERT INTO [dbo].[Member]
            ,[Email]
            ,[Phone]
            ,[Intro]
-		   ,[UserPhoto]
-           ,[LoginMethod])
+		   ,[UserPhoto])
      VALUES
-           ('管理員', 0000000000, 0000000000, '0000000000@gmail.com', 0900000000, 'admin', null ,'這啥鬼'),
-		   ('蓬魚雁', 1111111111, 1111111111, '1111111111@gmail.com', 0911111111, '大家好，我是蓬魚雁。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null ,'這啥鬼'),
-		   ('003', 2222222222, 2222222222, '2222222222@gmail.com', 0922222222, '大家好，我是003。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null ,'這啥鬼'),
-		   ('jerry', 3333333333, 3333333333, '3333333333@gmail.com', 0933333333, '大家好，我是jerry。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null ,'這啥鬼')
+           ('管理員', 0000000000, 0000000000, '0000000000@gmail.com', 0900000000, 'admin', null),
+		   ('蓬魚雁', 1111111111, 1111111111, '1111111111@gmail.com', 0911111111, '大家好，我是蓬魚雁。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null),
+		   ('003', 2222222222, 2222222222, '2222222222@gmail.com', 0922222222, '大家好，我是003。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null),
+		   ('jerry', 3333333333, 3333333333, '3333333333@gmail.com', 0933333333, '大家好，我是jerry。我來自一個美麗的城市，在這裡我有豐富的經驗和技能。我專注於軟體開發，並擁有多年的程式設計經驗，尤其在網路應用程式開發方面有豐富經驗。', null)
 GO
 
+--成團資料表
 INSERT INTO [dbo].[Group]
            ([GroupName]
            ,[GroupCategory]
@@ -222,27 +231,30 @@ INSERT INTO [dbo].[Group]
 
 GO
 
+--投票時間資料表
 INSERT INTO [dbo].[VoteTime]
            ([ActivityID]
-           ,[StartDate]
-           ,[DeadDate])
+           ,[StartDate])
      VALUES
-           (1, '2023-10-01', '2023-10-06')
+           (1, '2023-09-30'),
+           (1, '2023-10-07'),
+           (1, '2023-09-14'),
+           (1, '2023-09-21')
 GO
 
 
-
+--報名紀錄資料表
 INSERT INTO [dbo].[VoteRecord]
            ([UserID]
            ,[ActivityID]
            ,[VoteResult])
      VALUES
-           (1, 1, '2023-11-4'),
-		   (2, 1, '2023-11-4'),
-		   (3, 1, '2023-11-11')
+           (1, 1, '2023-09-21'),
+		   (2, 1, '2023-09-14'),
+		   (3, 1, '2023-09-21')
 GO
 
-
+--報名紀錄資料表
 INSERT INTO [dbo].[Registration]
            ([GroupID]
            ,[ParticipantID])
@@ -253,8 +265,8 @@ INSERT INTO [dbo].[Registration]
 GO
 
 
-
-INSERT INTO [dbo].[ActivityLikes]
+--活動收藏資料表
+INSERT INTO [dbo].[LikeRecord]
            ([UserID]
            ,[ActivityID])
      VALUES
@@ -264,41 +276,40 @@ INSERT INTO [dbo].[ActivityLikes]
 GO
 
 
-
+-- 通知資料表
 INSERT INTO [dbo].[Notification]
            ([UserID]
-           ,[NotificationContent]
-           ,[IsRead]
-           ,[NotificationDate])
+           ,[NotificationContent])
      VALUES
-           (2, '你有一則追蹤活動需要投票', 0, '2023-10-01')
+           (2, '你有一則追蹤活動需要投票'),
+		   (1,'有人回覆了您的訊息!')
 GO
 
 
-
-INSERT INTO [dbo].[Photos]
+--官方活動照片資料表
+INSERT INTO [dbo].[OfficialPhoto]
            ([ActivityID]
-           ,[GroupID]
-           ,[PhotoData])
+           ,[PhotoPath])
      VALUES
-           (1, null, '/IMG/手剎車.jpg'),
-		   (1, null, '/IMG/surf3.jpg'),
-		   (1, null, '/IMG/surf2.jpg'),
-		   (1, null, '/IMG/surf.jpg')
+           (1, '/IMG/手剎車.jpg'),
+		   (1, '/IMG/surf3.jpg'),
+		   (1, '/IMG/surf2.jpg'),
+		   (1, '/IMG/surf.jpg')
 GO
 
+--個人開團活動照片資料表
+--不需要假資料，直接在頁面上操作是否能寫入/讀取資料表即可
 
-
+--留言板資料表
 INSERT INTO [dbo].[Chat]
            ([ActivityID]
            ,[UserID]
            ,[ChatContent]
-           ,[ToWhom]
-           ,[ChatTime])
+           ,[ToWhom])
      VALUES
-           (1, 1, '留言板顯示測試', null, SYSDATETIME()),
-		   (1, 1, '留言板回覆測試', 1, SYSDATETIME()),
-		   (1, 1, '留言板顯示測試2', null, SYSDATETIME()),
-		   (1, 1, '留言板回覆測試2', 3, SYSDATETIME())
+           (1, 1, '留言板顯示測試', null),
+		   (1, 1, '留言板回覆測試', 1),
+		   (1, 1, '留言板顯示測試2', null),
+		   (1, 1, '留言板回覆測試2', 3)
 GO
 
