@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace MVC_Project.Models;
 
-public partial class VoteTime
+public partial class OfficialPhoto
 {
-    public int VoteID { get; set; }
+    public int OfficialPhotoID { get; set; }
 
     public int? ActivityID { get; set; }
 
-    public DateTime? StartDate { get; set; }
+    public string PhotoPath { get; set; }
 
     public virtual MyActivity Activity { get; set; }
 }

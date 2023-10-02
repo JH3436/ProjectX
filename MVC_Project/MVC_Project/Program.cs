@@ -12,8 +12,6 @@ builder.Services.AddControllersWithViews();
 //³s±µ
 builder.Services.AddDbContext<ProjectXContext>(
       options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection")));
-builder.Services.AddDbContext<ProjectXContext>(
-      options => options.UseSqlServer(builder.Configuration.GetConnectionString("JamesProjectXconnection")));
 
 //JSON
 builder.Services
@@ -32,6 +30,8 @@ builder.Services.AddCors(options => {
                           policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                       });
 });
+
+
 
 var app = builder.Build();
 
@@ -55,6 +55,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=HomePage}/{id?}");
+    pattern: "{controller=Home}/{action=Homepage}/{id?}");
 
 app.Run();

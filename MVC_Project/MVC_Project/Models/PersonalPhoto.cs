@@ -5,15 +5,13 @@ using System.Collections.Generic;
 
 namespace MVC_Project.Models;
 
-public partial class Registration
+public partial class PersonalPhoto
 {
-    public int RegistrationID { get; set; }
+    public int PersonalPhotoID { get; set; }
 
     public int? GroupID { get; set; }
 
-    public int? ParticipantID { get; set; }
+    public byte[] PhotoData { get; set; }
 
     public virtual Group Group { get; set; }
-
-    public virtual Member Participant { get; set; }
 }

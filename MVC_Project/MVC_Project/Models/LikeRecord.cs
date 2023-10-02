@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 namespace MVC_Project.Models;
 
-public partial class VoteTime
+public partial class LikeRecord
 {
-    public int VoteID { get; set; }
+    public int LikeRecordID { get; set; }
+
+    public int? UserID { get; set; }
 
     public int? ActivityID { get; set; }
 
-    public DateTime? StartDate { get; set; }
-
     public virtual MyActivity Activity { get; set; }
+
+    public virtual Member User { get; set; }
 }
