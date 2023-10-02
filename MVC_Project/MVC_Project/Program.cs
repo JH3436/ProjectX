@@ -11,7 +11,11 @@ builder.Services.AddControllersWithViews();
 
 //連接
 builder.Services.AddDbContext<ProjectXContext>(
-      options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection")));
+      options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_James")));
+
+// 連接到第二個資料庫
+builder.Services.AddDbContext<ProjectXContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_Lun")));
 
 //JSON
 builder.Services
