@@ -9,7 +9,6 @@ CREATE TABLE MyActivity (
     ActivityID INT identity(1,1) PRIMARY KEY,
     ActivityName NVARCHAR(255) UNIQUE, -- 唯一約束，確保活動名稱的唯一性
     Category NVARCHAR(255),
-    Map NVARCHAR(255),
     SuggestedAmount MONEY,
     ActivityContent NVARCHAR(MAX),
     MinAttendee INT,
@@ -27,7 +26,7 @@ CREATE TABLE Member (
     Email NVARCHAR(255) UNIQUE,    
     Phone NVARCHAR(20) UNIQUE,
 	Intro NVARCHAR(MAX),
-	UserPhoto NVARCHAR(MAX) ,
+	UserPhoto VARBINARY(MAX),
     LoginMethod NVARCHAR(50)      
 );
 go
@@ -54,7 +53,6 @@ CREATE TABLE VoteTime (
 	VoteID INT IDENTITY(1,1) PRIMARY KEY,        
     ActivityID INT,               
     StartDate DATE,               
-    DeadDate DATE,                   
     CONSTRAINT FK_VoteTime_Activity FOREIGN KEY (ActivityID) REFERENCES MyActivity(ActivityID)
 );
 go
