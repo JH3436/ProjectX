@@ -1,0 +1,26 @@
+﻿@model Try_Photo_Upload.Models.Photos
+
+@{
+    ViewData["Title"] = "新增照片";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="PhotoName" class="control-label">照片名稱：</label>
+        <input asp-for="PhotoName" class="form-control" />
+        <span asp-validation-for="PhotoName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ImageData" class="control-label">上傳照片：</label>
+        <input type="file" name="ImageDataFiles" id="ImageData" accept="image/*" class="form-control-file" multiple/>
+        <span asp-validation-for="ImageData" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="新增" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+    </div>
+</form>

@@ -1,0 +1,38 @@
+﻿@model List<Try_Photo_Upload.Models.Photos>
+
+@{
+    ViewData["Title"] = "查看相同照片名稱的照片";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>照片名稱</th>
+                <th>照片</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var photo in Model)
+            {
+                <tr>
+                    <td>@photo.PhotoName</td>
+                    <td>
+                        <img src="data:image/png;base64,@Convert.ToBase64String(photo.ImageData)" width="200" alt="照片" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>找不到相同照片名稱的照片。</p>
+}
+
+<div>
+    <a asp-action="Index">返回列表</a>
+</div>
