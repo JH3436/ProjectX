@@ -9,23 +9,23 @@ using MVC_Project.Models;
 
 namespace MVC_Project.Controllers
 {
-    public class PersonalPhotoesController : Controller
+    public class PersonalPhotosController : Controller
     {
         private readonly ProjectXContext _context;
 
-        public PersonalPhotoesController(ProjectXContext context)
+        public PersonalPhotosController(ProjectXContext context)
         {
             _context = context;
         }
 
-        // GET: PersonalPhotoes PersonalPhoto
+        // GET: PersonalPhotos PersonalPhoto
         public async Task<IActionResult> Index()
         {
             var projectXContext = _context.PersonalPhoto.Include(p => p.Group);
             return View(await projectXContext.ToListAsync());
         }
 
-        // GET: PersonalPhotoes/Details/5
+        // GET: PersonalPhotos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.PersonalPhoto == null)
@@ -44,14 +44,14 @@ namespace MVC_Project.Controllers
             return View(personalPhoto);
         }
 
-        // GET: PersonalPhotoes/Create
+        // GET: PersonalPhotos/Create
         public IActionResult Create()
         {
             ViewData["GroupID"] = new SelectList(_context.Group, "GroupID", "GroupID");
             return View();
         }
 
-        // POST: PersonalPhotoes/Create
+        // POST: PersonalPhotos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,7 +68,7 @@ namespace MVC_Project.Controllers
             return View(personalPhoto);
         }
 
-        // GET: PersonalPhotoes/Edit/5
+        // GET: PersonalPhotos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.PersonalPhoto == null)
@@ -85,7 +85,7 @@ namespace MVC_Project.Controllers
             return View(personalPhoto);
         }
 
-        // POST: PersonalPhotoes/Edit/5
+        // POST: PersonalPhotos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -121,7 +121,7 @@ namespace MVC_Project.Controllers
             return View(personalPhoto);
         }
 
-        // GET: PersonalPhotoes/Delete/5
+        // GET: PersonalPhotos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.PersonalPhoto == null)
@@ -140,7 +140,7 @@ namespace MVC_Project.Controllers
             return View(personalPhoto);
         }
 
-        // POST: PersonalPhotoes/Delete/5
+        // POST: PersonalPhotos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

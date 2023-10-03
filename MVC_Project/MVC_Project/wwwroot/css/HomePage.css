@@ -144,7 +144,7 @@ body {
 .intro-div .options .option {
     position: relative;
     overflow: hidden;
-    min-width: 60px;
+    min-width: 70px;
     margin: 10px;
     background: var(--optionBackground, var(--defaultBackground, #E6E9ED));
     cursor: pointer;
@@ -188,8 +188,8 @@ body {
         }
 
         .intro-div .options .option.active .label {
-            bottom: 12px;
-            left: 12px;
+            bottom: 10px;
+            left: 15px;
         }
 
             .intro-div .options .option.active .label .info > div {
@@ -209,7 +209,7 @@ body {
 
         .intro-div .options .option:not(.active) .label {
             bottom: 2px;
-            left: 5px;
+            left: 10px;
         }
 
             .intro-div .options .option:not(.active) .label .info > div {
