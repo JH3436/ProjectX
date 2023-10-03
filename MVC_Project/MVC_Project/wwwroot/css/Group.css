@@ -150,3 +150,14 @@ h1 {
 }
 
 
+/*頁底的聯絡我們表單彈出設計(齊澤加的)*/
+#contactDialog {
+    margin-top: .7%;
+}
+
+#contactDialog::backdrop {
+    /* 設定模糊半徑，調整數值以達到所需的效果 */
+    backdrop-filter: blur(10px);
+    /* 背景透明度 */
+    opacity: 1;
+}
