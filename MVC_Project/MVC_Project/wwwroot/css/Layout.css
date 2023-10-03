@@ -71,8 +71,8 @@ body {
 }
 
 .navbar {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
     color: var(--white);
     font-size: 1.75rem;
     font-weight: bolder;
@@ -122,11 +122,16 @@ body {
     background-image: url('https://picsum.photos/240/80?random=4');
 }
 
+.dropdown-img-5::before {
+    background-image: url('https://picsum.photos/240/80?random=5');
+}
+
 
 .dropdown-img-1,
 .dropdown-img-2,
 .dropdown-img-3,
-.dropdown-img-4 {
+.dropdown-img-4,
+.dropdown-img-5 {
     position: relative;
     overflow: hidden;
     transition: opacity 0.3s;
@@ -135,7 +140,8 @@ body {
     .dropdown-img-1::before,
     .dropdown-img-2::before,
     .dropdown-img-3::before,
-    .dropdown-img-4::before {
+    .dropdown-img-4::before,
+    .dropdown-img-5::before {
         content: "";
         position: absolute;
         top: 0;
@@ -150,7 +156,8 @@ body {
     .dropdown-img-1:hover::before,
     .dropdown-img-2:hover::before,
     .dropdown-img-3:hover::before,
-    .dropdown-img-4:hover::before {
+    .dropdown-img-4:hover::before,
+    .dropdown-img-5:hover::before {
         opacity: 0.5;
         transform: scale(1.25);
     }
@@ -408,3 +415,14 @@ footer {
 #contactBox form .textarea-field textarea {
     resize: none;
 }
+
+#contactDialog {
+    margin-top: .7%;
+}
+
+    #contactDialog::backdrop {
+        /* 設定模糊半徑，調整數值以達到所需的效果 */
+        backdrop-filter: blur(10px);
+        /* 背景透明度 */
+        opacity: 1;
+    }

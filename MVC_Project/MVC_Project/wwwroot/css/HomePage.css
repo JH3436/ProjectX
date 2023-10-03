@@ -491,29 +491,3 @@ body {
 .card--6 .card__img--hover {
     background-image: url('https://spaceholder.cc/i/1260x750?random=3');
 }
-
-
-/* 頁底設計 */
-footer {
-    margin-top: 5%;
-}
-
-.custom-btn {
-    margin: 1rem;
-    display: inline-block;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-    .custom-btn i {
-        font-size: 2rem;
-        color: var(--deepBlue);
-    }
-
-    .custom-btn:hover i {
-        color: var(--brown);
-    }
-
-
