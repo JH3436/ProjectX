@@ -148,3 +148,9 @@ h1 {
 .move-left-row {
     margin-left: -250px !important;
 }
+
+
+.GroupForm{
+    position:absolute;
+    margin-top:2000px;
+}
