@@ -20,10 +20,7 @@
 			</div>
 		</a>
 	</div>
-
-
-
-
+	
 	<!-- 導覽列設計 -->
 	<div class="header">
 		<div class="row navbar justify-content-between">
@@ -80,9 +77,13 @@
 		</div>
 	</div>
 
+	@* if bla bla bla 就顯示.... *@
+	@await Html.PartialAsync("_LoggedInNavbar")
+
 	<main role="main" class="pb-3">
 		@RenderBody()
 	</main>
+	
 
 	<!-- 頁底設計 -->
 	<footer class="text-center text-white" style="background-color: var(--white)">
