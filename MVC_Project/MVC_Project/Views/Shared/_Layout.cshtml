@@ -68,17 +68,27 @@
 					<i class="searchInputIcon fa fa-search"></i>
 				</div>
 			</div>
-			<div class="col-auto">
-				<a class="navbar-item" href="#">登入</a>
-			</div>
-			<div class="col-auto nav-signin">
-				<a class="singin-style" href="#">註冊</a>
-			</div>
+
+			@if (Context.Request.Path == "/Groups/Create")
+			{
+				// 顯示已登入的導覽列
+				@await Html.PartialAsync("_LoggedInNavbar")
+			}
+			else
+			{
+				// 顯示未登入的導覽列
+				<div class="col-auto">
+					<a class="navbar-item" href="#">登入</a>
+				</div>
+				<div class="col-auto nav-signin">
+					<a class="singin-style" href="#">註冊</a>
+				</div>
+			}
+
+			
 		</div>
 	</div>
 
-	@* if bla bla bla 就顯示.... *@
-	@await Html.PartialAsync("_LoggedInNavbar")
 
 	<main role="main" class="pb-3">
 		@RenderBody()
