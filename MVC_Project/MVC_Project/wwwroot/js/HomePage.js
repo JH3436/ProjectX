@@ -1,5 +1,4 @@
-﻿//回到網頁頂端
-
+﻿
 const scrollButton = document.getElementById("scroll-to-top");
 
 window.addEventListener("scroll", () => {
