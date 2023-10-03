@@ -6,7 +6,8 @@
 
 <!-- css連結  8-1-->
 <link rel="stylesheet" href="~/css/Group.css" />
-
+<br>
+<br>
 <div class="container">
 <h1 class="mt-5 fw-bold">個人揪團表單</h1>
 
@@ -21,11 +22,11 @@
                         <label asp-for="GroupCategory" class="control-label pb-2" style="font-size: 30px;">請選擇活動類別</label>
                         <select asp-for="GroupCategory" class="form-control">
                             <option value="" disabled selected>點擊後選擇</option>
-                            <option value="Option1">登山</option>
-                            <option value="Option2">潛水</option>
-                            <option value="Option3">露營</option>
-                            <option value="Option4">溯溪</option>
-                            <option value="Option5">其他</option>
+                            <option value="登山">登山</option>
+                            <option value="潛水">潛水</option>
+                            <option value="露營">露營</option>
+                            <option value="溯溪">溯溪</option>
+                            <option value="其他">其他</option>
                         </select>
                         <span asp-validation-for="GroupCategory" class="text-danger"></span>
                     </div>
