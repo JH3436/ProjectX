@@ -107,23 +107,23 @@ body {
 
 /* 圖片位址 */
 .dropdown-img-1::before {
-    background: url('https://picsum.photos/240/80?random=1');
+    background: url('../IMG/奇萊山景.JPG');
 }
 
 .dropdown-img-2::before {
-    background-image: url('https://picsum.photos/240/80?random=2');
+    background-image: url('../IMG/情人湖.JPG');
 }
 
 .dropdown-img-3::before {
-    background-image: url('https://picsum.photos/240/80?random=3');
+    background-image: url('../IMG/自潛.png');
 }
 
 .dropdown-img-4::before {
-    background-image: url('https://picsum.photos/240/80?random=4');
+    background-image: url('../IMG/野營.jpg');
 }
 
 .dropdown-img-5::before {
-    background-image: url('https://picsum.photos/240/80?random=5');
+    background-image: url('../IMG/其他.png');
 }
 
 

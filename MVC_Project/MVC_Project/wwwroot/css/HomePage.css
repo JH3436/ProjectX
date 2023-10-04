@@ -61,7 +61,7 @@ body {
     padding-right: 10%;
     height: 80vh;
     margin-top: 80px;
-    background-image: url("https://picsum.photos/1720/499");
+    background-image: url("../IMG/大壩.JPG");
     position: relative;
     background-size: cover;
     background-repeat: no-repeat;
@@ -201,7 +201,6 @@ body {
         transform: scale(1);
         margin: 0px;
         border-radius: 40px;
-        background-size: auto 100%;
     }
 
         .intro-div .options .option.active .shadow {

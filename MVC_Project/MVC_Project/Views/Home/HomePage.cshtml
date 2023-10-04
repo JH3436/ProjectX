@@ -9,298 +9,286 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JO!N</title>
-  <link rel="icon" href="~/IMG/小黃人.png" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JO!N</title>
+    <link rel="icon" href="~/IMG/小黃人.png" type="image/png" />
 
-  <!-- Font Awesome套件引入 -->
-  <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
+    <!-- Font Awesome套件引入 -->
+    <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
 
 
-  <!-- 引入 Bootstrap 的 CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- 引入 Bootstrap 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
-  <!-- css連結，確保在Bootsrap之下 -->
-  <link rel="stylesheet" href="~/css/HomePage.css" />
+    <!-- css連結，確保在Bootsrap之下 -->
+    <link rel="stylesheet" href="~/css/HomePage.css" />
 
-  <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- moving letter特效引入 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <!-- moving letter特效引入 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 </head>
 
 <body>
-  <!-- 回到網頁頂端設計 -->
-  <div id="scroll-to-top" class="hidden">
-    <a href="#top">
-      <div class="homeicon-container">
-        <i class="fa-solid fa-house fa-xl" style="color: var(--white);"></i>
-      </div>
-    </a>
-  </div>
-
-  <!-- slogan加插圖 -->
-  <div class="slogan-section">
-    <div class="slogan-text">
-      <!-- Slogan 文本 -->
-      <h2>一起探索台灣的美吧!</h2>
-      <h2 class="slogan-lower-text">以社群的力量找到同好</h2>
+    <!-- 回到網頁頂端設計 -->
+    <div id="scroll-to-top" class="hidden">
+        <a href="#top">
+            <div class="homeicon-container">
+                <i class="fa-solid fa-house fa-xl" style="color: var(--white);"></i>
+            </div>
+        </a>
     </div>
-  </div>
 
-  <!-- 網站介紹設計 -->
-  <h1 class="intro-title">與新朋友一起展開新旅程🏕️</h1>
-
-  <div class="intro-div">
-    <div class="options">
-      <div class="option active" style="--optionBackground:url(https://picsum.photos/2500/799?random=1);">
-        <div class="shadow"></div>
-        <div class="label">
-          <div class="icon">
-            <i class="fa-solid fa-xl fa-1"></i>
-          </div>
-          <div class="info">
-            <div class="main">身邊總是找不到喜愛戶外活動的朋友?</div>
-            <div class="sub">試試我們的揪團系統!</div>
-          </div>
+    <!-- slogan加插圖 -->
+    <div class="slogan-section">
+        <div class="slogan-text">
+            <!-- Slogan 文本 -->
+            <h2>一起探索台灣的美吧!</h2>
+            <h2 class="slogan-lower-text">以社群的力量找到同好</h2>
         </div>
-      </div>
-      <div class="option" style="--optionBackground:url(https://picsum.photos/1800/799?random=2);">
-        <div class="shadow"></div>
-        <div class="label">
-          <div class="icon">
-            <i class="fa-solid fa-xl fa-2"></i>
-          </div>
-          <div class="info">
-            <div class="main">台灣有哪些秘境?</div>
-            <div class="sub">讓JO!N報你栽!</div>
-          </div>
+    </div>
+
+    <!-- 網站介紹設計 -->
+    <h1 class="intro-title">與新朋友一起展開新旅程🏕️</h1>
+
+    <div class="intro-div">
+        <div class="options">
+            <div class="option active" style="--optionBackground:url(../IMG/sunset.JPG);background-size: cover; background-repeat: no-repeat;">
+                <div class="shadow"></div>
+                <div class="label">
+                    <div class="icon">
+                        <i class="fa-solid fa-xl fa-1"></i>
+                    </div>
+                    <div class="info">
+                        <div class="main">身邊總是找不到喜愛戶外活動的朋友?</div>
+                        <div class="sub">試試我們的揪團系統!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="option" style="--optionBackground:url(../IMG/奇萊北.JPG);background-size: cover; background-repeat: no-repeat;">
+                <div class="shadow"></div>
+                <div class="label">
+                    <div class="icon">
+                        <i class="fa-solid fa-xl fa-2"></i>
+                    </div>
+                    <div class="info">
+                        <div class="main">台灣有哪些秘境?</div>
+                        <div class="sub">讓JO!N報你栽!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="option" style="--optionBackground:url(../IMG/奇萊北黃金.JPG);background-size: cover; background-repeat: no-repeat;">
+                <div class="shadow"></div>
+                <div class="label">
+                    <div class="icon">
+                        <i class="fa-solid fa-xl fa-3"></i>
+                    </div>
+                    <div class="info">
+                        <div class="main">不確定何時有活動?</div>
+                        <div class="sub">收藏活動! 讓你不再錯過感興趣的戶外活動</div>
+                    </div>
+                </div>
+            </div>
+            <div class="option" style="Background:url(../IMG/露營.JPG);background-size: cover; background-repeat: no-repeat;">
+                <div class="shadow"></div>
+                <div class="label">
+                    <div class="icon">
+                        <i class="fa-solid fa-xl fa-4"></i>
+                    </div>
+                    <div class="info">
+                        <div class="main">還在等什麼?</div>
+                        <div class="sub">往下滑看更多活動!!</div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="option" style="--optionBackground:url(https://picsum.photos/1800/799?random=3);">
-        <div class="shadow"></div>
-        <div class="label">
-          <div class="icon">
-            <i class="fa-solid fa-xl fa-3"></i>
-          </div>
-          <div class="info">
-            <div class="main">不確定何時有活動?</div>
-            <div class="sub">收藏活動! 讓你不再錯過感興趣的戶外活動</div>
-          </div>
+    </div>
+
+
+
+    <!-- 活動導覽方塊 -->
+    <section class="activity-container">
+        <div class="activity-group-header">
+            <div class="activity-content">
+                <h2 class="activity-title">
+                    活動導覽
+                </h2>
+                <h4 class="activity-small-title">
+                    <p>熱門&nbsp;<span style="color:#fca311; font-weight: 500;">TOP&nbsp;3</span></p>
+                </h4>
+            </div>
         </div>
-      </div>
-      <div class="option" style="--optionBackground:url(https://picsum.photos/1800/799?random=4);">
-        <div class="shadow"></div>
-        <div class="label">
-          <div class="icon">
-            <i class="fa-solid fa-xl fa-4"></i>
-          </div>
-          <div class="info">
-            <div class="main">blablablabla</div>
-            <div class="sub">Omuke trughte a otufta lore Lorem ipsum dolor sit amet.</div>
-          </div>
+
+        <!-- 方塊們 -->
+        <div class="card-div">
+            <section class="cards">
+                <article class="card card--1">
+                    <div class="card__info-hover">
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
+                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
+                            </svg><span class="card__time">多日 - 2天</span>
+                        </div>
+                    </div>
+
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">個人揪團</div>
+                        <span class="card__category">登山</span>
+                        <h3 class="card__title">奇萊主北假日團</h3>
+                        <span class="card__by">主揪<a href="#" class="card__author" title="author"> 王大壯</a></span>
+                    </div>
+                </article>
+
+
+                <article class="card card--2">
+                    <div class="card__info-hover">
+                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
+                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
+                            </svg>
+                            <span class="card__time">單日</span>
+                        </div>
+                    </div>
+
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">官方活動</div>
+                        <span class="card__category">潛水 - 自由潛水</span>
+                        <h3 class="card__title">Discover the sea</h3>
+                    </div>
+                </article>
+
+
+                <article class="card card--3">
+                    <div class="card__info-hover">
+                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
+                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
+                            </svg><span class="card__time">多日 - 4天</span>
+                        </div>
+                    </div>
+
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">官方活動</div>
+                        <span class="card__category">溯溪 - 溫泉</span>
+                        <h3 class="card__title">雲海溫泉週末團</h3>
+                    </div>
+                </article>
+            </section>
         </div>
-      </div>
-      <div class="option" style="--optionBackground:url(https://picsum.photos/1800/799?random=5);">
-        <div class="shadow"></div>
-        <div class="label">
-          <div class="icon">
-            <i class="fa-solid fa-xl fa-5"></i>
-          </div>
-          <div class="info">
-            <div class="main">還在等什麼?</div>
-            <div class="sub">往下滑看更多活動!!</div>
-          </div>
+    </section>
+
+    <!-- 你可能喜歡.... -->
+
+    <section class="activity-container">
+
+        <div class="activity-content">
+            <h4 class="activity-small-title">
+                <p>你可能喜歡...<i class="fa-solid fa-heart" style="color: var(--heart);"></i></p>
+            </h4>
         </div>
-      </div>
-    </div>
-  </div>
 
-
-
-  <!-- 活動導覽方塊 -->
-  <section class="activity-container">
-    <div class="activity-group-header">
-      <div class="activity-content">
-        <h2 class="activity-title">
-          活動導覽
-        </h2>
-        <h4 class="activity-small-title">
-          <p>熱門&nbsp;<span style="color:#fca311; font-weight: 500;">TOP&nbsp;3</span></p>
-        </h4>
-      </div>
-    </div>
-
-    <!-- 方塊們 -->
-    <div class="card-div">
-      <section class="cards">
-        <article class="card card--1">
-          <div class="card__info-hover">
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+        <!-- 方塊們 -->
+        <div class="card-div">
+            <section class="cards">
+                <article class="card card--4">
+                    <div class="card__info-hover">
+                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
                   64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
                   24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg><span class="card__time">多日 - 2天</span>
-            </div>
-          </div>
+                            </svg><span class="card__time">多日 - 2天</span>
+                        </div>
+                    </div>
 
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">個人揪團</div>
-            <span class="card__category">登山</span>
-            <h3 class="card__title">奇萊主北假日團</h3>
-            <span class="card__by">主揪<a href="#" class="card__author" title="author"> 王大壯</a></span>
-          </div>
-        </article>
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">官方活動</div>
+                        <span class="card__category">登山</span>
+                        <h3 class="card__title">奇萊主北假日團</h3>
+                    </div>
+                </article>
 
 
-        <article class="card card--2">
-          <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                <article class="card card--5">
+                    <div class="card__info-hover">
+                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
                   64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
                   24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg>
-              <span class="card__time">單日</span>
-            </div>
-          </div>
+                            </svg>
+                            <span class="card__time">單日</span>
+                        </div>
+                    </div>
 
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">官方活動</div>
-            <span class="card__category">潛水 - 自由潛水</span>
-            <h3 class="card__title">Discover the sea</h3>
-          </div>
-        </article>
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">官方活動</div>
+                        <span class="card__category">潛水 - 自由潛水</span>
+                        <h3 class="card__title">Discover the sea</h3>
+                    </div>
+                </article>
 
 
-        <article class="card card--3">
-          <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                <article class="card card--6">
+                    <div class="card__info-hover">
+                        <div class="card__clock-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
                   64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
                   24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg><span class="card__time">多日 - 4天</span>
-            </div>
-          </div>
+                            </svg><span class="card__time">多日 - 4天</span>
+                        </div>
+                    </div>
 
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">官方活動</div>
-            <span class="card__category">溯溪 - 溫泉</span>
-            <h3 class="card__title">雲海溫泉週末團</h3>
-          </div>
-        </article>
-      </section>
-    </div>
-  </section>
-
-  <!-- 你可能喜歡.... -->
-
-  <section class="activity-container">
-
-    <div class="activity-content">
-      <h4 class="activity-small-title">
-        <p>你可能喜歡...<i class="fa-solid fa-heart" style="color: var(--heart);"></i></p>
-      </h4>
-    </div>
-
-    <!-- 方塊們 -->
-    <div class="card-div">
-      <section class="cards">
-        <article class="card card--4">
-          <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
-                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
-                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg><span class="card__time">多日 - 2天</span>
-            </div>
-          </div>
-
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">官方活動</div>
-            <span class="card__category">登山</span>
-            <h3 class="card__title">奇萊主北假日團</h3>
-          </div>
-        </article>
-
-
-        <article class="card card--5">
-          <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
-                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
-                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg>
-              <span class="card__time">單日</span>
-            </div>
-          </div>
-
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">官方活動</div>
-            <span class="card__category">潛水 - 自由潛水</span>
-            <h3 class="card__title">Discover the sea</h3>
-          </div>
-        </article>
-
-
-        <article class="card card--6">
-          <div class="card__info-hover">
-            <div class="card__clock-info">
-              <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
-                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
-                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-              </svg><span class="card__time">多日 - 4天</span>
-            </div>
-          </div>
-
-          <div class="card__img"></div>
-          <a href="#" class="card_link">
-            <div class="card__img--hover"></div>
-          </a>
-          <div class="card__info">
-            <div class="category-box">個人揪團</div>
-            <span class="card__category">溯溪 - 溫泉</span>
-            <h3 class="card__title">雲海溫泉週末團</h3>
-            <span class="card__by">主揪<a href="#" class="card__author" title="author"> 溫泉蛋</a></span>
-          </div>
-        </article>
-      </section>
-    </div>
-  </section>
+                    <div class="card__img"></div>
+                    <a href="#" class="card_link">
+                        <div class="card__img--hover"></div>
+                    </a>
+                    <div class="card__info">
+                        <div class="category-box">個人揪團</div>
+                        <span class="card__category">溯溪 - 溫泉</span>
+                        <h3 class="card__title">雲海溫泉週末團</h3>
+                        <span class="card__by">主揪<a href="#" class="card__author" title="author"> 溫泉蛋</a></span>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </section>
 </body>
 </html>
