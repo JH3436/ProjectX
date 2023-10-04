@@ -1,6 +1,27 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<MemberUseViewModel>
+
 @{
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
+
+
+<div class="container">
+    <div class="row row-cols-2">
+        @foreach (var group in ViewBag.registeredGroups)
+        {
+            <div class="col">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <h3 class="card-title">@group.GroupName</h3>
+                        <p class="card-text">出團日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
+                        <div class="card-button-container">
+
+                            <button class="blue-btn blue-btn-text-style">編輯</button>
+                            <button class="blue-btn blue-btn-text-style">刪除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -7,38 +7,70 @@ namespace MVC_Project.Controllers
 
     public class MemberController : Controller
     {
-         private readonly ProjectXContext _context;
+        private readonly ProjectXContext _context;
 
-            public MemberController(ProjectXContext context)
-            {
-                _context = context;
-            }
+        public MemberController(ProjectXContext context)
+        {
+            _context = context;
+        }
 
 
-            public IActionResult Registration()
+        public IActionResult Registration(Group group)
         {
 
+           
+            var userId = 1; // 從當前登錄的使用者取得UserId
+
+            var registeredGroups = _context.Registration
+                .Where(r => r.ParticipantID == userId)
+                .Include(r => r.Group)
+                .Select(r => new MemberUseViewModel
+                {
+                    GroupName = r.Group.GroupName,
+                    EndDate = r.Group.EndDate
+                })
+                .ToList();
+            ViewBag.registeredGroups = registeredGroups;
             return View();
+
         }
         public IActionResult LikeRecord()
         {
             var userId = 1; // 從當前登錄的使用者取得UserId
 
+            var currentDate = DateTime.Now; // 取得當前日期
+
             // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
             var likedActivities = _context.LikeRecord
-    .Where(lr => lr.UserID == userId)
-    .Include(lr => lr.Activity)
-    .Select(lr => new LikedActivityViewModel
-    {
-        ActivityName = lr.Activity.ActivityName,
-        VoteDate = lr.Activity.VoteDate
-    })
-    .ToList();
+                .Where(lr => lr.UserID == userId)
+                .Include(lr => lr.Activity)
+                .Select(lr => new MemberUseViewModel
+                {
+                    LikeRecordID = lr.LikeRecordID,  //為了刪除
+                    ActivityName = lr.Activity.ActivityName,
+                    VoteDate = lr.Activity.VoteDate,
+                    // 判斷是否可以編輯
+                    CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
+                })
+                .ToList();
 
             ViewBag.LikedActivities = likedActivities;
 
             return View();
         }
+
+        [HttpPost]
+    public IActionResult DeleteLikeRecord(int likeRecordID)
+    {
+    var record = _context.LikeRecord.Find(likeRecordID);
+    if (record != null)
+    {
+        _context.LikeRecord.Remove(record);
+        _context.SaveChanges();
+    }
+    return RedirectToAction("LikeRecord");
+    }
+
         public IActionResult Member()
         {
             return View();

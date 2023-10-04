@@ -1,4 +1,4 @@
-﻿@model List<LikedActivityViewModel>
+﻿@model List<MemberUseViewModel>
 
 @{
     Layout = "_MemberLayout";
@@ -10,16 +10,18 @@
     <div class="row row-cols-2">
     @foreach (var activity in ViewBag.LikedActivities)
     {
-             
+            var canEditValue = activity.CanEdit ? "true" : "false";
             <div class="col">
                 <div class="card my-3">
                     <div class="card-body">
                         <h3 class="card-title">@activity.ActivityName</h3>
                         <p class="card-text">投票日:@activity.VoteDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            
-                            <button class="blue-btn blue-btn-text-style">編輯</button>
-                            <button class="blue-btn blue-btn-text-style">刪除</button>
+                            <button class="blue-btn blue-btn-text-style"
+                                    onclick="checkEditable(@canEditValue);">
+                             編輯
+                            </button>
+                            <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">刪除</button>
                         </div>
                     </div>
                 </div>
@@ -27,3 +29,27 @@
     }
     </div>
 </div>
+<script>
+
+    function checkEditable(canEdit) {
+        if (canEdit) {
+            alert('可以編輯!');
+            // 這裡可以加入你要連結到的編輯頁面的程式碼，例如：
+            // location.href = 'your_edit_link_here';
+        } else {
+            alert('目前不可以編輯!');
+        }
+    }
+
+    $('.delete-btn').click(function () {
+        var id = $(this).data('id');
+        var result = confirm("確定要刪除此紀錄嗎？");
+        if (result) {
+            $.post("/LikeRecord/DeleteLikeRecord", { likeRecordID: id }, function () {
+
+                // 呼叫成功後的操作，例如重新載入頁面
+                location.reload();
+            });
+        }
+    });
+</script>

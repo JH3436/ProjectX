@@ -147,7 +147,7 @@ go
 
 --假資料
 
---活動資料表
+--活動資料表 --10/4小胖:多新增了個假資料給與不同的votedate測試
 INSERT INTO [dbo].[MyActivity]
            ([ActivityName]
            ,[Category]
@@ -254,14 +254,15 @@ INSERT INTO [dbo].[VoteRecord]
 		   (3, 1, '2023-09-21')
 GO
 
---報名紀錄資料表
+--報名紀錄資料表 --10/4小胖:我讓會員1多按了幾個試試看迴圈
 INSERT INTO [dbo].[Registration]
            ([GroupID]
            ,[ParticipantID])
      VALUES
            (1, 1),
 		   (1, 2),
-		   (1, 3)
+		   (1, 3),
+
 GO
 
 
@@ -272,7 +273,7 @@ INSERT INTO [dbo].[LikeRecord]
      VALUES
            (1, 2),
 		   (2, 2),
-		   (3, 2)
+		   (3, 2),
 		   (1, 1),  
 		   (1, 3)
 GO
