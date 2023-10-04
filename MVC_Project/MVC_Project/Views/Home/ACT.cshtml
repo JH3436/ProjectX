@@ -1,38 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Data;
-using System.Data.SqlClient;
-public class ProductController : Controller
-{
-    public IActionResult Index()
-    {
-        // 設置資料庫連接字符串
-        string connectionString = "Data Source=YourServer;Initial Catalog=YourDatabase;User ID=YourUsername;Password=YourPassword";
-
-        // 創建連接
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Open();
-
-            // 創建 SQL 查詢
-            string sqlQuery = "SELECT * FROM YourTable";
-
-            using (SqlCommand command = new SqlCommand(sqlQuery, connection))
-            {
-                // 創建 DataTable 來保存查詢結果
-                DataTable dataTable = new DataTable();
-
-                using (SqlDataAdapter dataAdapter = new SqlDataAdapter(command))
-                {
-                    dataAdapter.Fill(dataTable);
-                }
-                return View(dataTable);
-            }
-        }
-    }
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
