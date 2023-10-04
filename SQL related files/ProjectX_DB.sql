@@ -265,7 +265,7 @@ INSERT INTO [dbo].[Registration]
 GO
 
 
---活動收藏資料表
+--活動收藏資料表   --10/4小胖:我讓會員1多按了幾個試試看迴圈
 INSERT INTO [dbo].[LikeRecord]
            ([UserID]
            ,[ActivityID])
@@ -273,6 +273,8 @@ INSERT INTO [dbo].[LikeRecord]
            (1, 2),
 		   (2, 2),
 		   (3, 2)
+		   (1, 1),  
+		   (1, 3)
 GO
 
 
@@ -313,3 +315,5 @@ INSERT INTO [dbo].[Chat]
 		   (1, 1, '留言板回覆測試2', 3)
 GO
 
+
+--
