@@ -86,7 +86,7 @@ $('#cropImageBtn').on('click', function (ev) {
     }).then(function (resp) {
         // 使用AJAX將裁剪後的圖像數據上傳到伺服器
         $.ajax({
-            url: '/your-controller/save-cropped-image', // 替換成伺服器端端點的URL
+            url: '/MemberController/CropAndUploadImage', // 替換成伺服器端端點的URL
             //如果你使用ASP.NET MVC框架，這個URL可能會指向一個控制器的動作方法，如/YourController/SaveCroppedImage，其中YourController是你的控制器名稱，SaveCroppedImage是處理保存圖像的動作方法名稱。如果你使用其他後端框架或語言，URL結構可能會有所不同。 
             type: 'POST',
             data: {
