@@ -5,8 +5,43 @@
 }
 
 
-
 <div class="container">
+    <div class="row row-cols-2">
+        @foreach (var activity in ViewBag.LikedActivities)
+        {
+            <!-- 顯示資料的程式碼 -->
+            var canEditValue = activity.CanEdit ? "true" : "false";
+            <div class="col">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <h3 class="card-title">@activity.ActivityName</h3>
+                        <p class="card-text">投票日:@activity.VoteDate?.ToString("yyyy-MM-dd")</p>
+                        <div class="card-button-container">
+                            <button class="blue-btn blue-btn-text-style"
+                                    onclick="checkEditable(@canEditValue);">
+                                選擇時段
+                            </button>
+                            <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">取消收藏</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="pagination">
+    @if (ViewBag.PageNumber > 1)
+    {
+        <a href="/Member/LikeRecord?page=@(ViewBag.PageNumber - 1)">上一頁</a>
+    }
+    @if (ViewBag.HasNextPage)
+    {
+        <a href="/Member/LikeRecord?page=@(ViewBag.PageNumber + 1)">下一頁</a>
+    }
+</div>
+
+@* <div class="container">
     <div class="row row-cols-2">
     @foreach (var activity in ViewBag.LikedActivities)
     {
@@ -25,10 +60,11 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
     }
     </div>
-</div>
+</div> *@
+
 <script>
 
     function checkEditable(canEdit) {
