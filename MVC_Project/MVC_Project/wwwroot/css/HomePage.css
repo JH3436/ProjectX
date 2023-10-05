@@ -349,16 +349,6 @@ body {
     z-index: 1;
 }
 
-.card--1 .card__img,
-.card--1 .card__img--hover {
-    background-image: url('../IMG/sunset.JPG'); 
-}
-
-.card--2 .card__img,
-.card--2 .card__img--hover {
-    background-image: url('https://picsum.photos/1260/750?random=2');
-}
-
 
 .heart-icon:hover {
     cursor: pointer;

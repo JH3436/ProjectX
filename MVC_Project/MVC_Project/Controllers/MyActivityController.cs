@@ -18,16 +18,11 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-        public IActionResult HomePage(int? id)
+        public IActionResult HomePage()
         {
-            if (id == null || _context.MyActivity == null)
-            {
-                return NotFound();
-            }
             var data = from m in _context.MyActivity
                        join o in _context.OfficialPhoto
                        on m.ActivityID equals o.ActivityID
-                       where m.ActivityID == id
                        select new ResponseActivity
                        {
                            ActivityName = m.ActivityName,
@@ -39,8 +34,8 @@ namespace MVC_Project.Controllers
                            ExpectedDepartureMonth = m.ExpectedDepartureMonth,
                            PhotoPath = o.PhotoPath
                        };
-            var temp = data.FirstOrDefault();
-            return View(temp);
+            var activities = data.ToList();  //檢視所有活動
+            return View(activities);
         }
 
         // GET: MyActivity

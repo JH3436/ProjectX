@@ -1,4 +1,4 @@
-﻿@model MVC_Project.Models.ResponseActivity
+﻿@model List<ResponseActivity>
 
 
 <!DOCTYPE html>
@@ -30,14 +30,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 </head>
-
-@* 為了在裡面寫Razor，所以把某些css搬出來 *@
-<style>
-    .card--3 .card__img,
-    .card--3 .card__img--hover {
-        background-image: url('@Model.PhotoPath');
-    }
-</style>
 
 <body>
     <!-- 回到網頁頂端設計 -->
@@ -132,77 +124,38 @@
         <!-- 方塊們 -->
         <div class="card-div">
             <section class="cards">
-                <article class="card card--1">
-                    <div class="card__info-hover">
-                        <div class="card__clock-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
+                @foreach (var activity in Model)
+                {
+                    <article class="card">
+                        <div class="card__info-hover">
+                            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                            <div class="card__clock-info">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
+                                    <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
                   64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
                   24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-                            </svg><span class="card__time">多日 - 2天</span>
+                                </svg><span class="card__time">多日 - 4天</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <div class="category-box">個人揪團</div>
-                        <span class="card__category">登山</span>
-                        <h3 class="card__title">奇萊主北假日團</h3>
-                        <span class="card__by">主揪<a href="#" class="card__author" title="author"> 王大壯</a></span>
-                    </div>
-                </article>
+                        <div class="card__img" style="background-image: url('@activity.PhotoPath')"></div>
+                        <a href="#" class="card_link">
+                            <div class="card__img--hover" style="background-image: url('@activity.PhotoPath')"></div>
+                        </a>
+                        <div class="card__info">
+                            <div class="category-box">官方活動</div>
 
+                            <span class="card__category">@activity.Category - 溫泉</span>
+                            <h3 class="card__title">@activity.ActivityName</h3>
 
-                <article class="card card--2">
-                    <div class="card__info-hover">
-                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-                        <div class="card__clock-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
-                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
-                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-                            </svg>
-                            <span class="card__time">單日</span>
                         </div>
-                    </div>
-
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <div class="category-box">官方活動</div>
-                        <span class="card__category">潛水 - 自由潛水</span>
-                        <h3 class="card__title">Discover the sea</h3>
-                    </div>
-                </article>
+                    </article>
+                }
 
 
-                <article class="card card--3">
-                    <div class="card__info-hover">
-                        <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
-                        <div class="card__clock-info">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">
-                                <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
-                  64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
-                  24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-                            </svg><span class="card__time">多日 - 4天</span>
-                        </div>
-                    </div>
 
-                    <div class="card__img"></div>
-                    <a href="#" class="card_link">
-                        <div class="card__img--hover"></div>
-                    </a>
-                    <div class="card__info">
-                        <div class="category-box">官方活動</div>
-                        <span class="card__category">@Model.Category - 溫泉</span>
-                        <h3 class="card__title">@Model.ActivityName</h3>
-                    </div>
-                </article>
+
+
             </section>
         </div>
     </section>
