@@ -26,6 +26,7 @@ namespace MVC_Project.Controllers
                 .Include(r => r.Group)
                 .Select(r => new MemberUseViewModel
                 {
+                    RegistrationID = r.RegistrationID,
                     GroupName = r.Group.GroupName,
                     EndDate = r.Group.EndDate
                 })
@@ -34,14 +35,30 @@ namespace MVC_Project.Controllers
             return View();
 
         }
+
+       
+        [HttpPost]
+        public IActionResult DeleteRegistration(int RegistrationID)
+        {
+            var record = _context.Registration.Find(RegistrationID);
+            if (record != null)
+            {
+                
+                _context.Registration.Remove(record);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Registration");
+        }
+
+
         public IActionResult LikeRecord()
         {
             var userId = 1; // 從當前登錄的使用者取得UserId
 
             var currentDate = DateTime.Now; // 取得當前日期
 
-            // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
-            var likedActivities = _context.LikeRecord
+                 // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
+                 var likedActivities = _context.LikeRecord
                 .Where(lr => lr.UserID == userId)
                 .Include(lr => lr.Activity)
                 .Select(lr => new MemberUseViewModel

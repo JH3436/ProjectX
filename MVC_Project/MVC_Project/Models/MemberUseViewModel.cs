@@ -9,8 +9,10 @@
         public DateTime? EndDate { get; set; }
         public bool CanEdit { get; set; }
 
-       public int LikeRecordID { get; set; } //為了要刪除
-        
+       public int LikeRecordID { get; set; } //刪除
+
+        public int RegistrationID { get; set; } // 刪除
+
     };
 }
 

@@ -15,9 +15,9 @@
                         <h3 class="card-title">@group.GroupName</h3>
                         <p class="card-text">出團日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-
-                            <button class="blue-btn blue-btn-text-style">編輯</button>
-                            <button class="blue-btn blue-btn-text-style">刪除</button>
+                            <button class="blue-btn blue-btn-text-style delete-btn" data-id="@group.RegistrationID">
+                                取消報名
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -25,3 +25,19 @@
         }
     </div>
 </div>
+
+
+<script>
+
+    $('.delete-btn').click(function () {
+        var id = $(this).data('id');
+        var result = confirm("確定要刪除此紀錄嗎？");
+        if (result) {
+            $.post("/Member/DeleteRegistration", { RegistrationID: id }, function () {
+                // 呼叫成功後的操作，例如重新載入頁面
+                location.reload();
+            });
+        }
+    });
+
+</script>
