@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
-
 namespace MVC_Project.Controllers
 {
 
@@ -14,33 +13,87 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-
-        public IActionResult Registration(Group group)
+        public IActionResult Registration(int page = 1)
         {
-
-           
+            int pageSize = 6; // 每頁顯示的項目數
             var userId = 1; // 從當前登錄的使用者取得UserId
+
+            // 根據當前頁數和每頁顯示的項目數計算跳過的項目數
+            int skip = (page - 1) * pageSize;
 
             var registeredGroups = _context.Registration
                 .Where(r => r.ParticipantID == userId)
                 .Include(r => r.Group)
                 .Select(r => new MemberUseViewModel
                 {
+                    RegistrationID = r.RegistrationID,
                     GroupName = r.Group.GroupName,
                     EndDate = r.Group.EndDate
                 })
+                .Skip(skip)
+                .Take(pageSize)
                 .ToList();
-            ViewBag.registeredGroups = registeredGroups;
-            return View();
 
+            // 計算是否有下一頁的邏輯
+            bool hasNextPage = _context.Registration
+                .Where(r => r.ParticipantID == userId)
+                .Skip(skip + pageSize)
+                .Any();
+
+            ViewBag.RegisteredGroups = registeredGroups;
+            ViewBag.PageNumber = page;
+            ViewBag.HasNextPage = hasNextPage;
+
+            return View();
         }
-        public IActionResult LikeRecord()
+
+
+        ////public IActionResult Registration(Group group)
+        ////{
+
+
+        ////    var userId = 1; // 從當前登錄的使用者取得UserId
+
+        ////    var registeredGroups = _context.Registration
+        ////        .Where(r => r.ParticipantID == userId)
+        ////        .Include(r => r.Group)
+        ////        .Select(r => new MemberUseViewModel
+        ////        {
+        ////            RegistrationID = r.RegistrationID,
+        ////            GroupName = r.Group.GroupName,
+        ////            EndDate = r.Group.EndDate
+        ////        })
+        ////        .ToList();
+        ////    ViewBag.registeredGroups = registeredGroups;
+        ////    return View();
+
+        ////}
+
+
+        [HttpPost]
+        public IActionResult DeleteRegistration(int RegistrationID)
         {
+            var record = _context.Registration.Find(RegistrationID);
+            if (record != null)
+            {
+                
+                _context.Registration.Remove(record);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Registration");
+        }
+
+        public IActionResult LikeRecord(int page = 1)
+        {
+            int pageSize = 6; // 每頁顯示的項目數
             var userId = 1; // 從當前登錄的使用者取得UserId
 
             var currentDate = DateTime.Now; // 取得當前日期
 
-            // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
+            // 根據當前頁數和每頁顯示的項目數計算跳過的項目數
+            int skip = (page - 1) * pageSize;
+
+            // 取得這個UserId的LikeRecords以及相對應的MyActivity資料，根據分頁參數進行分頁
             var likedActivities = _context.LikeRecord
                 .Where(lr => lr.UserID == userId)
                 .Include(lr => lr.Activity)
@@ -52,12 +105,47 @@ namespace MVC_Project.Controllers
                     // 判斷是否可以編輯
                     CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
                 })
+                .Skip(skip)
+                .Take(pageSize)
                 .ToList();
 
+            // 計算是否有下一頁的邏輯
+            bool hasNextPage = _context.LikeRecord
+                .Where(lr => lr.UserID == userId)
+                .Skip(skip + pageSize)
+                .Any();
+
             ViewBag.LikedActivities = likedActivities;
+            ViewBag.PageNumber = page;
+            ViewBag.HasNextPage = hasNextPage;
 
             return View();
         }
+
+        //public IActionResult LikeRecord()
+        //{
+        //    var userId = 1; // 從當前登錄的使用者取得UserId
+
+        //    var currentDate = DateTime.Now; // 取得當前日期
+
+        //    // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
+        //    var likedActivities = _context.LikeRecord
+        //   .Where(lr => lr.UserID == userId)
+        //   .Include(lr => lr.Activity)
+        //   .Select(lr => new MemberUseViewModel
+        //   {
+        //       LikeRecordID = lr.LikeRecordID,  //為了刪除
+        //       ActivityName = lr.Activity.ActivityName,
+        //       VoteDate = lr.Activity.VoteDate,
+        //       // 判斷是否可以編輯
+        //       CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
+        //   })
+        //   .ToList();
+
+        //    ViewBag.LikedActivities = likedActivities;
+
+        //    return View();
+        //}
 
         [HttpPost]
     public IActionResult DeleteLikeRecord(int likeRecordID)
