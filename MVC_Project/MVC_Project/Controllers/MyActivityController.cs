@@ -18,12 +18,37 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
+        public IActionResult HomePage(int? id)
+        {
+            if (id == null || _context.MyActivity == null)
+            {
+                return NotFound();
+            }
+            var data = from m in _context.MyActivity
+                       join o in _context.OfficialPhoto
+                       on m.ActivityID equals o.ActivityID
+                       where m.ActivityID == id
+                       select new ResponseActivity
+                       {
+                           ActivityName = m.ActivityName,
+                           Category = m.Category,
+                           SuggestedAmount = m.SuggestedAmount,
+                           ActivityContent = m.ActivityContent,
+                           MinAttendee = m.MinAttendee,
+                           VoteDate = m.VoteDate,
+                           ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                           PhotoPath = o.PhotoPath
+                       };
+            var temp = data.FirstOrDefault();
+            return View(temp);
+        }
+
         // GET: MyActivity
         public async Task<IActionResult> Index()
         {
-              return _context.MyActivity != null ? 
-                          View(await _context.MyActivity.ToListAsync()) :
-                          Problem("Entity set 'ProjectXContext.MyActivity'  is null.");
+            return _context.MyActivity != null ?
+                        View(await _context.MyActivity.ToListAsync()) :
+                        Problem("Entity set 'ProjectXContext.MyActivity'  is null.");
         }
 
         // GET: MyActivity/Details/5
@@ -149,14 +174,14 @@ namespace MVC_Project.Controllers
             {
                 _context.MyActivity.Remove(myActivity);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MyActivityExists(int id)
         {
-          return (_context.MyActivity?.Any(e => e.ActivityID == id)).GetValueOrDefault();
+            return (_context.MyActivity?.Any(e => e.ActivityID == id)).GetValueOrDefault();
         }
     }
 }

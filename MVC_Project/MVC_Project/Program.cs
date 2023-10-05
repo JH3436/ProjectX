@@ -9,15 +9,15 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//³s±µ
+//é€£æŽ¥
 builder.Services.AddDbContext<ProjectXContext>(
       options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_James")));
 
-// ³s±µ¨ì²Ä¤G­Ó¸ê®Æ®w
+// é€£æŽ¥åˆ°ç¬¬äºŒå€‹è³‡æ–™åº«
 builder.Services.AddDbContext<ProjectXContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_Lun")));
 
-//­«¸ü(¥Ø«e¦n¹³¨S¥Î¨ì¡A¦ý¤§«áÀ³¸Ó·|»Ý­n´N¥ý©ñµÛ¤F)
+//é‡è¼‰(ç›®å‰å¥½åƒæ²’ç”¨åˆ°ï¼Œä½†ä¹‹å¾Œæ‡‰è©²æœƒéœ€è¦å°±å…ˆæ”¾è‘—äº†)
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 //JSON
@@ -25,12 +25,12 @@ builder.Services
     .AddControllersWithViews()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;    //Åýproperty¤£­nÅÜ¤p¼g
-        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);  //½s½X¥þ©ñ
-        options.JsonSerializerOptions.WriteIndented = true;  //¦Û°Ê±Æª©JSON¿é¥X
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;    //è®“propertyä¸è¦è®Šå°å¯«
+        options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);  //ç·¨ç¢¼å…¨æ”¾
+        options.JsonSerializerOptions.WriteIndented = true;  //è‡ªå‹•æŽ’ç‰ˆJSONè¼¸å‡º
     });
 
-// CORS³s½u
+// CORSé€£ç·š
 builder.Services.AddCors(options => {
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy => {
@@ -62,6 +62,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Homepage}/{id?}");
+    pattern: "{controller=MyActivity}/{action=Homepage}/{id?}");
 
 app.Run();

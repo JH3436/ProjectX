@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model MVC_Project.Models.ResponseActivity
 
 
 <!DOCTYPE html>
@@ -34,6 +30,14 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
 </head>
+
+@* 為了在裡面寫Razor，所以把某些css搬出來 *@
+<style>
+    .card--3 .card__img,
+    .card--3 .card__img--hover {
+        background-image: url('@Model.PhotoPath');
+    }
+</style>
 
 <body>
     <!-- 回到網頁頂端設計 -->
@@ -195,13 +199,14 @@
                     </a>
                     <div class="card__info">
                         <div class="category-box">官方活動</div>
-                        <span class="card__category">溯溪 - 溫泉</span>
-                        <h3 class="card__title">雲海溫泉週末團</h3>
+                        <span class="card__category">@Model.Category - 溫泉</span>
+                        <h3 class="card__title">@Model.ActivityName</h3>
                     </div>
                 </article>
             </section>
         </div>
     </section>
+
 
     <!-- 你可能喜歡.... -->
 
