@@ -483,18 +483,4 @@ body {
     z-index: 10;
 }
 
-/* 你可能喜歡... */
-.card--4 .card__img,
-.card--4 .card__img--hover {
-    background-image: url('https://spaceholder.cc/i/1260x750?random=1');
-}
 
-.card--5 .card__img,
-.card--5 .card__img--hover {
-    background-image: url('https://spaceholder.cc/i/1260x750?');
-}
-
-.card--6 .card__img,
-.card--6 .card__img--hover {
-    background-image: url('https://spaceholder.cc/i/1260x750?random=3');
-}
