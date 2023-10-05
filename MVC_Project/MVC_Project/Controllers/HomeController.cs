@@ -39,10 +39,8 @@ namespace MVC_Project.Controllers
         }
 
 
-        public IActionResult HomePage()
-        {
-            return View();
-        }
+        
+        
 
         public IActionResult ActivityPage()
         {
