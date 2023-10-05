@@ -41,15 +41,17 @@
         }
     }
 
+
+
     $('.delete-btn').click(function () {
         var id = $(this).data('id');
         var result = confirm("確定要刪除此紀錄嗎？");
         if (result) {
-            $.post("/LikeRecord/DeleteLikeRecord", { likeRecordID: id }, function () {
-
+            $.post("/Member/DeleteLikeRecord", { likeRecordID: id }, function () {
                 // 呼叫成功後的操作，例如重新載入頁面
                 location.reload();
             });
         }
     });
+
 </script>
