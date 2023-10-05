@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
-
 namespace MVC_Project.Controllers
 {
 
@@ -14,12 +13,13 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-
-        public IActionResult Registration(Group group)
+        public IActionResult Registration(int page = 1)
         {
-
-           
+            int pageSize = 6; // 每頁顯示的項目數
             var userId = 1; // 從當前登錄的使用者取得UserId
+
+            // 根據當前頁數和每頁顯示的項目數計算跳過的項目數
+            int skip = (page - 1) * pageSize;
 
             var registeredGroups = _context.Registration
                 .Where(r => r.ParticipantID == userId)
@@ -30,13 +30,46 @@ namespace MVC_Project.Controllers
                     GroupName = r.Group.GroupName,
                     EndDate = r.Group.EndDate
                 })
+                .Skip(skip)
+                .Take(pageSize)
                 .ToList();
-            ViewBag.registeredGroups = registeredGroups;
-            return View();
 
+            // 計算是否有下一頁的邏輯
+            bool hasNextPage = _context.Registration
+                .Where(r => r.ParticipantID == userId)
+                .Skip(skip + pageSize)
+                .Any();
+
+            ViewBag.RegisteredGroups = registeredGroups;
+            ViewBag.PageNumber = page;
+            ViewBag.HasNextPage = hasNextPage;
+
+            return View();
         }
 
-       
+
+        ////public IActionResult Registration(Group group)
+        ////{
+
+
+        ////    var userId = 1; // 從當前登錄的使用者取得UserId
+
+        ////    var registeredGroups = _context.Registration
+        ////        .Where(r => r.ParticipantID == userId)
+        ////        .Include(r => r.Group)
+        ////        .Select(r => new MemberUseViewModel
+        ////        {
+        ////            RegistrationID = r.RegistrationID,
+        ////            GroupName = r.Group.GroupName,
+        ////            EndDate = r.Group.EndDate
+        ////        })
+        ////        .ToList();
+        ////    ViewBag.registeredGroups = registeredGroups;
+        ////    return View();
+
+        ////}
+
+
         [HttpPost]
         public IActionResult DeleteRegistration(int RegistrationID)
         {
