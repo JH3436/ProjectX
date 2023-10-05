@@ -293,3 +293,11 @@ height:500px
     background-color: #0056b3;
     border-color: #0056b3;
 }
+
+
+/* 禁用的按鈕樣式 */
+.disabled-button {
+    background-color: #ccc; /* 灰色背景色 */
+    color: #666; /* 灰色文字顏色 */
+    cursor: not-allowed; /* 禁用光標 */
+}

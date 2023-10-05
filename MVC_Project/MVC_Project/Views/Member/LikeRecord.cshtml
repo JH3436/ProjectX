@@ -4,6 +4,9 @@
     Layout = "_MemberLayout";
 }
 
+@{
+    bool isDisabled = true; // 或者根據您的邏輯設置為true或false
+}
 
 <div class="container">
     <div class="row row-cols-2">
@@ -11,17 +14,25 @@
         {
             <!-- 顯示資料的程式碼 -->
             var canEditValue = activity.CanEdit ? "true" : "false";
+           
             <div class="col">
                 <div class="card my-3">
                     <div class="card-body">
                         <h3 class="card-title">@activity.ActivityName</h3>
                         <p class="card-text">投票日:@activity.VoteDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            <button class="blue-btn blue-btn-text-style"
-                                    onclick="checkEditable(@canEditValue);">
-                                選擇時段
-                            </button>
-                            <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">取消收藏</button>
+                            
+                                @if (activity.CanEdit)
+                                {
+                                    <button class="blue-btn blue-btn-text-style"
+                                            onclick="checkEditable(@canEditValue);">
+                                        選擇時段
+                                    </button>
+                                }
+                                <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">取消收藏</button>
+                            
+
+                         
                         </div>
                     </div>
                 </div>
