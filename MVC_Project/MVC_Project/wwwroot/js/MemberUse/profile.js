@@ -1,4 +1,13 @@
 ﻿
+$(document).ready(function () {
+    // 假設你已經取得了currentUserId
+    let currentUserId = $('#currentUserId').val();
+
+    $.get('/Member/GetUserPhoto', { userId: currentUserId }, function (data) {
+        if (data.imageUrl) {
+            $('#item-img-output').attr('src', data.imageUrl);
+        }
+    });
 
 // 找到 textarea 元素
 var textarea = document.getElementById('introduceyrself');
@@ -69,41 +78,24 @@ $('#cropImageBtn').on('click', function (ev) {
     }).then(function (resp) {
         $('#item-img-output').attr('src', resp);
         $('#cropImagePop').modal('hide');
-    });
-});
 
-
-// ajax丟給controller
-
-$('#cropImageBtn').on('click', function (ev) {
-    $uploadCrop.croppie('result', {
-        type: 'base64',
-        format: 'jpeg',
-        size: {
-            width: 150,
-            height: 200
-        }
-    }).then(function (resp) {
-        // 使用AJAX將裁剪後的圖像數據上傳到伺服器
+        // AJAX 請求傳送照片到後端
         $.ajax({
-            url: '/MemberController/CropAndUploadImage', // 替換成伺服器端端點的URL
-            //如果你使用ASP.NET MVC框架，這個URL可能會指向一個控制器的動作方法，如/YourController/SaveCroppedImage，其中YourController是你的控制器名稱，SaveCroppedImage是處理保存圖像的動作方法名稱。如果你使用其他後端框架或語言，URL結構可能會有所不同。 
-            type: 'POST',
+            url: '/Member/UpdateUserPhoto',
+            method: 'POST',
             data: {
-                imageData: resp
+                userId: 1, // 這裡應該是當前登入的用戶ID
+                imageBase64: resp
             },
             success: function (response) {
                 if (response.success) {
-                    // 更新用戶界面上的圖像
-                    $('#item-img-output').attr('src', response.imageUrl);
-                    $('#cropImagePop').modal('hide');
+                    alert('Photo updated successfully');
                 } else {
-                    alert('圖像保存失敗');
+                    alert('Failed to update photo: ' + response.message);
                 }
-            },
-            error: function () {
-                alert('發送圖像數據到伺服器失敗');
             }
         });
     });
 });
+});
+
