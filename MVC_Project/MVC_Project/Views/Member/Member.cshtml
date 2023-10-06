@@ -4,51 +4,55 @@
 @{
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
+" rel="stylesheet">
+
 <input type="hidden" id="currentUserId" value="1" />
 
-<div class="container" id="introABC">
-    <div>
+<div class="container" style="background-color:yellow" id="personalA">
+   
 
         <!-- 照片 -->
 
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
+    <div class="container mb-4 mt-4 pt-3">
+            <div class="row align-items-end">
+                <div class="col-auto ">
 
                         
                         <figure>
                             <img src="" class="gambar img-responsive img-thumbnail"
-                                 id="item-img-output" />
+                                 id="item-img-output" /> 
                         </figure>
-                    <label for="file_photo" class="custom-file-upload">選擇大頭貼</label>
+                   
                     <input type="file" class="item-img file center-block" id="file_photo" name="file_photo" />
                     
-                    
                 </div>
+                <div class="col-auto">
+                <label for="file_photo" class="custom-file-upload">選擇大頭貼</label>
+                
             </div>
+            </div>
+            
         </div>
 
         <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                          
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">
-                            <?=multiLanguage( "Edit Foto" , "Edit Photo" )?>
-                        </h4>
+                        
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body d-flex justify-content-center align-items-center">
                         <div id="upload-demo" class="center-block"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default"
-                                data-dismiss="modal">
-                            Close
-                        </button>
+                        
+                       
                         <button type="button" id="cropImageBtn"
                                 class="btn btn-primary">
                             Crop
@@ -57,36 +61,60 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+
+
+    <div class="container pb-3">
             <!-- 暱稱 -->
 
-
-            <div class="mb-3 col-4 ">
+            <div class="mb-3 col-4  ">
                 <label for="nickname" class="form-label">暱稱</label>
                 <input type="email" class="form-control" id="nickname">
             </div>
 
             <!-- 自我介紹 -->
-            <div class="mb-3 col-8">
-                <label for="introduceyrself" class="form-label">自我介紹 (字數限制50字以內) </label>
+            <div class="mb-3 col-8 ">
+                <label for="introduceyrself" class="form-label">自我介紹 </label>
 
-                <textarea class="form-control" id="introduceyrself" rows="6"></textarea>
+            <textarea class="form-control" id="introduceyrself" rows="6" placeholder="(字數限制50字以內)"></textarea>
+
+
             </div>
 
-            <button class="org-btn org-btn-text-style text-end">
+            <div class="org-btn org-btn-text-style">
                 儲存
-            </button>
+            </div>
 
 
         </div>
+ </div>
+
+<div class="container mt-4 " style="background-color:blue" id="personalB">
+
+
+    <div class="container ">
+        <!-- 暱稱 -->
+
+        <div class="mb-3 col-4 pt-4">
+            <label for="nickname" class="form-label">暱稱</label>
+            <input type="email" class="form-control" id="nickname">
+        </div>
+
+        <!-- 自我介紹 -->
+        <div class="mt-4 mb-3 col-8">
+            <label for="introduceyrself" class="form-label">自我介紹 </label>
+
+            <textarea class="form-control" id="introduceyrself" rows="6" placeholder="(字數限制50字以內)"></textarea>
+        </div>
+
+        <button class="org-btn org-btn-text-style text-end">
+            儲存
+        </button>
+
+
     </div>
-
-
 </div>
-
-
  <script>
-    
-      
+
+ 
 
 </script>

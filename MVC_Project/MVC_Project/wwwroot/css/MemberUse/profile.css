@@ -8,14 +8,14 @@
 
 :root {
     --black: #000000;
-    --deepBlue: #14213d;
+    --deepBlue: #5d73a3;
     --blue: #416ac2;
     --orange: #fca311;
     --lightGray: #e5e5e5;
     --white: #ffffff;
     --brown: #AD7D52;
     --heart: #B44163;
-    --lightBlue-bg: rgba(45, 68, 119, 0.486);
+    --lightBlue-bg: rgb(45, 68, 119);
 }
 
 body {
@@ -83,7 +83,7 @@ body {
     height: 250px;
     font-family: "Noto Sans TC", sans-serif;
     font-family: "Roboto", sans-serif;
-    font-size: larger;
+    font-size: 1.6rem;
     /* 你可以根據需要調整這個值 */
 }
 
@@ -309,13 +309,26 @@ height:500px
     display: none;
 }
 
+
+
 .custom-file-upload {
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
     background-color: #f4f4f4;
     border: 1px solid #ccc;
-    display: inline-block;
+   
+}
+
+.modal-dialog {
+    max-width: 400px; /* 調整這個數值以適應你的需求 */
+     position:absolute;
+    top:33%;
+    left:33%
+}
+
+figure {
+    margin: 0 0 0rem;
 }
 
 /*大頭貼結束*/

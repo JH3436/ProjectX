@@ -14,14 +14,14 @@
 /* 主題顏色宣告 */
 :root {
     --black: #000000;
-    --deepBlue: #14213d;
+    --deepBlue: #5d73a3;
     --blue: #416ac2;
     --orange: #fca311;
     --lightGray: #e5e5e5;
     --white: #ffffff;
     --brown: #AD7D52;
     --heart: #B44163;
-    --lightBlue-bg: rgba(45, 68, 119, 0.486);
+    --lightBlue-bg: rgb(45, 68, 119);
 }
 
 /* 頁面背景色 */
