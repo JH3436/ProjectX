@@ -96,8 +96,11 @@ document.querySelectorAll('.menu-item').forEach(item => {
       }).then(function (resp) {
         $('#item-img-output').attr('src', resp);
         $('#cropImagePop').modal('hide');
+        console.log(resp); // 這裡印出裁切後的圖片的 base64 編碼
       });
     });
+
+
 
 
     // ajax丟給controller

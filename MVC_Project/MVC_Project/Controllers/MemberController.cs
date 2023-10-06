@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace MVC_Project.Controllers
 
@@ -179,55 +180,35 @@ namespace MVC_Project.Controllers
             return View();
         }
 
-
-
         [HttpPost]
-        public ActionResult UploadImage(string imageData)
+        public IActionResult UpdateUserPhoto(int userId, string imageBase64)
         {
-            if (!string.IsNullOrEmpty(imageData))
+            var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
+            if (member != null && !string.IsNullOrEmpty(imageBase64))
             {
-                // 轉換Base64字串為位元組數組
-                byte[] imageBytes = Convert.FromBase64String(imageData);
-
-                // 假設您要處理UserID為1的用戶
-                int userId = 1;
-
-                // 查找用戶
-                var user = _context.Member.FirstOrDefault(u => u.UserID == userId);
-                if (user != null)
-                {
-                    // 更新用戶的UserPhoto欄位
-                    user.UserPhoto = imageBytes;
-
-                    // 保存更改到資料庫
-                    _context.SaveChanges();
-                }
-
-                // 返回成功的JSON響應，您可以在此處返回更新後的圖像URL
-                return Json(new { success = true, imageUrl = "/Member/GetUserImage" }); // 更新為實際的圖像路徑
+                byte[] photoBytes = Convert.FromBase64String(imageBase64.Split(',')[1]);
+                member.UserPhoto = photoBytes;
+                _context.SaveChanges();
+                return Json(new { success = true });
             }
-
-            // 如果圖像數據為空，返回失敗的JSON響應
-            return Json(new { success = false });
+            return Json(new { success = false, message = "Failed to update photo" });
         }
-
+       
         [HttpGet]
-        public ActionResult GetUserImage()
+        public IActionResult GetUserPhoto(int userId)
         {
-            // 假設您要處理UserID為1的用戶
-            int userId = 1;
-
-            // 查找用戶
-            var user = _context.Member.FirstOrDefault(u => u.UserID == userId);
-            if (user != null && user.UserPhoto != null)
+            var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
+            if (member != null && member.UserPhoto != null)
             {
-                // 返回用戶的圖像
-                return File(user.UserPhoto, "image/jpeg"); // 此處假設圖像類型為jpeg，根據您的實際情況修改
+                string imageBase64Data = Convert.ToBase64String(member.UserPhoto);
+                string imageDataURL = $"data:image/jpg;base64,{imageBase64Data}";
+                return Json(new { imageUrl = imageDataURL });
             }
-
-            // 如果找不到用戶或圖像為空，返回一個預設圖像或錯誤圖像，或者根據您的需求返回404錯誤
-            return NotFound(); // 或者返回一個預設圖像的File結果
+            return Json(new { imageUrl = "" }); // 或者返回預設照片的URL
         }
+
+
+
     }
     /*var member = GetCurrentUser();*/ // 這裡需要您自己實現獲取當前用戶的方法
 }
