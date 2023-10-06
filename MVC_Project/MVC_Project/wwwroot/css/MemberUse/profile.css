@@ -301,3 +301,21 @@ height:500px
     color: #666; /* 灰色文字顏色 */
     cursor: not-allowed; /* 禁用光標 */
 }
+
+
+/*修改選擇大頭貼那邊的樣式*/
+
+.file {
+    display: none;
+}
+
+.custom-file-upload {
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+/*大頭貼結束*/

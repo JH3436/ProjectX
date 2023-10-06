@@ -51,8 +51,8 @@ function readFile(input) {
 
 $uploadCrop = $('#upload-demo').croppie({
     viewport: {
-        width: 150,
-        height: 200,
+        width: 300,
+        height: 300,
     },
     enforceBoundary: false,
     enableExif: true
@@ -74,7 +74,7 @@ $('#cropImageBtn').on('click', function (ev) {
     $uploadCrop.croppie('result', {
         type: 'base64',
         format: 'jpeg',
-        size: { width: 150, height: 200 }
+        size: { width: 300, height: 300 }
     }).then(function (resp) {
         $('#item-img-output').attr('src', resp);
         $('#cropImagePop').modal('hide');
