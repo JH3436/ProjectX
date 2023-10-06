@@ -23,7 +23,7 @@ namespace MVC_Project.Controllers
             // 創建一個亂數生成器
             Random random = new Random();
             List<int> selectedIds = new List<int>();
-            int maxActivityID = 5; // 假設資料庫中的最大 ActivityId 是 5
+            int maxActivityID = 10; // 假設資料庫中的最大 ActivityId 是 5
 
             while (selectedIds.Count < 3)
             {
@@ -84,6 +84,62 @@ namespace MVC_Project.Controllers
             {
                 TimeSpan? timeSpan = group.EndDate - group.StartDate;
                 group.DurationInDays = (int)timeSpan.Value.TotalDays; 
+            }
+
+            return View(viewModel);
+        }
+
+        public IActionResult ACT()
+        {
+			var myActivityData = from m in _context.MyActivity
+								 join o in _context.OfficialPhoto
+								 on m.ActivityID equals o.ActivityID
+								 /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
+								 select new ResponseActivity
+								 {
+									 ActivityName = m.ActivityName,
+									 Category = m.Category,
+									 SuggestedAmount = m.SuggestedAmount,
+									 ActivityContent = m.ActivityContent,
+									 MinAttendee = m.MinAttendee,
+									 VoteDate = m.VoteDate,
+									 ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+									 PhotoPath = o.PhotoPath
+								 };
+
+			//個人開團資料讀取
+			var groupData = from g in _context.Group
+                            join m in _context.Member on g.Organizer equals m.UserID
+                            join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                            join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                            from pp in personalPhotos.DefaultIfEmpty()
+                            //where selectedIds.Contains(g.GroupID)
+                            select new ResponseGroup
+                            {
+                                GroupName = g.GroupName,
+                                GroupCategory = g.GroupCategory,
+                                GroupContent = g.GroupContent,
+                                MinAttendee = g.MinAttendee,
+                                MaxAttendee = g.MaxAttendee,
+                                StartDate = g.StartDate,
+                                EndDate = g.EndDate,
+                                Nickname = m.Nickname,
+                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                            };
+            var activities = myActivityData.ToList();
+            var groups = groupData.ToList();
+
+            var viewModel = new HomePageViewModel
+            {
+                Activities = activities,
+                Groups = groups
+            };
+
+            // 計算 DurationInDays 並設定給 ResponseGroup
+            foreach (var group in viewModel.Groups)
+            {
+                TimeSpan? timeSpan = group.EndDate - group.StartDate;
+                group.DurationInDays = (int)timeSpan.Value.TotalDays;
             }
 
             return View(viewModel);
