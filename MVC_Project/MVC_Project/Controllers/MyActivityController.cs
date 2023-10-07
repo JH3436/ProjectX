@@ -20,48 +20,53 @@ namespace MVC_Project.Controllers
 
         public IActionResult HomePage()
         {
-
-            // 計算活動資料表中的記錄數
-            int recordCount = _context.MyActivity.Count();
+            // 讀取所有有效的 ActivityID 到一個列表中
+            var validActivityIds = _context.MyActivity.Select(a =>a.ActivityID).ToList();
 
             // 設定要生成的亂數ID數量
-            int numberOfRandomIds = 3;
+            int numberOfRandomIds = Math.Min(3, validActivityIds.Count);
 
-            // 使用 HashSet 來存放不重複的亂數ID
-            HashSet<int> selectedIds_MyActivity = new HashSet<int>();
-
-            // 創建一個亂數生成器
+            // 使用亂數生成器來選擇有效的 ActivityID
             Random random = new Random();
+            List<int> selectedActivityIds = new List<int>();
 
-            while (selectedIds_MyActivity.Count < numberOfRandomIds)
+
+            while (selectedActivityIds.Count < numberOfRandomIds)
             {
-                int randomId = random.Next(1, recordCount + 1); // 隨機生成 Id，範圍是 1 到記錄數
-                selectedIds_MyActivity.Add(randomId);
+                int randomId = validActivityIds[random.Next(validActivityIds.Count)];
+
+                if (!selectedActivityIds.Contains(randomId))
+                {
+                    selectedActivityIds.Add(randomId);
+                }
             }
 
-            // 計算個人開團活動資料表中的記錄數
-            int recordCount_2 = _context.Group.Count();
+            // 讀取所有有效的 GroupID 到一個列表中
+            var validGroupIds = _context.Group.Select(g => g.GroupID).ToList();
+
+            // 設定要生成的亂數ID數量
+            int numberOfRandomIds_2 = Math.Min(3, validGroupIds.Count);
 
 
-            // 使用 HashSet 來存放不重複的亂數ID
-            HashSet<int> selectedIds_Group = new HashSet<int>();
-
-            // 創建一個亂數生成器
+            // 使用亂數生成器來選擇有效的 GroupID
             Random random2 = new Random();
+            List<int> selectedGroupIds = new List<int>();
 
-            while (selectedIds_Group.Count < numberOfRandomIds)
+            while (selectedGroupIds.Count < numberOfRandomIds_2)
             {
-                int randomId = random.Next(1, recordCount_2 + 1); // 隨機生成 Id，範圍是 1 到記錄數
-                selectedIds_Group.Add(randomId);
+                int randomId = validGroupIds[random.Next(validGroupIds.Count)];
+
+                if (!selectedGroupIds.Contains(randomId))
+                {
+                    selectedGroupIds.Add(randomId);
+                }
             }
-
-
 
             // 官方活動資料讀取，按 ActivityID 分組，並對相同的 ActivityID 的照片進行隨機排序
             var myActivityData = from m in _context.MyActivity
                                        join o in _context.OfficialPhoto
                                        on m.ActivityID equals o.ActivityID
-                                       where selectedIds_MyActivity.Contains(m.ActivityID)
+                                       where selectedActivityIds.Contains(m.ActivityID)
                                        group new { m, o } by m.ActivityID into grouped
                                        select new ResponseActivity
                                        {
@@ -81,7 +86,7 @@ namespace MVC_Project.Controllers
                             join m in _context.Member on g.Organizer equals m.UserID
                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                             from pp in personalPhotos.DefaultIfEmpty()
-                            where selectedIds_Group.Contains(g.GroupID)
+                            where selectedGroupIds.Contains(g.GroupID)
                             group new { g, pp, m } by g.GroupID into grouped
                             select new ResponseGroup
                             {
