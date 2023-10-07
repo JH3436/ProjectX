@@ -11,11 +11,9 @@ builder.Services.AddControllersWithViews();
 
 //連接
 builder.Services.AddDbContext<ProjectXContext>(
-      options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_James")));
+      options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection")));
 
 // 連接到第二個資料庫
-builder.Services.AddDbContext<ProjectXContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectXconnection_Lun")));
 
 //重載(目前好像沒用到，但之後應該會需要就先放著了)
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
