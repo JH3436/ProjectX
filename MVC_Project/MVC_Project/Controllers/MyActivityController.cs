@@ -23,7 +23,7 @@ namespace MVC_Project.Controllers
             // 創建一個亂數生成器
             Random random = new Random();
             List<int> selectedIds = new List<int>();
-            int maxActivityID = 10; // 假設資料庫中的最大 ActivityId 是 5
+            int maxActivityID = 4; // 假設資料庫中的最大 ActivityId 是 5
 
             while (selectedIds.Count < 3)
             {
@@ -68,7 +68,7 @@ namespace MVC_Project.Controllers
                                 StartDate = g.StartDate,
                                 EndDate = g.EndDate,
                                 Nickname = m.Nickname,
-                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                                PhotoData = pp.PhotoData
                             };
             var activities = myActivityData.ToList();
             var groups = groupData.ToList();

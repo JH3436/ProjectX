@@ -57,114 +57,145 @@ namespace MVC_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
+        public async Task<IActionResult> Create([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(@group);
                 await _context.SaveChangesAsync();
+
+                // 上傳多張照片
+                if (imageDataFiles != null && imageDataFiles.Count > 0)
+                {
+                    foreach (var imageDataFile in imageDataFiles)
+                    {
+                        if (imageDataFile != null && imageDataFile.Length > 0)
+                        {
+                            using (var stream = new MemoryStream())
+                            {
+                                await imageDataFile.CopyToAsync(stream);
+
+                                // 創建一個新的PersonalPhoto對象，設置GroupID和PhotoData，然後保存到資料庫
+                                var newPhoto = new PersonalPhoto
+                                {
+                                    GroupID = @group.GroupID,
+                                    PhotoData = stream.ToArray() // 將圖片資料存入PhotoData
+                                };
+
+
+                                // 將PersonalPhoto存入資料庫
+                                _context.PersonalPhoto.Add(newPhoto);
+                                await _context.SaveChangesAsync();
+                            }
+                        }
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+
+			//把OriginalActivityID移除，才不會每次新建group都會帶入，使用者創的活動也不需要。
+			//ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+
             return View(@group);
         }
 
-        // GET: Groups/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+    // GET: Groups/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null || _context.Group == null)
         {
-            if (id == null || _context.Group == null)
-            {
-                return NotFound();
-            }
-
-            var @group = await _context.Group.FindAsync(id);
-            if (@group == null)
-            {
-                return NotFound();
-            }
-            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-            return View(@group);
+            return NotFound();
         }
 
-        // POST: Groups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
+        var @group = await _context.Group.FindAsync(id);
+        if (@group == null)
         {
-            if (id != @group.GroupID)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
+        //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+        return View(@group);
+    }
 
-            if (ModelState.IsValid)
+    // POST: Groups/Edit/5
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
+    {
+        if (id != @group.GroupID)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
             {
-                try
+                _context.Update(@group);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GroupExists(@group.GroupID))
                 {
-                    _context.Update(@group);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!GroupExists(@group.GroupID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-            return View(@group);
-        }
-
-        // GET: Groups/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Group == null)
-            {
-                return NotFound();
-            }
-
-            var @group = await _context.Group
-                .FirstOrDefaultAsync(m => m.GroupID == id);
-            if (@group == null)
-            {
-                return NotFound();
-            }
-
-            return View(@group);
-        }
-
-        // POST: Groups/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Group == null)
-            {
-                return Problem("Entity set 'ProjectXContext.Group'  is null.");
-            }
-            var @group = await _context.Group.FindAsync(id);
-            if (@group != null)
-            {
-                _context.Group.Remove(@group);
-            }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        private bool GroupExists(int id)
-        {
-          return (_context.Group?.Any(e => e.GroupID == id)).GetValueOrDefault();
-        }
+        ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
+        //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+        return View(@group);
     }
+
+    // GET: Groups/Delete/5
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null || _context.Group == null)
+        {
+            return NotFound();
+        }
+
+        var @group = await _context.Group
+            .FirstOrDefaultAsync(m => m.GroupID == id);
+        if (@group == null)
+        {
+            return NotFound();
+        }
+
+        return View(@group);
+    }
+
+    // POST: Groups/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        if (_context.Group == null)
+        {
+            return Problem("Entity set 'ProjectXContext.Group'  is null.");
+        }
+        var @group = await _context.Group.FindAsync(id);
+        if (@group != null)
+        {
+            _context.Group.Remove(@group);
+        }
+
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+    private bool GroupExists(int id)
+    {
+        return (_context.Group?.Any(e => e.GroupID == id)).GetValueOrDefault();
+    }
+}
 }
