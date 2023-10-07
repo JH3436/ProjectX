@@ -115,8 +115,8 @@ namespace MVC_Project.Controllers
             return NotFound();
         }
         ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-        //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-        return View(@group);
+            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+            return View(@group);
     }
 
     // POST: Groups/Edit/5

@@ -73,6 +73,15 @@ namespace MVC_Project.Controllers
             var activities = myActivityData.ToList();
             var groups = groupData.ToList();
 
+            //處理PhotoData可能為0的狀況
+            foreach (var group in groups)
+            {
+                if (group.PhotoData == null)
+                {
+                    group.PhotoData = new byte[0];
+                }
+            }
+
             var viewModel = new HomePageViewModel
             {
                 Activities = activities,
