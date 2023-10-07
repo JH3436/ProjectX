@@ -101,63 +101,63 @@ namespace MVC_Project.Controllers
             return View(@group);
         }
 
-    // GET: Groups/Edit/5
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null || _context.Group == null)
+        // GET: Groups/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return NotFound();
-        }
-
-        var @group = await _context.Group.FindAsync(id);
-        if (@group == null)
-        {
-            return NotFound();
-        }
-        ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-        //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-        return View(@group);
-    }
-
-    // POST: Groups/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
-    {
-        if (id != @group.GroupID)
-        {
-            return NotFound();
-        }
-
-        if (ModelState.IsValid)
-        {
-            try
+            if (id == null || _context.Group == null)
             {
-                _context.Update(@group);
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!GroupExists(@group.GroupID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-        //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-        return View(@group);
-    }
 
-    // GET: Groups/Delete/5
-    public async Task<IActionResult> Delete(int? id)
+            var @group = await _context.Group.FindAsync(id);
+            if (@group == null)
+            {
+                return NotFound();
+            }
+            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
+            //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+            return View(@group);
+        }
+
+        // POST: Groups/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
+        {
+            if (id != @group.GroupID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@group);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!GroupExists(@group.GroupID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
+            //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+            return View(@group);
+        }
+
+        // GET: Groups/Delete/5
+        public async Task<IActionResult> Delete(int? id)
     {
         if (id == null || _context.Group == null)
         {
