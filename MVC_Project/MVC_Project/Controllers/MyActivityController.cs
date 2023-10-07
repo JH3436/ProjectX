@@ -20,56 +20,85 @@ namespace MVC_Project.Controllers
 
         public IActionResult HomePage()
         {
+
+            // 計算活動資料表中的記錄數
+            int recordCount = _context.MyActivity.Count();
+
+            // 設定要生成的亂數ID數量
+            int numberOfRandomIds = 3;
+
+            // 使用 HashSet 來存放不重複的亂數ID
+            HashSet<int> selectedIds_MyActivity = new HashSet<int>();
+
             // 創建一個亂數生成器
             Random random = new Random();
-            List<int> selectedIds = new List<int>();
-            int maxActivityID = 4; // 假設資料庫中的最大 ActivityId 是 5
 
-            while (selectedIds.Count < 3)
+            while (selectedIds_MyActivity.Count < numberOfRandomIds)
             {
-                int randomId = random.Next(1, maxActivityID + 1); // 隨機生成 Id，範圍是 1 到 maxActivityID
-                if (!selectedIds.Contains(randomId))
-                {
-                    selectedIds.Add(randomId);
-                }
+                int randomId = random.Next(1, recordCount + 1); // 隨機生成 Id，範圍是 1 到記錄數
+                selectedIds_MyActivity.Add(randomId);
             }
 
-            //官方資料讀取
-            var myActivityData = from m in _context.MyActivity
-                                 join o in _context.OfficialPhoto
-                                 on m.ActivityID equals o.ActivityID
-                                 where selectedIds.Contains(m.ActivityID)
-                                 select new ResponseActivity
-                                 {
-                                     ActivityName = m.ActivityName,
-                                     Category = m.Category,
-                                     SuggestedAmount = m.SuggestedAmount,
-                                     ActivityContent = m.ActivityContent,
-                                     MinAttendee = m.MinAttendee,
-                                     VoteDate = m.VoteDate,
-                                     ExpectedDepartureMonth = m.ExpectedDepartureMonth,
-                                     PhotoPath = o.PhotoPath
-                                 };
+            // 計算個人開團活動資料表中的記錄數
+            int recordCount_2 = _context.Group.Count();
 
-            //個人開團資料讀取
+
+            // 使用 HashSet 來存放不重複的亂數ID
+            HashSet<int> selectedIds_Group = new HashSet<int>();
+
+            // 創建一個亂數生成器
+            Random random2 = new Random();
+
+            while (selectedIds_Group.Count < numberOfRandomIds)
+            {
+                int randomId = random.Next(1, recordCount_2 + 1); // 隨機生成 Id，範圍是 1 到記錄數
+                selectedIds_Group.Add(randomId);
+            }
+
+
+
+            // 官方活動資料讀取，按 ActivityID 分組，並對相同的 ActivityID 的照片進行隨機排序
+            var myActivityData = from m in _context.MyActivity
+                                       join o in _context.OfficialPhoto
+                                       on m.ActivityID equals o.ActivityID
+                                       where selectedIds_MyActivity.Contains(m.ActivityID)
+                                       group new { m, o } by m.ActivityID into grouped
+                                       select new ResponseActivity
+                                       {
+                                           ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                           Category = grouped.FirstOrDefault().m.Category,
+                                           SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                           ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                           MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                           VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                           ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                           // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
+                                           PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
+                                       };
+
+            //個人開團資料讀取，按 GroupID 分組，並對相同的 GroupID 的照片進行隨機排序
             var groupData = from g in _context.Group
                             join m in _context.Member on g.Organizer equals m.UserID
-                            join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                             from pp in personalPhotos.DefaultIfEmpty()
-                            where selectedIds.Contains(g.GroupID)
+                            where selectedIds_Group.Contains(g.GroupID)
+                            group new { g, pp, m } by g.GroupID into grouped
                             select new ResponseGroup
                             {
-                                GroupName = g.GroupName,
-                                GroupCategory = g.GroupCategory,
-                                GroupContent = g.GroupContent,
-                                MinAttendee = g.MinAttendee,
-                                MaxAttendee = g.MaxAttendee,
-                                StartDate = g.StartDate,
-                                EndDate = g.EndDate,
-                                Nickname = m.Nickname,
-                                PhotoData = pp.PhotoData
+                                GroupName = grouped.FirstOrDefault().g.GroupName,
+                                GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
+                                GroupContent = grouped.FirstOrDefault().g.GroupContent,
+                                MinAttendee = grouped.FirstOrDefault().g.MinAttendee,
+                                MaxAttendee = grouped.FirstOrDefault().g.MaxAttendee,
+                                StartDate = grouped.FirstOrDefault().g.StartDate,
+                                EndDate = grouped.FirstOrDefault().g.EndDate,
+                                Nickname = grouped.FirstOrDefault().m.Nickname,
+                                // 在這裡對相同 GroupID 的照片進行隨機排序，然後選取第一張照片
+                                PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
                             };
+
+
+
             var activities = myActivityData.ToList();
             var groups = groupData.ToList();
 
@@ -92,7 +121,7 @@ namespace MVC_Project.Controllers
             foreach (var group in viewModel.Groups)
             {
                 TimeSpan? timeSpan = group.EndDate - group.StartDate;
-                group.DurationInDays = (int)timeSpan.Value.TotalDays; 
+                group.DurationInDays = (int)timeSpan.Value.TotalDays;
             }
 
             return View(viewModel);
@@ -100,29 +129,29 @@ namespace MVC_Project.Controllers
 
         public IActionResult ACT()
         {
-			var myActivityData = from m in _context.MyActivity
-								 join o in _context.OfficialPhoto
-								 on m.ActivityID equals o.ActivityID
-								 /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
-								 select new ResponseActivity
-								 {
-									 ActivityName = m.ActivityName,
-									 Category = m.Category,
-									 SuggestedAmount = m.SuggestedAmount,
-									 ActivityContent = m.ActivityContent,
-									 MinAttendee = m.MinAttendee,
-									 VoteDate = m.VoteDate,
-									 ExpectedDepartureMonth = m.ExpectedDepartureMonth,
-									 PhotoPath = o.PhotoPath
-								 };
+            var myActivityData = from m in _context.MyActivity
+                                 join o in _context.OfficialPhoto
+                                 on m.ActivityID equals o.ActivityID
+                                 /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
+                                 select new ResponseActivity
+                                 {
+                                     ActivityName = m.ActivityName,
+                                     Category = m.Category,
+                                     SuggestedAmount = m.SuggestedAmount,
+                                     ActivityContent = m.ActivityContent,
+                                     MinAttendee = m.MinAttendee,
+                                     VoteDate = m.VoteDate,
+                                     ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                                     PhotoPath = o.PhotoPath
+                                 };
 
-			//個人開團資料讀取
-			var groupData = from g in _context.Group
+            //個人開團資料讀取
+            var groupData = from g in _context.Group
                             join m in _context.Member on g.Organizer equals m.UserID
                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                             from pp in personalPhotos.DefaultIfEmpty()
-                            //where selectedIds.Contains(g.GroupID)
+                                //where selectedIds.Contains(g.GroupID)
                             select new ResponseGroup
                             {
                                 GroupName = g.GroupName,
