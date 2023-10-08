@@ -6,6 +6,7 @@
 
 <!-- css連結 -->
 <link rel="stylesheet" href="~/css/Group.css" />
+
 <br>
 <br>
 <div class="container">
@@ -55,9 +56,17 @@
 						<!-- Right Column -->
 						<div class="form-group pb-2">
 							<div class="photos">
-								<input type="file" name="ImageDataFiles" id="ImageData" class="file-input form-control-file" accept="image/*" multiple />
+								<div class="action-buttons">
+									<input type="file" name="ImageDataFiles" style="display: none;" id="ImageData" class="file-input form-control-file QQ" accept="image/*" multiple />
+									<label for="ImageData" class="bnt1">選擇照片</label>
+									<button type="button" id="deleteImage" class="bnt1">刪除這張</button>
+									<button type="button" id="prevImage" class="bnt1">上一張</button>
+									<button type="button" id="nextImage" class="bnt1">下一張</button>
+								</div>
+								<div id="photosPreview"></div>
 							</div>
 						</div>
+
 						<div class="form-group">
 							<label asp-for="GroupName" class="control-label pb-2" style="font-size: 30px;">請輸入活動名稱</label>
 							<input asp-for="GroupName" class="form-control group-name-input" placeholder="例: 眠月線三日遊" />
