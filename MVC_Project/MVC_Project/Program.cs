@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
+using SmartBreadcrumbs.Extensions;
+using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 
@@ -35,6 +37,21 @@ builder.Services.AddCors(options => {
                           policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                       });
 });
+
+//-----麵包屑-----
+builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly());
+
+builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
+{
+	options.TagName = "nav";
+	options.TagClasses = "mt-3 fs-5";
+	options.OlClasses = "breadcrumb";
+	options.LiClasses = "breadcrumb-item";
+	options.ActiveLiClasses = "breadcrumb-item";
+    options.SeparatorElement = "<li class=\"separator\">&nbsp<i class=\"fa-solid fa-chevron-right\"></i>&nbsp</li>";
+});
+//-----麵包屑-----
+
 
 
 

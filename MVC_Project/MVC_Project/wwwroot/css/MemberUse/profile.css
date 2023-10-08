@@ -18,9 +18,29 @@
     --lightBlue-bg: rgb(45, 68, 119);
 }
 
-body {
+/*body {
     color: #fca311;
+}*/
+
+/*麵包屑*/
+nav {
+    padding-left: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--lightBlue-bg)
 }
+
+    nav a {
+        text-decoration: none;
+        color: var(--white)
+    }
+
+        nav a:hover {
+            color: var(--orange);
+        }
+    nav ol li:last-child {
+        color: var(--orange)
+    }
 
 /* main裡面有card class */
 .card-ex {
@@ -178,7 +198,6 @@ label.cabinet {
         width: auto;
         opacity: 0;
         opacity: 0;
-        
         margin-top: -30px;
     }
 
@@ -261,7 +280,7 @@ figure figcaption {
 }
 
 .doratry {
-height:500px
+    height: 500px
 }
 
 .btn {
@@ -317,14 +336,13 @@ height:500px
     cursor: pointer;
     background-color: #f4f4f4;
     border: 1px solid #ccc;
-   
 }
 
 .modal-dialog {
     max-width: 400px; /* 調整這個數值以適應你的需求 */
-     position:absolute;
-    top:33%;
-    left:33%
+    position: absolute;
+    top: 33%;
+    left: 33%
 }
 
 figure {

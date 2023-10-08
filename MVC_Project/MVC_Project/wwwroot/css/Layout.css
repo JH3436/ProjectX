@@ -10,6 +10,28 @@
     /*當使用超連結時，頁面會平滑滾動到目標位置。 */
 }
 
+/*麵包屑*/
+nav {
+    padding-left: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--lightBlue-bg)
+}
+
+    nav a {
+        text-decoration: none;
+        color: var(--white)
+    }
+
+        nav a:hover {
+            color: var(--orange);
+        }
+
+    nav ol li:last-child {
+        color: var(--orange)
+    }
+
+
 /* 主題顏色宣告 */
 :root {
     --black: #000000;
@@ -71,8 +93,8 @@ body {
 }
 
 .navbar {
-    margin-left: 10% !important;
-    margin-right: 10% !important;
+    margin-left: 10%;
+    margin-right: 10%;
     color: var(--white);
     font-size: 1.75rem;
     font-weight: bolder;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
+using SmartBreadcrumbs.Attributes;
 
 namespace MVC_Project.Controllers
 {
@@ -44,18 +45,19 @@ namespace MVC_Project.Controllers
             return View(@group);
         }
 
-        // GET: Groups/Create
-        public IActionResult Create()
+		// GET: Groups/Create
+		[Breadcrumb("個人揪團", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
+		public IActionResult Create()
         {
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID");
             ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID");
             return View();
         }
 
-        // POST: Groups/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Groups/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
         {

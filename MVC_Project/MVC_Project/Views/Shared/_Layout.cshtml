@@ -1,3 +1,10 @@
+@{
+	var hideBreadcrumb = Context.Request.RouteValues["action"].ToString().Equals("HomePage", StringComparison.OrdinalIgnoreCase);
+}
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +27,7 @@
 			</div>
 		</a>
 	</div>
-	
+
 	<!-- 導覽列設計 -->
 	<div class="header">
 		<div class="row navbar justify-content-between">
@@ -60,17 +67,6 @@
 				<a class="nav-link navbar-item" id="group-link" asp-area="" asp-controller="Groups" asp-action="Create">發起揪團</a>
 
 			</div>
-			<div class="col-auto">
-				<a class="nav-link navbar-item" id="group-link" asp-area="" asp-controller="MyActivity" asp-action="Create">官網</a>
-
-			</div>
-			<div class="col-auto">
-				<a class="nav-link navbar-item" id="group-link" asp-area="" asp-controller="OfficialPhotos" asp-action="Create">官方照片上傳</a>
-
-			</div><div class="col-auto">
-				<a class="nav-link navbar-item" id="group-link" asp-area="" asp-controller="PersonalPhotos" asp-action="Create">個人照片上傳</a>
-
-			</div>
 			<div class="col">
 				<!-- 填充空間 -->
 			</div>
@@ -90,22 +86,26 @@
 			{
 				// 顯示未登入的導覽列
 				<div class="col-auto">
-					<a class="navbar-item" href="#">登入</a>
+					<a class="navbar-item" asp-controller="home" asp-action="login">登入</a>
 				</div>
 				<div class="col-auto nav-signin">
-					<a class="singin-style" href="#">註冊</a>
+					<a class="singin-style" asp-controller="home" asp-action="login">註冊</a>
 				</div>
 			}
 
-			
+
 		</div>
 	</div>
 
-
+	@if (!hideBreadcrumb)
+	{
+		<breadcrumb></breadcrumb>
+	}
 	<main role="main" class="pb-3">
 		@RenderBody()
 	</main>
-	
+
+
 
 	<!-- 頁底設計 -->
 	<footer class="text-center text-white" style="background-color: var(--white)">
