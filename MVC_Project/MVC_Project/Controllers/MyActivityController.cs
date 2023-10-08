@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
+using SmartBreadcrumbs.Attributes;
 
 namespace MVC_Project.Controllers
 {
@@ -18,7 +19,8 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-        public IActionResult HomePage()
+		[DefaultBreadcrumb("首頁")]
+		public IActionResult HomePage()
         {
             // 讀取所有有效的 ActivityID 到一個列表中
             var validActivityIds = _context.MyActivity.Select(a =>a.ActivityID).ToList();
