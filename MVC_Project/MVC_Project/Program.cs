@@ -44,10 +44,11 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly());
 builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
 {
 	options.TagName = "nav";
-	options.TagClasses = "";
+	options.TagClasses = "mt-3 fs-5";
 	options.OlClasses = "breadcrumb";
-	options.LiClasses = "breadcrumb-item text-sm";
-	options.ActiveLiClasses = "breadcrumb-item text-sm";
+	options.LiClasses = "breadcrumb-item";
+	options.ActiveLiClasses = "breadcrumb-item";
+    options.SeparatorElement = "<li class=\"separator\">&nbsp<i class=\"fa-solid fa-chevron-right\"></i>&nbsp</li>";
 });
 //-----麵包屑-----
 

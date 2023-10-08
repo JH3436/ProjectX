@@ -19,7 +19,7 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-		[DefaultBreadcrumb("首頁")]
+        [DefaultBreadcrumb("首頁")]
 		public IActionResult HomePage()
         {
             // 讀取所有有效的 ActivityID 到一個列表中
@@ -134,6 +134,7 @@ namespace MVC_Project.Controllers
             return View(viewModel);
         }
 
+        [Breadcrumb("活動列表", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT()
         {
             var myActivityData = from m in _context.MyActivity

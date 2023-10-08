@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Project.Models;
+using SmartBreadcrumbs.Attributes;
 using System.Diagnostics;
 
 namespace MVC_Project.Controllers
@@ -47,8 +48,9 @@ namespace MVC_Project.Controllers
             return View();
         }
 
+		[Breadcrumb("登入", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
 
-        public IActionResult Login()
+		public IActionResult Login()
         {
             return View();
         }

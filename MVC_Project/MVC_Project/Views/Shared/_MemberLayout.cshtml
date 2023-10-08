@@ -19,7 +19,7 @@
 
     <!-- navbar -->
     <title>JO!N</title>
-    <link rel="icon" href="./Files/小黃人.png" type="image/png" />
+    <link rel="icon" href="~/IMG/小黃人.png" type="image/png" />
 
     <!-- Font Awesome套件引入 -->
     <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
@@ -60,8 +60,8 @@
     <div class="header">
         <div class="row navbar justify-content-between">
             <div class="col-auto">
-                <a class="navbar-item" href="#" id="home">
-                    <img src="/導覽列+頁底/Files/Logo.png" alt="logo" id="logo" width="200" height="60" />
+                <a class="navbar-item" asp-controller="myactivity" asp-action="HomePage">
+                    <img src="~/IMG/標誌.png" alt="logo" id="logo" width="200" height="60" />
                 </a>
             </div>
 
@@ -114,13 +114,14 @@
                     <div class="col-auto">
                         <!-- 會員中心 -->
                         <div class="nav-signed">
-                            <a class="singed-style" href="#">會員中心</a>
+                            <a class="singed-style" asp-controller="member" asp-action="member">會員中心</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <breadcrumb></breadcrumb>
 
 
     <!-- 內容開始 -->
@@ -136,10 +137,10 @@
                     <!-- A2下半部：列表 -->
                     <div class="A2-lower">
                         <div class="menu-item-container">
-                            <a href="/Member/LikeRecord" class="menu-item" data-content="likeit">已收藏的活動</a>
+                            <a href="/Member/LikeRecord" class="menu-item" data-content="likeit">已收藏活動</a>
                         </div>
                         <div class="menu-item-container">
-                            <a href="/Member/Registration" class="menu-item" data-content="activity">已報名的活動</a>
+                            <a href="/Member/Registration" class="menu-item" data-content="activity">已報名活動</a>
                         </div>
                         <div class="menu-item-container">
                             <a href="/Member/Member" class="menu-item" data-content="settings">個人資料</a>
