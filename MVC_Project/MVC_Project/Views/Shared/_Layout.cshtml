@@ -44,19 +44,19 @@
 				</a>
 				<div class="dropdown-content" id="explore-dropdown">
 					<div class="row">
-						<div class="col dropdown-img-1">
+						<div class="col dropdown-img-1" style="background-image:url('../IMG/奇萊山景.JPG')">
 							<a href="#">登山</a>
 						</div>
-						<div class="col dropdown-img-2">
+						<div class="col dropdown-img-2" style="background-image:url('../IMG/情人湖.JPG')">
 							<a href="#">溯溪</a>
 						</div>
-						<div class="col dropdown-img-3">
+						<div class="col dropdown-img-3" style="background-image:url('../IMG/自潛.png')">
 							<a href="#">潛水</a>
 						</div>
-						<div class="col dropdown-img-4">
+						<div class="col dropdown-img-4" style="background-image:url('../IMG/野營.jpg')">
 							<a href="#">露營</a>
 						</div>
-						<div class="col dropdown-img-5">
+						<div class="col dropdown-img-5" style="background-image:url('../IMG/其他.png')">
 							<a href="#">其他</a>
 						</div>
 					</div>
@@ -65,7 +65,6 @@
 			</div>
 			<div class="col-auto">
 				<a class="nav-link navbar-item" id="group-link" asp-area="" asp-controller="Groups" asp-action="Create">發起揪團</a>
-
 			</div>
 			<div class="col">
 				<!-- 填充空間 -->
@@ -97,6 +96,7 @@
 		</div>
 	</div>
 
+	@* 判斷URL是否在首頁。如果否，顯示麵包屑 *@
 	@if (!hideBreadcrumb)
 	{
 		<breadcrumb></breadcrumb>
