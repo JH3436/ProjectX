@@ -9,6 +9,17 @@ $(document).ready(function () {
         }
     });
 
+    ////$.get('/Member/GetMemberInfo', { userId: currentUserId }, function (data) {
+    ////    if (data.Nickname) {
+    ////        $('#nickname').val(data.Nickname);
+    ////    }
+    ////    if (data.Intro) {
+    ////        $('#introduceyrself').val(data.Intro);
+    ////    }
+    ////});
+
+
+
 // 找到 textarea 元素
 var textarea = document.getElementById('introduceyrself');
 
@@ -97,5 +108,8 @@ $('#cropImageBtn').on('click', function (ev) {
         });
     });
 });
+
+    
 });
+
 

@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model MVC_Project.Models.Member
+
 @{
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
 }
@@ -34,7 +33,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
             </div>
             </div>
             
-        </div>
+    </div>
 
         <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel" aria-hidden="true">
@@ -61,60 +60,88 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
                 </div>
             </div>
         </div>
+ 
 
-
-    <div class="container pb-3">
+<form method="post" action="/Member/UpdateProfile">
+        <div class="container pb-3">
             <!-- 暱稱 -->
-
             <div class="mb-3 col-4  ">
                 <label for="nickname" class="form-label">暱稱</label>
-                <input type="email" class="form-control" id="nickname">
+                <input type="text" class="form-control" id="nickname" name="Nickname" value="@Model.Nickname">
             </div>
 
             <!-- 自我介紹 -->
             <div class="mb-3 col-8 ">
                 <label for="introduceyrself" class="form-label">自我介紹 </label>
-
-            <textarea class="form-control" id="introduceyrself" rows="6" placeholder="(字數限制50字以內)"></textarea>
-
-
+                <textarea class="form-control" id="introduceyrself" name="Intro" rows="6" placeholder="(字數限制50字以內)">@Model.Intro</textarea>
             </div>
 
-            <div class="org-btn org-btn-text-style">
-                儲存
-            </div>
-
-
+            <button type="submit" class="org-btn org-btn-text-style">儲存</button>
         </div>
- </div>
+    </form>
 
-<div class="container mt-4 " style="background-color:blue" id="personalB">
+    </div>
+
+
+
+<div class="container mt-4 "  id="personalB">
 
 
     <div class="container ">
-        <!-- 暱稱 -->
 
-        <div class="mb-3 col-4 pt-4">
-            <label for="nickname" class="form-label">暱稱</label>
-            <input type="email" class="form-control" id="nickname">
-        </div>
-
-        <!-- 自我介紹 -->
-        <div class="mt-4 mb-3 col-8">
-            <label for="introduceyrself" class="form-label">自我介紹 </label>
-
-            <textarea class="form-control" id="introduceyrself" rows="6" placeholder="(字數限制50字以內)"></textarea>
-        </div>
-
-        <button class="org-btn org-btn-text-style text-end">
-            儲存
-        </button>
+        <form method="post" action="/Member/ChangePassword">
+            <div>
+                <label for="oldPassword">舊密碼：</label>
+                <input type="password" id="oldPassword" name="oldPassword" required />
+            </div>
+            <div>
+                <label for="newPassword">新密碼：</label>
+                <input type="password" id="newPassword" name="newPassword" required />
+            </div>
+            <div>
+                <label for="confirmPassword">再次輸入新密碼：</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required />
+                <span id="passwordMismatch" style="color: red; display: none;">密碼與先前輸入不符合</span>
+            </div>
+            <div>
+                <button type="submit">儲存</button>
+            </div>
+        </form>
 
 
     </div>
 </div>
- <script>
 
- 
 
+
+<script>
+    document.getElementById('confirmPassword').addEventListener('input', function () {
+        var newPassword = document.getElementById('newPassword').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        var passwordMismatchMessage = document.getElementById('passwordMismatch');
+
+        if (newPassword !== confirmPassword && confirmPassword !== "") {
+            passwordMismatchMessage.style.display = "inline";
+        } else {
+            passwordMismatchMessage.style.display = "none";
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var successMessage = '@Html.Raw(TempData["PasswordChangeSuccess"])';
+        var errorMessage = '@Html.Raw(TempData["PasswordChangeError"])';
+
+        if (successMessage && successMessage !== "") {
+            alert(successMessage);
+        } else if (errorMessage && errorMessage !== "") {
+            alert(errorMessage);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var successintro = '@Html.Raw(TempData["ProfileUpdateSuccess"])';
+        if (successintro && successintro !== "") {
+            alert(successintro);
+        }
+    });
 </script>

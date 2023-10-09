@@ -179,12 +179,67 @@ namespace MVC_Project.Controllers
 
 
 		[Breadcrumb("會員中心", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
-		public IActionResult Member()
-		{
-			return View();
-		}
+        public IActionResult Member()
+        {
+            var member = _context.Member.FirstOrDefault(); // 或者是其他相對應的查詢方式
+            if (member == null)
+            {
+                // 你可以選擇返回一個錯誤視圖或其他方式來處理這種情況
+                return View("Error");
+            }
+            return View(member);  // 確保你傳遞了一個非null的對象
+        }
 
-		[HttpPost]
+
+        // (password hashing) 之後可能要做密碼hashing，資料庫新增一個欄位來存儲鹽值（Salt）--->我在想把phone用掉改成salt欄位
+        [HttpPost]
+        public IActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
+        {
+            var memberId = 1/* 取得已登入會員ID的方式 */;
+            var member = _context.Member.Find(memberId);
+            if (member == null)
+            {
+                return View("Error", "未找到會員資料");
+            }
+
+            if (member.Password != oldPassword)
+            {
+                // 密碼錯誤，顯示錯誤訊息
+                TempData["PasswordChangeError"] = "舊密碼不正確";
+                return RedirectToAction("Member");  // 重導到會員頁面
+            }
+
+            if (newPassword != confirmPassword)
+            {
+                // 密碼不符合，不過這種情況不太可能發生，因為前端已經有檢查
+                TempData["PasswordChangeError"] = "新密碼與確認密碼不符合";
+                return RedirectToAction("Member");  // 重導到會員頁面
+            }
+
+            member.Password = newPassword;
+            _context.SaveChanges();
+
+            TempData["PasswordChangeSuccess"] = "密碼已成功更改";
+            return RedirectToAction("Member");  // 重導到會員頁面
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProfile(string Nickname, string Intro)
+        {
+            int userId = 1;  // 此處應根據當前登錄的用戶設置
+            var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
+            if (member != null)
+            {
+                member.Nickname = Nickname;
+                member.Intro = Intro;
+                _context.SaveChanges();
+                TempData["ProfileUpdateSuccess"] = "變更成功";
+                return RedirectToAction("Member");  // 返回Member頁面
+            }
+            return View();  // 或者返回錯誤頁面，如果你有的話
+        }
+
+        [HttpPost]
 		public IActionResult UpdateUserPhoto(int userId, string imageBase64)
 		{
 			var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
