@@ -134,7 +134,7 @@ namespace MVC_Project.Controllers
             return View(viewModel);
         }
 
-        [Breadcrumb("活動列表", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
+        [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT()
         {
             var myActivityData = from m in _context.MyActivity

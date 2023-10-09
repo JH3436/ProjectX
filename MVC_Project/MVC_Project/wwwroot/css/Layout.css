@@ -12,7 +12,7 @@
 
 /*麵包屑*/
 nav {
-    padding-left: 15%;
+    padding-left: 11%;
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: var(--lightBlue-bg)
@@ -125,30 +125,9 @@ body {
     .dropdown-content .row {
         gap: 1rem;
     }
+    
 
-
-/* 圖片位址 */
-.dropdown-img-1::before {
-    background: url('../IMG/奇萊山景.JPG');
-}
-
-.dropdown-img-2::before {
-    background-image: url('../IMG/情人湖.JPG');
-}
-
-.dropdown-img-3::before {
-    background-image: url('../IMG/自潛.png');
-}
-
-.dropdown-img-4::before {
-    background-image: url('../IMG/野營.jpg');
-}
-
-.dropdown-img-5::before {
-    background-image: url('../IMG/其他.png');
-}
-
-
+/*下拉圖片*/
 .dropdown-img-1,
 .dropdown-img-2,
 .dropdown-img-3,
