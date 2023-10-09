@@ -147,8 +147,7 @@ $(document).ready(function () {
         
         </div>`
                 )
-                alert("討論提交成功")
-                $("#discussTextArea").val("");
+                /*$("#discussTextArea").val("");*/
             }
         }
     })
@@ -174,8 +173,7 @@ $(document).on("click", ".messageBtn", function () {
       </div>`
             )
         }
-        alert("留言成功");
-        $(this).parent().children("#replyTextArea").val("");
+        /*$(this).parent().children("#replyTextArea").val("");*/
     }
 });
 

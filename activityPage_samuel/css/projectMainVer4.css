@@ -509,6 +509,12 @@ a.float:hover + div.label-container{
     background-color: gray;
   }
 
+ .commentTime{
+  color:var(--lightGray);
+  display: inline-block;
+  margin-right: 0;
+ }
+
   /* 留言按鈕 */
   .messageBtn {
     width: fit-content;
