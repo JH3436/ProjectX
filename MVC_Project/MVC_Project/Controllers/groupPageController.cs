@@ -66,37 +66,7 @@ namespace MVC_Project.Controllers
             return View();
         }
 
-        // POST: YourController/commentCreate
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CommentCreate([Bind("ChatContent")] Chat chat)
-        //{
-        //    // 在這裡處理接收到的 ChatContent
-
-
-        //    try
-        //    {
-
-        //            int id = int.Parse(Request.Form["id"]);
-        //            chat.ActivityID = id;
-        //            // 設置固定值
-        //            chat.UserID = 1;
-        //            chat.ToWhom = null;
-        //            chat.ChatTime = DateTime.Now;
-
-        //            // 添加到數據庫
-        //            _context.Chat.Add(chat);
-        //            _context.SaveChanges();
-
-        //        // 可以在這裡進行重定向到其他頁面或返回相應的視圖
-        //        return RedirectToAction("GroupPage"); // 假設 GroupPage 接受一個 id 參數
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Handle exceptions
-        //        return View("Error");
-        //    }
-        //}
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CommentCreate(Chat chat)
@@ -112,6 +82,28 @@ namespace MVC_Project.Controllers
 
             return NoContent();
         }
-            
+
+        [HttpGet]
+        public IActionResult ReplyCreate()
+        {
+            return View();
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ReplyCreate(Chat chat)
+        {
+            //int id = int.Parse(Request.Form["id"]);
+            chat.ActivityID = 1;
+            chat.UserID = 1;
+            chat.ToWhom = 1;
+            chat.ChatTime = DateTime.Now;
+
+            _context.Add(chat);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+    }
     }

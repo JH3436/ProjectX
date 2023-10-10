@@ -274,18 +274,20 @@
                                     }
                                 }
                                 <div class="replyTextDiv">
+                                    <form asp-action="ReplyCreate" method="post">
                                     <div class="userCommentDiv">
                                         <img class="profile" src="~/IMG/godtone.png" />
                                         <div class="userCommentDivRight">
                                             <p class="h3 align-self-center">嘎痛</p>
-                                            <textarea name="" id="replyTextArea" class="col-auto" rows="1"></textarea>
-                                            <div class="messageBtn">
-                                                <a class="messageBtn-text-style" href="#">
+                                                <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
+                                            <button class="messageBtn" type="submit">
+                                                <p class="messageBtn-text-style" href="#">
                                                     留言
-                                                </a>
-                                            </div>
+                                                </p>
+                                            </button>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         }
