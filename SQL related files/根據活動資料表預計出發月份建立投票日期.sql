@@ -1,4 +1,3 @@
---delete from [VoteTime]
 -- 系統當前時間
 DECLARE @CurrentTime DATETIME = GETDATE()
 
@@ -9,6 +8,7 @@ DECLARE @CurrentTime DATETIME = GETDATE()
         DateGenerated.StartDate,
         ROW_NUMBER() OVER (PARTITION BY MyActivity.ActivityID ORDER BY DateGenerated.StartDate) AS RowNum
     FROM MyActivity
+	--生成日期
     CROSS APPLY (
         SELECT 
             StartDate
@@ -22,7 +22,6 @@ DECLARE @CurrentTime DATETIME = GETDATE()
     ) AS DateGenerated
     WHERE CONVERT(DATE, VoteDate) = CONVERT(DATE, @CurrentTime)
           AND ExpectedDepartureMonth >= @CurrentTime
-          --AND ExpectedDepartureMonth < DATEADD(MONTH, 1, @CurrentTime)
 )
 INSERT INTO VoteTime (ActivityID, StartDate)
 SELECT ActivityID, StartDate
