@@ -55,40 +55,6 @@ ELSE BEGIN
 PRINT '這邊可以當作繼續投票的判斷?';
 END
 ------------------------------------------------------------------------------------------
---2. 根據活動資料表計算出四個投票選項
--- 假設要從活動資料表中選擇特定活動ID的預計出發月份
-DECLARE @ActivityID INT = 1;
-
--- 創建一個臨時表格來存儲週末的週六
-CREATE TABLE #WeekendSaturdays (SaturdayDate DATE);
-
--- 從活動資料表中選擇特定活動ID的預計出發月份
-DECLARE @StartDate DATE;
-SELECT @StartDate = ExpectedDepartureMonth
-FROM Activity
-WHERE ActivityID = @ActivityID;
-
-DECLARE @EndDate DATE = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate));     --先計算出根據第一天(@StartDate)往後推一個月，然後再扣一天得到當月最後一天
-
--- 使用 WHILE 迴圈來找到四個週末的週六並插入到臨時表格中
-WHILE @StartDate <= @EndDate
-BEGIN
-    IF DATENAME(WEEKDAY, @StartDate) = 'Saturday'
-    BEGIN
-        INSERT INTO #WeekendSaturdays (SaturdayDate) VALUES (@StartDate);
-    END
-    SET @StartDate = DATEADD(DAY, 1, @StartDate);
-END
-
--- 將臨時表格中的週六日期插入到投票時間資料表中，針對特定活動ID
-INSERT INTO VoteTime (ActivityID, StartDate, VoteCount)
-SELECT @ActivityID, SaturdayDate, 0 -- 這裡的 0 代表初始票數
-FROM #WeekendSaturdays;
-
--- 刪除臨時表格
-DROP TABLE #WeekendSaturdays;
-------------------------------------------------------------------------------------------
-
 --3. 新增投票紀錄並更新投票時間資料表的票數
 DECLARE @UserID INT = 1; -- 使用者ID
 DECLARE @ActivityID INT = 1; -- 活動ID
