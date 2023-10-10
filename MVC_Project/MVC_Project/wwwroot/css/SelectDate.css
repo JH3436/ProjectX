@@ -72,9 +72,9 @@ form {
     border-radius: 10px;
     text-align: center;
     padding: 20px;
-    height: 780px;
-    /* 設置最大高度，根據需要更改 */
+    height: fit-content;
 }
+
 
     .login input {
         display: flex;
@@ -87,16 +87,20 @@ form {
         border: 2px solid #14213d;
     }
 
-.header {
+
+
+
+
+.header1 {
     text-align: center;
     margin-bottom: 5rem;
 }
 
-    .header h1 {
+    .header1 h1 {
         margin-bottom: 1rem;
     }
 
-    .header p {
+    .header1 p {
         margin-right: 0px;
     }
 
