@@ -3,8 +3,6 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["GroupCategory"] = Model[0].GroupCategory;
-    ViewData["GroupName"] = Model[0].GroupName;
 }
 
 
@@ -34,7 +32,7 @@
             integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
             crossorigin="anonymous"></script>
 
-
+    <script src="~/js/ActivityPage.js"></script>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
@@ -50,6 +48,10 @@
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
 
+        <!-- 麵包屑 -->
+        <div id="linkWordDiv">
+            <h1 id="linkWord ">探索 > @Model[0].GroupCategory > @Model[0].GroupName</h1>
+        </div>
         <div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
@@ -205,24 +207,25 @@
 
                     <!-- 討論輸入區 -->
                     <div class="commentDiv" id="discussInput">
-                        <div class="userCommentDiv">
-                            <img class="profile" src="./Files/godtone.png" />
-                            <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">嘎痛</p>
-                                <div class="discuss-box align-self-start">
-                                    <textarea name="" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+                        <form asp-action="commentCreate" method="post">
+                            <input type="hidden" name="id" value="@Model[0].GroupID" />
+                            <div class="userCommentDiv">
+                                <img class="profile" src="./Files/godtone.png" />
+                                <div class="userCommentDivRight">
+                                    <p class="h3 align-self-center">嘎痛</p>
+                                    <div class="discuss-box align-self-start" name ="ChatContent">
+                                        <textarea name="ChatContent" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="commentBtnDiv">
-                            <div class="publishBtn">
-                                <p class="h3">發表</p>
-                                <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                            <div class="commentBtnDiv" >
+                                <button class="publishBtn" type="submit">
+                                    <p class="h3">發表</p>
+                                    <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
-
-
                 </div>
 
                 <!-- 討論區 -->
@@ -230,75 +233,73 @@
                     var chatList = Model[0].Chat.ToList();
                     int commentId = 0;
                 }
-                @foreach (var chat in chatList)
+                @if (chatList != null && chatList.Any())
                 {
-                    commentId++ ;
-                    var toWhom = chat.ToWhom;
-                    var ChatContent = chat.ChatContent;
-                    if (toWhom == null)
+                    foreach (var chat in chatList)
                     {
-                        <div class="commentDiv">
-                            <div class="userCommentDiv">
-                                <img class="profile" src="~/IMG/ma.jpg" />
-                                <div class="userCommentDivRight">
-                                    <p class="h3 align-self-center">馬英九</p>
-                                    <div class="comment-box align-self-start">@ChatContent commentId: @commentId</div>
+                        commentId++;
+                        var toWhom = chat.ToWhom;
+                        var ChatContent = chat.ChatContent;
+                        if (toWhom == null)
+                        {
+                            <div class="commentDiv">
+                                <div class="userCommentDiv">
+                                    <img class="profile" src="~/IMG/ma.jpg" />
+                                    <div class="userCommentDivRight">
+                                        <p class="h3 align-self-center">馬英九</p>
+                                        <div class="comment-box align-self-start">@ChatContent commentId: @commentId</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="commentBtnDiv">
-                                <div class="replyBtn" id="replyBtn">
-                                    <p class="h3">回覆</p>
-                                    <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                <div class="commentBtnDiv">
+                                    <div class="replyBtn" id="replyBtn">
+                                        <p class="h3">回覆</p>
+                                        <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            @foreach (var reply in chatList)
-                            {
-                                int? replyToWhom = reply.ToWhom;
-                                string? replyChatContent = reply.ChatContent;
-                                if (replyToWhom == commentId)
+                                @foreach (var reply in chatList)
                                 {
-                                    <div class="replyDiv">
-                                        <div class="userCommentDiv">
-                                            <img class="profile" src="~/IMG/lai.jpg" />
-                                            <div class="userCommentDivRight">
-                                                <p class="h3 align-self-center">ㄌㄨㄚˋ </p>
-                                                <div class="comment-box align-self-start">@replyChatContent</div>
+                                    int? replyToWhom = reply.ToWhom;
+                                    string? replyChatContent = reply.ChatContent;
+                                    if (replyToWhom == commentId)
+                                    {
+                                        <div class="replyDiv">
+                                            <div class="userCommentDiv">
+                                                <img class="profile" src="~/IMG/lai.jpg" />
+                                                <div class="userCommentDivRight">
+                                                    <p class="h3 align-self-center">ㄌㄨㄚˋ</p>
+                                                    <div class="comment-box align-self-start">@replyChatContent</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                <div class="replyTextDiv">
+                                    <div class="userCommentDiv">
+                                        <img class="profile" src="~/IMG/godtone.png" />
+                                        <div class="userCommentDivRight">
+                                            <p class="h3 align-self-center">嘎痛</p>
+                                            <textarea name="" id="replyTextArea" class="col-auto" rows="1"></textarea>
+                                            <div class="messageBtn">
+                                                <a class="messageBtn-text-style" href="#">
+                                                    留言
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            }
-                            <div class="replyTextDiv">
-                                <div class="userCommentDiv">
-                                    <img class="profile" src="~/IMG/godtone.png" />
-                                    <div class="userCommentDivRight">
-                                        <p class="h3 align-self-center">嘎痛</p>
-                                        <textarea name="" id="replyTextArea" class="col-auto" rows="1"></textarea>
-                                        <div class="messageBtn">
-                                            <a class="messageBtn-text-style" href="#">
-                                                留言
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-  
-                        </div>
-
+                        }
                     }
                 }
-                
-                </div>
-
+               
             </div>
         </div>
-    
-
+    </div>
 
 </body>
 <!-- JS連結 -->
 
-<script src="~/js/ActivityPage.js"></script>
+
 
 
 </html>

@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using MVC_Project.Models;
-using SmartBreadcrumbs.Nodes;
+
 
 namespace MVC_Project.Controllers
 {
@@ -23,15 +23,13 @@ namespace MVC_Project.Controllers
         }
 
 
-        public IActionResult groupPage(int? id)
+        public IActionResult groupPage(int id)
         {
-            if (id == null || _context.MyActivity == null)
-            {
-                return NotFound();
-            }
+            //if (id == null || _context.MyActivity == null)
+            //{
+            //    return NotFound();
+            //}
             var data = from g in _context.Group
-                       join c in _context.Chat
-                       on g.GroupID equals c.ActivityID
                        where g.GroupID == id
                        select new Group
                        {
@@ -44,55 +42,15 @@ namespace MVC_Project.Controllers
                            StartDate = g.StartDate,
                            EndDate = g.EndDate,
                            Organizer = g.Organizer,
-                           Chat = _context.Chat.Where(chat => chat.ActivityID == g.GroupID).ToList(),
-                           OrganizerNavigation = _context.Member.FirstOrDefault(m => m.UserID == g.Organizer), // Set OrganizerNavigation based on Member Id
-                           OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID), // Set OriginalActivity based on ActivityID
-                           PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(), // Set PersonalPhoto based on GroupID
-                           Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList() // Set Registration based on GroupID
-
+                           Chat = (_context.Chat.Count(chat => chat.ActivityID == g.GroupID) > 0) ?
+                                  _context.Chat.Where(chat => chat.ActivityID == g.GroupID).ToList() : new List<Chat>(),
+                           OrganizerNavigation = _context.Member.FirstOrDefault(m => m.UserID == g.Organizer),
+                           OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID),
+                           PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(),
+                           Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList()
                        };
 
-            //var data = from g in _context.Group
-            //                      join p in _context.PersonalPhoto
-            //                      on g.GroupID equals p.GroupID
-            //                      join c in _context.Chat
-            //                      on g.GroupID equals c.ActivityID
-            //                      where g.GroupID == id
-            //                      select new Group
-            //                      {
-            //                          GroupName = g.GroupName,
-            //                          GroupCategory = g.GroupCategory,
-            //                          GroupContent = g.GroupContent,
-            //                          MinAttendee = g.MinAttendee,
-            //                          MaxAttendee = g.MaxAttendee,
-            //                          StartDate = g.StartDate,
-            //                          EndDate = g.EndDate,
-            //                          Organizer = g.Organizer,
-            //                          Chat = _context.Chat.Where(chat => chat.ActivityID == g.GroupID).ToList(),
-            //                          OrganizerNavigation = _context.Member.FirstOrDefault(m => m.UserID == g.Organizer), // Set OrganizerNavigation based on Member Id
-            //                          OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID), // Set OriginalActivity based on ActivityID
-            //                          PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(), // Set PersonalPhoto based on GroupID
-            //                          Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList() // Set Registration based on GroupID
 
-            //                      };
-
-            //-----麵包屑-----
-            var childNode1 = new MvcBreadcrumbNode("ACT", "MyActivity", "所有活動");
-
-            var childNode2 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.GroupCategory")
-            {
-                OverwriteTitleOnExactMatch = true,
-                Parent = childNode1
-            };
-
-            var childNode3 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.GroupName")
-            {
-                OverwriteTitleOnExactMatch = true,
-                Parent = childNode2
-            };
-
-            ViewData["BreadcrumbNode"] = childNode3;
-            //-----麵包屑結束-----
 
 
             var temp = data.ToList();
@@ -102,21 +60,58 @@ namespace MVC_Project.Controllers
 
 
 
-        // POST: groupPageController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        public IActionResult CommentCreate()
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
-        
+        // POST: YourController/commentCreate
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult CommentCreate([Bind("ChatContent")] Chat chat)
+        //{
+        //    // 在這裡處理接收到的 ChatContent
+
+
+        //    try
+        //    {
+
+        //            int id = int.Parse(Request.Form["id"]);
+        //            chat.ActivityID = id;
+        //            // 設置固定值
+        //            chat.UserID = 1;
+        //            chat.ToWhom = null;
+        //            chat.ChatTime = DateTime.Now;
+
+        //            // 添加到數據庫
+        //            _context.Chat.Add(chat);
+        //            _context.SaveChanges();
+
+        //        // 可以在這裡進行重定向到其他頁面或返回相應的視圖
+        //        return RedirectToAction("GroupPage"); // 假設 GroupPage 接受一個 id 參數
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Handle exceptions
+        //        return View("Error");
+        //    }
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CommentCreate(Chat chat)
+        {
+            int id = int.Parse(Request.Form["id"]);
+            chat.ActivityID = id;
+            chat.UserID = 1;
+            chat.ToWhom = null;
+            chat.ChatTime = DateTime.Now;
+
+            _context.Add(chat);
+                await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+            
+        }
     }
-}
