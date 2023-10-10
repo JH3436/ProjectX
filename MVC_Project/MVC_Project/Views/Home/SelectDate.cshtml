@@ -12,6 +12,8 @@
     <!-- BAR -->
     <title>JO!N</title>
     <link rel="icon" href="~/IMG/小黃人.png" type="image/png" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -19,8 +21,8 @@
 
     <!-- 帳密   -->
     <div id="container1">
-        <form action="login.js" class="login" id="login">
-            <div class="header">
+        <form action="#" class="login" id="login">
+            <div class="header1">
                 <h1>您好,親愛的會員</h1>
                 <p style="font-size: 21px;">當您在選擇日期截止日之前，都可以編輯您最適合的時間。</p>
                 <p style="font-size: 21px;">選擇日期截止後，系統將根據最多人選擇的時間段來安排活動。</p>
@@ -43,15 +45,20 @@
                             <label for="t-option">2023/10/14 - 2023/10/15</label>
                             <div class="check"></div>
                         </li>
+                        <li class="Cli">
+                            <input type="radio" id="z-option" name="selectorDATA">
+                            <label for="z-option">2023/10/14 - 2023/10/15</label>
+                            <div class="check"></div>
+                        </li>
                     </ul>
                 </div>
             </div>
             <!-- 添加按鈕容器 -->
             <div class="button-container">
-                <button class="button" style="font-size: 20px;">提交</button>
+                <button class="button" type="submit" style="font-size: 20px;" asp-controller="Member" asp-action="Registration">提交</button>
             </div>
             <div class="register-link">
-                <a href="../小胖/index/profile.html">
+                <a asp-controller="Member" asp-action="Registration">
                     <span onclick="show_hide()">返回會員中心</span>
                 </a>
             </div>
@@ -64,7 +71,6 @@
 </body>
 
 <!-- bar-js -->
-<script src="/導覽列Navbar/js for navbar.js"></script>
-<script src="./選日期頁.js"></script>
+<script src="~/js/SelectDate.js"></script>
 
 </html>

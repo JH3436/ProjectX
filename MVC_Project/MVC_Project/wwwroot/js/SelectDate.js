@@ -124,3 +124,45 @@ $("button-container").click(function () {
         alert("請選擇日期");
     }
 });
+
+
+
+//顯示日期時間
+$(document).ready(function () {
+    
+    const today = new Date();
+
+    
+    const nextNextMonthFirstDay = new Date(today.getFullYear(), today.getMonth() + 2, 1);
+
+    const weekends = [];
+    let day = nextNextMonthFirstDay.getDay();
+    let startWeekend = null;
+
+    for (let i = 0; i <= 30; i++) {
+        if (weekends.length >= 4) break;
+
+        if (day === 6) { 
+            startWeekend = new Date(nextNextMonthFirstDay);
+        }
+
+        if (day === 0 && startWeekend) { 
+            const endWeekend = new Date(nextNextMonthFirstDay);
+            weekends.push({ start: startWeekend, end: endWeekend });
+            startWeekend = null; 
+        }
+
+        
+        nextNextMonthFirstDay.setDate(nextNextMonthFirstDay.getDate() + 1);
+        day = (day + 1) % 7;
+    }
+
+    // 更新label
+    $(".Cli label").each(function (index) {
+        if (index < weekends.length) {
+            const weekend = weekends[index];
+            const dateStr = `${weekend.start.getFullYear()}/${weekend.start.getMonth() + 1}/${weekend.start.getDate()} - ${weekend.end.getFullYear()}/${weekend.end.getMonth() + 1}/${weekend.end.getDate()}`;
+            $(this).text(dateStr);
+        }
+    });
+});
