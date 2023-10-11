@@ -3,6 +3,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Category"] = Model[0].GroupCategory;
+    ViewData["ActivityName"] = Model[0].GroupName;
 }
 
 
@@ -47,11 +49,6 @@
 
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
-
-        <!-- 麵包屑 -->
-        <div id="linkWordDiv">
-            <h1 id="linkWord ">探索 > @Model[0].GroupCategory > @Model[0].GroupName</h1>
-        </div>
         <div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
