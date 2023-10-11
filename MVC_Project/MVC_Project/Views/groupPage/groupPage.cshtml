@@ -275,6 +275,8 @@
                                 }
                                 <div class="replyTextDiv">
                                     <form asp-action="ReplyCreate" method="post">
+                                    <input type="hidden" name="id" value="@Model[0].GroupID" />
+                                    <input type="hidden" name="ToWhom" value = "@chat.ChatID" />
                                     <div class="userCommentDiv">
                                         <img class="profile" src="~/IMG/godtone.png" />
                                         <div class="userCommentDivRight">
