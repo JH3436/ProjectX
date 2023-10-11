@@ -9,7 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using MVC_Project.Models;
-
+using SmartBreadcrumbs.Nodes;
 
 namespace MVC_Project.Controllers
 {
@@ -49,6 +49,25 @@ namespace MVC_Project.Controllers
                            PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(),
                            Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList()
                        };
+            //-----麵包屑-----
+
+            var childNode1 = new MvcBreadcrumbNode("ACT", "MyActivity", "所有活動");
+
+            var childNode2 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.Category")
+            {
+                OverwriteTitleOnExactMatch = true,
+                Parent = childNode1
+            };
+
+            var childNode3 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.ActivityName")
+            {
+                OverwriteTitleOnExactMatch = true,
+                Parent = childNode2
+            };
+
+            ViewData["BreadcrumbNode"] = childNode3;
+
+            //-----麵包屑結束-----
 
 
 

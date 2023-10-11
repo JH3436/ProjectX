@@ -3,6 +3,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Category"] = Model[0].GroupCategory;
+    ViewData["ActivityName"] = Model[0].GroupName;
 }
 
 
@@ -42,16 +44,8 @@
 </head>
 
 <body>
-    <!-- 導覽列設計 -->
-    
-
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
-
-        <!-- 麵包屑 -->
-        <div id="linkWordDiv">
-            <h1 id="linkWord ">探索 > @Model[0].GroupCategory > @Model[0].GroupName</h1>
-        </div>
         <div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
@@ -68,7 +62,7 @@
                         <i class="fa-regular fa-heart fa-2xl"></i>
                     </div>
                     <div class="hit-style">
-                        <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
+                        <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏 !</i>
                     </div>
                 </div>
             </div>
@@ -170,7 +164,7 @@
                         <td>建議自備：</td>
                         <td>無</td>
                     </tr>
-                    
+
                     <tr>
                         <td>主辦人</td>
                         <td>@Model[0].Organizer</td>
@@ -213,12 +207,12 @@
                                 <img class="profile" src="./Files/godtone.png" />
                                 <div class="userCommentDivRight">
                                     <p class="h3 align-self-center">嘎痛</p>
-                                    <div class="discuss-box align-self-start" name ="ChatContent">
+                                    <div class="discuss-box align-self-start" name="ChatContent">
                                         <textarea name="ChatContent" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="commentBtnDiv" >
+                            <div class="commentBtnDiv">
                                 <button class="publishBtn" type="submit">
                                     <p class="h3">發表</p>
                                     <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
@@ -275,25 +269,25 @@
                                 }
                                 <div class="replyTextDiv">
                                     <form asp-action="ReplyCreate" method="post">
-                                    <div class="userCommentDiv">
-                                        <img class="profile" src="~/IMG/godtone.png" />
-                                        <div class="userCommentDivRight">
-                                            <p class="h3 align-self-center">嘎痛</p>
+                                        <div class="userCommentDiv">
+                                            <img class="profile" src="~/IMG/godtone.png" />
+                                            <div class="userCommentDivRight">
+                                                <p class="h3 align-self-center">嘎痛</p>
                                                 <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
-                                            <button class="messageBtn" type="submit">
-                                                <p class="messageBtn-text-style" href="#">
-                                                    留言
-                                                </p>
-                                            </button>
+                                                <button class="messageBtn" type="submit">
+                                                    <p class="messageBtn-text-style" href="#">
+                                                        留言
+                                                    </p>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
                                     </form>
                                 </div>
                             </div>
                         }
                     }
                 }
-               
+
             </div>
         </div>
     </div>
