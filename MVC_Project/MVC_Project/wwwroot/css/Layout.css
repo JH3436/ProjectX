@@ -128,6 +128,27 @@ body {
     
 
 /*下拉圖片*/
+/* 圖片位址 */
+.dropdown-img-1::before {
+    background: url('../IMG/奇萊山景.JPG');
+}
+
+.dropdown-img-2::before {
+    background-image: url('../IMG/情人湖.JPG');
+}
+
+.dropdown-img-3::before {
+    background-image: url('../IMG/自潛.png');
+}
+
+.dropdown-img-4::before {
+    background-image: url('../IMG/野營.jpg');
+}
+
+.dropdown-img-5::before {
+    background-image: url('../IMG/其他.png');
+}
+
 .dropdown-img-1,
 .dropdown-img-2,
 .dropdown-img-3,

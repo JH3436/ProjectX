@@ -70,25 +70,30 @@ body {
 
 /* 圖片位址 */
 .dropdown-img-1::before {
-    background: url("https://picsum.photos/240/80?random=1");
+    background: url('../IMG/奇萊山景.JPG');
 }
 
 .dropdown-img-2::before {
-    background-image: url("https://picsum.photos/240/80?random=2");
+    background-image: url('../IMG/情人湖.JPG');
 }
 
 .dropdown-img-3::before {
-    background-image: url("https://picsum.photos/240/80?random=3");
+    background-image: url('../IMG/自潛.png');
 }
 
 .dropdown-img-4::before {
-    background-image: url("https://picsum.photos/240/80?random=4");
+    background-image: url('../IMG/野營.jpg');
+}
+
+.dropdown-img-5::before {
+    background-image: url('../IMG/其他.png');
 }
 
 .dropdown-img-1,
 .dropdown-img-2,
 .dropdown-img-3,
-.dropdown-img-4 {
+.dropdown-img-4,
+.dropdown-img-5 {
     position: relative;
     overflow: hidden;
     transition: opacity 0.3s;
@@ -97,7 +102,8 @@ body {
     .dropdown-img-1::before,
     .dropdown-img-2::before,
     .dropdown-img-3::before,
-    .dropdown-img-4::before {
+    .dropdown-img-4::before,
+    .dropdown-img-5::before {
         content: "";
         position: absolute;
         top: 0;
@@ -112,7 +118,8 @@ body {
     .dropdown-img-1:hover::before,
     .dropdown-img-2:hover::before,
     .dropdown-img-3:hover::before,
-    .dropdown-img-4:hover::before {
+    .dropdown-img-4:hover::before,
+    .dropdown-img-5:hover::before {
         opacity: 0.5;
         transform: scale(1.25);
     }
