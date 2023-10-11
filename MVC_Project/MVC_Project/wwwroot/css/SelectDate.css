@@ -119,9 +119,7 @@ form {
     justify-content: center
 }
 
-.navbar:hover {
-    transform: scale(1.5);
-}
+
 
 #container2 {
     visibility: hidden;
