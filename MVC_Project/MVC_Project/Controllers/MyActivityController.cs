@@ -20,10 +20,13 @@ namespace MVC_Project.Controllers
         }
 
         [DefaultBreadcrumb("首頁")]
-		public IActionResult HomePage()
+        public IActionResult HomePage()
         {
+            // 假設使用者未登入，暫時使用userId = 1
+            int userId = 1;
+
             // 讀取所有有效的 ActivityID 到一個列表中
-            var validActivityIds = _context.MyActivity.Select(a =>a.ActivityID).ToList();
+            var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
 
             // 設定要生成的亂數ID數量
             int numberOfRandomIds = Math.Min(3, validActivityIds.Count);
@@ -42,6 +45,15 @@ namespace MVC_Project.Controllers
                     selectedActivityIds.Add(randomId);
                 }
             }
+
+            // 處理已點擊愛心的活動，查找LikeRecord資料表
+            var likedActivityIds = _context.LikeRecord
+                .Where(lr => lr.UserID == userId && selectedActivityIds.Contains((int)lr.ActivityID))
+                .Select(lr => lr.ActivityID)
+                .ToList();
+
+            // 在前端傳遞已點擊愛心的活動ID，以便在首頁上設置愛心圖示的狀態
+            ViewBag.LikedActivityIds = likedActivityIds;
 
             // 讀取所有有效的 GroupID 到一個列表中
             var validGroupIds = _context.Group.Select(g => g.GroupID).ToList();
@@ -66,23 +78,23 @@ namespace MVC_Project.Controllers
 
             // 官方活動資料讀取，按 ActivityID 分組，並對相同的 ActivityID 的照片進行隨機排序
             var myActivityData = from m in _context.MyActivity
-                                       join o in _context.OfficialPhoto
-                                       on m.ActivityID equals o.ActivityID
-                                       where selectedActivityIds.Contains(m.ActivityID)
-                                       group new { m, o } by m.ActivityID into grouped
-                                       select new ResponseActivity
-                                       {
-                                           ActivityID = grouped.FirstOrDefault().m.ActivityID,
-                                           ActivityName = grouped.FirstOrDefault().m.ActivityName,
-                                           Category = grouped.FirstOrDefault().m.Category,
-                                           SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
-                                           ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
-                                           MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
-                                           VoteDate = grouped.FirstOrDefault().m.VoteDate,
-                                           ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
-                                           // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
-                                           PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
-                                       };
+                                 join o in _context.OfficialPhoto
+                                 on m.ActivityID equals o.ActivityID
+                                 where selectedActivityIds.Contains(m.ActivityID)
+                                 group new { m, o } by m.ActivityID into grouped
+                                 select new ResponseActivity
+                                 {
+                                     ActivityID = grouped.FirstOrDefault().m.ActivityID,
+                                     ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                     Category = grouped.FirstOrDefault().m.Category,
+                                     SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                     ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                     MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                     VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                     ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                     // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
+                                     PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
+                                 };
 
             //個人開團資料讀取，按 GroupID 分組，並對相同的 GroupID 的照片進行隨機排序
             var groupData = from g in _context.Group
@@ -234,7 +246,7 @@ namespace MVC_Project.Controllers
             return View(viewModel);
         }
 
-        
+
 
 
         // GET: MyActivity
