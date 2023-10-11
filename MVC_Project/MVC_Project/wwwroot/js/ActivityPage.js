@@ -147,9 +147,11 @@ $(document).ready(function () {
         
         </div>`
                 )
-                /*$("#discussTextArea").val("");*/
             }
         }
+        location.reload();
+        $('#exampleModal').modal('show');
+        /*$("#discussTextArea").val("");*/
     })
 });
 
@@ -176,6 +178,7 @@ $(document).on("click", ".messageBtn", function () {
         /*$(this).parent().children("#replyTextArea").val("");*/
     }
 });
+
 
 
 

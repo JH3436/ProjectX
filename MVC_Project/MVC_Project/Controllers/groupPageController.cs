@@ -113,10 +113,9 @@ namespace MVC_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReplyCreate(Chat chat)
         {
-            //int id = int.Parse(Request.Form["id"]);
-            chat.ActivityID = 1;
+            int id = int.Parse(Request.Form["id"]);
+            chat.ActivityID = id;
             chat.UserID = 1;
-            chat.ToWhom = 1;
             chat.ChatTime = DateTime.Now;
 
             _context.Add(chat);
