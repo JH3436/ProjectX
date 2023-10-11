@@ -72,6 +72,7 @@ namespace MVC_Project.Controllers
                                        group new { m, o } by m.ActivityID into grouped
                                        select new ResponseActivity
                                        {
+                                           ActivityID = grouped.FirstOrDefault().m.ActivityID,
                                            ActivityName = grouped.FirstOrDefault().m.ActivityName,
                                            Category = grouped.FirstOrDefault().m.Category,
                                            SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
@@ -134,6 +135,48 @@ namespace MVC_Project.Controllers
             return View(viewModel);
         }
 
+        //新增收藏紀錄
+        [HttpPost]
+        public IActionResult LikeActivity(int activityId, int userId)
+        {
+            // 使用Entity Framework將新的LikeRecord插入到資料庫中
+            var newLikeRecord = new LikeRecord
+            {
+                ActivityID = activityId,
+                UserID = userId
+            };
+
+            _context.LikeRecord.Add(newLikeRecord);
+            _context.SaveChanges();
+
+            // 返回成功的回應，例如JSON對象
+            return Json(new { success = true });
+        }
+
+        //取消收藏紀錄
+        [HttpDelete]
+        public IActionResult UnlikeActivity(int activityId, int userId)
+        {
+            // 查找符合指定ActivityId和UserId的LikeRecord記錄
+            var likeRecord = _context.LikeRecord.SingleOrDefault(LR => LR.ActivityID == activityId && LR.UserID == userId);
+
+            if (likeRecord != null)
+            {
+                // 如果找到匹配的記錄，則將其從資料庫中刪除
+                _context.LikeRecord.Remove(likeRecord);
+                _context.SaveChanges();
+
+                // 返回成功的回應，例如JSON對象
+                return Json(new { success = true });
+            }
+
+            // 如果找不到匹配的記錄，可以返回一個錯誤或其他適當的回應
+            return Json(new { success = false, error = "LikeRecord not found" });
+        }
+
+
+
+
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT()
         {
@@ -190,6 +233,9 @@ namespace MVC_Project.Controllers
 
             return View(viewModel);
         }
+
+        
+
 
         // GET: MyActivity
         public async Task<IActionResult> Index()
