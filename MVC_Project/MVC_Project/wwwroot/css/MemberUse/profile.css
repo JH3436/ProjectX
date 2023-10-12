@@ -1,7 +1,7 @@
 ﻿@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
 
 
-* {
+*{
     font-family: "Noto Sans TC", sans-serif;
     font-family: "Roboto", sans-serif;
 }
@@ -335,8 +335,10 @@ figure figcaption {
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
-    background-color: #f4f4f4;
-    border: 1px solid #ccc;
+    background-color: transparent;
+    border: 2px solid var(--orange);
+    
+    font-weight: bold;
 }
 
 .modal-dialog {
@@ -366,6 +368,7 @@ figure {
     --bs-nav-tabs-link-active-border-color: white;
     --bs-nav-link-color: var(--brown);
     --bs-nav-link-hover-color: var(--brown);
+    font-weight: bold;
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
 }
@@ -377,5 +380,5 @@ figure {
 
 label {
     font-family: "Roboto", sans-serif;
-    font-size:1.5rem;
+    font-size: 1.5rem;
 }

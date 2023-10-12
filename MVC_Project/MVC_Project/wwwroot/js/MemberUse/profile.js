@@ -1,22 +1,24 @@
 ﻿
 $(document).ready(function () {
     // 假設你已經取得了currentUserId
-    //let currentUserId = $('#currentUserId').val();
+    let currentUserId = $('#currentUserId').val();
 
-    //$.get('/Member/GetUserPhoto', { userId: currentUserId }, function (data) {
-    //    if (data.imageUrl) {
-    //        $('#item-img-output').attr('src', data.imageUrl);
+    $.get('/Member/GetUserPhoto', { userId: currentUserId }, function (data) {
+        if (data.imageUrl) {
+            console.log(currentUserId);
+            $('#item-img-output').attr('src', data.imageUrl);
+            console.log(currentUserId);
+        }
+    });
+
+    //$.get('/Member/GetMemberInfo', { userId: currentUserId }, function (data) {
+    //    if (data.Nickname) {
+    //        $('#nickname').val(data.Nickname);
+    //    }
+    //    if (data.Intro) {
+    //        $('#introduceyrself').val(data.Intro);
     //    }
     //});
-
-    ////$.get('/Member/GetMemberInfo', { userId: currentUserId }, function (data) {
-    ////    if (data.Nickname) {
-    ////        $('#nickname').val(data.Nickname);
-    ////    }
-    ////    if (data.Intro) {
-    ////        $('#introduceyrself').val(data.Intro);
-    ////    }
-    ////});
 
 
 
