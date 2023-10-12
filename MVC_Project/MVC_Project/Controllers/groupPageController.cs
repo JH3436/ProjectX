@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using MVC_Project.Models;
+using NuGet.Protocol;
 using SmartBreadcrumbs.Nodes;
 
 namespace MVC_Project.Controllers
@@ -122,5 +123,22 @@ namespace MVC_Project.Controllers
 
             return NoContent();
         }
+        
+        [HttpPost]
+[Route("api/GetGroupById/{id}")]
+public IActionResult GetGroupById(int id)
+{
+    var temp = from m in _context.Member
+                select new Member
+                {
+                    UserID = m.UserID,
+                    Nickname = m.Nickname,
+                    Account = m.Account
+                };
+
+    return Json(temp); // 直接返回对象，ASP.NET Core 会自动序列化为 JSON
+}
+
+
     }
-    }
+}
