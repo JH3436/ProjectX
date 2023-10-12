@@ -185,7 +185,6 @@ const heartIcons = document.querySelectorAll('.heart-icon');
 heartIcons.forEach(function (heartIcon) {
     heartIcon.addEventListener('click', function () {
         const activityId = heartIcon.getAttribute('data-activityid');
-        console.log(activityId)
         if (heartIcon.classList.contains('fa-regular')) {
             // 在此處執行AJAX POST請求，將activityId和userID（在這裡假設為1）發送到後端
             $.ajax({
@@ -196,18 +195,19 @@ heartIcons.forEach(function (heartIcon) {
                     userId: 1
                 },
                 success: function (data) {
+                    console.log("處理成功的回應，可以更新UI或執行其他操作")
                     // 處理成功的回應，可以更新UI或執行其他操作
                     heartIcon.classList.remove('fa-regular');
                     heartIcon.classList.add('fa-solid');
                     heartIcon.style.color = "#B44163";
 
-                    const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
+                    //const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
 
-                    const likedText = document.createElement('span');
-                    likedText.textContent = '已收藏';
-                    likedText.classList.add('liked-text');
+                    //const likedText = document.createElement('span');
+                    //likedText.textContent = '已收藏';
+                    //likedText.classList.add('liked-text');
 
-                    cardInfo.appendChild(likedText);
+                    /*cardInfo.appendChild(likedText);*/
                 },
                 error: function (error) {
                     // 處理錯誤，如果有錯誤發生
@@ -223,16 +223,13 @@ heartIcons.forEach(function (heartIcon) {
                     userId: 1
                 },
                 success: function (data) {
+                    console.log("處理成功的回應，可以更新UI或執行其他操作delete")
                     // 處理成功的回應，可以更新UI或執行其他操作
                     heartIcon.classList.remove('fa-solid');
                     heartIcon.classList.add('fa-regular');
                     heartIcon.style.color = "#1E3050";
 
-                    // 移除已經存在的 "Liked" 文字
-                    const likedText = heartIcon.closest('.card').querySelector('.liked-text');
-                    if (likedText) {
-                        likedText.remove();
-                    }
+                    
                 },
                 error: function (error) {
                     // 處理錯誤，如果有錯誤發生
