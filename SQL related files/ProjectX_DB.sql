@@ -243,7 +243,7 @@ INSERT INTO [dbo].[VoteTime]
 GO
 
 
---報名紀錄資料表
+--投票紀錄資料表
 INSERT INTO [dbo].[VoteRecord]
            ([UserID]
            ,[ActivityID]
@@ -261,7 +261,7 @@ INSERT INTO [dbo].[Registration]
      VALUES
            (1, 1),
 		   (1, 2),
-		   (1, 3),
+		   (1, 3)
 
 GO
 
