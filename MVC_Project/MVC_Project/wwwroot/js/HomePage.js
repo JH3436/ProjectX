@@ -31,7 +31,7 @@ heartIcons.forEach(function (heartIcon) {
 
                     const likedText = document.createElement('span');
                     likedText.textContent = '已收藏';
-                    likedText.classList.add('liked-text');
+                    likedText.classList.add('card__liked-text');
 
                     cardInfo.appendChild(likedText);
                 },
@@ -55,7 +55,7 @@ heartIcons.forEach(function (heartIcon) {
                     heartIcon.style.color = "#1E3050";
 
                     // 移除已經存在的 "Liked" 文字
-                    const likedText = heartIcon.closest('.card').querySelector('.liked-text');
+                    const likedText = heartIcon.closest('.card').querySelector('.card__liked-text');
                     if (likedText) {
                         likedText.remove();
                     }
