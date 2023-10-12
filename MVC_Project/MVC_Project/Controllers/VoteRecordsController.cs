@@ -62,7 +62,12 @@ namespace MVC_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(voteRecord);
+				// 分割 VoteResult 字串以取得開始和結束日期
+				string[] dateRange = voteRecord.VoteResult.Split(" - ");
+				// 只使用開始日期
+				voteRecord.VoteResult = dateRange[0];
+
+				_context.Add(voteRecord);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

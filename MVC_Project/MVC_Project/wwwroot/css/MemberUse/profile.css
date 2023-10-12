@@ -382,3 +382,13 @@ label {
     font-family: "Roboto", sans-serif;
     font-size: 1.5rem;
 }
+
+#nav-page {
+    padding-left: 0px;
+    background-color: transparent;
+   
+}
+
+#likeR {
+    height:546px;
+}

@@ -96,7 +96,9 @@ namespace MVC_Project.Controllers
 		[Breadcrumb("已收藏活動", FromAction = nameof(Member))]
 		public IActionResult LikeRecord(int page = 1)
 		{
-			int pageSize = 6; // 每頁顯示的項目數
+          
+
+            int pageSize = 6; // 每頁顯示的項目數
 			var userId = 1; // 從當前登錄的使用者取得UserId
 
 			var currentDate = DateTime.Now; // 取得當前日期
@@ -104,8 +106,11 @@ namespace MVC_Project.Controllers
 			// 根據當前頁數和每頁顯示的項目數計算跳過的項目數
 			int skip = (page - 1) * pageSize;
 
-			// 取得這個UserId的LikeRecords以及相對應的MyActivity資料，根據分頁參數進行分頁
-			var likedActivities = _context.LikeRecord
+			//計算總頁數
+            int totalRecords = _context.LikeRecord.Where(lr => lr.UserID == userId).Count();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            // 取得這個UserId的LikeRecords以及相對應的MyActivity資料，根據分頁參數進行分頁
+            var likedActivities = _context.LikeRecord
 				.Where(lr => lr.UserID == userId)
 				.Include(lr => lr.Activity)
 				.Select(lr => new MemberUseViewModel
@@ -128,9 +133,10 @@ namespace MVC_Project.Controllers
 
 			ViewBag.LikedActivities = likedActivities;
 			ViewBag.PageNumber = page;
-			ViewBag.HasNextPage = hasNextPage;
+			
+            ViewBag.TotalPages = totalPages;
 
-			return View();
+            return View();
 		}
 
 		//public IActionResult LikeRecord()

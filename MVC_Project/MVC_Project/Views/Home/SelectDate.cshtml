@@ -1,8 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model MVC_Project.Models.VoteRecord
+
 
 
 <!DOCTYPE html>
@@ -21,7 +18,7 @@
 
     <!-- 帳密   -->
     <div id="container1">
-        <form action="#" class="login" id="login">
+        <form asp-action="Create" asp-controller="VoteRecords" method="post" class="login" id="login">
             <div class="header1">
                 <h1>您好,親愛的會員</h1>
                 <p style="font-size: 21px;">當您在選擇日期截止日之前，都可以編輯您最適合的時間。</p>
@@ -31,22 +28,22 @@
                 <div class="container">
                     <ul class="Cul">
                         <li class="Cli">
-                            <input type="radio" id="f-option" name="selectorDATA">
+                            <input type="radio" id="f-option" name="VoteResult" value="2023/09/29 - 2023/10/01">
                             <label for="f-option">2023/09/29 - 2023/10/01</label>
                             <div class="check"></div>
                         </li>
                         <li class="Cli">
-                            <input type="radio" id="s-option" name="selectorDATA">
+                            <input type="radio" id="s-option" name="VoteResult" value="2023/09/29 - 2023/10/01">
                             <label for="s-option">2023/10/07 - 2023/10/10</label>
                             <div class="check"></div>
                         </li>
                         <li class="Cli">
-                            <input type="radio" id="t-option" name="selectorDATA">
+                            <input type="radio" id="t-option" name="VoteResult" value="2023/09/29 - 2023/10/01">
                             <label for="t-option">2023/10/14 - 2023/10/15</label>
                             <div class="check"></div>
                         </li>
                         <li class="Cli">
-                            <input type="radio" id="z-option" name="selectorDATA">
+                            <input type="radio" id="z-option" name="VoteResult" value="2023/09/29 - 2023/10/01">
                             <label for="z-option">2023/10/14 - 2023/10/15</label>
                             <div class="check"></div>
                         </li>
@@ -55,7 +52,7 @@
             </div>
             <!-- 添加按鈕容器 -->
             <div class="button-container">
-                <button class="button" type="submit" style="font-size: 20px;" >提交</button>
+                <button class="button" type="submit" style="font-size: 20px;" value="Create" >提交</button>
             </div>
             <div class="register-link">
                 <a asp-controller="Member" asp-action="Registration">
