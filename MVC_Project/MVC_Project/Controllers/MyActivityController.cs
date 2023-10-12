@@ -25,6 +25,9 @@ namespace MVC_Project.Controllers
             // 假設使用者未登入，暫時使用userId = 1
             int userId = 1;
 
+            //進行是否建立通知判斷
+            ProcessLikesAndCreateNotifications(userId);
+
             // 讀取所有有效的 ActivityID 到一個列表中
             var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
 
@@ -185,6 +188,51 @@ namespace MVC_Project.Controllers
             // 如果找不到匹配的記錄，可以返回一個錯誤或其他適當的回應
             return Json(new { success = false, error = "LikeRecord not found" });
         }
+
+
+        //處理使用者已收藏活動是否需要寄送投票通知
+        public IActionResult ProcessLikesAndCreateNotifications(int userId)
+        {
+            //使用者收藏紀錄
+            var likedActivityIds = _context.LikeRecord
+                .Where(lr => lr.UserID == userId)
+                .Select(lr => lr.ActivityID)
+                .ToList();
+
+            //查找收藏紀錄中符合條件的活動
+            var activitiesToSendNotifications = _context.MyActivity
+                .Where(a => likedActivityIds.Contains(a.ActivityID) && DateTime.Compare(a.VoteDate.Value.Date, DateTime.Today)==0)
+                .ToList();
+
+            // 對符合條件的活動建立通知
+            foreach (var activity in activitiesToSendNotifications)
+            {
+                var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"已經可以進行投票。";
+
+                var notification = new Notification
+                {
+                    UserID = userId,
+                    NotificationContent = notificationContent,
+                    IsRead = false, 
+                    NotificationDate = DateTime.Now
+                };
+
+                _context.Notification.Add(notification);
+                _context.SaveChanges();
+
+                //移除已處理通知建立之已收藏活動
+                var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
+                if (likeRecordEntry != null)
+                {
+                    _context.LikeRecord.Remove(likeRecordEntry);
+                }
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("HomePage");
+        }
+
 
 
 
