@@ -5,18 +5,20 @@ $(document).ready(function () {
 
     $.get('/Member/GetUserPhoto', { userId: currentUserId }, function (data) {
         if (data.imageUrl) {
+            console.log(currentUserId);
             $('#item-img-output').attr('src', data.imageUrl);
+            console.log(currentUserId);
         }
     });
 
-    ////$.get('/Member/GetMemberInfo', { userId: currentUserId }, function (data) {
-    ////    if (data.Nickname) {
-    ////        $('#nickname').val(data.Nickname);
-    ////    }
-    ////    if (data.Intro) {
-    ////        $('#introduceyrself').val(data.Intro);
-    ////    }
-    ////});
+    //$.get('/Member/GetMemberInfo', { userId: currentUserId }, function (data) {
+    //    if (data.Nickname) {
+    //        $('#nickname').val(data.Nickname);
+    //    }
+    //    if (data.Intro) {
+    //        $('#introduceyrself').val(data.Intro);
+    //    }
+    //});
 
 
 
@@ -24,7 +26,7 @@ $(document).ready(function () {
 var textarea = document.getElementById('introduceyrself');
 
 // 設定字數限制
-var maxLength = 10; // 這裡設置為你想要的字數限制
+var maxLength = 50; // 這裡設置為你想要的字數限制
 
 // 綁定 input 事件處理程序
 textarea.addEventListener('input', function () {

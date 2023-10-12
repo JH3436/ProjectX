@@ -157,7 +157,7 @@
                             {
                                 <span class="card__liked-text">已收藏</span>
                             }
-                            else { }
+                            else {}
                             <span class="card__ExpectedMonth">@activity.ExpectedDepartureMonth?.ToString("yyyy-MMM")活動</span>
                         </div>
                     </article>
@@ -201,7 +201,7 @@
                         <div class="card__info">
                             <span class="card__category">@groups.GroupCategory</span>
                             <h3 class="card__title">@groups.GroupName</h3>
-                            <p class="card__period">@groups.StartDate?.ToString("yyyy-MM-dd") - @groups.EndDate?.ToString("yyyy-MM-dd")</p>
+                            <p class="card__period">@groups.StartDate?.ToString("yyyy-MM-dd") ~ @groups.EndDate?.ToString("yyyy-MM-dd")</p>
                             <span class="card__by">主揪<a href="#" class="card__author" title="author"> @groups.Nickname</a></span>
                         </div>
                     </article>
