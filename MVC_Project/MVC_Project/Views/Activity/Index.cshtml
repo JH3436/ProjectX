@@ -50,7 +50,7 @@
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
 
-        <div class="reg-and-like-btn row">
+        @*<div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
                 <div class="register-btn">
@@ -58,20 +58,30 @@
                         我要報名!
                     </a>
                 </div>
-            </div>
+            </div>*@
             <div class="col-auto">
                 <!-- 點擊收藏 -->
                 <div class="heart-inner">
-                    <div class="heart-icon">
-                        <i class="fa-regular fa-heart fa-2xl"></i>
-                    </div>
+                    
+                    @if (ViewBag.likedActivity)
+                    {
+                        <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
+                           data-activityid="@Model[0].ActivityID"></i>
+                    }
+                    else
+                    {
+                        <i class="fa-regular fa-heart fa-2xl heart-icon"
+                           data-activityid=@Model[0].ActivityID></i>
+                    }
+                    @*<i class="fa-regular fa-heart fa-2xl"></i>*@
+                    
                     <div class="hit-style">
                         <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
 
 
 
@@ -190,7 +200,7 @@
 
     <!-- 彈出Modal -->
 
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    @*<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content" id="dialogDiv">
                 <div>
@@ -279,7 +289,7 @@
 
             </div>
         </div>
-    </div>
+    </div>*@
 
 
 </body>
