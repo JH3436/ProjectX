@@ -11,7 +11,7 @@ const heartIcons = document.querySelectorAll('.heart-icon');
 heartIcons.forEach(function (heartIcon) {
     heartIcon.addEventListener('click', function () {
         const activityId = heartIcon.getAttribute('data-activityid');
-
+        console.log(activityId);
         if (heartIcon.classList.contains('fa-regular')) {
             // 在此處執行AJAX POST請求，將activityId和userID（在這裡假設為1）發送到後端
             $.ajax({
