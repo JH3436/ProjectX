@@ -38,6 +38,7 @@ nav {
         nav a:hover {
             color: var(--orange);
         }
+
     nav ol li:last-child {
         color: var(--orange)
     }
@@ -103,7 +104,7 @@ nav {
     height: 250px;
     font-family: "Noto Sans TC", sans-serif;
     font-family: "Roboto", sans-serif;
-    font-size: 1.6rem;
+    font-size: 2rem;
     /* 你可以根據需要調整這個值 */
 }
 
@@ -350,3 +351,31 @@ figure {
 }
 
 /*大頭貼結束*/
+
+/*
+調整member/nav*/
+#nav-tab-member {
+    padding-left: 0px;
+    background-color: transparent;
+    margin-bottom:0px;
+}
+
+#nav-tab {
+    --bs-nav-tabs-border-width: 5px;
+    --bs-nav-tabs-border-color: white;
+    --bs-nav-tabs-link-active-border-color: white;
+    --bs-nav-link-color: var(--brown);
+    --bs-nav-link-hover-color: var(--brown);
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: var(--orange);
+    
+}
+
+label {
+    font-family: "Roboto", sans-serif;
+    font-size:1.5rem;
+}
