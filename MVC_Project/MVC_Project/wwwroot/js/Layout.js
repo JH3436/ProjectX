@@ -127,44 +127,6 @@ function updateNotificationCount() {
     }
 }
 
-
-//網站介紹
-$(".option").click(function () {
-    $(".option").removeClass("active");
-    $(this).addClass("active");
-});
-
-
-//活動方塊-愛心設計
-const heartIcons = document.querySelectorAll('.heart-icon');
-
-heartIcons.forEach(function (heartIcon) {
-    heartIcon.addEventListener('click', function () {
-        if (heartIcon.classList.contains('fa-regular')) {
-            heartIcon.classList.remove('fa-regular');
-            heartIcon.classList.add('fa-solid');
-            heartIcon.style.color = "#B44163";
-
-            const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
-
-            const likedText = document.createElement('span');
-            likedText.textContent = '已收藏';
-            likedText.classList.add('liked-text');
-
-            cardInfo.appendChild(likedText);
-        } else {
-            heartIcon.classList.remove('fa-solid');
-            heartIcon.classList.add('fa-regular');
-            heartIcon.style.color = "#1E3050";
-            // 移除已經存在的 "Liked" 文字
-            const likedText = heartIcon.closest('.card').querySelector('.liked-text');
-            if (likedText) {
-                likedText.remove();
-            }
-        }
-    });
-});
-
 // 聯絡我們-表單
 // 當按鈕點擊時，顯示 dialog
 document.getElementById("showContactButton").addEventListener("click", function () {

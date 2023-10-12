@@ -2,7 +2,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +40,8 @@
     <section class="actselect">
         <div class="centered-container">
             <div class="topnav">
+                @foreach (var activity in Model.Activities){
+                }
                 <a asp-area="" asp-controller="Home" asp-action="ACT">ALL</a>
                 <a href="#mountain">登山</a>
                 <a href="#diving">潛水</a>

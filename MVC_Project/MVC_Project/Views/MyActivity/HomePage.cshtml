@@ -131,19 +131,34 @@
                 {
                     <article class="card">
                         <div class="card__info-hover">
-                            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+                            @* 判斷此使用者是否有收藏載入到首頁的活動 *@
+                            @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                            {
+                                <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
+                                   data-activityid="@activity.ActivityID"></i>
+                            }
+                            else
+                            {
+                                <i class="fa-regular fa-heart fa-2xl heart-icon"
+                                   data-activityid="@activity.ActivityID"></i>
+                            }
                         </div>
 
                         <div class="card__img" style="background-image: url('@activity.PhotoPath')"></div>
                         <a href="#" class="card_link">
                             <div class="card__img--hover" style="background-image: url('@activity.PhotoPath')"></div>
                         </a>
+                        <div class="category-box">官方活動</div>
+                        <span class="card__VoteDate-text">投票日：<span style="color: var(--brown)">@activity.VoteDate?.ToString("M")</span></span>
                         <div class="card__info">
-                            <div class="category-box">官方活動</div>
-
                             <span class="card__category">@activity.Category</span>
                             <h3 class="card__title">@activity.ActivityName</h3>
-
+                            @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                            {
+                                <span class="card__liked-text">已收藏</span>
+                            }
+                            else { }
+                            <span class="card__ExpectedMonth">@activity.ExpectedDepartureMonth?.ToString("yyyy-MMM")活動</span>
                         </div>
                     </article>
                 }
@@ -174,18 +189,19 @@
                                     <path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64
                   64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24
                   24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
-                                </svg><span class="card__time">天數：@groups.DurationInDays 天</span>
+                                </svg>
+                                <span class="card__time">天數：@groups.DurationInDays 天</span>
                             </div>
                         </div>
-
                         <div class="card__img" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
                         <a href="#" class="card_link">
                             <div class="card__img--hover" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
                         </a>
+                        <div class="category-box">個人揪團</div>
                         <div class="card__info">
-                            <div class="category-box">個人揪團</div>
                             <span class="card__category">@groups.GroupCategory</span>
                             <h3 class="card__title">@groups.GroupName</h3>
+                            <p class="card__period">@groups.StartDate?.ToString("yyyy-MM-dd") - @groups.EndDate?.ToString("yyyy-MM-dd")</p>
                             <span class="card__by">主揪<a href="#" class="card__author" title="author"> @groups.Nickname</a></span>
                         </div>
                     </article>
@@ -193,5 +209,6 @@
             </section>
         </div>
     </section>
+    <script src="~/js/HomePage.js"></script>
 </body>
 </html>

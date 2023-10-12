@@ -370,10 +370,6 @@ body {
     margin-left: 5px;
 }
 
-.card__clock-info {
-    float: right;
-}
-
 .card__img {
     visibility: hidden;
     background-size: cover;
@@ -426,6 +422,7 @@ body {
         transform: scale(1.10, 1.10);
     }
 
+/*卡片內容設計*/
 .card__info {
     z-index: 2;
     background-color: var(--white);
@@ -434,7 +431,7 @@ body {
     padding: 16px 24px 24px 24px;
 }
 
-.liked-text {
+.card__liked-text {
     color: var(--heart);
     font-size: 1.3rem;
     font-weight: bold;
@@ -450,6 +447,24 @@ body {
     color: var(--black);
 }
 
+.card__ExpectedMonth {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.card__VoteDate-text {
+    position: absolute;
+    bottom: 28%;
+    right: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--black);
+    z-index:1111;
+}
+
 .card__title {
     margin-top: 5px;
     margin-bottom: 10px;
@@ -457,9 +472,17 @@ body {
     font-weight: 800;
 }
 
+.card__period {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
 .card__by {
     font-size: 1.5rem;
     font-weight: bold;
+    display: flex;
+    justify-content: flex-end; /* 靠右對齊 */
+    gap: 8px;
 }
 
 .card__author {
