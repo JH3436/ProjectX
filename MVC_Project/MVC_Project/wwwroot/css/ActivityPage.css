@@ -18,7 +18,7 @@ body {
 }
 
 /* 導覽列 */
-.header {
+/*.header {
     background-color: rgba(45, 68, 119, 0.486);
 }
 
@@ -30,6 +30,11 @@ body {
     font-weight: bolder;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}*/
+
+.mycontainer {
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 

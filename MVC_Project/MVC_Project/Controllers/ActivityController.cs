@@ -23,9 +23,10 @@ namespace MVC_Project.Controllers
         }
 
         // GET: ActivityController
-        public IActionResult Index(int? id)
+        public IActionResult Index( int? id)
         {
-
+            //假設會員ID
+            var account = 1;
 
             if (id == null || _context.MyActivity == null)
             {
@@ -38,6 +39,7 @@ namespace MVC_Project.Controllers
             where m.ActivityID == id
             select new responseActivity
             {
+                ActivityID = m.ActivityID,
                 ActivityName = m.ActivityName,
                 Category = m.Category,
                 SuggestedAmount = m.SuggestedAmount,
@@ -67,6 +69,12 @@ namespace MVC_Project.Controllers
             ViewData["BreadcrumbNode"] = childNode3;
 
             //-----麵包屑結束-----
+            var likedActivity = _context.LikeRecord
+                .Where(lr => lr.UserID == account && lr.ActivityID == id)
+                .Select(lr => lr.ActivityID)
+                .ToList();
+            ViewBag.likedActivity = (likedActivity.Count() == 0 ? false : true);
+
 
             var temp = data.ToList();
 
@@ -77,37 +85,42 @@ namespace MVC_Project.Controllers
         // POST: ActivityController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Chat chat)
+        public IActionResult LikeActivity(int activityId, int userId)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            
+                var newLikeRecord = new LikeRecord
+                {
+                    ActivityID = activityId,
+                    UserID = userId
+                };
+
+                _context.LikeRecord.Add(newLikeRecord);
+                _context.SaveChanges();
+
+                // 返回成功的回應，例如JSON對象
+                return Json(new { success = true });
+            
         }
 
-        // GET: ActivityController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpDelete]
+        public IActionResult UnlikeActivity(int activityId, int userId)
         {
-            return View();
+            // 查找符合指定ActivityId和UserId的LikeRecord記錄
+            var likeRecord = _context.LikeRecord.SingleOrDefault(LR => LR.ActivityID == activityId && LR.UserID == userId);
+
+            if (likeRecord != null)
+            {
+                // 如果找到匹配的記錄，則將其從資料庫中刪除
+                _context.LikeRecord.Remove(likeRecord);
+                _context.SaveChanges();
+
+                // 返回成功的回應，例如JSON對象
+                return Json(new { success = true });
+            }
+
+            // 如果找不到匹配的記錄，可以返回一個錯誤或其他適當的回應
+            return Json(new { success = false, error = "LikeRecord not found" });
         }
 
-        // POST: ActivityController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
