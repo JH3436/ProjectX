@@ -30,7 +30,11 @@ namespace MVC_Project.Controllers
 			// 根據當前頁數和每頁顯示的項目數計算跳過的項目數
 			int skip = (page - 1) * pageSize;
 
-			var registeredGroups = _context.Registration
+            //計算總頁數
+            int totalRecords = _context.Registration.Where(r => r.ParticipantID == userId).Count();
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+            var registeredGroups = _context.Registration
 				.Where(r => r.ParticipantID == userId)
 				.Include(r => r.Group)
 				.Select(r => new MemberUseViewModel
@@ -52,8 +56,8 @@ namespace MVC_Project.Controllers
 			ViewBag.RegisteredGroups = registeredGroups;
 			ViewBag.PageNumber = page;
 			ViewBag.HasNextPage = hasNextPage;
-
-			return View();
+            ViewBag.TotalPages = totalPages;
+            return View();
 		}
 
 
