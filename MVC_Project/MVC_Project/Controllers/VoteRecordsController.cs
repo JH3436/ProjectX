@@ -60,21 +60,16 @@ namespace MVC_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RecordID,UserID,ActivityID,VoteResult")] VoteRecord voteRecord)
         {
-            if (ModelState.IsValid)
-            {
-				// 分割 VoteResult 字串以取得開始和結束日期
-				//string[] dateRange = voteRecord.VoteResult.Split(" - ");
-				//// 只使用開始日期
-				//voteRecord.VoteResult = dateRange[0];
-
-				_context.Add(voteRecord);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", voteRecord.ActivityID);
-            ViewData["UserID"] = new SelectList(_context.Member, "UserID", "UserID", voteRecord.UserID);
-            return View(voteRecord);
-        }
+			if (ModelState.IsValid)
+			{
+					_context.Add(voteRecord);
+					await _context.SaveChangesAsync();
+					return RedirectToAction(nameof(Index));
+			}
+			ViewData["ActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", voteRecord.ActivityID);
+			ViewData["UserID"] = new SelectList(_context.Member, "UserID", "UserID", voteRecord.UserID);
+			return View(voteRecord);
+		}
 
         // GET: VoteRecords/Edit/5
         public async Task<IActionResult> Edit(int? id)
