@@ -258,15 +258,23 @@ namespace MVC_Project.Controllers
             return Json(notificationData);
         }
 
+        //處理已讀||未讀狀態
         [HttpPost]
-        public IActionResult MarkNotificationAsRead(int notificationId, int userId)
+        public IActionResult ChangeNotificationReadState(int notificationId, int userId)
         {
-            // 執行更新通知為已讀的操作，這裡使用Entity Framework Core示例
             var notification = _context.Notification.FirstOrDefault(n => n.NotificationID == notificationId);
-            if (notification != null)
+
+            //如果未讀>>改為已讀
+            if (notification != null && notification.IsRead == false)
             {
                 notification.IsRead = true;
-                _context.SaveChanges(); // 保存變更到資料庫
+                _context.SaveChanges(); 
+            }
+            
+            else
+            {
+                notification.IsRead = false;
+                _context.SaveChanges();
             }
 
             // 從資料庫中獲取未讀通知數目
@@ -288,6 +296,43 @@ namespace MVC_Project.Controllers
 
             return Json(notificationData);
         }
+
+        //處理"全部已讀"狀態
+        [HttpPost]
+        public IActionResult MarkAllNotificationsAsRead(int userId)
+        {
+            // 根據用戶ID將所有通知設置為已讀
+            var notifications = _context.Notification
+                .Where(n => n.UserID == userId && !n.IsRead)
+                .ToList();
+
+            foreach (var notification in notifications)
+            {
+                notification.IsRead = true;
+            }
+
+            _context.SaveChanges();
+
+            // 重新獲取已讀通知數目
+            int notificationCount = _context.Notification
+                .Where(n => n.UserID == userId &&!n.IsRead)
+                .Count();
+
+            // 重新獲取通知內容
+            var updatedNotifications = _context.Notification
+                .Where(n => n.UserID == userId)
+                .OrderByDescending(n => n.NotificationDate)
+                .ToList();
+
+            var notificationData = new
+            {
+                notificationCount = notificationCount,
+                notifications = updatedNotifications
+            };
+
+            return Json(notificationData);
+        }
+
 
 
 

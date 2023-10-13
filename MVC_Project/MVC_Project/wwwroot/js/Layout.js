@@ -60,10 +60,10 @@ $(".notification").on("click", function () {
     }
 });
 
+//關閉通知下拉
 document.addEventListener(
     "click",
     function (event) {
-        // If user either clicks X button OR clicks outside the modal window, then close modal by calling closeModal()
         if (
             event.target.closest(".notification") == null &&
             event.target.closest(".notification-popup") == null
@@ -72,11 +72,11 @@ document.addEventListener(
             $(".notification-popup").removeClass("active");
         }
     },
-    false
 );
 
 // 在頁面載入時，向後端發送請求以獲取通知數目和通知內容
 $(document).ready(function () {
+
     $.ajax({
         type: 'GET',
         url: '/MyActivity/GetNotifications',
@@ -88,45 +88,62 @@ $(document).ready(function () {
             //console.log(notificationData); // 輸出 JSON 數據到控制台
             //console.log(JSON.stringify(notificationData, null, 2)); // 格式化 JSON 數據
 
-            // 更新通知數目
+            // 更新通知數字
             var notificationNum = $(".notification--num");
-            notificationNum.text(notificationData.notificationCount);
-
+            if (notificationData.notificationCount > 0) {
+                // 如果還有未讀訊息，顯示數字並更新內容
+                notificationNum.text(notificationData.notificationCount);
+                notificationNum.show();
+            } else {
+                // 如果沒有未讀訊息，隱藏數字
+                notificationNum.hide();
+            }
             // 清空通知下拉框
             var notificationPopup = $(".notification-popup");
+            // 保存通知下拉框的Header
+            var notificationHeader = notificationPopup.find(".notification-popup__header").clone();
+            var notificationEmpty = notificationPopup.find(".notification-empty").clone();
+
             notificationPopup.empty();
+            // 清空通知下拉框，但保留Header
+            notificationPopup.append(notificationHeader);
 
             // 生成通知內容
-            for (var i = 0; i < notificationData.notifications.length; i++) {
-                var notification = notificationData.notifications[i];
-                var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
+            if (notificationData.notifications.length > 0) {
+                for (var i = 0; i < notificationData.notifications.length; i++) {
+                    var notification = notificationData.notifications[i];
+                    var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
+                    var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
 
-                notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
-                notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
-                notificationContent += '<div class="notification-message col-9">';
-                notificationContent += '<h4>' + notification.NotificationContent + '</h4>';
-                notificationContent += '<span class="notified-date">' + notification.NotificationDate + '</span>';
-                notificationContent += '</div>';
-                notificationContent += '</div>';
+                    notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
+                    notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
+                    notificationContent += '<div class="notification-message col-9">';
+                    notificationContent += '<h4>' + notification.NotificationContent + '</h4>';
+                    notificationContent += '<span class="notified-date">' + formatNotificationDate(notification.NotificationDate) + '</span>';
+                    notificationContent += '</div>';
+                    notificationContent += '</div>';
 
-                notificationPopup.append(notificationContent);
+                    notificationPopup.append(notificationContent);
+                }
+            } else {
+                // 如果通知數為0，顯示"暫無通知"提示
+                notificationPopup.append(notificationEmpty);
             }
         },
-        error: function () {
-            console.log('無法獲取通知數據。');
-        }
-    });
+            error: function () {
+                console.log('無法獲取通知數據。');
+            }
+        });
 });
 
-// 點擊通知項目
+// 點擊通知項目後更改已讀||未讀狀態
 $(".notification-popup").on("click", ".popup-content", function () {
     var notificationId = $(this).data("notificationid");
 
     // 使用AJAX向後端發送標記為已讀的請求
     $.ajax({
         type: 'POST',
-        url: '/MyActivity/MarkNotificationAsRead',
+        url: '/MyActivity/ChangeNotificationReadState',
         data: {
             userId: 1,   //假設值
             notificationId: notificationId
@@ -134,7 +151,12 @@ $(".notification-popup").on("click", ".popup-content", function () {
         success: function (notificationData) {
             // 更新通知下拉框
             var notificationPopup = $(".notification-popup");
+            // 保存通知下拉框的Header
+            var notificationHeader = notificationPopup.find(".notification-popup__header").clone();
+
             notificationPopup.empty();
+            // 清空通知下拉框，但保留Header
+            notificationPopup.append(notificationHeader);
 
             // 生成通知內容
             for (var i = 0; i < notificationData.notifications.length; i++) {
@@ -146,7 +168,7 @@ $(".notification-popup").on("click", ".popup-content", function () {
                 notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
                 notificationContent += '<div class="notification-message col-9">';
                 notificationContent += '<h4>' + notification.NotificationContent + '</h4>';
-                notificationContent += '<span class="notified-date">' + notification.NotificationDate + '</span>';
+                notificationContent += '<span class="notified-date">' + formatNotificationDate(notification.NotificationDate) + '</span>';
                 notificationContent += '</div>';
                 notificationContent += '</div>';
 
@@ -155,13 +177,95 @@ $(".notification-popup").on("click", ".popup-content", function () {
 
             // 更新通知數字
             var notificationNum = $(".notification--num");
-            notificationNum.text(notificationData.notificationCount);
+            if (notificationData.notificationCount > 0) {
+                // 如果還有未讀訊息，顯示數字並更新內容
+                notificationNum.text(notificationData.notificationCount);
+                notificationNum.show();
+            } else {
+                // 如果沒有未讀訊息，隱藏數字
+                notificationNum.hide();
+            }
         },
         error: function () {
             console.log('無法標記通知為已讀。');
         }
     });
 });
+
+// 點擊"全部已讀"選項
+$(".notification-popup").on("click", ".read-all", function () {
+    $.ajax({
+        type: 'POST',
+        url: '/MyActivity/MarkAllNotificationsAsRead',
+        data: {
+            userId: 1 // 假設的使用者ID
+        },
+        success: function (notificationData) {
+            // 更新通知下拉框
+            var notificationPopup = $(".notification-popup");
+            // 保存通知下拉框的Header
+            var notificationHeader = notificationPopup.find(".notification-popup__header").clone();
+
+            notificationPopup.empty();
+            // 清空通知下拉框，但保留Header
+            notificationPopup.append(notificationHeader);
+
+            // 生成通知內容
+            for (var i = 0; i < notificationData.notifications.length; i++) {
+                var notification = notificationData.notifications[i];
+                var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
+                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
+
+                notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
+                notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
+                notificationContent += '<div class="notification-message col-9">';
+                notificationContent += '<h4>' + notification.NotificationContent + '</h4>';
+                notificationContent += '<span class="notified-date">' + formatNotificationDate(notification.NotificationDate) + '</span>';
+                notificationContent += '</div>';
+                notificationContent += '</div>';
+
+                notificationPopup.append(notificationContent);
+            }
+
+            // 更新通知數字
+            var notificationNum = $(".notification--num");
+            if (notificationData.notificationCount > 0) {
+                // 如果還有未讀訊息，顯示數字並更新內容
+                notificationNum.text(notificationData.notificationCount);
+                notificationNum.show();
+            } else {
+                // 如果沒有未讀訊息，隱藏數字
+                notificationNum.hide();
+            }
+        },
+        error: function () {
+            console.log('無法標記所有通知為已讀。');
+        }
+    });
+});
+
+// 處理通知日期顯示
+function formatNotificationDate(notificationDate) {
+    const now = new Date();
+    const notificationDateTime = new Date(notificationDate);
+    const timeDiff = now - notificationDateTime;
+    const seconds = Math.floor(timeDiff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (seconds < 60) {
+        return "現在";
+    } else if (minutes < 60) {
+        return `${minutes}分鐘前`;
+    } else if (hours < 24) {
+        return `${hours}小時前`;
+    } else {
+        return `${days}天前`;
+    }
+}
+
+
 
 
 

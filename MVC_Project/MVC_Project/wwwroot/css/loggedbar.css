@@ -303,7 +303,7 @@ button.notification {
     top: 56px;
     right: 50%;
     transform: translateX(1em);
-    width: 400px;
+    width: 450px;
     background: white;
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -354,12 +354,29 @@ button.notification {
             padding-top: 1rem;
         }
 
-.notification-popup .popup-content {
-    padding-left: 3%;
-    padding-top: 3%;
-    border-bottom: var(--lightGray) solid 2px;
+/*沒通知設計*/
+.notification-popup .notification-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 300px;
+    text-align: center;
 }
+
+    .notification-popup .notification-empty h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 3rem;
+        color: var(--black);
+    }
+
+    .notification-popup .popup-content {
+        padding-left: 3%;
+        padding-top: 3%;
+        border-bottom: var(--lightGray) solid 2px;
+        align-items: center;
+    }
 
 
 
@@ -369,6 +386,7 @@ button.notification {
 
     .notification-popup .popup-content .notification-message {
         text-align: left;
+        padding-right: 2rem;
     }
 
     .notification-popup .popup-content h4 {
@@ -384,7 +402,7 @@ button.notification {
     }
 
     .notification-popup .popup-content span {
-        font-size: 1.25rem;
+        font-size: 1.275rem;
         font-weight: 500;
         margin: 0;
     }
