@@ -44,8 +44,9 @@ namespace MVC_Project.Controllers
                            EndDate = g.EndDate,
                            Organizer = g.Organizer,
                            Chat = (_context.Chat.Count(chat => chat.ActivityID == g.GroupID) > 0) ?
-                                  _context.Chat.Where(chat => chat.ActivityID == g.GroupID).ToList() : new List<Chat>(),
-                           OrganizerNavigation = _context.Member.FirstOrDefault(m => m.UserID == g.Organizer),
+                                                        _context.Chat.Where(chat => chat.ActivityID == g.GroupID)
+                                                        .Include(chat => chat.User)  // Include Member data related to Chat
+                                                        .ToList() : new List<Chat>(),
                            OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID),
                            PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(),
                            Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList()

@@ -45,7 +45,7 @@
 
 <div class="container">
     <nav aria-label="Page navigation example" id="nav-page">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center" id="nav-pagi">
             <li class="page-item @(ViewBag.PageNumber == 1 ? "disabled" : "")">
                 <a class="page-link" href="@Url.Action("LikeRecord", "Member", new { page = ViewBag.PageNumber - 1 })" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>

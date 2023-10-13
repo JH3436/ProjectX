@@ -277,8 +277,27 @@ namespace MVC_Project.Controllers
 		}
 
 
+        //抓給group的照片那些
+        [HttpGet]
+        public IActionResult GetOrganizerInfo(int userId)
+        {
+            var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
+            if (member != null)
+            {
+                string imageBase64Data = member.UserPhoto != null ? Convert.ToBase64String(member.UserPhoto) : "";
+                string imageDataURL = $"data:image/jpg;base64,{imageBase64Data}";
+                return Json(new
+                {
+                    Nickname = member.Nickname,
+                    Intro = member.Intro,
+                    imageUrl = imageDataURL
+                });
+            }
+            return Json(new { success = false, message = "User not found" });
+        }
 
-	}
+
+    }
 	/*var member = GetCurrentUser();*/ // 這裡需要您自己實現獲取當前用戶的方法
 }
 

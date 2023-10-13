@@ -91,7 +91,9 @@ $(document).on('toggle.bs.modal', '.modal fade', function () {
 //   console.log("??");
 //   window.location.reload();
 // })
-
+$(document).ready(function() {
+  $('#exampleModal').modal('show');  // 顯示 Bootstrap Modal
+});
 // 聊天室
 $(document).ready(function(){
   $("#discussBtn").click(function(){
@@ -108,75 +110,92 @@ $(document).on("click", ".replyBtn", function(){
  
 
 
-$(document).ready(function(){
-  $(".publishBtn").click(function(){
-    var temp = $("#discussTextArea").val();
-    if (temp == ""){
-      alert("請輸入文字")
-    }else{
-      var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val())
-      if(sure == true){
-        $("#dialogDiv").append(
-          `<div class="commentDiv">
-          <div class="userCommentDiv">
-            <img class="profile" src="./Files/godtone.png "/>
-            <div class="userCommentDivRight">
-              <p class="h3 align-self-center">嘎痛</p>
-              <div class="comment-box align-self-start">` + temp + `</div> 
-            </div>
-          </div>
-          <div class="commentBtnDiv">
-            <div class="replyBtn" id="replyBtn" >
-              <p class="h3">回覆</p>
-              <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
-            </div>
-          </div>
-          
-          <div class="replyTextDiv">
-            <div class="userCommentDiv">
-              <img class="profile" src="./Files/godtone.png" />
-              <div class="userCommentDivRight">
-                <p class="h3 align-self-center">嘎痛</p>
-                <textarea name="" id="replyTextArea" cols="col-auto" rows="1"></textarea>
-                <div class="messageBtn">
-                  <a class="messageBtn-text-style" href="#">
-                    留言
-                  </a>
-                </div> 
-              </div>
-            </div>
-          </div>
-        
-        </div>`
-        )
-        alert("討論提交成功")
-        $("#discussTextArea").val("");
-      }
+  $(document).ready(function() {
+    // 監聽 #discussTextArea 元素的 keydown 事件
+    $("#discussTextArea").on("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();  // 阻止預設的 Enter 鍵行為
+            simulateClick();  // 呼叫模擬 click 函式
+        }
+    });
+
+    $(".publishBtn").click(simulateClick);  // 點擊 publishBtn 也呼叫模擬 click 函式
+
+    function simulateClick() {
+        var temp = $("#discussTextArea").val();
+        if (temp == "") {
+            alert("請輸入文字");
+        } else {
+            var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
+            if (sure == true) {
+                $("#dialogDiv").append(
+                    `<div class="commentDiv">
+                        <div class="userCommentDiv">
+                            <img class="profile" src="./Files/godtone.png" />
+                            <div class="userCommentDivRight">
+                                <p class="h3 align-self-center">嘎痛</p>
+                                <div class="comment-box align-self-start">` + temp + `</div>
+                            </div>
+                        </div>
+                        <div class="commentBtnDiv">
+                            <div class="replyBtn" id="replyBtn" >
+                                <p class="h3">回覆</p>
+                                <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                            </div>
+                        </div>
+                        <div class="replyTextDiv">
+                            <div class="userCommentDiv">
+                                <img class="profile" src="./Files/godtone.png" />
+                                <div class="userCommentDivRight">
+                                    <p class="h3 align-self-center">嘎痛</p>
+                                    <textarea name="" id="replyTextArea" cols="col-auto" rows="1"></textarea>
+                                    <div class="messageBtn">
+                                        <a class="messageBtn-text-style" href="#">
+                                            留言
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+                );
+                location.reload();
+                $('#exampleModal').modal('show');
+            }
+        }
     }
-  })
 });
 
-$(document).on("click", ".messageBtn", function(){
-  var temp =  $(this).parent().children("#replyTextArea").val()
-  if(temp == ""){
-    alert("請輸入文字")
-  }else{
-    var sure = confirm("確定提交留言\n\n" + $(this).parent().children("#replyTextArea").val())
-    if(sure == true){
-      
-      $($(this).parent().parent().parent()).before(
-        `<div class="replyDiv">
-        <div class="userCommentDiv">
-          <img class="profile" src="./Files/godtone.png" />
-          <div class="userCommentDivRight">
-            <p class="h3 align-self-center">嘎痛</p>
-            <div class="comment-box align-self-start">` + temp + `</div> 
-          </div>
-        </div>
-      </div>`
-      )
-    }
-    alert("留言成功");
-    $(this).parent().children("#replyTextArea").val("");
+$(document).on("click", ".messageBtn", function() {
+  var temp = $(this).parent().children("#replyTextArea").val();
+  if (temp == "") {
+      alert("請輸入文字");
+  } else {
+      var sure = confirm("確定提交留言\n\n" + temp);
+      if (sure) {
+          $($(this).parent().parent().parent()).before(
+              `<div class="replyDiv">
+                  <div class="userCommentDiv">
+                      <img class="profile" src="./Files/godtone.png" />
+                      <div class="userCommentDivRight">
+                          <p class="h3 align-self-center">嘎痛</p>
+                          <div class="comment-box align-self-start">` + temp + `</div>
+                      </div>
+                  </div>
+              </div>`
+          );
+          
+      }
   }
 });
+
+
+
+// 在 #replyTextArea 上監聽 keydown 事件
+$(document).on("keydown", "#replyTextArea", function(event) {
+  if (event.key === "Enter") {
+      event.preventDefault();  // 阻止預設的 Enter 鍵行為
+      $(this).siblings(".messageBtn").click();  // 模擬點擊 .messageBtn
+  }
+});
+

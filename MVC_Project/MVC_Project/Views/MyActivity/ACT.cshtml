@@ -103,20 +103,17 @@
     <br><br>
     <!-- 分頁 -->
     <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#" class="active">1</a>
-        <a href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <a href="?page=@i" @(i == Model.CurrentPage ? "class=active" : "")>@i</a>
+        }
     </div>
 
 
     <!-- JS連結 -->
+    <script src="~/js/ACTheart.js"></script>
     <script src="~/js/ACT.js"></script>
-
+    
 
 </body>
 

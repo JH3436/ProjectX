@@ -336,11 +336,16 @@ figure figcaption {
     padding: 10px;
     cursor: pointer;
     background-color: transparent;
-    border: 2px solid var(--orange);
-    
+    border: 2px solid var(--white);
+    color: var(--white);
     font-weight: bold;
+    transition: all 0.1s ease;
 }
 
+.custom-file-upload:hover {
+    border: 2px solid var(--orange);
+    color: var(--orange);
+}
 .modal-dialog {
     max-width: 400px; /* 調整這個數值以適應你的需求 */
     position: absolute;
@@ -390,5 +395,13 @@ label {
 }
 
 #likeR {
-    height:546px;
+    height:570px;
+}
+
+#nav-pagi {
+    --bs-pagination-active-bg: var(--orange);
+    --bs-pagination-active-border-color: var(--orange);
+    --bs-pagination-color: var(--deepBlue);
+    --bs-pagination-bg: var(--white);
+    --bs-pagination-font-size:1.2rem;
 }
