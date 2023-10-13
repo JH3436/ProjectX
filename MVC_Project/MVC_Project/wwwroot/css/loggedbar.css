@@ -220,6 +220,19 @@ body {
 
 
 /* 通知下拉 */
+/*已讀狀態設計*/
+div.popup-content i.read {
+    color: #999b9f;
+    font-size: 0.3em;
+}
+
+/*未讀狀態設計*/
+div.popup-content i.unread {
+    color: #0860f7;
+    font-size: 0.3em;
+}
+
+
 .notification-wrapper {
     position: relative;
 }

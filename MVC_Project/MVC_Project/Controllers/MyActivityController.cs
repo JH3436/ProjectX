@@ -234,12 +234,13 @@ namespace MVC_Project.Controllers
         }
 
         //根據目前使用者拿取通知Action
+        //目前的userId寫在"Layout.js"的AJAX裡面
         [HttpGet]
         public IActionResult GetNotifications(int userId)
         {
-            // 從資料庫中獲取通知數目
+            // 從資料庫中獲取未讀通知數目
             int notificationCount = _context.Notification
-                .Where(n => n.UserID == userId)
+                .Where(n => n.UserID == userId && !n.IsRead)
                 .Count();
 
             // 從資料庫中獲取通知內容
@@ -256,6 +257,39 @@ namespace MVC_Project.Controllers
 
             return Json(notificationData);
         }
+
+        [HttpPost]
+        public IActionResult MarkNotificationAsRead(int notificationId, int userId)
+        {
+            // 執行更新通知為已讀的操作，這裡使用Entity Framework Core示例
+            var notification = _context.Notification.FirstOrDefault(n => n.NotificationID == notificationId);
+            if (notification != null)
+            {
+                notification.IsRead = true;
+                _context.SaveChanges(); // 保存變更到資料庫
+            }
+
+            // 從資料庫中獲取未讀通知數目
+            int notificationCount = _context.Notification
+                .Where(n => n.UserID == userId && !n.IsRead)
+                .Count();
+
+            // 從資料庫中獲取通知內容
+            var notifications = _context.Notification
+                .Where(n => n.UserID == userId)
+                .OrderByDescending(n => n.NotificationDate)
+                .ToList();
+
+            var notificationData = new
+            {
+                notificationCount = notificationCount,
+                notifications = notifications
+            };
+
+            return Json(notificationData);
+        }
+
+
 
 
 
