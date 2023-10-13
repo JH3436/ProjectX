@@ -233,6 +233,32 @@ namespace MVC_Project.Controllers
             return RedirectToAction("HomePage");
         }
 
+        //根據目前使用者拿取通知Action
+        [HttpGet]
+        public IActionResult GetNotifications(int userId)
+        {
+            // 從資料庫中獲取通知數目
+            int notificationCount = _context.Notification
+                .Where(n => n.UserID == userId)
+                .Count();
+
+            // 從資料庫中獲取通知內容
+            var notifications = _context.Notification
+                .Where(n => n.UserID == userId)
+                .OrderByDescending(n => n.NotificationDate)
+                .ToList();
+
+            var notificationData = new
+            {
+                notificationCount = notificationCount,
+                notifications = notifications
+            };
+
+            return Json(notificationData);
+        }
+
+
+
 
 
 

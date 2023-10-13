@@ -127,6 +127,55 @@ function updateNotificationCount() {
     }
 }
 
+//測試
+// 在頁面載入時，向後端發送請求以獲取通知數目和通知內容
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: '/MyActivity/GetNotifications',
+        data: {
+            userId: 1 // 假設的使用者ID
+        },
+        success: function (notificationData) {
+            //Json資料
+            console.log(notificationData); // 輸出 JSON 數據到控制台
+            console.log(JSON.stringify(notificationData, null, 2)); // 格式化 JSON 數據
+
+            // 更新通知數目
+            var notificationNum = $(".notification--num");
+            notificationNum.text(notificationData.notificationCount);
+
+            // 清空通知下拉框
+            var notificationPopup = $(".notification-popup");
+            notificationPopup.empty();
+
+            // 生成通知內容
+            for (var i = 0; i < notificationData.notifications.length; i++) {
+                var notification = notificationData.notifications[i];
+                var notificationContent = '<div class="popup-content row">';
+                notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot" style="color: #0860f7; font-size: 0.3em;"></i>';
+                notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
+                notificationContent += '<div class="notification-message col-9">';
+                notificationContent += '<h4>' + notification.NotificationContent + '</h4>';
+                notificationContent += '<span class="notified-date">' + notification.NotificationDate + '</span>';
+                notificationContent += '</div>';
+                notificationContent += '</div>';
+
+                notificationPopup.append(notificationContent);
+            }
+        },
+        error: function () {
+            console.log('無法獲取通知數據。');
+        }
+    });
+});
+
+
+
+
+
+
+
 // 聯絡我們-表單
 // 當按鈕點擊時，顯示 dialog
 document.getElementById("showContactButton").addEventListener("click", function () {
