@@ -48,10 +48,24 @@ namespace MVC_Project.Controllers
         // GET: VoteRecords/Create
         public IActionResult Create()
         {
-            ViewData["ActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID");
-            ViewData["UserID"] = new SelectList(_context.Member, "UserID", "UserID");
+            var dates = _context.VoteTime
+                        .Where(v => v.ActivityID == 1)
+                        .Select(v => v.StartDate)
+                        .ToList();
+
+            // 用於 Debug 的代碼
+            Console.WriteLine("Dates Count: " + dates.Count);
+            foreach (var date in dates)
+            {
+                Console.WriteLine("Date: " + date);
+            }
+
+            ViewBag.Dates = dates;
+
             return View();
         }
+
+
 
         // POST: VoteRecords/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -60,16 +74,22 @@ namespace MVC_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RecordID,UserID,ActivityID,VoteResult")] VoteRecord voteRecord)
         {
-			if (ModelState.IsValid)
-			{
-					_context.Add(voteRecord);
-					await _context.SaveChangesAsync();
-					return RedirectToAction(nameof(Index));
-			}
-			ViewData["ActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", voteRecord.ActivityID);
-			ViewData["UserID"] = new SelectList(_context.Member, "UserID", "UserID", voteRecord.UserID);
-			return View(voteRecord);
-		}
+            if (ModelState.IsValid)
+            {
+                // 設置 ActivityID 為 1
+                voteRecord.ActivityID = 1;
+
+                _context.Add(voteRecord);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewData["ActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", voteRecord.ActivityID);
+            ViewData["UserID"] = new SelectList(_context.Member, "UserID", "UserID", voteRecord.UserID);
+            return View(voteRecord);
+        }
+
 
         // GET: VoteRecords/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -26,33 +26,26 @@
                 <p style="font-size: 21px;">如果最終活動時間與您所選的時間不符，您將無法參加活動。</p>
                 <p style="font-size: 21px;">但您可以再次考慮時間，然後再決定是否參加。</p>
                 <div class="container">
-                    <ul class="Cul">
-                        <li class="Cli">
-                            <input type="radio" id="f-option" name="VoteResult" value="2023/09/29 - 2023/10/01">
-                            <label for="f-option">2023/09/29 - 2023/10/01</label>
-                            <div class="check"></div>
-                        </li>
-                        <li class="Cli">
-                            <input type="radio" id="s-option" name="VoteResult" value="2023/10/07 - 2023/10/10">
-                            <label for="s-option">2023/10/07 - 2023/10/10</label>
-                            <div class="check"></div>
-                        </li>
-                        <li class="Cli">
-                            <input type="radio" id="t-option" name="VoteResult" value="2023/10/14 - 2023/10/15">
-                            <label for="t-option">2023/10/14 - 2023/10/15</label>
-                            <div class="check"></div>
-                        </li>
-                        <li class="Cli">
-                            <input type="radio" id="z-option" name="VoteResult" value="2023/10/21 - 2023/10/22">
-                            <label for="z-option">2023/10/21 - 2023/10/22</label>
-                            <div class="check"></div>
-                        </li>
-                    </ul>
+                    @if (ViewBag.Dates != null)
+                    {
+                        foreach (var date in ViewBag.Dates)
+                        {
+                            <li class="Cli">
+                                <input type="radio" id="@date" name="VoteResult" value="@date">
+                                <label for="@date">@date</label>
+                                <div class="check"></div>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>沒有可用的日期</li>
+                    }
                 </div>
             </div>
             <!-- 添加按鈕容器 -->
             <div class="button-container">
-                <button class="button" type="submit" style="font-size: 20px;" value="Create" >提交</button>
+                <button class="button" type="submit" style="font-size: 20px;" value="Create">提交</button>
             </div>
             <div class="register-link">
                 <a asp-controller="Member" asp-action="Registration">
@@ -61,6 +54,7 @@
             </div>
         </form>
     </div>
+
 
 
 
