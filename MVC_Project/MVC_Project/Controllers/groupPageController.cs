@@ -100,7 +100,7 @@ namespace MVC_Project.Controllers
             _context.Add(chat);
                 await _context.SaveChangesAsync();
 
-            return NoContent();
+            return RedirectToAction("groupPage", new { id });
         }
 
         [HttpGet]
@@ -122,7 +122,7 @@ namespace MVC_Project.Controllers
             _context.Add(chat);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return RedirectToAction("groupPage", new { id });
         }
         
         [HttpGet]

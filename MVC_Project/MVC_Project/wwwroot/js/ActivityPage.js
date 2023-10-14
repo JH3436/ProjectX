@@ -99,9 +99,6 @@ $(document).ready(function () {
             alert("請輸入文字");
         } else {
             var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
-            if (sure == true) {
-                window.location.reload();
-            }
         }
     }
 });
@@ -113,7 +110,6 @@ $(document).on("click", ".messageBtn", function () {
     } else {
         var sure = confirm("確定提交留言\n\n" + temp);
     }
-    window.location.reload();
 });
 
 
