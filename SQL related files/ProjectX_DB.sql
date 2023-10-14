@@ -95,6 +95,7 @@ CREATE TABLE [Notification] (
     NotificationContent NVARCHAR(MAX) NOT NULL,
     IsRead BIT NOT NULL DEFAULT 0, --預設為未讀
     NotificationDate DATETIME default sysdatetime(),
+	NotificationType nvarchar(25),
     CONSTRAINT FK_User_Notification FOREIGN KEY (UserID) REFERENCES [Member](UserID),
 	CONSTRAINT CK_IsRead CHECK (IsRead IN (0, 1)) -- IsRead只能是0或1
 );
@@ -282,10 +283,10 @@ GO
 -- 通知資料表
 INSERT INTO [dbo].[Notification]
            ([UserID]
-           ,[NotificationContent])
+           ,[NotificationContent], [NotificationType])
      VALUES
-           (2, '你有一則追蹤活動需要投票'),
-		   (1,'有人回覆了您的訊息!')
+           (2, '你有一則追蹤活動需要投票', 'Vote'),
+		   (1,'有人回覆了您的訊息!', 'Chat')
 GO
 
 

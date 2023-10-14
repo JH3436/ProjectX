@@ -214,7 +214,8 @@ namespace MVC_Project.Controllers
                     UserID = userId,
                     NotificationContent = notificationContent,
                     IsRead = false, 
-                    NotificationDate = DateTime.Now
+                    NotificationDate = DateTime.Now,
+                    NotificationType = "Vote"
                 };
 
                 _context.Notification.Add(notification);

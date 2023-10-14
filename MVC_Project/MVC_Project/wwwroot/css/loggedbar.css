@@ -223,13 +223,13 @@ body {
 /*已讀狀態設計*/
 div.popup-content i.read {
     color: #999b9f;
-    font-size: 0.3em;
+    font-size: 0.45em;
 }
 
 /*未讀狀態設計*/
 div.popup-content i.unread {
     color: #0860f7;
-    font-size: 0.3em;
+    font-size: 0.45em;
 }
 
 
@@ -299,11 +299,11 @@ button.notification {
     font-weight: 300;
     color: #000000;
     position: absolute;
-    z-index: 999;
     top: 56px;
     right: 50%;
     transform: translateX(1em);
-    width: 450px;
+    width: 400px;
+    max-height: 400px;
     background: white;
     border-radius: 0.5rem;
     box-sizing: border-box;
@@ -314,6 +314,29 @@ button.notification {
     animation-duration: 0.75s;
 }
 
+/*更改滾輪樣式設計*/
+.scrollbar-primary::-webkit-scrollbar {
+    width: 12px;
+    background-color: var(--white);
+}
+
+.scrollbar-primary::-webkit-scrollbar-track {
+    margin-top: 54.27px
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #3d557a72;
+}
+
+.scrollbar-primary {
+    margin: 2px;
+    scrollbar-color: var(--lightBlue-bg) #F5F5F5;
+}
+
+
+
 @keyframes dropPanel {
     0% {
         opacity: 0;
@@ -323,13 +346,16 @@ button.notification {
 
 .notification-popup.active {
     display: block;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .notification-popup__header {
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid var(--lightGray);
+    background-color: var(--white);
+    position: sticky;
+    top: 0;
 }
 
     .notification-popup__header h3 {
@@ -350,8 +376,8 @@ button.notification {
             font-size: 22px;
             font-weight: 700;
             color: var(--blue);
-            padding-right: 1rem;
             padding-top: 1rem;
+            padding-right: 1rem;
         }
 
 /*沒通知設計*/

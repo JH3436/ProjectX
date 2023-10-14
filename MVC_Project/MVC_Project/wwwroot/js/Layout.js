@@ -103,17 +103,19 @@ $(document).ready(function () {
             // 保存通知下拉框的Header
             var notificationHeader = notificationPopup.find(".notification-popup__header").clone();
             var notificationEmpty = notificationPopup.find(".notification-empty").clone();
+            var notificationsDiv = notificationPopup.find(".notifications").clone(); 
 
             notificationPopup.empty();
             // 清空通知下拉框，但保留Header
             notificationPopup.append(notificationHeader);
+
 
             // 生成通知內容
             if (notificationData.notifications.length > 0) {
                 for (var i = 0; i < notificationData.notifications.length; i++) {
                     var notification = notificationData.notifications[i];
                     var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                    var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
+                    var notificationContent = '<div class="popup-content row ' + notification.NotificationType + ' ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
 
                     notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                     notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
@@ -162,7 +164,7 @@ $(".notification-popup").on("click", ".popup-content", function () {
             for (var i = 0; i < notificationData.notifications.length; i++) {
                 var notification = notificationData.notifications[i];
                 var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
+                var notificationContent = '<div class="popup-content row ' + notification.NotificationType + ' ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
 
                 notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                 notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
@@ -214,7 +216,7 @@ $(".notification-popup").on("click", ".read-all", function () {
             for (var i = 0; i < notificationData.notifications.length; i++) {
                 var notification = notificationData.notifications[i];
                 var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
+                var notificationContent = '<div class="popup-content row ' + notification.NotificationType + ' ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '">';
 
                 notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                 notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
