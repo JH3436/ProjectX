@@ -520,6 +520,9 @@ a.float:hover + div.label-container {
         background-color: gray;
     }
 
+.commentDatetime {
+    font-size:xx-small;
+}
 /* 留言按鈕 */
 .messageBtn {
     width: fit-content;

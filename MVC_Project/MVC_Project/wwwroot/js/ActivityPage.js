@@ -41,37 +41,13 @@ if ($(window).width() < 575) {
         $('<div class="carousel-item">').insertAfter(boundary.parent()).append(boundary.nextAll().addBack());
     });
 }
-// Hide slide arrows if too few items.
-// if ($('#carousel-thumbs .carousel-item').length < 2) {
-//   $('#carousel-thumbs [class^=carousel-control-]').remove();
-//   $('.machine-carousel-container #carousel-thumbs').css('padding', '0 5px');
-// }
-// when the carousel slides, auto update
+
 $('#myCarousel').on('slide.bs.carousel', function (e) {
     var id = parseInt($(e.relatedTarget).attr('data-slide-number'));
     $('[id^=carousel-selector-]').removeClass('selected');
     $('[id=carousel-selector-' + id + ']').addClass('selected');
 });
-// when user swipes, go next or previous
-// $('#myCarousel').swipe({
-//   fallbackToMouseEvents: true,
-//   swipeLeft: function (e) {
-//     $('#myCarousel').carousel('next');
-//     //   console.log("swipeLeft");
-//   },
-//   swipeRight: function (e) {
-//     $('#myCarousel').carousel('prev');
-//     //   console.log("swipeRight");
-//   },
-//   allowPageScroll: 'vertical',
-//   preventDefaultEvents: false,
-//   threshold: 75
-// });
 
-// $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-//   event.preventDefault();
-//   $(this).ekkoLightbox();
-// });
 
 
 $('#myCarousel .carousel-item img').on('click', function (e) {
@@ -84,11 +60,11 @@ $(document).on('toggle.bs.modal', '.modal fade', function () {
     $('.modal:visible').length && $(document.body).addClass('modal-open');
 });
 
-// var myModalEl = document.getElementById('exampleModal')
-// myModalEl.addEventListener('hidden.bs.modal', function (event) {
-//   console.log("??");
-//   window.location.reload();
-// })
+$(document).ready(function() {
+  var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+
+  myModal.show();
+});
 
 // 聊天室
 $(document).ready(function () {
@@ -107,77 +83,49 @@ $(document).on("click", ".replyBtn", function () {
 
 
 $(document).ready(function () {
-    $(".publishBtn").click(function () {
+    // 監聽 #discussTextArea 元素的 keydown 事件
+    $("#discussTextArea").on("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();  // 阻止預設的 Enter 鍵行為
+            simulateClick();  // 呼叫模擬 click 函式
+        }
+    });
+
+    $(".publishBtn").click(simulateClick);  // 點擊 publishBtn 也呼叫模擬 click 函式
+
+    function simulateClick() {
         var temp = $("#discussTextArea").val();
         if (temp == "") {
-            alert("請輸入文字")
+            alert("請輸入文字");
         } else {
-            var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val())
+            var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
             if (sure == true) {
-                $("#dialogDiv").append(
-                    `<div class="commentDiv">
-          <div class="userCommentDiv">
-            <img class="profile" src="./Files/godtone.png "/>
-            <div class="userCommentDivRight">
-              <p class="h3 align-self-center">嘎痛</p>
-              <div class="comment-box align-self-start">` + temp + `</div> 
-            </div>
-          </div>
-          <div class="commentBtnDiv">
-            <div class="replyBtn" id="replyBtn" >
-              <p class="h3">回覆</p>
-              <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
-            </div>
-          </div>
-          
-          <div class="replyTextDiv">
-            <div class="userCommentDiv">
-              <img class="profile" src="./Files/godtone.png" />
-              <div class="userCommentDivRight">
-                <p class="h3 align-self-center">嘎痛</p>
-                <textarea name="" id="replyTextArea" cols="col-auto" rows="1"></textarea>
-                <div class="messageBtn">
-                  <a class="messageBtn-text-style" href="#">
-                    留言
-                  </a>
-                </div> 
-              </div>
-            </div>
-          </div>
-        
-        </div>`
-                )
+                window.location.reload();
             }
         }
-        location.reload();
-        $('#exampleModal').modal('show');
-        /*$("#discussTextArea").val("");*/
-    })
+    }
 });
 
 $(document).on("click", ".messageBtn", function () {
-    var temp = $(this).parent().children("#replyTextArea").val()
+    var temp = $(this).parent().children("#replyTextArea").val();
     if (temp == "") {
-        alert("請輸入文字")
+        alert("請輸入文字");
     } else {
-        var sure = confirm("確定提交留言\n\n" + $(this).parent().children("#replyTextArea").val())
-        if (sure == true) {
+        var sure = confirm("確定提交留言\n\n" + temp);
+    }
+    window.location.reload();
+});
 
-            $($(this).parent().parent().parent()).before(
-                `<div class="replyDiv">
-        <div class="userCommentDiv">
-          <img class="profile" src="./Files/godtone.png" />
-          <div class="userCommentDivRight">
-            <p class="h3 align-self-center">嘎痛</p>
-            <div class="comment-box align-self-start">` + temp + `</div> 
-          </div>
-        </div>
-      </div>`
-            )
-        }
-        /*$(this).parent().children("#replyTextArea").val("");*/
+
+
+// 在 #replyTextArea 上監聽 keydown 事件
+$(document).on("keydown", "#replyTextArea", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();  // 阻止預設的 Enter 鍵行為
+        $(this).siblings(".messageBtn").click();  // 模擬點擊 .messageBtn
     }
 });
+
 
 /*收藏API*/
 const heartIcons = document.querySelectorAll('.heart-icon');
