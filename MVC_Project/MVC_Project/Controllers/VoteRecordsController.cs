@@ -45,13 +45,32 @@ namespace MVC_Project.Controllers
             return View(voteRecord);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: VoteRecords/Create
         public IActionResult Create()
         {
-            var dates = _context.VoteTime
-                        .Where(v => v.ActivityID == 1)
-                        .Select(v => v.StartDate)
-                        .ToList();
+            var datesQuery = from voteTime in _context.VoteTime
+                             where voteTime.ActivityID == 1
+                             select voteTime.StartDate;
+
+            // 轉為 List
+            var dates = datesQuery.ToList();
 
             // 用於 Debug 的代碼
             Console.WriteLine("Dates Count: " + dates.Count);
@@ -60,6 +79,7 @@ namespace MVC_Project.Controllers
                 Console.WriteLine("Date: " + date);
             }
 
+            // 將日期傳遞到 View 中
             ViewBag.Dates = dates;
 
             return View();
