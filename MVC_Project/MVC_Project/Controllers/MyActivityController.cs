@@ -25,8 +25,12 @@ namespace MVC_Project.Controllers
             // 假設使用者未登入，暫時使用userId = 1
             int userId = 1;
 
-            //進行是否建立通知判斷
+            //進行是否建立投票通知判斷
             ProcessLikesAndCreateNotifications(userId);
+
+            //進行是否建立新回覆通知判斷
+            CheckRepliesAndCreateNotifications(userId);
+
 
             // 讀取所有有效的 ActivityID 到一個列表中
             var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
@@ -213,7 +217,7 @@ namespace MVC_Project.Controllers
                 {
                     UserID = userId,
                     NotificationContent = notificationContent,
-                    IsRead = false, 
+                    IsRead = false,
                     NotificationDate = DateTime.Now,
                     NotificationType = "Vote"
                 };
@@ -269,9 +273,9 @@ namespace MVC_Project.Controllers
             if (notification != null && notification.IsRead == false)
             {
                 notification.IsRead = true;
-                _context.SaveChanges(); 
+                _context.SaveChanges();
             }
-            
+
             else
             {
                 notification.IsRead = false;
@@ -334,8 +338,71 @@ namespace MVC_Project.Controllers
             return Json(notificationData);
         }
 
+        //查找回覆並建立通知-------測試中
+        public IActionResult CheckRepliesAndCreateNotifications(int userId)
+        {
+            // 找到所有具有回覆的 chat 資料
+            var repliedChats = _context.Chat
+                .Where(c => c.ToWhom != null)
+                .Select(c => new { c.ChatID, c.ToWhom, c.UserID, c.ActivityID, c.ChatTime })
+                .ToList();
+
+            foreach (var chat in repliedChats)
+            {
+                //防呆機制，確保不會傳送自己寫的回覆
+                if (chat.UserID != userId)
+                {
+                    // 首先查找原始留言的 ChatID
+                    var originalChat = _context.Chat
+                        .Where(c => c.ChatID == chat.ToWhom)
+                        .FirstOrDefault();
+
+                    // 檢查該通知是否已存在於資料庫，且具有相同通知內容、回覆者名稱和通知日期晚於找到的 Chat 資料列的 ChatTime，如果有就代表已經處理過了
+                    var existingNotification = _context.Notification.FirstOrDefault(n =>
+                        n.UserID == userId &&
+                        n.NotificationContent == $"{GetUserNameById(chat.UserID)} 已在 \"{GetActivityNameById(chat.ActivityID)}\" 回覆了你的留言" &&
+                        n.NotificationDate > chat.ChatTime
+                    );
+
+                    // 如果沒有找到，而且UserID與提供的userId相符，則寫入新通知
+                    if (existingNotification == null && originalChat?.UserID == userId)
+                    {
+                        var notification = new Notification
+                        {
+                            UserID = userId,
+                            NotificationContent = $"{GetUserNameById(chat.UserID)} 已在 \"{GetActivityNameById(chat.ActivityID)}\" 回覆了你的留言",
+                            IsRead = false,
+                            NotificationDate = DateTime.Now,
+                            NotificationType = "Reply"
+                        };
+                        _context.Notification.Add(notification);
+                    }
+                }
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Homepage");
+        }
+
+        // 透過 ActivityID (從Chat資料表來) 獲取 ActivityName (非官方活動)的方法
+        private string GetActivityNameById(int? activityId)
+        {
+            var activity = _context.Group.FirstOrDefault(g => g.GroupID == activityId);
+            return activity != null ? activity.GroupName : "Unknown Activity";
+        }
+
+        // 透過 UserID (從Chat資料表來) 獲取使用者名稱的方法
+        private string GetUserNameById(int? userId)
+        {
+            var user = _context.Member.FirstOrDefault(u => u.UserID == userId);
+            return user != null ? user.Nickname : "Unknown User";
+        }
 
 
+
+
+
+        //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
 
 
 
@@ -345,42 +412,42 @@ namespace MVC_Project.Controllers
         {
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
-          
-            var myActivityData =(from m in _context.MyActivity
-                                 join o in _context.OfficialPhoto
-                                 on m.ActivityID equals o.ActivityID
-                                 /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
-                                 select new ResponseActivity
-                                 {
-                                     ActivityName = m.ActivityName,
-                                     Category = m.Category,
-                                     SuggestedAmount = m.SuggestedAmount,
-                                     ActivityContent = m.ActivityContent,
-                                     MinAttendee = m.MinAttendee,
-                                     VoteDate = m.VoteDate,
-                                     ExpectedDepartureMonth = m.ExpectedDepartureMonth,
-                                     PhotoPath = o.PhotoPath
-                                 });
+
+            var myActivityData = (from m in _context.MyActivity
+                                  join o in _context.OfficialPhoto
+                                  on m.ActivityID equals o.ActivityID
+                                  /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
+                                  select new ResponseActivity
+                                  {
+                                      ActivityName = m.ActivityName,
+                                      Category = m.Category,
+                                      SuggestedAmount = m.SuggestedAmount,
+                                      ActivityContent = m.ActivityContent,
+                                      MinAttendee = m.MinAttendee,
+                                      VoteDate = m.VoteDate,
+                                      ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                                      PhotoPath = o.PhotoPath
+                                  });
 
             //個人開團資料讀取
-            var groupData =(from g in _context.Group
-                            join m in _context.Member on g.Organizer equals m.UserID
-                            join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
-                            join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
-                            from pp in personalPhotos.DefaultIfEmpty()
-                                //where selectedIds.Contains(g.GroupID)
-                            select new ResponseGroup
-                            {
-                                GroupName = g.GroupName,
-                                GroupCategory = g.GroupCategory,
-                                GroupContent = g.GroupContent,
-                                MinAttendee = g.MinAttendee,
-                                MaxAttendee = g.MaxAttendee,
-                                StartDate = g.StartDate,
-                                EndDate = g.EndDate,
-                                Nickname = m.Nickname,
-                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
-                            });
+            var groupData = (from g in _context.Group
+                             join m in _context.Member on g.Organizer equals m.UserID
+                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                             from pp in personalPhotos.DefaultIfEmpty()
+                                 //where selectedIds.Contains(g.GroupID)
+                             select new ResponseGroup
+                             {
+                                 GroupName = g.GroupName,
+                                 GroupCategory = g.GroupCategory,
+                                 GroupContent = g.GroupContent,
+                                 MinAttendee = g.MinAttendee,
+                                 MaxAttendee = g.MaxAttendee,
+                                 StartDate = g.StartDate,
+                                 EndDate = g.EndDate,
+                                 Nickname = m.Nickname,
+                                 PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                             });
 
             int itemsToSkip = (pageNumber - 1) * pageSize;
 
