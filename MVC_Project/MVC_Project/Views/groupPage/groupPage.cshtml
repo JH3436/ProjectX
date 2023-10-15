@@ -35,7 +35,6 @@
             integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
             crossorigin="anonymous"></script>
 
-    <script src="~/js/ActivityPage.js"></script>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
@@ -84,20 +83,27 @@
             <div class="carousel-container position-relative  col-lg-8" id="pictureDiv">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+                        @{
+                            var photoList = Model[0].PersonalPhoto.ToList();
+                            string photoBase64Image0 = Convert.ToBase64String(photoList[0].PhotoData);
+                            string photoBase64Image1 = Convert.ToBase64String(photoList[1].PhotoData);
+                            string photoBase64Image2 = Convert.ToBase64String(photoList[2].PhotoData);
+                            string photoBase64Image3 = Convert.ToBase64String(photoList[3].PhotoData);
+                        }
                         <div class="carousel-item active" data-slide-number="0">
-                            <img src="" class="d-block w-100" alt="..." data-type="image"
+                            <img src="data:image/png;base64,@photoBase64Image0" class="d-block w-100" alt="..." data-type="image"
                                  data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
                         <div class="carousel-item" data-slide-number="1">
-                            <img src="" class="d-block w-100" alt="..." data-type="image"
+                            <img src="data:image/png;base64,@photoBase64Image1" class="d-block w-100" alt="..." data-type="image"
                                  data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
                         <div class="carousel-item" data-slide-number="2">
-                            <img src="" class="d-block w-100" alt="..." data-type="image"
+                            <img src="data:image/png;base64,@photoBase64Image2" class="d-block w-100" alt="..." data-type="image"
                                  data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
                         <div class="carousel-item" data-slide-number="3">
-                            <img src="" class="d-block w-100" alt="..." data-type="image"
+                            <img src="data:image/png;base64,@photoBase64Image3" class="d-block w-100" alt="..." data-type="image"
                                  data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
                     </div>
@@ -110,19 +116,19 @@
                             <div class="row mx-0">
                                 <div id="carousel-selector-0" class="thumb col-sm-1 col-lg-3 px-1 py-2 selected"
                                      data-target="#myCarousel" data-slide-to="0">
-                                    <img src="" class="img-fluid" alt="...">
+                                    <img src="data:image/png;base64,@photoBase64Image0" class="img-fluid" alt="...">
                                 </div>
                                 <div id="carousel-selector-1" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                                      data-slide-to="1">
-                                    <img src="" class="img-fluid" alt="...">
+                                    <img src="data:image/png;base64,@photoBase64Image1" class="img-fluid" alt="...">
                                 </div>
                                 <div id="carousel-selector-2" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                                      data-slide-to="2">
-                                    <img src="" class="img-fluid" alt="...">
+                                    <img src="data:image/png;base64,@photoBase64Image2" class="img-fluid" alt="...">
                                 </div>
                                 <div id="carousel-selector-3" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
                                      data-slide-to="3">
-                                    <img src="" class="img-fluid" alt="...">
+                                    <img src="data:image/png;base64,@photoBase64Image3" class="img-fluid" alt="...">
                                 </div>
                             </div>
                         </div>
@@ -349,6 +355,7 @@
 <!-- JS連結 -->
 
 
+<script src="~/js/ActivityPage.js"></script>
 
 
 </html>

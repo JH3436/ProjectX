@@ -29,6 +29,8 @@ $('[id^=carousel-selector-]').click(function () {
     var id_selector = $(this).attr('id');
     var id = parseInt(id_selector.substr(id_selector.lastIndexOf('-') + 1));
     $('#myCarousel').carousel(id);
+    console.log("id_selector:" +id_selector);
+    console.log("id:" +id);
 });
 // Only display 3 items in nav on mobile.
 if ($(window).width() < 575) {
@@ -46,6 +48,7 @@ $('#myCarousel').on('slide.bs.carousel', function (e) {
     var id = parseInt($(e.relatedTarget).attr('data-slide-number'));
     $('[id^=carousel-selector-]').removeClass('selected');
     $('[id=carousel-selector-' + id + ']').addClass('selected');
+    console.log(id)
 });
 
 
@@ -53,6 +56,7 @@ $('#myCarousel').on('slide.bs.carousel', function (e) {
 $('#myCarousel .carousel-item img').on('click', function (e) {
     var src = $(e.target).attr('data-remote');
     if (src) $(this).ekkoLightbox();
+    console.log("$('#myCarousel .carousel-item img').on('click'")
 });
 
 
