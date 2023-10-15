@@ -35,15 +35,14 @@ function formatDate(date) {
 $(document).ready(function () {
     var images = [];
     var currentIndex = -1;
-    var totalImages = 0; // 用來追踪已選取的圖片數量
-    var files = this.files;
+    var totalImages = 0;
 
     $("#ImageData").change(function () {
         var files = this.files;
 
         if (totalImages + files.length > 4) {
             alert("最多只能選4張圖片！");
-            this.value = null;  // 清空檔案輸入框
+            this.value = null;
             return;
         }
 
@@ -63,19 +62,17 @@ $(document).ready(function () {
 
     $("#deleteImage").click(function () {
         if (currentIndex !== -1) {
-            images.splice(currentIndex, 1);  // 從陣列中刪除該照片
-            totalImages--;  // 減少總圖片數量
+            images.splice(currentIndex, 1);
+            totalImages--;
             if (images.length === 0) {
-                $("#photosPreview").empty();  // 如果沒有照片，清空預覽
+                $("#photosPreview").empty();
                 currentIndex = -1;
             } else {
-                // 更新當前索引和顯示的圖片
                 currentIndex = Math.max(currentIndex - 1, 0);
                 showImage(images[currentIndex]);
             }
         }
     });
-
 
     $("#prevImage").click(function () {
         if (currentIndex > 0) {
@@ -93,8 +90,15 @@ $(document).ready(function () {
 
     function showImage(src) {
         var img = $("<img>").attr("src", src).css({ "width": "300px", "height": "200px" });
-        $("#photosPreview").empty().append(img);  // 清空舊的圖片並添加新圖片
+
+        if (currentIndex !== -1) {
+            $("#imageLabel").text(`第${currentIndex + 1}張`);
+
+        }
+
+        $("#photosPreview").empty().append(img);
     }
+
 });
 
 
