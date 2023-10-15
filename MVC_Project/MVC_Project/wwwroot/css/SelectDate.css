@@ -163,7 +163,7 @@ form {
 
 /* 選擇日期 */
 
-.container {
+.selectDateContainer {
     display: block;
     position: relative;
     margin: 40px auto;
@@ -173,7 +173,7 @@ form {
 }
 
 
-    .container .Cul {
+    .selectDateContainer .Cul {
         list-style: none;
         margin: 0;
         padding: 0;

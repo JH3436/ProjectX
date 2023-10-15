@@ -18,6 +18,23 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
+        //齊澤寫的
+        public IActionResult SelectDate()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: VoteRecords
         public async Task<IActionResult> Index()
         {

@@ -29,11 +29,6 @@ namespace MVC_Project.Controllers
             return View();
         }
 
-        public IActionResult SelectDate()
-        {
-            return View();
-        }
-
         public IActionResult Act()
         {
             return View();
