@@ -17,7 +17,9 @@ public partial class Notification
 
     public DateTime? NotificationDate { get; set; }
 
-    public string NotificationType { get; set; } // 添加通知類型屬性
+    public string NotificationType { get; set; } // 新增通知類型屬性
+
+    public int NotificationToWhichActivityID { get; set; } //新增活動導向
 
     public virtual Member User { get; set; }
 }

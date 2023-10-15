@@ -347,6 +347,7 @@ button.notification {
 .notification-popup.active {
     display: block;
     overflow-x: hidden;
+    z-index: 100;
 }
 
 .notification-popup__header {

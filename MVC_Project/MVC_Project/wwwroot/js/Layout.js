@@ -114,7 +114,7 @@ $(document).ready(function () {
                 for (var i = 0; i < notificationData.notifications.length; i++) {
                     var notification = notificationData.notifications[i];
                     var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                    var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '">';
+                    var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '" data-notificationtoactivityid="' + notification.NotificationToWhichActivityID + '">';
 
                     notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                     notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
@@ -163,7 +163,7 @@ $(".notification-popup").on("click", ".popup-content", function () {
             for (var i = 0; i < notificationData.notifications.length; i++) {
                 var notification = notificationData.notifications[i];
                 var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '">';
+                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '" data-notificationtoactivityid="' + notification.NotificationToWhichActivityID + '">';
 
                 notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                 notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
@@ -215,7 +215,7 @@ $(".notification-popup").on("click", ".read-all", function () {
             for (var i = 0; i < notificationData.notifications.length; i++) {
                 var notification = notificationData.notifications[i];
                 var isReadClass = notification.IsRead ? 'read' : 'unread'; // 判斷已讀或未讀
-                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '">';
+                var notificationContent = '<div class="popup-content row ' + isReadClass + '" data-notificationid="' + notification.NotificationID + '" data-notificationtype="' + notification.NotificationType + '" data-notificationtoactivityid="' + notification.NotificationToWhichActivityID + '">';
 
                 notificationContent += '<i class="fa-solid fa-circle col-1 notification-dot ' + isReadClass + '"></i>';
                 notificationContent += '<i class="fa-regular fa-newspaper col-2"></i>';
@@ -272,14 +272,16 @@ $(".notification-popup").on("click", ".popup-content", function () {
 
     var notificationType = $(this).data("notificationtype"); // 讀取通知類型
     var isUnread = $(this).hasClass("unread"); // 檢查通知是否為未讀
+    var notificationToActivityID = $(this).data("notificationtoactivityid"); //讀取要導向的活動的ID
+
 
     if (notificationType && isUnread) {
         // 根據通知類型執行不同的操作
         if (notificationType === "Vote") {
-            window.location.href = "/Home/selectDate"; // 導向投票頁面
+            window.location.href = `/VoteRecords/selectDate/${notificationToActivityID}`; // 導向投票頁面
         }
         else if (notificationType === "Reply") {
-            window.location.href = "/grouppage/grouppage/1"; // 導向活動頁面
+            window.location.href = `/grouppage/grouppage/${notificationToActivityID}`; // 導向活動頁面
         }
         else {
             //應該沒有其他判斷了吧?
