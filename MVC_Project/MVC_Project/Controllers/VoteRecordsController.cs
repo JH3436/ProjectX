@@ -19,8 +19,9 @@ namespace MVC_Project.Controllers
         }
 
         //齊澤寫的
-        public IActionResult SelectDate()
+        public IActionResult SelectDate(int Activityid)
         {
+
             return View();
         }
 

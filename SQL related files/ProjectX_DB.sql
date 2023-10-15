@@ -96,6 +96,7 @@ CREATE TABLE [Notification] (
     IsRead BIT NOT NULL DEFAULT 0, --預設為未讀
     NotificationDate DATETIME default sysdatetime(),
 	NotificationType nvarchar(25),
+	NotificationToWhichActivityID INT,
     CONSTRAINT FK_User_Notification FOREIGN KEY (UserID) REFERENCES [Member](UserID),
 	CONSTRAINT CK_IsRead CHECK (IsRead IN (0, 1)) -- IsRead只能是0或1
 );

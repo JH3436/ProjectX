@@ -219,7 +219,8 @@ namespace MVC_Project.Controllers
                     NotificationContent = notificationContent,
                     IsRead = false,
                     NotificationDate = DateTime.Now,
-                    NotificationType = "Vote"
+                    NotificationType = "Vote",
+                    NotificationToWhichActivityID = activity.ActivityID,
                 };
 
                 _context.Notification.Add(notification);
@@ -338,7 +339,7 @@ namespace MVC_Project.Controllers
             return Json(notificationData);
         }
 
-        //查找回覆並建立通知-------測試中
+        //查找回覆並建立通知
         public IActionResult CheckRepliesAndCreateNotifications(int userId)
         {
             // 找到所有具有回覆的 chat 資料
