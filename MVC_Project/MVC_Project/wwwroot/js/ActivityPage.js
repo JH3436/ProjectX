@@ -194,7 +194,110 @@ heartIcons.forEach(function (heartIcon) {
     });
 });
 
-/*報名API*/
+/*抓取groupid*/
+function getIdFromUrl() {
+    const groupidElement = document.querySelector('.groupid');  // 選取具有 class 為 groupid 的元素
+    if (groupidElement) {
+        return groupidElement.getAttribute('data-groupid');
+    }
+    return null;  // 或者您可以返回一個適當的預設值或錯誤訊息
+}
+
+const id = getIdFromUrl();
+if (id) {
+    console.log('ID:', id);
+} else {
+    console.log('ID not found in the URL.');
+}
+
+function getChatData(activityId) {
+    $.ajax({
+        url: `/api/chatData/1004`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            // Handle the data returned from the API
+            console.log('Chat data:', data);
+            updateChatInModal(data);
+            // Do something with the data, e.g., update the UI
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
+function updateChatInModal(chatList) {
+    // 清空原有的討論區內容
+    // 將新的聊天資料插入到討論區
+    
+    chatList.forEach(function (chat) {
+        if (chat.ToWhom === null) {
+            var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
+            var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
+            var chatContent = chat.ChatContent ? `<div class="comment-box align-self-start">${chat.ChatContent}</div>` : '';
+
+            var chatCommentDiv = `
+            <div class="commentDiv">
+                <div class="userCommentDiv">
+                    ${userPhoto}
+                    <div class="userCommentDivRight">
+                        <p class="h3 align-self-center">${chat.Nickname}</p>
+                        ${chatContent}
+                        <p class="commentDatetime">${chat.ChatTime}</p>
+                    </div>
+                </div>
+                <div class="commentBtnDiv" id =${chatId}>
+                    <div class="replyBtn" id="replyBtn">
+                        <p class="h3">回覆</p>
+                        <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                    </div>
+                </div>`;
+            chatList.forEach(function (reply) {
+                if (reply.ToWhom !== null && reply.ToWhom === chatId) {
+                    // 建立回覆的 HTML
+                    var replyHtml = `
+                    <div class="replyDiv">
+                        <div class="userCommentDiv">
+                            ${userPhoto}
+                            <div class="userCommentDivRight">
+                                <p class="h3 align-self-center">${reply.Nickname}</p>
+                                <div class="comment-box align-self-start">${reply.ChatContent}</div>
+                                <p class="commentDatetime">${reply.ChatTime}</p>
+                            </div>
+                        </div>
+                    </div>`;
+                    chatCommentDiv = chatCommentDiv + replyHtml; 
+                }
+            });
+            var replyTextDiv = `
+                <div class="replyTextDiv">
+                    <div class="userCommentDiv">
+                        <img class="profile" src="data:image/png;base64,@userBase64Image" />
+                        <div class="userCommentDivRight">
+                            <p class="h3 align-self-center">@userInfo[0].Nickname</p>
+                            <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
+                            <button class="messageBtn" type="submit">
+                                <p class="messageBtn-text-style" href="#">
+                                    留言
+                                </p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            chatCommentDiv = chatCommentDiv + replyTextDiv;
+            // 插入到討論區
+            $('#dialogDiv').append(chatCommentDiv);
+
+        }
+    });
+
+}
+
+$(document).ready(function () {
+    getChatData(1);
+});
 
 
 
