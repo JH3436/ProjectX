@@ -233,7 +233,20 @@ namespace MVC_Project.Controllers
                     };
                     _context.Notification.Add(notification);
                 }
-
+                else
+                {
+                    var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"未達出團人數，已取消收藏。";
+                    var notification = new Notification
+                    {
+                        UserID = userId,
+                        NotificationContent = notificationContent,
+                        IsRead = false,
+                        NotificationDate = DateTime.Now,
+                        NotificationType = "Cancelled",
+                        NotificationToWhichActivityID = activity.ActivityID,
+                    };
+                    _context.Notification.Add(notification);
+                }
                 //移除已處理通知建立之已收藏活動(如果沒有建立通知也會刪掉，因為投票時間到了)
                 var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
                 if (likeRecordEntry != null)
