@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Text;
 using SmartBreadcrumbs.Attributes;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace MVC_Project.Controllers
 
@@ -26,10 +27,20 @@ namespace MVC_Project.Controllers
 		public IActionResult Registration(int page = 1)
 		{
 			int pageSize = 6; // 每頁顯示的項目數
-			var userId = 1; // 從當前登錄的使用者取得UserId
+			//var userId = 1; // 從當前登錄的使用者取得UserId
 
-			// 根據當前頁數和每頁顯示的項目數計算跳過的項目數
-			int skip = (page - 1) * pageSize;
+            // 從Session取得當前登錄的用戶ID
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+
+
+
+            // 根據當前頁數和每頁顯示的項目數計算跳過的項目數
+            int skip = (page - 1) * pageSize;
 
             //計算總頁數
             int totalRecords = _context.Registration.Where(r => r.ParticipantID == userId).Count();

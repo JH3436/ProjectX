@@ -82,7 +82,7 @@ $('#cropImageBtn').on('click', function (ev) {
             url: '/Member/UpdateUserPhoto',
             method: 'POST',
             data: {
-                userId: 1, // 這裡應該是當前登入的用戶ID
+                userId: currentUserId, // 使用從隱藏輸入框取得的當前用戶ID
                 imageBase64: resp
             },
             success: function (response) {
