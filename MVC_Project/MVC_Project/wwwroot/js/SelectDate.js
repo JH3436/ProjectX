@@ -78,7 +78,13 @@ $('button[type="submit"]').click(function (e) {
                 }
 
                 //顯示成功訊息
-                alert('投票成功');
+                Swal.fire({
+                    title: '提交成功!',
+                    text: '您已投票',
+                    icon: 'success',
+                    confirmButtonText: 'Ok!',
+                    confirmButtonColor: 'var(--deepBlue)',
+                })
             },
             error: function (error) {
                 // 在這里處理保存失敗的情況
