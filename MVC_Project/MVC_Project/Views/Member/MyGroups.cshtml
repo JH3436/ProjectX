@@ -6,7 +6,7 @@
 
 
 
-<div class="container" id="myGroups">
+<div class="container" id="likeR"">
     <div class="row row-cols-2">
         @foreach (var group in ViewBag.OrganizedGroups)
         {
@@ -56,13 +56,12 @@
 </div>
 
 <script>
-
     function confirmDelete(btn) {
         var groupId = btn.getAttribute("data-id");
         var groupName = btn.getAttribute("data-name");
 
         swal({
-            title: "確定要刪除此紀錄嗎？",
+            title: "確定要刪除此活動嗎？",
             text: "請輸入活動名稱以確認刪除:",
             icon: "warning",
             buttons: true,
@@ -74,18 +73,22 @@
                     // 使用AJAX調用DeleteGroup方法
                     $.post("/Member/DeleteGroup", { GroupID: groupId }, function (data) {
                         if (data.success) {
-                            swal("成功！", "已成功刪除活動！", "success");
-                            // 刷新頁面或刪除該活動的元素
-                            location.reload();
+                            swal("成功！", "已成功刪除活動！", "success").then(() => {
+                                // 刷新頁面或刪除該活動的元素
+                                location.reload();
+                            });
                         } else {
                             swal("錯誤！", "刪除過程中發生錯誤！", "error");
                         }
                     });
+                } else if (value === null) {
+                    // 使用者點擊了取消按鈕，不執行任何操作
                 } else {
-                    swal("活動名稱不正確，請重新輸入!");
+                    swal("錯誤！", "輸入錯誤活動名稱，請重新操作", "error");
                 }
             });
     }
+
     // $('.delete-btn').click(function () {
     //     var groupId = $(this).data('id');
     //     var groupName = $(this).data('name');

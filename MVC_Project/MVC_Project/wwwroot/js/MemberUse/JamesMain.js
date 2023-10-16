@@ -122,7 +122,7 @@ $(document).ready(function () {
     });
 });
 
-alert表單內容
+/*alert表單內容*/
 document.getElementById("myForm").onsubmit = function (event) {
     // 獲取表單元素
     var form = event.target;
