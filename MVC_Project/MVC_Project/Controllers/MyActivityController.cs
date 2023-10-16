@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,6 +14,8 @@ namespace MVC_Project.Controllers
     public class MyActivityController : Controller
     {
         private readonly ProjectXContext _context;
+
+        public string? category { get; private set; }
 
         public MyActivityController(ProjectXContext context)
         {
@@ -223,8 +226,8 @@ namespace MVC_Project.Controllers
                     NotificationToWhichActivityID = activity.ActivityID,
                 };
 
-                //_context.Notification.Add(notification);
-                //_context.SaveChanges();
+                _context.Notification.Add(notification);
+                _context.SaveChanges();
 
                 //移除已處理通知建立之已收藏活動
                 var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
@@ -399,25 +402,17 @@ namespace MVC_Project.Controllers
             return user != null ? user.Nickname : "Unknown User";
         }
 
-
-
-
-
         //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
 
-
-
-
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
-        public IActionResult ACT(int? page)
+        public IActionResult ACT(int? page, string category)
         {
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
 
             var myActivityData = (from m in _context.MyActivity
-                                  join o in _context.OfficialPhoto
-                                  on m.ActivityID equals o.ActivityID
-                                  /*orderby m.CreatedDate*/ // 依照 CreatedDate 進行排序
+                                  join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                  where (string.IsNullOrEmpty(category) || m.Category == category) // 使用 category 参数进行筛选
                                   select new ResponseActivity
                                   {
                                       ActivityName = m.ActivityName,
@@ -436,7 +431,7 @@ namespace MVC_Project.Controllers
                              join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
                              join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                              from pp in personalPhotos.DefaultIfEmpty()
-                                 //where selectedIds.Contains(g.GroupID)
+                             where (string.IsNullOrEmpty(category) || ma.Category == category) // 使用 category 参数进行筛选
                              select new ResponseGroup
                              {
                                  GroupName = g.GroupName,
@@ -456,15 +451,17 @@ namespace MVC_Project.Controllers
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
 
-            var activities = myActivityData.ToList();
-            var groups = groupData.ToList();
+
+            var myActivityDataList = myActivityData.ToList();
+            var groupDataList = groupData.ToList();
 
             var viewModel = new HomePageViewModel
             {
-                Activities = myActivityData.Skip(itemsToSkip).Take(pageSize).ToList(),
-                Groups = groupData.Skip(itemsToSkip).Take(pageSize).ToList(),
+                Activities = myActivityDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
+                Groups = groupDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
                 TotalPages = totalPages,
                 CurrentPage = pageNumber
+
             };
 
             // 計算 DurationInDays 並設定給 ResponseGroup
@@ -477,6 +474,7 @@ namespace MVC_Project.Controllers
         }
 
 
+        // ?---------------------------------------------------?
 
         // GET: MyActivity
         public async Task<IActionResult> Index()

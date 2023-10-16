@@ -80,13 +80,19 @@ body {
     padding-bottom: 1rem;
 }
 
+#nav-pagi {
+    --bs-pagination-active-bg: var(--deepBlue);
+    --bs-pagination-active-border-color: var(--deepBlue);
+    --bs-pagination-color: var(--deepBlue);
+    --bs-pagination-bg: var(--white);
+    --bs-pagination-font-size: 1.2rem;
+}
 
 
-
-
-
-
-
+#nav-page {
+    padding-left: 0px;
+    background-color: transparent;
+}
 
 
 
@@ -527,3 +533,4 @@ body {
 .cktoggle_checkbox:checked + .cktoggle_label .cktoggle_circle {
     right: 10px;
 }
+
