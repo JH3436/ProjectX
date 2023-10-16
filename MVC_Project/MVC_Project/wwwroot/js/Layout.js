@@ -294,6 +294,18 @@ $(".notification-popup").on("click", ".popup-content", function () {
 });
 
 
+//SearchBar@@@@@@@@@@@@@@@@@@@@@@@@測試中@@@@@@@@@@@@@@@@@@@@@
+// 透過按Enter鍵觸發搜索
+$(".searchInputWrapper").on("keydown", "input[type='text']", function (e) {
+    if (e.key === "Enter") {
+        $("form").submit();
+    }
+});
+
+// 透過點擊按鈕觸發搜索
+$(".searchInputWrapper").on("click", "#search-icon", function () {
+    $("form").submit();
+});
 
 
 
@@ -349,6 +361,4 @@ document.getElementById("myForm").onsubmit = function (event) {
     var emailSubject = form.elements["emailSubject"].value;
     var mobileNumber = form.elements["mobileNumber"].value;
     var message = form.elements["message"].value;
-
-
 };

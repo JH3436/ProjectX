@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
+using SmartBreadcrumbs.Attributes;
 
 namespace MVC_Project.Controllers
 {
@@ -22,6 +23,7 @@ namespace MVC_Project.Controllers
 
         //根據活動ID查找要顯示的投票選項
         // GET: /VoteRecords/SelectDate/{ActivityId}
+        [Breadcrumb("官方活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
         public IActionResult SelectDate(int? id)
         {
             //接收來自點擊通知的ActivityID
