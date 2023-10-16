@@ -58,6 +58,7 @@ body {
 /* 報名按鈕 */
 .register-btn {
     width: fit-content;
+    background-color: var(--deepBlue);
     border: var(--orange) 2px solid;
     padding: 2.5px 12.5px;
     border-radius: 5px;
@@ -68,6 +69,15 @@ body {
         background-color: var(--brown);
         border: var(--orange) 2px solid;
     }
+
+.alreadyRegister-btn {
+    width: fit-content;
+    background-color: var(--black);
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+}
 
 /* 文字設計 */
 .register-btn-text-style {
@@ -81,6 +91,14 @@ body {
     .register-btn-text-style:hover {
         color: var(--white);
     }
+
+.alreadyRegister-btn-text-style {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--lightGray);
+    transition: color 0.1s;
+}
 
 /* 點擊愛心 */
 .heart-inner .heart-icon {
@@ -509,7 +527,6 @@ a.float:hover + div.label-container {
 
 .replyTextDiv {
     margin-top: 1rem;
-    ;
     border-top: 0.5px solid var(--white);
     padding-top: 1rem;
     display: none;
@@ -550,6 +567,42 @@ a.float:hover + div.label-container {
     .messageBtn-text-style:hover {
         color: var(--white);
     }
+
+
+.signBtn {
+    height: 100%;
+    width: auto;
+    display: inline-flex;
+    background-color: var(--black);
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+}
+
+    .signBtn i {
+        color: var(--white);
+    }
+
+    .signBtn:hover {
+        color: var(--white);
+    }
+
+    .signBtn:hover {
+        background-color: var(--brown);
+        border: var(--orange) 2px solid;
+    }
+
+    .signBtn p {
+        margin-right: 1rem;
+    }
+
 
 #organizerNickname {
     color: var(--deepBlue);
