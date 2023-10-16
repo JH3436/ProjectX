@@ -1,5 +1,4 @@
-﻿
-@model List<MVC_Project.Models.Group>
+﻿@model List<MVC_Project.Models.Group>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -44,26 +43,51 @@
 </head>
 
 <body>
+    @{
+        var userInfo = ViewBag.userInfo;
+        string userBase64Image = Convert.ToBase64String(userInfo[0].UserPhoto);
+    }
     <!-- 導覽列設計 -->
-    
-
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
         <div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
-               
+                @{
+                    if (ViewBag.signOrNot == false)
+                    {
+                        <form asp-action="register" method="post">
+                            <input type="hidden" name="groupId" value="@Model[0].GroupID" />
+                            <input type="hidden" name="userId" value=@userInfo[0].UserID />
+                            <button type="submit" class="register-btn">
+                                <p class="register-btn-text-style" href="#" id="registerLink">
+                                    我要報名!
+                                </p>
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                            <button  class="alreadyRegister-btn">
+                            <p class="alreadyRegister-btn-text-style" href="#" id="registerLink">
+                                    已報名!
+                                </p>
+                            </button>
+                        
+                    }
+                }
+                
             </div>
             @*<div class="col-auto">
-                <!-- 點擊收藏 -->
-                <div class="heart-inner">
-                    <div class="heart-icon">
-                        <i class="fa-regular fa-heart fa-2xl"></i>
-                    </div>
-                    <div class="hit-style">
-                        <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                    </div>
-                </div>
+            <!-- 點擊收藏 -->
+            <div class="heart-inner">
+            <div class="heart-icon">
+            <i class="fa-regular fa-heart fa-2xl"></i>
+            </div>
+            <div class="hit-style">
+            <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
+            </div>
+            </div>
             </div>*@
         </div>
     </div>
@@ -170,7 +194,7 @@
                         <td>建議自備：</td>
                         <td>無</td>
                     </tr>
-                    
+
                     <tr>
                         <td>主揪</td>
                         <td>@Model[0].Organizer</td>
@@ -247,13 +271,27 @@
                     </div>
 
                     <!-- 討論輸入區 -->
-                    <div class="commentDiv" id="discussInput" >
-                        <div class="commentBtnDiv">
-                            <p class="h3" style="display:inline-block">你還沒登入會員!</p>
-                            <button class="signBtn"  style="display:inline-block" id="signBtn">
-                                <p class="h3">登入發表討論</p>
-                            </button>
-                        </div>
+                    
+                    <div class="commentDiv" id="discussInput">
+                        <form asp-action="commentCreate" method="post">
+                            <input type="hidden" name="id" value="@Model[0].GroupID" />
+                            <input type="hidden" name="UserID" value=@userInfo[0].UserID />
+                            <div class="userCommentDiv">
+                                <img class="profile" src="data:image/png;base64,@userBase64Image" />
+                                <div class="userCommentDivRight">
+                                    <p class="h3 align-self-center">@userInfo[0].Nickname</p>
+                                    <div class="discuss-box align-self-start" name="ChatContent">
+                                        <textarea name="ChatContent" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentBtnDiv">
+                                <button class="publishBtn" type="submit">
+                                    <p class="h3">發表</p>
+                                    <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -266,13 +304,14 @@
                 {
                     foreach (var chat in chatList)
                     {
+                        
                         commentId++;
                         var chatID = chat.ChatID;
                         var toWhom = chat.ToWhom;
                         var ChatContent = chat.ChatContent;
                         var memberList = chat.User;
                         string base64Image = Convert.ToBase64String(memberList.UserPhoto);
-                        
+
                         if (toWhom == null)
                         {
                             <div class="commentDiv">
@@ -309,16 +348,29 @@
                                     }
                                 }
                                 <div class="replyTextDiv">
-                                    <p class="h3" style="display:inline-block">你還沒登入會員!</p>
-                                    <button class="signBtn" style="display:inline-block" id="signBtn">
-                                        <p class="h3">登入發表回復</p>
-                                    </button>
+                                    <form asp-action="ReplyCreate" method="post">
+                                        <input type="hidden" name="id" value="@Model[0].GroupID" />
+                                        <input type="hidden" name="ToWhom" value="@chat.ChatID" />
+                                        <input type="hidden" name="UserID" value=@userInfo[0].UserID />
+                                        <div class="userCommentDiv">
+                                            <img class="profile" src="data:image/png;base64,@userBase64Image" />
+                                            <div class="userCommentDivRight">
+                                                <p class="h3 align-self-center">@userInfo[0].Nickname</p>
+                                                <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
+                                                <button class="messageBtn" type="submit">
+                                                    <p class="messageBtn-text-style" href="#">
+                                                        留言
+                                                    </p>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         }
                     }
                 }
-               
+
             </div>
         </div>
     </div>

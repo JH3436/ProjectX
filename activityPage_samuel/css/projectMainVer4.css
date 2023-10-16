@@ -542,5 +542,33 @@ a.float:hover + div.label-container{
     color: var(--white);
   }
 
+
+  /* 登入按鈕 */
+  .signBtn {
+    width: fit-content;
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+  }
+  
+  .signBtn:hover {
+    background-color: var(--brown);
+    border: var(--orange) 2px solid;
+  }
+
+  .signBtn-text-style {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+  }
+  
+  .signBtn-text-style:hover {
+    color: var(--white);
+  }
+
   
 
