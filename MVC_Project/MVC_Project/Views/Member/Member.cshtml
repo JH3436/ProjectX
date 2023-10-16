@@ -1,4 +1,5 @@
-﻿@model MVC_Project.Models.Member
+﻿@using Microsoft.AspNetCore.Http
+@model MVC_Project.Models.Member
 
 @{
     Layout = "~/Views/Shared/_MemberLayout.cshtml";
@@ -7,7 +8,8 @@
 https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 " rel="stylesheet">
 
-<input type="hidden" id="currentUserId" value="1" />
+@* <input type="hidden" id="currentUserId" value="1" /> *@
+<input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
 
 <nav id="nav-tab-member">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
