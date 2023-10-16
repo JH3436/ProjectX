@@ -104,28 +104,35 @@
 
 <script>
 
-    function checkEditable(canEdit) {
-        if (canEdit) {
-            alert('可以編輯!');
-            // 這裡可以加入你要連結到的編輯頁面的程式碼，例如：
-            // location.href = 'your_edit_link_here';
-
-        } else {
-            alert('目前不可以編輯!');
-        }
-    }
-
-
+  
 
     $('.delete-btn').click(function () {
         var id = $(this).data('id');
-        var result = confirm("確定要刪除此紀錄嗎？");
-        if (result) {
-            $.post("/Member/DeleteLikeRecord", { likeRecordID: id }, function () {
-                // 呼叫成功後的操作，例如重新載入頁面
-                location.reload();
+
+        swal({
+            title: "確定要取消收藏嗎？",
+            
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.post("/Member/DeleteLikeRecord", { likeRecordID: id }, function () {
+                        // 呼叫成功後的操作，例如重新載入頁面
+                        swal("成功！", "已成功刪除紀錄！", "success").then(() => {
+                            location.reload();
+                        });
+                    })
+                        .fail(function () {
+                            swal("錯誤！", "刪除過程中發生錯誤！", "error");
+                        });
+                } else {
+                    location.reload();
+                }
             });
-        }
     });
 
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

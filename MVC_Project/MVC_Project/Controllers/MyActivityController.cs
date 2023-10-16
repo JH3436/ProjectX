@@ -211,22 +211,30 @@ namespace MVC_Project.Controllers
             // 對符合條件的活動建立通知
             foreach (var activity in activitiesToSendNotifications)
             {
-                var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"已經可以進行投票。";
 
-                var notification = new Notification
+                // 查找所有使用者收藏此活動的記錄
+                var usersWhoLikedActivity = _context.LikeRecord
+                    .Where(lr => lr.ActivityID == activity.ActivityID)
+                    .Select(lr => lr.UserID)
+                    .ToList();
+
+                // 檢查 MinAttendee 是否大於所有使用者的收藏數量
+                if (activity.MinAttendee.HasValue && usersWhoLikedActivity.Count >= activity.MinAttendee)
                 {
-                    UserID = userId,
-                    NotificationContent = notificationContent,
-                    IsRead = false,
-                    NotificationDate = DateTime.Now,
-                    NotificationType = "Vote",
-                    NotificationToWhichActivityID = activity.ActivityID,
-                };
+                    var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"已經可以進行投票。";
+                    var notification = new Notification
+                    {
+                        UserID = userId,
+                        NotificationContent = notificationContent,
+                        IsRead = false,
+                        NotificationDate = DateTime.Now,
+                        NotificationType = "Vote",
+                        NotificationToWhichActivityID = activity.ActivityID,
+                    };
+                    _context.Notification.Add(notification);
+                }
 
-                _context.Notification.Add(notification);
-                _context.SaveChanges();
-
-                //移除已處理通知建立之已收藏活動
+                //移除已處理通知建立之已收藏活動(如果沒有建立通知也會刪掉，因為投票時間到了)
                 var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
                 if (likeRecordEntry != null)
                 {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using SmartBreadcrumbs.Attributes;
+using System.Security.Claims;
 
 namespace MVC_Project.Controllers
 
@@ -181,14 +182,71 @@ namespace MVC_Project.Controllers
 		}
 
 		[Breadcrumb("個人揪團", FromAction = nameof(Member))]
-		public IActionResult PersonGroup()
+		public IActionResult MyGroups(int page = 1)
 		{
+			int pageSize = 6;
+			var userId = 1; // 從當前登錄的使用者取得UserId
+
+			int skip = (page - 1) * pageSize;
+
+			int totalRecords = _context.Group.Where(g => g.Organizer == userId).Count();
+			int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+
+			var organizedGroups = _context.Group
+				.Where(g => g.Organizer == userId)
+				.Select(g => new MemberUseViewModel
+				{
+                    GroupID = g.GroupID,
+                    GroupName = g.GroupName,
+					EndDate = g.EndDate
+				})
+				.Skip(skip)
+				.Take(pageSize)
+				.ToList();
+
+			ViewBag.OrganizedGroups = organizedGroups;
+			ViewBag.PageNumber = page;
+			ViewBag.TotalPages = totalPages;
 			return View();
 		}
 
 
+        [HttpPost]
+        public IActionResult DeleteGroup(int GroupID)
+        {
+            var response = new { success = false, message = string.Empty }; // 初始化時包含所有屬性
 
-		[Breadcrumb("會員中心", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
+
+            var group = _context.Group.Find(GroupID);
+            var currentUserId = 1; // 從Session或其他地方獲取當前登錄的用戶ID
+
+            if (group != null)
+            {
+                // 刪除與此活動相關的Chat紀錄
+                var chats = _context.Chat.Where(c => c.ActivityID == GroupID).ToList();
+                _context.Chat.RemoveRange(chats);
+
+                // 刪除與此活動相關的Registration紀錄
+                var registrations = _context.Registration.Where(r => r.GroupID == GroupID).ToList();
+                _context.Registration.RemoveRange(registrations);
+
+                // 刪除活動
+                _context.Group.Remove(group);
+                _context.SaveChanges();
+
+                response = new { success = true, message = "成功刪除活動" };
+            }
+            else
+            {
+                response = new { success = false, message = "找不到該活動" };
+            }
+
+            return Json(response);
+        }
+
+
+
+        [Breadcrumb("會員中心", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult Member()
         {
             var member = _context.Member.FirstOrDefault(); // 或者是其他相對應的查詢方式

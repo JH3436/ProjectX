@@ -10,6 +10,10 @@
     <link rel="icon" href="~/IMG/小黃人.png" type="image/png" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    @* SweetAlert *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+
 </head>
 
 <body>
@@ -28,10 +32,9 @@
 
                         foreach (var date in ViewBag.Dates)
                         {
-                            var isDisabled = ViewBag.UserHasVoted && date.ToString("yyyy-MM-dd") != ViewBag.LastVote;
 
                             <li class="Cli">
-                                <input type="radio" id="@date.ToString("yyyy-MM-dd")" name="VoteResult" value="@date.ToString("yyyy-MM-dd")" @(isDisabled ? "" : "disabled") @(date.ToString("yyyy-MM-dd") == ViewBag.LastVote ? "checked" : "")>
+                                <input type="radio" id="@date.ToString("yyyy-MM-dd")" name="VoteResult" value="@date.ToString("yyyy-MM-dd")">
                                 <label>@date.ToString("yyyy-MM-dd") ~ @(date.AddDays(1).ToString("yyyy-MM-dd"))</label>
                             </li>
                         }
@@ -40,12 +43,17 @@
                     {
                         <li>沒有可用的日期</li>
                     }
+
+                    <!-- 設置一個隱藏的input，用於存儲該會員在此活動的投票選項 -->
+                    <input type="hidden" id="memberVote" value="">
+
                 </div>
             </div>
             <!-- 添加按鈕容器 -->
             <div class="button-container">
                 <button class="button" type="submit" style="font-size: 20px;" value="Create">提交</button>
             </div>
+
             <div class="register-link">
                 <a asp-controller="Member" asp-action="Registration">
                     <span onclick="show_hide()">返回會員中心</span>
@@ -53,12 +61,8 @@
             </div>
         </form>
     </div>
-
-
-
 </body>
 
-<!-- bar-js -->
 <script src="~/js/SelectDate.js"></script>
 
 </html>

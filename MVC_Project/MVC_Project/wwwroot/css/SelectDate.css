@@ -64,6 +64,14 @@ form {
         color: #14213d;
     }
 
+    /* 按鈕在禁用狀態下的樣式 */
+    .button:disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+        border: 2px solid #ccc;
+    }
+
 .login {
     background-color: var(--white);
     width: 800px;

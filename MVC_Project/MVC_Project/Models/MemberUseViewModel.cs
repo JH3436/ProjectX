@@ -13,6 +13,8 @@
 
         public int RegistrationID { get; set; } // 刪除
 
+        public int? GroupID { get; set; } 
+
     };
 }
 
