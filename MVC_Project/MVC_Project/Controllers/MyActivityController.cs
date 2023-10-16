@@ -223,8 +223,8 @@ namespace MVC_Project.Controllers
                     NotificationToWhichActivityID = activity.ActivityID,
                 };
 
-                _context.Notification.Add(notification);
-                _context.SaveChanges();
+                //_context.Notification.Add(notification);
+                //_context.SaveChanges();
 
                 //移除已處理通知建立之已收藏活動
                 var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
