@@ -18,34 +18,14 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
-        //James寫的
+        //----------------James寫的-----------------
+
+        //根據活動ID查找要顯示的投票選項
         // GET: /VoteRecords/SelectDate/{ActivityId}
-        public IActionResult SelectDate(int? id, string VoteResult)
+        public IActionResult SelectDate(int? id)
         {
             //接收來自點擊通知的ActivityID
             var activityId = id;
-
-            //假設使用者目前是1
-            var userId = 1;
-
-            //查找是否已經投票
-            var userHasVoted = _context.VoteRecord
-           .Any(vr => vr.UserID == userId && vr.ActivityID == activityId);
-
-            ViewBag.UserHasVoted = userHasVoted;
-
-            // 如果用戶已經投票，獲取用戶上一次的投票選項
-            if (userHasVoted)
-            {
-                var lastVote = _context.VoteRecord
-                    .Where(vr => vr.UserID == userId && vr.ActivityID == activityId)
-                    .OrderByDescending(vr => vr.RecordID)
-                    .Select(vr => vr.VoteResult)
-                    .FirstOrDefault();
-
-                ViewBag.LastVote = lastVote?.ToString("yyyy-MM-dd");
-            }
-
 
             //根據 ActivityId 查詢相應的活動投票時間
             var voteTimes = _context.VoteTime
@@ -54,24 +34,94 @@ namespace MVC_Project.Controllers
 
             ViewBag.Dates = voteTimes.Select(vt => vt.StartDate).ToList();
 
-
-            // 寫入資料，檢查是否有選擇了投票選項
-            if (VoteResult != null)
-            {
-                var voteRecord = new VoteRecord
-                {
-                    UserID = userId, // 這裡應該設置為當前使用者的 ID
-                    ActivityID = activityId,
-                    VoteResult = DateTime.Parse(VoteResult) // 將選擇的日期轉換為 DateTime
-                };
-
-                _context.VoteRecord.Add(voteRecord);
-                _context.SaveChanges();
-            }
-
             return View();
         }
-        
+
+        //取得使用者的投票紀錄
+        [HttpGet]
+        public IActionResult GetMemberVote(int? activityId)
+        {
+            //假設會員是1
+            var userId = 1;
+
+            //查找是否已經投票(回傳True||False)
+            var userHasVoted = _context.VoteRecord
+           .Any(vr => vr.UserID == userId && vr.ActivityID == activityId);
+
+            // 將lastVote初始化為null
+            DateTime? lastVote = null;
+
+            // 如果用戶已經投票，獲取用戶上一次的投票選項
+            if (userHasVoted)
+            {
+                lastVote = _context.VoteRecord
+                   .Where(vr => vr.UserID == userId && vr.ActivityID == activityId)
+                   .OrderByDescending(vr => vr.RecordID)
+                   .Select(vr => vr.VoteResult)
+                   .FirstOrDefault();
+            }
+
+            // 將DateTime轉換為string
+            string lastVoteStr = lastVote?.ToString("yyyy-MM-dd"); 
+
+            return Json(lastVoteStr);
+
+        }
+
+        //儲存||更新投票選項
+        [HttpPost]
+        public IActionResult SaveVote(int activityId, string voteResult)
+        {
+            // 假設會員是1
+            var userId = 1;
+
+            // 檢查是否已經投票
+            var userHasVoted = _context.VoteRecord
+                .Any(vr => vr.UserID == userId && vr.ActivityID == activityId);
+
+            if (userHasVoted)
+            {
+                // 如果使用者已經投票，更新現有的投票選項
+                var existingVote = _context.VoteRecord
+                    .Where(vr => vr.UserID == userId && vr.ActivityID == activityId)
+                    .FirstOrDefault();
+
+                existingVote.VoteResult = DateTime.Parse(voteResult);
+            }
+            else
+            {
+                // 如果使用者尚未投票，建立新的投票紀錄
+                var newVoteRecord = new VoteRecord
+                {
+                    UserID = userId,
+                    ActivityID = activityId,
+                    VoteResult = DateTime.Parse(voteResult)
+                };
+
+                _context.VoteRecord.Add(newVoteRecord);
+            }
+
+            _context.SaveChanges();
+
+            //再次查找投票紀錄
+            var updatedVote = _context.VoteRecord
+                 .Where(vr => vr.UserID == userId && vr.ActivityID == activityId)
+                   .OrderByDescending(vr => vr.RecordID)
+                   .Select(vr => vr.VoteResult)
+                   .FirstOrDefault();
+
+            // 將DateTime轉換為string
+            string UpdatedVoteStr = updatedVote?.ToString("yyyy-MM-dd");
+
+
+            return Json(UpdatedVoteStr);
+        }
+
+
+
+
+        //----------------James寫的-----------------
+
 
 
 
@@ -268,14 +318,14 @@ namespace MVC_Project.Controllers
             {
                 _context.VoteRecord.Remove(voteRecord);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool VoteRecordExists(int id)
         {
-          return (_context.VoteRecord?.Any(e => e.RecordID == id)).GetValueOrDefault();
+            return (_context.VoteRecord?.Any(e => e.RecordID == id)).GetValueOrDefault();
         }
     }
 }
