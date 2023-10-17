@@ -495,6 +495,7 @@ namespace MVC_Project.Controllers
                                   where m.Category == category
                                   select new ResponseActivity
                                   {
+                                      ActivityID = m.ActivityID,
                                       ActivityName = m.ActivityName,
                                       Category = m.Category,
                                       SuggestedAmount = m.SuggestedAmount,
@@ -531,7 +532,8 @@ namespace MVC_Project.Controllers
                                  join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
                                  select new ResponseActivity
                                  {
-                                      ActivityName = m.ActivityName,
+                                     ActivityID = m.ActivityID,
+                                     ActivityName = m.ActivityName,
                                       Category = m.Category,
                                       SuggestedAmount = m.SuggestedAmount,
                                       ActivityContent = m.ActivityContent,

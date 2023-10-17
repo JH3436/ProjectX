@@ -321,6 +321,15 @@ body {
     right: 13px;
 }
 
+.card__liked-text {
+    color: var(--heart);
+    font-size: 1.3rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5px;
+    right: 13px;
+}
+
 .card__category {
     font-size: 1.5rem;
     letter-spacing: 2px;
