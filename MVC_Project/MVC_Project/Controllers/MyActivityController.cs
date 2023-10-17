@@ -425,7 +425,7 @@ namespace MVC_Project.Controllers
 
         //搜尋框@@@@@@@@@@@@@@@@@@@@@測試@@@@@@@@@@@@@@@@@@@@@@@
         //Note: with where()||where(), you can find two columns with your search Search string
-        public async Task<IActionResult> Searchfunction(string searchString)
+        public IActionResult Searchfunction(string searchString)
         {
             if (_context.MyActivity == null)
             {
@@ -440,7 +440,7 @@ namespace MVC_Project.Controllers
                 activities = activities.Where(m => m.ActivityName!.Contains(searchString));
             }
 
-            return View(await activities.ToListAsync());
+            return Json(activities);
         }
 
 

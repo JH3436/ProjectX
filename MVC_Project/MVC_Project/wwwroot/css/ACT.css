@@ -96,8 +96,6 @@ body {
 
 
 
-
-
 /* 活動導覽設計 */
 .activity-container {
     padding-left: 10%;
@@ -125,7 +123,7 @@ body {
 /* 外面多包一個div讓方塊們保持置中 */
 .card-div {
     margin-top: 5%;
-    display: flex;
+   /* display: flex;*/
     justify-content: center;
     align-items: center;
 }
@@ -157,7 +155,7 @@ body {
     z-index: 1;
 }
 
-.card--1 .card__img,
+/*.card--1 .card__img,
 .card--1 .card__img--hover {
     background-image: url('https://picsum.photos/1260/750?random=1');
 }
@@ -201,7 +199,7 @@ body {
 .card--9 .card__img--hover {
     background-image: url('https://picsum.photos/1260/750?random=9');
 }
-
+*/
 .heart-icon:hover {
     cursor: pointer;
 }
@@ -333,6 +331,24 @@ body {
 .card:hover .card__info-hover {
     opacity: 1;
     z-index: 10;
+}
+
+.card__ExpectedMonth {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.card__VoteDate-text {
+    position: absolute;
+    bottom: 28%;
+    right: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--black);
+    z-index: 1111;
 }
 
 .read-more-button {
