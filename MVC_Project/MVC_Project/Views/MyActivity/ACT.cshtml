@@ -155,24 +155,40 @@
     <div class="container">
         <nav aria-label="Page navigation example" id="nav-page">
             <ul class="pagination justify-content-center" id="nav-pagi">
-                <li class="page-item @(ViewBag.PageNumber == 1 ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber - 1 })" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                @if (ViewBag.TotalPages > 1)
                 {
-                    <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
-                        <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = i })">@i</a>
+                    <li class="page-item @(ViewBag.PageNumber == 1 ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber - 1 })" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = i })">@i</a>
+                        </li>
+                    }
+
+                    <li class="page-item @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber + 1 })" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
                     </li>
                 }
-
-                <li class="page-item @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber + 1 })" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
+                else
+                {
+                    <!-- 如果只有一页，禁用前后按钮 -->
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&laquo;</span>
+                    </li>
+                    <li class="page-item active">
+                        <span class="page-link">1</span>
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link" aria-hidden="true">&raquo;</span>
+                    </li>
+                }
             </ul>
         </nav>
     </div>
