@@ -45,19 +45,29 @@ namespace MVC_Project.Controllers
             return View(@group);
         }
 
-		// GET: Groups/Create
-		[Breadcrumb("個人揪團", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
-		public IActionResult Create()
+        // GET: Groups/Create
+        [Breadcrumb("個人揪團", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
+        public async Task<IActionResult> Create(int? id)
         {
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID");
             ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID");
-            return View();
+
+            if (id.HasValue)
+            {
+                var existingGroup = await _context.Group.FindAsync(id.Value);
+                if (existingGroup != null)
+                {
+                    return View(existingGroup);
+                }
+            }
+
+            return View(new Group());
         }
 
-		// POST: Groups/Create
-		// To protect from overposting attacks, enable the specific properties you want to bind to.
-		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
+        // POST: Groups/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
         {
@@ -126,7 +136,7 @@ namespace MVC_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group)
+        public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group, List<IFormFile> imageDataFiles)
         {
             if (id != @group.GroupID)
             {
@@ -138,6 +148,28 @@ namespace MVC_Project.Controllers
                 try
                 {
                     _context.Update(@group);
+
+                    // 上傳多張照片
+                    if (imageDataFiles != null && imageDataFiles.Count > 0)
+                    {
+                        foreach (var imageDataFile in imageDataFiles)
+                        {
+                            if (imageDataFile != null && imageDataFile.Length > 0)
+                            {
+                                using (var stream = new MemoryStream())
+                                {
+                                    await imageDataFile.CopyToAsync(stream);
+                                    var newPhoto = new PersonalPhoto
+                                    {
+                                        GroupID = @group.GroupID,
+                                        PhotoData = stream.ToArray()
+                                    };
+                                    _context.PersonalPhoto.Add(newPhoto);
+                                }
+                            }
+                        }
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -154,7 +186,7 @@ namespace MVC_Project.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-            //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+            // ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
             return View(@group);
         }
 

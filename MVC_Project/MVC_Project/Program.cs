@@ -86,6 +86,6 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=myactivity}/{action=homepage}/{id?}/{account?}");
+    pattern: "{controller=Member}/{action=MyGroups}/{id?}/{account?}");
 
 app.Run();
