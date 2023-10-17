@@ -102,3 +102,13 @@ $(document).ready(function () {
 });
 
 
+//會員編輯用
+//$(document).ready(function () {
+//$('.edit-btn').click(function () {
+//    var groupId = $(this).data('id');
+//    window.location.href = '/Groups/Create?groupId=' + groupId;
+//});
+//});
+
+
+

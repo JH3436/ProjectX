@@ -1,7 +1,7 @@
 ﻿@model MVC_Project.Models.Group
 
 @{
-	ViewData["Title"] = "Create";
+	ViewData["Title"] = (Model.GroupID == 0) ? "Create" : "Update";
 }
 
 <!-- css連結 -->
@@ -83,7 +83,7 @@
 				<div class="row" style="margin-right:8px">
 					<div class="col-md-12 text-center BtnMove">
 						<div class="form-group">
-							<input type="submit" value="提交" class="btn submit fw-bold" />
+							<input type="submit" value="@((Model.GroupID == 0) ? "提交" : "更新")" class="btn submit fw-bold" />
 						</div>
 					</div>
 				</div>
