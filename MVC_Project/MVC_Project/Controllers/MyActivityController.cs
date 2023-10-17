@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
 using SmartBreadcrumbs.Attributes;
+using static NuGet.Packaging.PackagingConstants;
 
 namespace MVC_Project.Controllers
 {
@@ -472,6 +475,7 @@ namespace MVC_Project.Controllers
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
 
+
             var myActivityData = (from m in _context.MyActivity
                                   join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
                                   where (string.IsNullOrEmpty(category) || m.Category == category) // 使用 category 参数进行筛选
@@ -507,12 +511,11 @@ namespace MVC_Project.Controllers
                                  PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
                              });
 
+
             int itemsToSkip = (pageNumber - 1) * pageSize;
 
             int totalItems = _context.MyActivity.Count() + _context.Group.Count();
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-
-
 
             var myActivityDataList = myActivityData.ToList();
             var groupDataList = groupData.ToList();
@@ -521,10 +524,9 @@ namespace MVC_Project.Controllers
             {
                 Activities = myActivityDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
                 Groups = groupDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
-                TotalPages = totalPages,
-                CurrentPage = pageNumber
-
-            };
+                //TotalPages = totalPages,
+                //CurrentPage = pageNumber
+        };
 
             // 計算 DurationInDays 並設定給 ResponseGroup
             foreach (var group in viewModel.Groups)
@@ -532,9 +534,10 @@ namespace MVC_Project.Controllers
                 TimeSpan? timeSpan = group.EndDate - group.StartDate;
                 group.DurationInDays = (int)timeSpan.Value.TotalDays;
             }
+            ViewBag.PageNumber = page;
+            ViewBag.TotalPages = totalPages;
             return View(viewModel);
         }
-
 
         // ?---------------------------------------------------?
 

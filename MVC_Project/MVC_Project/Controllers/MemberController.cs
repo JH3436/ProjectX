@@ -115,9 +115,15 @@ namespace MVC_Project.Controllers
           
 
             int pageSize = 6; // 每頁顯示的項目數
-			var userId = 1; // 從當前登錄的使用者取得UserId
+			//var userId = 1; // 從當前登錄的使用者取得UserId
 
-			var currentDate = DateTime.Now; // 取得當前日期
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+            var currentDate = DateTime.Now; // 取得當前日期
 
 			// 根據當前頁數和每頁顯示的項目數計算跳過的項目數
 			int skip = (page - 1) * pageSize;
@@ -196,9 +202,15 @@ namespace MVC_Project.Controllers
 		public IActionResult MyGroups(int page = 1)
 		{
 			int pageSize = 6;
-			var userId = 1; // 從當前登錄的使用者取得UserId
+			//var userId = 1; // 從當前登錄的使用者取得UserId
 
-			int skip = (page - 1) * pageSize;
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+            int skip = (page - 1) * pageSize;
 
 			int totalRecords = _context.Group.Where(g => g.Organizer == userId).Count();
 			int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
@@ -229,7 +241,7 @@ namespace MVC_Project.Controllers
 
 
             var group = _context.Group.Find(GroupID);
-            var currentUserId = 1; // 從Session或其他地方獲取當前登錄的用戶ID
+           /* var currentUserId = 1;*/ // 從Session或其他地方獲取當前登錄的用戶ID
 
             if (group != null)
             {
@@ -240,6 +252,11 @@ namespace MVC_Project.Controllers
                 // 刪除與此活動相關的Registration紀錄
                 var registrations = _context.Registration.Where(r => r.GroupID == GroupID).ToList();
                 _context.Registration.RemoveRange(registrations);
+
+
+				//刪除相關的照片
+                var PersonalPhoto = _context.PersonalPhoto.Where(r => r.GroupID == GroupID).ToList();
+                _context.PersonalPhoto.RemoveRange(PersonalPhoto);
 
                 // 刪除活動
                 _context.Group.Remove(group);
@@ -260,7 +277,15 @@ namespace MVC_Project.Controllers
         [Breadcrumb("會員中心", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult Member()
         {
-            var member = _context.Member.FirstOrDefault(); // 或者是其他相對應的查詢方式
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+
+            var member = _context.Member.FirstOrDefault(m => m.UserID == userId); // 或者是其他相對應的查詢方式
+
             if (member == null)
             {
                 // 你可以選擇返回一個錯誤視圖或其他方式來處理這種情況
@@ -274,7 +299,15 @@ namespace MVC_Project.Controllers
         [HttpPost]
         public IActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            var memberId = 1/* 取得已登入會員ID的方式 */;
+            //var memberId = 1/* 取得已登入會員ID的方式 */;
+
+            var userIdString = HttpContext.Session.GetString("UserId");
+            if (!int.TryParse(userIdString, out var memberId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+
             var member = _context.Member.Find(memberId);
             if (member == null)
             {
@@ -305,7 +338,16 @@ namespace MVC_Project.Controllers
         [HttpPost]
         public IActionResult UpdateProfile(string Nickname, string Intro)
         {
-            int userId = 1;  // 此處應根據當前登錄的用戶設置
+            //int userId = 1;  // 此處應根據當前登錄的用戶設置
+
+            var userIdString = HttpContext.Session.GetString("UserId");
+
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                TempData["ErrorMessage"] = "未登錄或Session已過期";
+                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+            }
+
             var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
             if (member != null)
             {
@@ -350,6 +392,7 @@ namespace MVC_Project.Controllers
         [HttpGet]
         public IActionResult GetOrganizerInfo(int userId)
         {
+
             var member = _context.Member.FirstOrDefault(m => m.UserID == userId);
             if (member != null)
             {

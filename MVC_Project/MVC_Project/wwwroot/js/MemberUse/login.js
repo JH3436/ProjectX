@@ -6,13 +6,13 @@
 
 
 //     if (login.style.display === "block") {
-//         login.style.display = "none";   
-//         signup.style.display = "block"; 
+//         login.style.display = "none";
+//         signup.style.display = "block";
 //         signup.style.visibility = "visible";
 
 //     } else {
-//         login.style.display = "block";    
-//         signup.style.display = "none";    
+//         login.style.display = "block";
+//         signup.style.display = "none";
 
 //     }
 // }
@@ -20,6 +20,7 @@
 
 //BUG修正
 // 獲取註冊鏈接元素
+
 const registerLink = document.querySelector('.register-link');
 const loginLink = document.querySelector('.login-link'); // 添加這一行來獲取登入鏈接
 
