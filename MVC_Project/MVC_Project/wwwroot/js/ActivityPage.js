@@ -70,6 +70,13 @@ $(document).ready(function() {
   myModal.show();
 });
 
+//聊天室登入按鈕
+$(document).ready(function () {
+    $(document).on('click', '#signBtn', function () {
+        window.location.href = '/member/member';
+    });
+});
+
 // 聊天室
 $(document).ready(function () {
     $("#discussBtn").click(function () {
@@ -186,6 +193,8 @@ heartIcons.forEach(function (heartIcon) {
         }
     });
 });
+
+/*報名API*/
 
 
 

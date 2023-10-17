@@ -22,22 +22,7 @@ $(document).ready(function () {
 
 
 
-// 找到 textarea 元素
-var textarea = document.getElementById('introduceyrself');
 
-// 設定字數限制
-var maxLength = 50; // 這裡設置為你想要的字數限制
-
-// 綁定 input 事件處理程序
-textarea.addEventListener('input', function () {
-    var currentLength = textarea.value.length;
-    if (currentLength > maxLength) {
-        // 如果超過字數限制，截斷文本
-        textarea.value = textarea.value.substring(0, maxLength);
-        // 或者顯示錯誤消息
-        // alert('字數超過限制！');
-    }
-});
 
 
 // Start upload preview image

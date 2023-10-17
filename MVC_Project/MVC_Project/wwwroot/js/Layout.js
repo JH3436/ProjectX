@@ -283,6 +283,10 @@ $(".notification-popup").on("click", ".popup-content", function () {
         else if (notificationType === "Reply") {
             window.location.href = `/grouppage/grouppage/${notificationToActivityID}`; // 導向活動頁面
         }
+        else if (notificationType === "Cancelled") {
+            window.location.href = "/Member/LikeRecord/"  //導向會員中心>已收藏活動
+        }
+
         else {
             //應該沒有其他判斷了吧?
         }

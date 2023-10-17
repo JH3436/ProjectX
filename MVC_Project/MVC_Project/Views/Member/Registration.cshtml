@@ -77,13 +77,27 @@
 
     $('.delete-btn').click(function () {
         var id = $(this).data('id');
-        var result = confirm("確定要刪除此紀錄嗎？");
-        if (result) {
-            $.post("/Member/DeleteRegistration", { RegistrationID: id }, function () {
-                // 呼叫成功後的操作，例如重新載入頁面
-                location.reload();
+
+        swal({
+            title: "確定要取消報名嗎？",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.post("/Member/DeleteRegistration", { RegistrationID: id }, function () {
+                        swal("成功！", "已成功刪除紀錄！", "success").then(() => {
+                            location.reload();
+                        });
+                    });
+                } else {
+                    location.reload();
+                }
             });
-        }
     });
 
+
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

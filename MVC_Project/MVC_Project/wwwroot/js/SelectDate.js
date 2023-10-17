@@ -24,6 +24,9 @@ $(document).ready(function () {
 
                 // 禁用"提交"按鈕
                 $('button[type="submit"]').prop('disabled', true);
+            } else {
+                // 禁用"提交"按鈕
+                $('button[type="submit"]').prop('disabled', true);
             }
         }
     });
@@ -92,6 +95,12 @@ $('button[type="submit"]').click(function (e) {
         });
     }
     // 如果沒有選擇投票選項，你可以顯示一個錯誤消息或者執行其他操作
+
+
+
+
+
+
 });
 
 

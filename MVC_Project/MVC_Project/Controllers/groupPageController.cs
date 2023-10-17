@@ -78,6 +78,67 @@ namespace MVC_Project.Controllers
             return View(temp);
         }
 
+        public IActionResult groupPageAccount(int id, int account)
+        {
+            account = 1;
+            var data = from g in _context.Group
+                       where g.GroupID == id
+                       select new Group
+                       {
+                           GroupID = g.GroupID,
+                           GroupName = g.GroupName,
+                           GroupCategory = g.GroupCategory,
+                           GroupContent = g.GroupContent,
+                           MinAttendee = g.MinAttendee,
+                           MaxAttendee = g.MaxAttendee,
+                           StartDate = g.StartDate,
+                           EndDate = g.EndDate,
+                           Organizer = g.Organizer,
+                           Chat = (_context.Chat.Count(chat => chat.ActivityID == g.GroupID) > 0) ?
+                                                        _context.Chat.Where(chat => chat.ActivityID == g.GroupID)
+                                                        .Include(chat => chat.User)  // Include Member data related to Chat
+                                                        .ToList() : new List<Chat>(),
+                           OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID),
+                           PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(),
+                           Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList()
+                       };
+
+            //-----麵包屑----- 
+
+            var childNode1 = new MvcBreadcrumbNode("ACT", "MyActivity", "所有活動");
+
+            var childNode2 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.Category")
+            {
+                OverwriteTitleOnExactMatch = true,
+                Parent = childNode1
+            };
+
+            var childNode3 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.ActivityName")
+            {
+                OverwriteTitleOnExactMatch = true,
+                Parent = childNode2
+            };
+
+            ViewData["BreadcrumbNode"] = childNode3;
+
+            //-----麵包屑結束----- 
+            var userInfo = from m in _context.Member
+                           where m.UserID == account
+                           select m;
+            ViewBag.userInfo = userInfo.ToList();
+
+            var signOrNot = _context.Registration
+                .Where(lr => lr.ParticipantID == account && lr.GroupID == id)
+                .Select(lr => lr.RegistrationID)
+                .ToList();
+            ViewBag.signOrNot = (signOrNot.Count() == 0 ? false : true);
+
+            var temp = data.ToList();
+
+            return View(temp);
+        }
+
+
 
 
         [HttpGet]
@@ -93,7 +154,6 @@ namespace MVC_Project.Controllers
         {
             int id = int.Parse(Request.Form["id"]);
             chat.ActivityID = id;
-            chat.UserID = 1;
             chat.ToWhom = null;
             chat.ChatTime = DateTime.Now;
 
@@ -116,7 +176,6 @@ namespace MVC_Project.Controllers
         {
             int id = int.Parse(Request.Form["id"]);
             chat.ActivityID = id;
-            chat.UserID = 1;
             chat.ChatTime = DateTime.Now;
 
             _context.Add(chat);
@@ -124,22 +183,23 @@ namespace MVC_Project.Controllers
 
             return RedirectToAction("groupPage", new { id });
         }
-        
-        [HttpGet]
-        [Route("api/GetGroupById/{id}")]
-        public IActionResult GetGroupById(int id)
+       
+        [HttpPost]
+        public IActionResult register(int groupId, int userId )
         {
-            var temp = from m in _context.Member
-                        select new Member
-                        {
-                            UserID = m.UserID,
-                            Nickname = m.Nickname,
-                            Account = m.Account
-                        };
+            int id = groupId;
+            int account = userId;
+            var newRegistration = new Registration
+            {
+                ParticipantID = userId,
+                GroupID = groupId
+            };
 
-            return Json(temp); // 直接返回对象，ASP.NET Core 会自动序列化为 JSON
+            _context.Registration.Add(newRegistration);
+            _context.SaveChanges();
+
+            // 返回成功的回應，例如JSON對象
+            return RedirectToAction("groupPageAccount", new { id, account });
         }
-
-
     }
 }
