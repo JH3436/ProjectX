@@ -24,7 +24,7 @@ SET NotificationToWhichActivityID = 1
 UPDATE Notification
 SET NotificationType = 'Vote';
 
-delete from dbo.Notification where NotificationID>1002;
+delete from dbo.Member
 
 delete from dbo.voterecord
 
@@ -39,10 +39,10 @@ INSERT INTO [dbo].[LikeRecord]
            ([UserID]
            ,[ActivityID])
      VALUES
-           (2, 1),
-		   (3, 1)
+           (2, 1)
+		   
 
 UPDATE dbo.LikeRecord
-SET ActivityID=2 where LikeRecordID=2003;
+SET UserID=1004 where LikeRecordID=2010;
 
-delete from LikeRecord where LikeRecordID=2007
+delete from LikeRecord 
