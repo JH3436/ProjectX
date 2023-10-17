@@ -388,11 +388,30 @@ body {
     opacity: 0;
 }
 
+    /*未登入狀態下的愛心icon*/
+    .card__info-hover .disabled-icon {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+/*未登入點擊提醒*/
+.custom-title {
+    visibility: hidden;
+    display: block;
+    margin-top: 10px;
+    opacity: 0.8;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.heart-icon:hover +.custom-title {
+    visibility: visible;
+}
+
 .heart-icon.solid {
     opacity: 1;
     visibility: visible;
 }
-
 
 .card__img--hover {
     transition: 0.2s all ease-out;

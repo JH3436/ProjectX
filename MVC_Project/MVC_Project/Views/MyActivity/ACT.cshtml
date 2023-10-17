@@ -14,10 +14,10 @@
     <script src="https://kit.fontawesome.com/2bfbd4ef35.js" crossorigin="anonymous"></script>
     <!-- 引入 Bootstrap 的 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+     <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- css連結，確保在Bootsrap之下 -->
     <link rel="stylesheet" href="~/css/ACT.css" />
-    <!-- 引入 Bootstrap 的 JavaScript 和相依的 Popper.js 和 jQuery -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- moving letter特效引入 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <!-- jquery -->
@@ -40,7 +40,8 @@
     <section class="actselect">
         <div class="centered-container">
             <div class="topnav">
-                @foreach (var activity in Model.Activities){
+                @foreach (var activity in Model.Activities)
+                {
                 }
                 <a asp-area="" asp-controller="MyActivity" asp-action="ACT">ALL</a>
                 <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=登山">登山</a>
@@ -60,6 +61,29 @@
                 </div>
             </div>
         </div>
+
+       @* <script>
+            // 使用jQuery來簡化AJAX請求
+            $('.cktoggle_checkbox').change(function () {
+                var isChecked = $(this).prop('checked');
+                var category = isChecked ? '' : 'yourCategory'; // 根據checkbox的狀態設定篩選條件，這裡假設您有一個特定的category需要篩選
+
+                // 發送AJAX請求
+                $.ajax({
+                    url: '/MyActi/ACT',
+                    type: 'GET',
+                    data: {
+                        category: category
+                    },
+                    success: function (result) {
+                        // 更新顯示資料的部分，您可以使用JavaScript來操作DOM
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            });
+        </script>*@
 
     </section>
     
@@ -128,13 +152,31 @@
 
     <br><br>
     <!-- 分頁 -->
-     <div class="pagination">
-      @for (int i = 1; i <= Model.TotalPages; i++)
-        {
-          <a href="?page=@i" @(i == Model.CurrentPage ? "class=active" : "")>@i</a>
-         }
-                  
-	</div>
+    <div class="container">
+        <nav aria-label="Page navigation example" id="nav-page">
+            <ul class="pagination justify-content-center" id="nav-pagi">
+                <li class="page-item @(ViewBag.PageNumber == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber - 1 })" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = i })">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(ViewBag.PageNumber == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("ACT", "MyActivity", new { page = ViewBag.PageNumber + 1 })" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 
    
 

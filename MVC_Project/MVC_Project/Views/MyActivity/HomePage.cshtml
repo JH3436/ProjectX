@@ -1,5 +1,9 @@
 ﻿@model MVC_Project.Models.HomePageViewModel
 
+@* 查找目前使用者 *@
+@using Microsoft.AspNetCore.Http
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -131,16 +135,26 @@
                 {
                     <article class="card">
                         <div class="card__info-hover">
-                            @* 判斷此使用者是否有收藏載入到首頁的活動 *@
-                            @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                            @* 先判斷有沒有登入 *@
+                            @if (Context.Session.GetString("UserId") != null)
                             {
-                                <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
-                                   data-activityid="@activity.ActivityID"></i>
+                                @* 判斷此使用者是否有收藏載入到首頁的活動 *@
+                                @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                                {
+                                    <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
+                                       data-activityid="@activity.ActivityID"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-heart fa-2xl heart-icon"
+                                       data-activityid="@activity.ActivityID"></i>
+                                }
                             }
                             else
                             {
-                                <i class="fa-regular fa-heart fa-2xl heart-icon"
+                                <i class="fa-regular fa-heart fa-2xl heart-icon disabled-icon"
                                    data-activityid="@activity.ActivityID"></i>
+                                <span class="custom-title">登入後即可收藏</span>
                             }
                         </div>
 
@@ -153,11 +167,16 @@
                         <div class="card__info">
                             <span class="card__category">@activity.Category</span>
                             <h3 class="card__title">@activity.ActivityName</h3>
-                            @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                            @if (Context.Session.GetString("UserId") != null)
                             {
-                                <span class="card__liked-text">已收藏</span>
+                                @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
+                                {
+                                    <span class="card__liked-text">已收藏</span>
+                                }
+                                else { }
                             }
-                            else {}
+                            else
+                            {}
                             <span class="card__ExpectedMonth">@activity.ExpectedDepartureMonth?.ToString("yyyy-MMM")活動</span>
                         </div>
                     </article>
