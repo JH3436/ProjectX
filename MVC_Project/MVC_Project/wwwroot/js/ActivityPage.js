@@ -56,12 +56,12 @@ $('#myCarousel').on('slide.bs.carousel', function (e) {
 $('#myCarousel .carousel-item img').on('click', function (e) {
     var src = $(e.target).attr('data-remote');
     if (src) $(this).ekkoLightbox();
-    console.log("$('#myCarousel .carousel-item img').on('click'")
 });
 
 
 $(document).on('toggle.bs.modal', '.modal fade', function () {
     $('.modal:visible').length && $(document.body).addClass('modal-open');
+    getChatData();
 });
 
 
@@ -107,22 +107,22 @@ $(document).ready(function () {
             var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
         }
         discussUpdate();
-        getChatData();
     }
 });
 
 
 $(document).on("click", ".messageBtn", function () {
-    var temp = $(this).parent().children("#replyTextArea").val();
+    var chatId = $(this).closest(".replyTextDiv").find("#replyTextDivId").val();
+
+    var temp = $(this).parent().children("textarea[name='ChatContent']").val();
     if (temp == "") {
         alert("請輸入文字");
     } else {
         var sure = confirm("確定提交留言\n\n" + temp);
     }
-
-    getChatData();
+    replyUpdate(chatId);
+    console.log(chatId);
 });
-
 
 
 // 在 #replyTextArea 上監聽 keydown 事件
@@ -132,6 +132,7 @@ $(document).on("keydown", "#replyTextArea", function (event) {
         $(this).siblings(".messageBtn").click();  // 模擬點擊 .messageBtn
     }
 });
+
 
 
 /*收藏API*/
@@ -216,6 +217,7 @@ function getChatData() {
         dataType: 'json',
         success: function (data) {
             updateChatInModal(data);
+            console.log("updateChatInModal(data);");
             // Do something with the data, e.g., update the UI
         },
         error: function (error) {
@@ -291,7 +293,7 @@ function updateChatInModal(chatList) {
                     var replyHtml = `
                     <div class="replyDiv">
                         <div class="userCommentDiv">
-                            ${userPhoto}
+                            <img src="data:image/png;base64,${reply.UserPhoto}" class="profile" />
                             <div class="userCommentDivRight">
                                 <p class="h3 align-self-center">${reply.Nickname}</p>
                                 <div class="comment-box align-self-start">${reply.ChatContent}</div>
@@ -303,11 +305,12 @@ function updateChatInModal(chatList) {
                 }
             });
             var replyTextDiv = `
-                <div class="replyTextDiv">
+                <div class="replyTextDiv" id="replyTextDiv${chatId}">
+                    <input type="hidden" id="replyTextDivId" value="${chatId}" />
                     <div class="userCommentDiv">
                         <img class="profile" src="" />
                         <div class="userCommentDivRight">
-                            <p class="h3 align-self-center" id="userInfoNickname" ></p>
+                            <p class="h3 align-self-center" id="userInfoNickname"></p>
                             <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
                             <button class="messageBtn" type="submit">
                                 <p class="messageBtn-text-style" href="#">
@@ -330,8 +333,8 @@ function updateChatInModal(chatList) {
 
 function getUserInfo() {
     let currentUserId = $('#currentUserId').val();
-    console.log(currentUserId);
 
+    console.log(`/api/getUserInfo/${currentUserId}`);
     $.ajax({
         url: `/api/getUserInfo/${currentUserId}`,
         type: 'GET',
@@ -350,36 +353,6 @@ function getUserInfo() {
 }
 
 
-//上傳自訂函式
-function discussUpdate() {
-    let discussContent = $('#discussTextArea').val(); 
-    let currentUserId = $('#currentUserId').val();
-
-    let updateData = {
-        ActivityID : 1,
-        UserID: currentUserId,
-        ChatContent : discussContent,
-        ToWhom : null,
-        // 可以添加其他需要上传的数据字段
-    };
-
-    // 发起AJAX请求
-    $.ajax({
-        url: '/api/discussUpdate', // 后端API的URL
-        type: 'POST',
-        dataType: 'json',
-        data: JSON.stringify(dataToSend), // 将数据转为JSON字符串
-        contentType: 'application/json', // 设置Content-Type为JSON
-        success: function (response) {
-            console.log('Data uploaded successfully:', response);
-            // 在这里处理成功响应
-        },
-        error: function (error) {
-            console.error('Error uploading data:', error);
-            // 在这里处理错误响应
-        }
-    });
-}
 
 
 
@@ -387,10 +360,11 @@ function discussUpdate() {
 function discussUpdate() {
     let discussContent = $('#discussTextArea').val();
     const id = getIdFromUrl();  // 取得 id
+    let currentUserId = $('#currentUserId').val();
 
     let updateData = {
         ActivityID: id,
-        UserID: 1,
+        UserID: currentUserId,
         ChatContent: discussContent,
         ToWhom: null,
         // 可以添加其他需要上传的数据字段
@@ -405,12 +379,46 @@ function discussUpdate() {
         contentType: 'application/json', // 设置Content-Type为JSON
         success: function (response) {
             console.log('数据成功上传:', response);
+            getChatData();
             // 在这里处理成功响应
         },
         error: function (error) {
             console.error('上传数据时出错:', error);
             console.log(JSON.stringify(updateData));
             // 在这里处理错误响应
+        }
+    });
+}
+
+//留言上傳
+function replyUpdate(chatId) {
+    const id = getIdFromUrl();  // 取得 id
+    const replyContent = $(`#replyTextDiv${chatId}`).find('textarea[name="ChatContent"]').val();  // 根據 chatId 取得回覆內容
+    const currentUserId = $('#currentUserId').val();
+
+    let replyData = {
+        ActivityID: id,
+        UserID: currentUserId,
+        ChatContent: replyContent,
+        ToWhom: chatId,  // 設定回覆的對象為原始留言的 chatId
+    };
+
+    // 發起 AJAX 請求
+    $.ajax({
+        url: '/api/replyUpdate',  // 後端 API 的 URL
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(replyData),  // 將資料轉為 JSON 字串
+        contentType: 'application/json',  // 設定 Content-Type 為 JSON
+        success: function (response) {
+            console.log('回覆成功:', response);
+            getChatData();  // 更新聊天資料
+            // 在這裡處理成功回應
+        },
+        error: function (error) {
+            console.error('回覆時發生錯誤:', error);
+            console.log(JSON.stringify(replyData));
+            // 在這裡處理錯誤回應
         }
     });
 }

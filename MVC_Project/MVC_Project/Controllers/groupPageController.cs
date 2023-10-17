@@ -165,7 +165,6 @@ namespace MVC_Project.Controllers
         [HttpGet("api/getUserInfo/{currentUserId}")]
         public IActionResult getUserInfo(int currentUserId)
         {
-            currentUserId = 1;
             var userInfo = from m in _context.Member
                            where m.UserID == currentUserId
                            select m;
@@ -182,6 +181,19 @@ namespace MVC_Project.Controllers
             chat.ChatTime = DateTime.Now;
             _context.Add(chat);
             await _context.SaveChangesAsync();
+
+            return Ok(chat);
+        }
+
+        //留言上傳API
+        [HttpPost]
+        [Route("api/replyUpdate")]
+        public async Task<IActionResult> replyUpdate([FromBody] Chat chat)
+        {
+            chat.ChatTime = DateTime.Now;
+            _context.Add(chat);
+            await _context.SaveChangesAsync();
+
             return Ok(chat);
         }
 
@@ -196,7 +208,7 @@ namespace MVC_Project.Controllers
             chat.ChatTime = DateTime.Now;
 
             _context.Add(chat);
-                                                                                                                                                                                                                        await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("groupPage", new { id });
         }
