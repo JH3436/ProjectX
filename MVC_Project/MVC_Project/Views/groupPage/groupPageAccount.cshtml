@@ -43,6 +43,7 @@
 </head>
 
 <body>
+    <p type="hidden" name="groupId" class="groupid" data-groupid="@Model[0].GroupID" />
     @{
         var userInfo = ViewBag.userInfo;
         string userBase64Image = Convert.ToBase64String(userInfo[0].UserPhoto);

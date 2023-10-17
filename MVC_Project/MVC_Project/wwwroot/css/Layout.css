@@ -125,7 +125,7 @@ body {
     .dropdown-content .row {
         gap: 1rem;
     }
-    
+
 
 /*下拉圖片*/
 /* 圖片位址 */
@@ -268,17 +268,24 @@ body {
     }
 
         .searchInput:focus + .searchInputIcon {
-            color: var(--orange);
             transform: translateX(10px);
         }
 
 .searchInputIcon {
+    display: flex;
+    justify-content: center;
     position: absolute;
     right: 0.8rem;
     top: 0.5rem;
     color: var(--deepBlue);
-    transition: all 0.1s ease-in-out;
+    transition: color 0.1s ease-in;
+    cursor: pointer;
 }
+
+    .searchInputIcon:hover {
+        color: var(--orange);
+    }
+
 
 /* 頁底設計 */
 footer {

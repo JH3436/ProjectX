@@ -139,6 +139,28 @@ namespace MVC_Project.Controllers
         }
 
 
+        //留言API
+        [HttpGet("api/chatData/{id}")]
+        public IActionResult chatData( int id)
+        {
+            var chatData = from c in _context.Chat
+                           join m in _context.Member
+                           on c.UserID equals m.UserID
+                           where c.ActivityID == id
+                           select new responeChat
+                           {
+                            ChatID = c.ChatID,
+                            ActivityID = c.ActivityID,
+                            UserID = c.UserID,
+                            ChatContent = c.ChatContent,
+                            ToWhom = c.ToWhom,
+                            ChatTime = c.ChatTime,
+                            Nickname = m.Nickname,
+                            UserPhoto = m.UserPhoto
+                           };
+            
+            return Ok(chatData);
+        }
 
 
         [HttpGet]

@@ -44,6 +44,7 @@
 </head>
 
 <body>
+    <p type="hidden" name="groupId" class="groupid" data-groupid="@Model[0].GroupID" />
     <!-- 導覽列設計 -->
     
 
@@ -257,68 +258,6 @@
                     </div>
                 </div>
 
-                <!-- 討論區 -->
-                @{
-                    var chatList = Model[0].Chat.ToList();
-                    int commentId = 0;
-                }
-                @if (chatList != null && chatList.Any())
-                {
-                    foreach (var chat in chatList)
-                    {
-                        commentId++;
-                        var chatID = chat.ChatID;
-                        var toWhom = chat.ToWhom;
-                        var ChatContent = chat.ChatContent;
-                        var memberList = chat.User;
-                        string base64Image = Convert.ToBase64String(memberList.UserPhoto);
-                        
-                        if (toWhom == null)
-                        {
-                            <div class="commentDiv">
-                                <div class="userCommentDiv">
-                                    <img class="profile" src="data:image/png;base64,@base64Image" />
-                                    <div class="userCommentDivRight">
-                                        <p class="h3 align-self-center">@memberList.Nickname</p>
-                                        <div class="comment-box align-self-start">@ChatContent commentId: @commentId</div>
-                                        <p class="commentDatetime"></p>
-                                    </div>
-                                </div>
-                                <div class="commentBtnDiv">
-                                    <div class="replyBtn" id="replyBtn">
-                                        <p class="h3">回覆</p>
-                                        <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
-                                    </div>
-                                </div>
-                                @foreach (var reply in chatList)
-                                {
-                                    int? replyToWhom = reply.ToWhom;
-                                    string? replyChatContent = reply.ChatContent;
-                                    if (replyToWhom == chatID)
-                                    {
-                                        <div class="replyDiv">
-                                            <div class="userCommentDiv">
-                                                <img class="profile" src="data:image/png;base64,@base64Image" />
-                                                <div class="userCommentDivRight">
-                                                    <p class="h3 align-self-center">@memberList.Nickname</p>
-                                                    <div class="comment-box align-self-start">@replyChatContent</div>
-                                                    <p class="commentDatetime">20231010</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                                <div class="replyTextDiv">
-                                    <p class="h3" style="display:inline-block">你還沒登入會員!</p>
-                                    <button class="signBtn" style="display:inline-block" id="signBtn">
-                                        <p class="h3">登入發表回復</p>
-                                    </button>
-                                </div>
-                            </div>
-                        }
-                    }
-                }
-               
             </div>
         </div>
     </div>

@@ -10,16 +10,19 @@
 		<!-- 登入-->
 		<div id="container1" class="login">
 
-			<form action="xxxxxx" id="login">
+			<form action="@Url.Action("Login", "Account")" id="login" method="post">
+
+
 				<div class="headerforwelcome">
 					<h1>歡迎!</h1>
 					<p>開始揪團，一起探險!</p>
 				</div>
 
 				<div>
-					<input type="text" placeholder="帳號" />
+					<input type="text" name="username" placeholder="帳號" />
 					<div class="tab"></div>
-					<input type="password" placeholder="密碼" />
+					<input type="password" name="password" placeholder="密碼" />
+
 					<button type="submit" class="button">登入</button>
 				</div>
 			</form>
@@ -45,7 +48,8 @@
 
 		<!-- 註冊 -->
 		<div id="container2">
-			<form action="signup.js" class="login">
+			<form action="@Url.Action("Register", "Account")" method="post" class="login">
+
 
 				<div class="headerforregister">
 					<h1>註冊!</h1>

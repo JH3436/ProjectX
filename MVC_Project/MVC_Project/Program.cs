@@ -52,7 +52,14 @@ builder.Services.AddBreadcrumbs(Assembly.GetExecutingAssembly(), options =>
 });
 //-----麵包屑-----
 
+builder.Services.AddDistributedMemoryCache();
 
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".AdventureWorks.Session";
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.IsEssential = true;
+});
 
 
 var app = builder.Build();
@@ -74,6 +81,8 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

@@ -423,7 +423,31 @@ namespace MVC_Project.Controllers
             return user != null ? user.Nickname : "Unknown User";
         }
 
+        //搜尋框@@@@@@@@@@@@@@@@@@@@@測試@@@@@@@@@@@@@@@@@@@@@@@
+        //Note: with where()||where(), you can find two columns with your search Search string
+        public async Task<IActionResult> Searchfunction(string searchString)
+        {
+            if (_context.MyActivity == null)
+            {
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+            }
+
+            var activities = from m in _context.MyActivity
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                activities = activities.Where(m => m.ActivityName!.Contains(searchString));
+            }
+
+            return View(await activities.ToListAsync());
+        }
+
+
+
         //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
+
+
 
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT(int? page, string category)
