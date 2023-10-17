@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
 @model List<MVC_Project.Models.Group>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,6 +44,8 @@
 </head>
 
 <body>
+    <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
+
     <p type="hidden" name="groupId" class="groupid" data-groupid="@Model[0].GroupID" />
     <!-- 導覽列設計 -->
     
@@ -172,10 +174,10 @@
                         <td>無</td>
                     </tr>
                     
-                    <tr>
+                    @* <tr>
                         <td>主揪</td>
                         <td>@Model[0].Organizer</td>
-                    </tr>
+                    </tr> *@
 
                     <tr>
                         <td>主揪</td>

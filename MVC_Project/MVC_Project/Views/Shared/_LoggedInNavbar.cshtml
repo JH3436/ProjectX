@@ -1,4 +1,5 @@
-
+@* 查找目前使用者 *@
+@using Microsoft.AspNetCore.Http
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +31,9 @@
 </head>
 
 <body>
+    @* 檢查是哪個使用者 *@
+    <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
+
     <!-- 導覽列設計 -->
     <!-- 通知下拉 -->
     <div class="col-auto">
@@ -56,6 +60,11 @@
     <!-- 會員中心 -->
     <div class="col-auto nav-signed">
         <a class="singed-style" asp-controller="member" asp-action="member">會員中心</a>
+    </div>
+    <div class="col-auto nav-logout">
+        <a class="logout-style" asp-controller="account" asp-action="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
     </div>
 
 </body>

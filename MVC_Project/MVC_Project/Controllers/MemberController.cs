@@ -133,16 +133,18 @@ namespace MVC_Project.Controllers
             int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
             // 取得這個UserId的LikeRecords以及相對應的MyActivity資料，根據分頁參數進行分頁
             var likedActivities = _context.LikeRecord
-				.Where(lr => lr.UserID == userId)
-				.Include(lr => lr.Activity)
-				.Select(lr => new MemberUseViewModel
-				{
-					LikeRecordID = lr.LikeRecordID,  //為了刪除
-					ActivityName = lr.Activity.ActivityName,
-					VoteDate = lr.Activity.VoteDate,
-					// 判斷是否可以編輯
-					CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
-				})
+                .Where(lr => lr.UserID == userId)
+                .Include(lr => lr.Activity)
+                .Select(lr => new MemberUseViewModel
+                {
+                    
+                    LikeRecordID = lr.LikeRecordID,  //為了刪除
+                    ActivityID = lr.ActivityID,
+                    ActivityName = lr.Activity.ActivityName,
+                    VoteDate = lr.Activity.VoteDate,
+                    // 判斷是否可以編輯
+                    CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
+                })
 				.Skip(skip)
 				.Take(pageSize)
 				.ToList();
@@ -155,38 +157,45 @@ namespace MVC_Project.Controllers
 
 			ViewBag.LikedActivities = likedActivities;
 			ViewBag.PageNumber = page;
-			
+            ViewBag.UserId = userId;
+            
             ViewBag.TotalPages = totalPages;
 
             return View();
 		}
 
-		//public IActionResult LikeRecord()
-		//{
-		//    var userId = 1; // 從當前登錄的使用者取得UserId
+       // 測試郁倫那邊
+        public IActionResult EditActivity(int userId, int activityId)
+        {
+            Console.WriteLine($"UserId: {userId}, ActivityId: {activityId}"); 
+            return View();
+        }
+        //public IActionResult LikeRecord()
+        //{
+        //    var userId = 1; // 從當前登錄的使用者取得UserId
 
-		//    var currentDate = DateTime.Now; // 取得當前日期
+        //    var currentDate = DateTime.Now; // 取得當前日期
 
-		//    // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
-		//    var likedActivities = _context.LikeRecord
-		//   .Where(lr => lr.UserID == userId)
-		//   .Include(lr => lr.Activity)
-		//   .Select(lr => new MemberUseViewModel
-		//   {
-		//       LikeRecordID = lr.LikeRecordID,  //為了刪除
-		//       ActivityName = lr.Activity.ActivityName,
-		//       VoteDate = lr.Activity.VoteDate,
-		//       // 判斷是否可以編輯
-		//       CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
-		//   })
-		//   .ToList();
+        //    // 取得這個UserId所有的LikeRecords以及相對應的MyActivity資料
+        //    var likedActivities = _context.LikeRecord
+        //   .Where(lr => lr.UserID == userId)
+        //   .Include(lr => lr.Activity)
+        //   .Select(lr => new MemberUseViewModel
+        //   {
+        //       LikeRecordID = lr.LikeRecordID,  //為了刪除
+        //       ActivityName = lr.Activity.ActivityName,
+        //       VoteDate = lr.Activity.VoteDate,
+        //       // 判斷是否可以編輯
+        //       CanEdit = currentDate >= lr.Activity.VoteDate && currentDate <= lr.Activity.VoteDate.Value.AddDays(5)
+        //   })
+        //   .ToList();
 
-		//    ViewBag.LikedActivities = likedActivities;
+        //    ViewBag.LikedActivities = likedActivities;
 
-		//    return View();
-		//}
+        //    return View();
+        //}
 
-		[HttpPost]
+        [HttpPost]
 		public IActionResult DeleteLikeRecord(int likeRecordID)
 		{
 			var record = _context.LikeRecord.Find(likeRecordID);

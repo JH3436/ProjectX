@@ -4,9 +4,7 @@
     Layout = "_MemberLayout";
 }
 
-@{
-    bool isDisabled = true; // 或者根據您的邏輯設置為true或false
-}
+
 
 <div class="container" id="likeR">
     <div class="row row-cols-2">
@@ -21,14 +19,14 @@
                         <h3 class="card-title">@activity.ActivityName</h3>
                         <p class="card-text">投票日:@activity.VoteDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            
-                                @if (activity.CanEdit)
-                                {
-                                    <button class="blue-btn blue-btn-text-style"
-                                            onclick="checkEditable(@canEditValue);">
-                                        選擇時段
-                                    </button>
-                                }
+
+                            @if (activity.CanEdit)
+                            {
+                                <a class="blue-btn blue-btn-text-style"
+                                   href="@Url.Action("EditActivity", "Member", new { userId = @ViewBag.UserId, activityId = activity.ActivityID })">
+                                    選擇時段
+                                </a>
+                            }
                                 <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">取消收藏</button>
                             
 

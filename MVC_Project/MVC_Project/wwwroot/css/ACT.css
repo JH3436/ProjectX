@@ -80,9 +80,19 @@ body {
     padding-bottom: 1rem;
 }
 
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #nav-pagi {
-    --bs-pagination-active-bg: var(--deepBlue);
-    --bs-pagination-active-border-color: var(--deepBlue);
+    --bs-pagination-active-bg: var(--orange);
+    --bs-pagination-active-border-color: var(--orange);
     --bs-pagination-color: var(--deepBlue);
     --bs-pagination-bg: var(--white);
     --bs-pagination-font-size: 1.2rem;
@@ -93,8 +103,6 @@ body {
     padding-left: 0px;
     background-color: transparent;
 }
-
-
 
 /* 活動導覽設計 */
 .activity-container {
@@ -200,6 +208,7 @@ body {
     background-image: url('https://picsum.photos/1260/750?random=9');
 }
 */
+
 .heart-icon:hover {
     cursor: pointer;
 }
@@ -242,11 +251,30 @@ body {
     opacity: 0;
 }
 
+    /*未登入狀態下的愛心icon*/
+    .card__info-hover .disabled-icon {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+/*未登入點擊提醒*/
+.custom-title {
+    visibility: hidden;
+    display: block;
+    margin-top: 10px;
+    opacity: 0.8;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.heart-icon:hover + .custom-title {
+    visibility: visible;
+}
+
 .heart-icon.solid {
     opacity: 1;
     visibility: visible;
 }
-
 
 .card__img--hover {
     transition: 0.2s all ease-out;
@@ -434,23 +462,21 @@ body {
             border-bottom: 2px solid #fca311;
         }
 
-.pagination {
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
+       .pagination {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-    .pagination a {
-        color: white;
-        font-size: 1.3rem;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-    }
+       .pagination a {
+          font-size: 1.3rem;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+        }
 
         .pagination a.active {
-            background-color: #416ac2;
+            background-color: #14213d ;
             color: white;
             border-radius: 5px;
         }
@@ -499,7 +525,7 @@ body {
         float: left;
         width: 50%; /* before和after各佔50% */
         height: 50px; /* 全按鈕高度 */
-        line-height: 50px; /* ON OFF文字高度 */
+        line-height: 50px; /*文字高度 */
         font-size: 1.6rem;
         color: white;
         font-family: Trebuchet, Arial, sans-serif;
@@ -509,7 +535,7 @@ body {
 
     /* ON */
     .cktoggle_inner:before {
-        content: "已成團";
+        content: "報名中";
         padding-left: 30px;
         background-color: #14213d;
         color: #FFFFFF;
@@ -518,7 +544,7 @@ body {
 
     /* OFF */
     .cktoggle_inner:after {
-        content: "    揪團中";
+        content: "    待成團";
         padding-right: 30px;
         background-color: #EEEEEE;
         color: #14213d;

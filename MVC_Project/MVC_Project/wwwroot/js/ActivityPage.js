@@ -64,11 +64,7 @@ $(document).on('toggle.bs.modal', '.modal fade', function () {
     $('.modal:visible').length && $(document.body).addClass('modal-open');
 });
 
-$(document).ready(function() {
-  var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
 
-  myModal.show();
-});
 
 //聊天室登入按鈕
 $(document).ready(function () {
@@ -79,10 +75,9 @@ $(document).ready(function () {
 
 // 聊天室
 $(document).ready(function () {
-    $("#discussBtn").click(function () {
+    $(document).on('click', '#discussBtn', function () {
         $("#discussInput").toggle();
-
-    })
+    });
 });
 
 
@@ -95,14 +90,14 @@ $(document).on("click", ".replyBtn", function () {
 
 $(document).ready(function () {
     // 監聽 #discussTextArea 元素的 keydown 事件
-    $("#discussTextArea").on("keydown", function (event) {
+    $(document).on("keydown", "#discussTextArea", function (event) {
         if (event.key === "Enter") {
             event.preventDefault();  // 阻止預設的 Enter 鍵行為
             simulateClick();  // 呼叫模擬 click 函式
         }
     });
 
-    $(".publishBtn").click(simulateClick);  // 點擊 publishBtn 也呼叫模擬 click 函式
+    $(document).on("click", ".publishBtn", simulateClick);  // 點擊 publishBtn 也呼叫模擬 click 函式
 
     function simulateClick() {
         var temp = $("#discussTextArea").val();
@@ -111,8 +106,11 @@ $(document).ready(function () {
         } else {
             var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
         }
+        discussUpdate();
+        getChatData();
     }
 });
+
 
 $(document).on("click", ".messageBtn", function () {
     var temp = $(this).parent().children("#replyTextArea").val();
@@ -121,6 +119,8 @@ $(document).on("click", ".messageBtn", function () {
     } else {
         var sure = confirm("確定提交留言\n\n" + temp);
     }
+
+    getChatData();
 });
 
 
@@ -200,24 +200,21 @@ function getIdFromUrl() {
     if (groupidElement) {
         return groupidElement.getAttribute('data-groupid');
     }
-    return null;  // 或者您可以返回一個適當的預設值或錯誤訊息
+    return null;
 }
+/*抓取groupid*/
+function getChatData() {
+    const id = getIdFromUrl();  // 取得 id
+    if (!id) {
+        console.log('ID not found in the URL.');
+        return;
+    }
 
-const id = getIdFromUrl();
-if (id) {
-    console.log('ID:', id);
-} else {
-    console.log('ID not found in the URL.');
-}
-
-function getChatData(activityId) {
     $.ajax({
-        url: `/api/chatData/1004`,
+        url: `/api/chatData/${id}`,  // 使用 id 構建 URL
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            // Handle the data returned from the API
-            console.log('Chat data:', data);
             updateChatInModal(data);
             // Do something with the data, e.g., update the UI
         },
@@ -227,10 +224,45 @@ function getChatData(activityId) {
     });
 }
 
+const id = getIdFromUrl();
+if (id) {
+    console.log('ID:', id);
+    getChatData(id);  // 呼叫 getChatData 函式並傳遞 id
+}
+
+
 function updateChatInModal(chatList) {
     // 清空原有的討論區內容
+    $("#dialogDiv").empty();
+
     // 將新的聊天資料插入到討論區
-    
+    var chatBoardHTML = `<div>
+                    <div id="messageBoardTitle">
+                        <p class="h1">討論區</p>
+                        <div id="discussBtn">建立討論</div>
+                    </div>
+
+                    <!-- 討論輸入區 -->
+                    
+                    <div class="commentDiv" id="discussInput">
+                            <div class="userCommentDiv">
+                                <img class="profile" src="" />
+                                <div class="userCommentDivRight">
+                                    <p class="h3 align-self-center"></p>
+                                    <div class="discuss-box align-self-start" name="ChatContent">
+                                        <textarea name="ChatContent" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentBtnDiv">
+                                <button class="publishBtn" type="submit">
+                                    <p class="h3">發表</p>
+                                    <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                </button>
+                            </div>
+                    </div>
+                </div>`;
+    $('#dialogDiv').append(chatBoardHTML);
     chatList.forEach(function (chat) {
         if (chat.ToWhom === null) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
@@ -273,9 +305,9 @@ function updateChatInModal(chatList) {
             var replyTextDiv = `
                 <div class="replyTextDiv">
                     <div class="userCommentDiv">
-                        <img class="profile" src="data:image/png;base64,@userBase64Image" />
+                        <img class="profile" src="" />
                         <div class="userCommentDivRight">
-                            <p class="h3 align-self-center">@userInfo[0].Nickname</p>
+                            <p class="h3 align-self-center" id="userInfoNickname" ></p>
                             <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
                             <button class="messageBtn" type="submit">
                                 <p class="messageBtn-text-style" href="#">
@@ -286,24 +318,102 @@ function updateChatInModal(chatList) {
                     </div>
                 </div>
             </div>`;
+
             chatCommentDiv = chatCommentDiv + replyTextDiv;
             // 插入到討論區
             $('#dialogDiv').append(chatCommentDiv);
-
         }
     });
+    getUserInfo();
+}
+//會員讀取自訂函式
 
+function getUserInfo() {
+    let currentUserId = $('#currentUserId').val();
+    console.log(currentUserId);
+
+    $.ajax({
+        url: `/api/getUserInfo/${currentUserId}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log('userInfo', data);
+            $('#discussInput .userCommentDiv p').text(data[0].Nickname);
+            $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
+            $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
+            $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
 }
 
-$(document).ready(function () {
-    getChatData(1);
-});
+
+//上傳自訂函式
+function discussUpdate() {
+    let discussContent = $('#discussTextArea').val(); 
+    let currentUserId = $('#currentUserId').val();
+
+    let updateData = {
+        ActivityID : 1,
+        UserID: currentUserId,
+        ChatContent : discussContent,
+        ToWhom : null,
+        // 可以添加其他需要上传的数据字段
+    };
+
+    // 发起AJAX请求
+    $.ajax({
+        url: '/api/discussUpdate', // 后端API的URL
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(dataToSend), // 将数据转为JSON字符串
+        contentType: 'application/json', // 设置Content-Type为JSON
+        success: function (response) {
+            console.log('Data uploaded successfully:', response);
+            // 在这里处理成功响应
+        },
+        error: function (error) {
+            console.error('Error uploading data:', error);
+            // 在这里处理错误响应
+        }
+    });
+}
 
 
 
+//討論上傳自訂函數
+function discussUpdate() {
+    let discussContent = $('#discussTextArea').val();
+    const id = getIdFromUrl();  // 取得 id
 
+    let updateData = {
+        ActivityID: id,
+        UserID: 1,
+        ChatContent: discussContent,
+        ToWhom: null,
+        // 可以添加其他需要上传的数据字段
+    };
 
-
+    // 发起AJAX请求
+    $.ajax({
+        url: '/api/discussUpdate', // 后端API的URL
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(updateData), // 将数据转为JSON字符串
+        contentType: 'application/json', // 设置Content-Type为JSON
+        success: function (response) {
+            console.log('数据成功上传:', response);
+            // 在这里处理成功响应
+        },
+        error: function (error) {
+            console.error('上传数据时出错:', error);
+            console.log(JSON.stringify(updateData));
+            // 在这里处理错误响应
+        }
+    });
+}
 
 
 
@@ -359,3 +469,4 @@ $(document).ready(function () {
         $(this).parent().find('.notification--num').remove();
     });
 });
+

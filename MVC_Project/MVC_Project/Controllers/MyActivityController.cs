@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +12,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
 using SmartBreadcrumbs.Attributes;
+using static NuGet.Packaging.PackagingConstants;
+
 
 namespace MVC_Project.Controllers
 {
     public class MyActivityController : Controller
     {
         private readonly ProjectXContext _context;
+        private readonly object selectedActivityIds;
+        private readonly object validActivityIds;
 
         public string? category { get; private set; }
 
@@ -25,15 +33,11 @@ namespace MVC_Project.Controllers
         [DefaultBreadcrumb("首頁")]
         public IActionResult HomePage()
         {
-            // 假設使用者未登入，暫時使用userId = 1
-            int userId = 1;
+            // 從Session取得當前登錄的用戶ID
+            var userIdString = HttpContext.Session.GetString("UserId");
 
-            //進行是否建立投票通知判斷
-            ProcessLikesAndCreateNotifications(userId);
-
-            //進行是否建立新回覆通知判斷
-            CheckRepliesAndCreateNotifications(userId);
-
+            //先在外部宣告viewModel
+            HomePageViewModel viewModel = new HomePageViewModel();
 
             // 讀取所有有效的 ActivityID 到一個列表中
             var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
@@ -45,7 +49,6 @@ namespace MVC_Project.Controllers
             Random random = new Random();
             List<int> selectedActivityIds = new List<int>();
 
-
             while (selectedActivityIds.Count < numberOfRandomIds)
             {
                 int randomId = validActivityIds[random.Next(validActivityIds.Count)];
@@ -56,21 +59,12 @@ namespace MVC_Project.Controllers
                 }
             }
 
-            // 處理已點擊愛心的活動，查找LikeRecord資料表
-            var likedActivityIds = _context.LikeRecord
-                .Where(lr => lr.UserID == userId && selectedActivityIds.Contains((int)lr.ActivityID))
-                .Select(lr => lr.ActivityID)
-                .ToList();
-
-            // 在前端傳遞已點擊愛心的活動ID，以便在首頁上設置愛心圖示的狀態
-            ViewBag.LikedActivityIds = likedActivityIds;
 
             // 讀取所有有效的 GroupID 到一個列表中
             var validGroupIds = _context.Group.Select(g => g.GroupID).ToList();
 
             // 設定要生成的亂數ID數量
             int numberOfRandomIds_2 = Math.Min(3, validGroupIds.Count);
-
 
             // 使用亂數生成器來選擇有效的 GroupID
             Random random2 = new Random();
@@ -84,6 +78,32 @@ namespace MVC_Project.Controllers
                 {
                     selectedGroupIds.Add(randomId);
                 }
+            }
+
+            //如果未登入
+            if (userIdString == null)
+            {
+
+            }
+            //如果有登入
+            else
+            {
+                var userId = int.Parse(userIdString!);
+
+                //進行是否建立投票通知判斷
+                ProcessLikesAndCreateNotifications(userId);
+
+                //進行是否建立新回覆通知判斷
+                CheckRepliesAndCreateNotifications(userId);
+
+                // 處理已點擊愛心的活動，查找LikeRecord資料表
+                var likedActivityIds = _context.LikeRecord
+                    .Where(lr => lr.UserID == userId && selectedActivityIds.Contains((int)lr.ActivityID))
+                    .Select(lr => lr.ActivityID)
+                    .ToList();
+
+                // 在前端傳遞已點擊愛心的活動ID，以便在首頁上設置愛心圖示的狀態
+                ViewBag.LikedActivityIds = likedActivityIds;
             }
 
             // 官方活動資料讀取，按 ActivityID 分組，並對相同的 ActivityID 的照片進行隨機排序
@@ -127,8 +147,6 @@ namespace MVC_Project.Controllers
                                 PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
                             };
 
-
-
             var activities = myActivityData.ToList();
             var groups = groupData.ToList();
 
@@ -141,7 +159,7 @@ namespace MVC_Project.Controllers
                 }
             }
 
-            var viewModel = new HomePageViewModel
+            viewModel = new HomePageViewModel
             {
                 Activities = activities,
                 Groups = groups
@@ -161,15 +179,22 @@ namespace MVC_Project.Controllers
         [HttpPost]
         public IActionResult LikeActivity(int activityId, int userId)
         {
-            // 使用Entity Framework將新的LikeRecord插入到資料庫中
-            var newLikeRecord = new LikeRecord
+            if (userId == 0)
             {
-                ActivityID = activityId,
-                UserID = userId
-            };
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                // 使用Entity Framework將新的LikeRecord插入到資料庫中
+                var newLikeRecord = new LikeRecord
+                {
+                    ActivityID = activityId,
+                    UserID = userId
+                };
 
-            _context.LikeRecord.Add(newLikeRecord);
-            _context.SaveChanges();
+                _context.LikeRecord.Add(newLikeRecord);
+                _context.SaveChanges();
+            }
 
             // 返回成功的回應，例如JSON對象
             return Json(new { success = true });
@@ -264,7 +289,7 @@ namespace MVC_Project.Controllers
         }
 
         //根據目前使用者拿取通知Action
-        //目前的userId寫在"Layout.js"的AJAX裡面
+        //userId寫在"Layout.js"的AJAX裡面，讀取從Session讀到value的頁面Input
         [HttpGet]
         public IActionResult GetNotifications(int userId)
         {
@@ -433,7 +458,7 @@ namespace MVC_Project.Controllers
             }
 
             var activities = from m in _context.MyActivity
-                         select m;
+                             select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -452,12 +477,22 @@ namespace MVC_Project.Controllers
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT(int? page, string category)
         {
+            
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
+            pageNumber = pageNumber <= 1 ? 1 : pageNumber;
+            var userIdString = HttpContext.Session.GetString("UserId");
+            var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
 
-            var myActivityData = (from m in _context.MyActivity
+            IQueryable<ResponseActivity> myActivityData;
+            IQueryable<ResponseGroup> groupData;
+
+            // 根据类别进行筛选
+            if (!string.IsNullOrEmpty(category))
+            {
+                 myActivityData = from m in _context.MyActivity
                                   join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
-                                  where (string.IsNullOrEmpty(category) || m.Category == category) // 使用 category 参数进行筛选
+                                  where m.Category == category
                                   select new ResponseActivity
                                   {
                                       ActivityName = m.ActivityName,
@@ -468,17 +503,17 @@ namespace MVC_Project.Controllers
                                       VoteDate = m.VoteDate,
                                       ExpectedDepartureMonth = m.ExpectedDepartureMonth,
                                       PhotoPath = o.PhotoPath
-                                  });
+                                  };
 
             //個人開團資料讀取
-            var groupData = (from g in _context.Group
-                             join m in _context.Member on g.Organizer equals m.UserID
-                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
-                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
-                             from pp in personalPhotos.DefaultIfEmpty()
-                             where (string.IsNullOrEmpty(category) || ma.Category == category) // 使用 category 参数进行筛选
-                             select new ResponseGroup
-                             {
+             groupData = (from g in _context.Group
+                          join m in _context.Member on g.Organizer equals m.UserID
+                          join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                          join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                          from pp in personalPhotos.DefaultIfEmpty()
+                          where ma.Category == category
+                          select new ResponseGroup
+                          {
                                  GroupName = g.GroupName,
                                  GroupCategory = g.GroupCategory,
                                  GroupContent = g.GroupContent,
@@ -489,24 +524,79 @@ namespace MVC_Project.Controllers
                                  Nickname = m.Nickname,
                                  PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
                              });
+            }
+            else
+            {
+                myActivityData = from m in _context.MyActivity
+                                 join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                 select new ResponseActivity
+                                 {
+                                      ActivityName = m.ActivityName,
+                                      Category = m.Category,
+                                      SuggestedAmount = m.SuggestedAmount,
+                                      ActivityContent = m.ActivityContent,
+                                      MinAttendee = m.MinAttendee,
+                                      VoteDate = m.VoteDate,
+                                      ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                                      PhotoPath = o.PhotoPath
+                                  };
+                groupData = from g in _context.Group
+                            join m in _context.Member on g.Organizer equals m.UserID
+                            join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                            join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                            from pp in personalPhotos.DefaultIfEmpty()
+                            where ma.Category == category
+                            select new ResponseGroup
+                            {
+                                GroupName = g.GroupName,
+                                GroupCategory = g.GroupCategory,
+                                GroupContent = g.GroupContent,
+                                MinAttendee = g.MinAttendee,
+                                MaxAttendee = g.MaxAttendee,
+                                StartDate = g.StartDate,
+                                EndDate = g.EndDate,
+                                Nickname = m.Nickname,
+                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                            };
+             }
 
-            int itemsToSkip = (pageNumber - 1) * pageSize;
+            //如果未登入
+            if (userIdString == null)
+            {
 
-            int totalItems = _context.MyActivity.Count() + _context.Group.Count();
+            }
+            //如果有登入
+            else
+            {
+                var userId = int.Parse(userIdString!);
+
+                //進行是否建立投票通知判斷
+                ProcessLikesAndCreateNotifications(userId);
+
+                //進行是否建立新回覆通知判斷
+                CheckRepliesAndCreateNotifications(userId);
+
+                // 處理已點擊愛心的活動，查找LikeRecord資料表
+                var likedActivityIds = _context.LikeRecord
+                    .Where(lr => lr.UserID == userId && validActivityIds.Contains((int)lr.ActivityID))
+                    .Select(lr => lr.ActivityID)
+                    .ToList();
+
+                // 在前端傳遞已點擊愛心的活動ID，以便在首頁上設置愛心圖示的狀態
+                ViewBag.LikedActivityIds = likedActivityIds;
+            }
+
+
+            int totalItems = myActivityData.Count() + groupData.Count();
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
-
-
-            var myActivityDataList = myActivityData.ToList();
-            var groupDataList = groupData.ToList();
+            var myActivityDataList = myActivityData.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var groupDataList = groupData.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             var viewModel = new HomePageViewModel
             {
-                Activities = myActivityDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
-                Groups = groupDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
-                TotalPages = totalPages,
-                CurrentPage = pageNumber
-
+                Activities = myActivityDataList,
+                Groups = groupDataList,
             };
 
             // 計算 DurationInDays 並設定給 ResponseGroup
@@ -515,8 +605,11 @@ namespace MVC_Project.Controllers
                 TimeSpan? timeSpan = group.EndDate - group.StartDate;
                 group.DurationInDays = (int)timeSpan.Value.TotalDays;
             }
+            ViewBag.PageNumber = page;
+            ViewBag.TotalPages = totalPages;
             return View(viewModel);
         }
+
 
 
         // ?---------------------------------------------------?
