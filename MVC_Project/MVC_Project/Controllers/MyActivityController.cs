@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -474,11 +475,17 @@ namespace MVC_Project.Controllers
         {
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
+            pageNumber = pageNumber <= 1 ? 1 : pageNumber;
 
+            IQueryable<ResponseActivity> myActivityData;
+            IQueryable<ResponseGroup> groupData;
 
-            var myActivityData = (from m in _context.MyActivity
+            // 根据类别进行筛选
+            if (!string.IsNullOrEmpty(category))
+            {
+                 myActivityData = from m in _context.MyActivity
                                   join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
-                                  where (string.IsNullOrEmpty(category) || m.Category == category) // 使用 category 参数进行筛选
+                                  where m.Category == category
                                   select new ResponseActivity
                                   {
                                       ActivityName = m.ActivityName,
@@ -489,17 +496,17 @@ namespace MVC_Project.Controllers
                                       VoteDate = m.VoteDate,
                                       ExpectedDepartureMonth = m.ExpectedDepartureMonth,
                                       PhotoPath = o.PhotoPath
-                                  });
+                                  };
 
             //個人開團資料讀取
-            var groupData = (from g in _context.Group
-                             join m in _context.Member on g.Organizer equals m.UserID
-                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
-                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
-                             from pp in personalPhotos.DefaultIfEmpty()
-                             where (string.IsNullOrEmpty(category) || ma.Category == category) // 使用 category 参数进行筛选
-                             select new ResponseGroup
-                             {
+             groupData = (from g in _context.Group
+                          join m in _context.Member on g.Organizer equals m.UserID
+                          join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                          join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                          from pp in personalPhotos.DefaultIfEmpty()
+                          where ma.Category == category
+                          select new ResponseGroup
+                          {
                                  GroupName = g.GroupName,
                                  GroupCategory = g.GroupCategory,
                                  GroupContent = g.GroupContent,
@@ -510,23 +517,53 @@ namespace MVC_Project.Controllers
                                  Nickname = m.Nickname,
                                  PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
                              });
+            }
+            else
+            {
+                myActivityData = from m in _context.MyActivity
+                                 join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                 select new ResponseActivity
+                                 {
+                                      ActivityName = m.ActivityName,
+                                      Category = m.Category,
+                                      SuggestedAmount = m.SuggestedAmount,
+                                      ActivityContent = m.ActivityContent,
+                                      MinAttendee = m.MinAttendee,
+                                      VoteDate = m.VoteDate,
+                                      ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                                      PhotoPath = o.PhotoPath
+                                  };
+                groupData = from g in _context.Group
+                            join m in _context.Member on g.Organizer equals m.UserID
+                            join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                            join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                            from pp in personalPhotos.DefaultIfEmpty()
+                            where ma.Category == category
+                            select new ResponseGroup
+                            {
+                                GroupName = g.GroupName,
+                                GroupCategory = g.GroupCategory,
+                                GroupContent = g.GroupContent,
+                                MinAttendee = g.MinAttendee,
+                                MaxAttendee = g.MaxAttendee,
+                                StartDate = g.StartDate,
+                                EndDate = g.EndDate,
+                                Nickname = m.Nickname,
+                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                            };
+             }
 
-
-            int itemsToSkip = (pageNumber - 1) * pageSize;
-
-            int totalItems = _context.MyActivity.Count() + _context.Group.Count();
+            int totalItems = myActivityData.Count() + groupData.Count();
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
-            var myActivityDataList = myActivityData.ToList();
-            var groupDataList = groupData.ToList();
+            var myActivityDataList = myActivityData.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var groupDataList = groupData.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             var viewModel = new HomePageViewModel
             {
-                Activities = myActivityDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
-                Groups = groupDataList.Skip(itemsToSkip).Take(pageSize).ToList(),
-                //TotalPages = totalPages,
-                //CurrentPage = pageNumber
-        };
+                Activities = myActivityDataList,
+                Groups = groupDataList,
+            };
 
             // 計算 DurationInDays 並設定給 ResponseGroup
             foreach (var group in viewModel.Groups)
