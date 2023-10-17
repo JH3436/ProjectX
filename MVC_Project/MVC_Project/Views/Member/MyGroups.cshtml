@@ -16,7 +16,7 @@
                         <h3 class="card-title">@group.GroupName</h3>
                         <p class="card-text">結束日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            <button class="blue-btn blue-btn-text-style edit-btn" data-id="@group.GroupID">
+                            <button class="blue-btn blue-btn-text-style edit-btn" data-id="@group.GroupID" asp-action="Groups" asp-controller="Create">
                                 編輯
                             </button>
                             <button class="blue-btn blue-btn-text-style delete-btn" data-name="@group.GroupName" data-id="@group.GroupID" onclick="confirmDelete(this)">
@@ -107,6 +107,8 @@
     // });
 </script>
 
+<script src="~/js/Group.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
