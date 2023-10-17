@@ -66,7 +66,7 @@ namespace MVC_Project.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("UserId");
-            return RedirectToAction("LoginView", "Home");
+            return RedirectToAction("Login", "Home");
         }
 
     }

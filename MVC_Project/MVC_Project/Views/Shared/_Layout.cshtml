@@ -3,6 +3,9 @@
     var hideBreadcrumb = Context.Request.RouteValues["action"].ToString().Equals("HomePage", StringComparison.OrdinalIgnoreCase);
 }
 
+@* 查找目前使用者 *@
+@using Microsoft.AspNetCore.Http
+
 
 
 
@@ -21,6 +24,9 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 <body>
+    @* 檢查是哪個使用者 *@
+    <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
+
     <div id="scroll-to-top" class="hidden">
         <a href="#top">
             <div class="homeicon-container">
@@ -82,7 +88,8 @@
                 </form>
             </div>
 
-            @if (Context.Request.Path == "/Groups/Create")
+            @* 判斷使用者是否登入，顯示登入後的首頁內容 *@
+            @if (!string.IsNullOrEmpty(Context.Session.GetString("UserId")))
             {
                 // 顯示已登入的導覽列
                 @await Html.PartialAsync("_LoggedInNavbar")

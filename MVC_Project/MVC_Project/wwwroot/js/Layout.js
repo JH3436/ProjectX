@@ -1,5 +1,4 @@
 ﻿//回到網頁頂端
-
 const scrollButton = document.getElementById("scroll-to-top");
 
 window.addEventListener("scroll", () => {
@@ -76,12 +75,13 @@ document.addEventListener(
 
 // 在頁面載入時，向後端發送請求以獲取通知數目和通知內容
 $(document).ready(function () {
-
+    //從body抓現在的使用者是誰(<input>裡面)
+    let userId = $("#currentUserId").val();
     $.ajax({
         type: 'GET',
         url: '/MyActivity/GetNotifications',
         data: {
-            userId: 1 // 假設的使用者ID
+            userId: userId
         },
         success: function (notificationData) {
             ////Json資料
@@ -140,13 +140,15 @@ $(document).ready(function () {
 // 點擊通知項目後更改已讀||未讀狀態
 $(".notification-popup").on("click", ".popup-content", function () {
     var notificationId = $(this).data("notificationid");
+    //從body抓現在的使用者是誰(<input>裡面)
+    let userId = $("#currentUserId").val();
 
     // 使用AJAX向後端發送標記為已讀的請求
     $.ajax({
         type: 'POST',
         url: '/MyActivity/ChangeNotificationReadState',
         data: {
-            userId: 1,   //假設值
+            userId: userId,
             notificationId: notificationId
         },
         success: function (notificationData) {
@@ -195,11 +197,14 @@ $(".notification-popup").on("click", ".popup-content", function () {
 
 // 點擊"全部已讀"選項
 $(".notification-popup").on("click", ".read-all", function () {
+    //從body抓現在的使用者是誰(<input>裡面)
+    let userId = $("#currentUserId").val();
+
     $.ajax({
         type: 'POST',
         url: '/MyActivity/MarkAllNotificationsAsRead',
         data: {
-            userId: 1 // 假設的使用者ID
+            userId: userId,
         },
         success: function (notificationData) {
             // 更新通知下拉框
