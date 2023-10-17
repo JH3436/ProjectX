@@ -423,7 +423,8 @@ namespace MVC_Project.Controllers
                             NotificationContent = $"{GetUserNameById(chat.UserID)} 已在 \"{GetActivityNameById(chat.ActivityID)}\" 回覆了你的留言",
                             IsRead = false,
                             NotificationDate = DateTime.Now,
-                            NotificationType = "Reply"
+                            NotificationType = "Reply",
+                            NotificationToWhichActivityID = (int)chat.ActivityID
                         };
                         _context.Notification.Add(notification);
                     }
