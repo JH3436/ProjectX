@@ -131,10 +131,10 @@ $(document).ready(function () {
                 notificationPopup.append(notificationEmpty);
             }
         },
-            error: function () {
-                console.log('無法獲取通知數據。');
-            }
-        });
+        error: function () {
+            console.log('無法獲取通知數據。');
+        }
+    });
 });
 
 // 點擊通知項目後更改已讀||未讀狀態
@@ -299,12 +299,16 @@ $(".notification-popup").on("click", ".popup-content", function () {
 $(".searchInputWrapper").on("keydown", "input[type='text']", function (e) {
     if (e.key === "Enter") {
         $("form").submit();
+        console.log(activities); // 輸出 JSON 數據到控制台
+        console.log(JSON.stringify(activities, null, 2)); // 格式化 JSON 數據
     }
 });
 
 // 透過點擊按鈕觸發搜索
 $(".searchInputWrapper").on("click", "#search-icon", function () {
     $("form").submit();
+    console.log(activities); // 輸出 JSON 數據到控制台
+    console.log(JSON.stringify(activities, null, 2)); // 格式化 JSON 數據
 });
 
 
