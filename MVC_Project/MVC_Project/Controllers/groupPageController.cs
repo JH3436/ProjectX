@@ -180,7 +180,7 @@ namespace MVC_Project.Controllers
             chat.ChatTime = DateTime.Now;
 
             _context.Add(chat);
-                await _context.SaveChangesAsync();
+                                                                                                                                                                                                                        await _context.SaveChangesAsync();
 
             return RedirectToAction("groupPage", new { id });
         }
