@@ -141,7 +141,7 @@ namespace MVC_Project.Controllers
 
         //留言API
         [HttpGet("api/chatData/{id}")]
-        public IActionResult chatData( int id)
+        public IActionResult chatData(int id)
         {
             var chatData = from c in _context.Chat
                            join m in _context.Member
@@ -149,27 +149,43 @@ namespace MVC_Project.Controllers
                            where c.ActivityID == id
                            select new responeChat
                            {
-                            ChatID = c.ChatID,
-                            ActivityID = c.ActivityID,
-                            UserID = c.UserID,
-                            ChatContent = c.ChatContent,
-                            ToWhom = c.ToWhom,
-                            ChatTime = c.ChatTime,
-                            Nickname = m.Nickname,
-                            UserPhoto = m.UserPhoto
+                               ChatID = c.ChatID,
+                               ActivityID = c.ActivityID,
+                               UserID = c.UserID,
+                               ChatContent = c.ChatContent,
+                               ToWhom = c.ToWhom,
+                               ChatTime = c.ChatTime,
+                               Nickname = m.Nickname,
+                               UserPhoto = m.UserPhoto
                            };
-            
+
             return Ok(chatData);
         }
 
-
-        [HttpGet]
-        public IActionResult CommentCreate()
+        [HttpGet("api/getUserInfo/{currentUserId}")]
+        public IActionResult getUserInfo(int currentUserId)
         {
-            return View();
+            currentUserId = 1;
+            var userInfo = from m in _context.Member
+                           where m.UserID == currentUserId
+                           select m;
+
+            return Ok(userInfo);
         }
 
-        
+
+        //討論上傳API
+        [HttpPost]
+        [Route("api/discussUpdate")]
+        public async Task<IActionResult> discussUpdate([FromBody] Chat chat)
+        {
+            chat.ChatTime = DateTime.Now;
+            _context.Add(chat);
+            await _context.SaveChangesAsync();
+            return Ok(chat);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CommentCreate(Chat chat)
@@ -185,11 +201,7 @@ namespace MVC_Project.Controllers
             return RedirectToAction("groupPage", new { id });
         }
 
-        [HttpGet]
-        public IActionResult ReplyCreate()
-        {
-            return View();
-        }
+        
 
 
         [HttpPost]
