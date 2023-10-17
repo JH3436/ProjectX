@@ -63,6 +63,8 @@ namespace MVC_Project.Controllers
 				Password = password, // 實際應用應使用加密存儲
 				Nickname = nickname,
 				Email = email,
+				Phone=account,
+			
 			};
 
 			_context.Member.Add(newUser);
