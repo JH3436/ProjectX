@@ -2,6 +2,8 @@
 {
     public class MemberUseViewModel
     {
+        public int? ActivityID { get; set; }
+        public int UserId { get; set; }
         public string? ActivityName { get; set; }
         public DateTime? VoteDate { get; set; }
 
