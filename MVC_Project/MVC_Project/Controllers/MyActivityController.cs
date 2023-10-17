@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,14 @@ using MVC_Project.Models;
 using SmartBreadcrumbs.Attributes;
 using static NuGet.Packaging.PackagingConstants;
 
+
 namespace MVC_Project.Controllers
 {
     public class MyActivityController : Controller
     {
         private readonly ProjectXContext _context;
+        private readonly object selectedActivityIds;
+        private readonly object validActivityIds;
 
         public string? category { get; private set; }
 
@@ -473,9 +477,12 @@ namespace MVC_Project.Controllers
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT(int? page, string category)
         {
+            
             int pageSize = 9;             // 計算要跳過的項目數量
             int pageNumber = (page ?? 1); // 如果 page 為空，默認為第 1 頁
             pageNumber = pageNumber <= 1 ? 1 : pageNumber;
+            var userIdString = HttpContext.Session.GetString("UserId");
+            var validActivityIds = _context.MyActivity.Select(a => a.ActivityID).ToList();
 
             IQueryable<ResponseActivity> myActivityData;
             IQueryable<ResponseGroup> groupData;
@@ -553,6 +560,33 @@ namespace MVC_Project.Controllers
                             };
              }
 
+            //如果未登入
+            if (userIdString == null)
+            {
+
+            }
+            //如果有登入
+            else
+            {
+                var userId = int.Parse(userIdString!);
+
+                //進行是否建立投票通知判斷
+                ProcessLikesAndCreateNotifications(userId);
+
+                //進行是否建立新回覆通知判斷
+                CheckRepliesAndCreateNotifications(userId);
+
+                // 處理已點擊愛心的活動，查找LikeRecord資料表
+                var likedActivityIds = _context.LikeRecord
+                    .Where(lr => lr.UserID == userId && validActivityIds.Contains((int)lr.ActivityID))
+                    .Select(lr => lr.ActivityID)
+                    .ToList();
+
+                // 在前端傳遞已點擊愛心的活動ID，以便在首頁上設置愛心圖示的狀態
+                ViewBag.LikedActivityIds = likedActivityIds;
+            }
+
+
             int totalItems = myActivityData.Count() + groupData.Count();
             var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
@@ -575,6 +609,8 @@ namespace MVC_Project.Controllers
             ViewBag.TotalPages = totalPages;
             return View(viewModel);
         }
+
+
 
         // ?---------------------------------------------------?
 
