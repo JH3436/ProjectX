@@ -103,7 +103,7 @@ namespace MVC_Project.Controllers
 						}
 					}
 				}
-				return RedirectToAction(nameof(Index));
+				return Ok("success"); ;
 			}
 			return View(@group);
 		}

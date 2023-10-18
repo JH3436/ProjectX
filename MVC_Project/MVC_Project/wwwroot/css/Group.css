@@ -27,7 +27,6 @@
 body {
     background-color: var(--deepBlue);
     color: var(--white);
-    overflow-y: hidden;
 }
 
 /*讓提示訊息撐高*/
@@ -35,7 +34,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 34vh;
+    height: 36vh;
+    color: var(--white);
+
 }
 
 .login-warning-icon-color {

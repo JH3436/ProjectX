@@ -106,17 +106,51 @@ if (userId = !0) {
     });
 }
 
-// 在表單提交成功後觸發SweetAlert2
-//$('form').on('submit', function (e) {
-//    e.preventDefault();
+function submitForm(form) {
+    // 使用AJAX提交表單
+    $.ajax({
+        type: "POST",
+        url: form.action,
+        data: new FormData(form),
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            // 表單提交成功
+            if (data === "success") {
+                Swal.fire({
+                    title: '提交成功!',
+                    text: '個人活動已建立',
+                    icon: 'success',
+                    confirmButtonText: 'Ok!',
+                    confirmButtonColor: 'var(--deepBlue)',
+                }).then(function () {
+                    // 重定向到成功頁面或執行其他操作
+                    window.location.href = "/Member/MyGroups";
+                });
+            }
+        },
+        error: function (data) {
+            // 表單提交失敗
+            Swal.fire({
+                title: '錯誤',
+                text: '資料寫入失敗。',
+                icon: 'error',
+            });
+        }
+    });
 
+    // 防止表單正常提交
+    return false;
+}
 
-//會員編輯用
-//$(document).ready(function () {
-//$('.edit-btn').click(function () {
-//    var groupId = $(this).data('id');
-//    window.location.href = '/Groups/Create?groupId=' + groupId;
-//});
+//    // 假設處理成功
+//    Swal.fire({
+//        title: '提交成功!',
+//        text: '您已投票',
+//        icon: 'success',
+//        confirmButtonText: 'Ok!',
+//        confirmButtonColor: 'var(--deepBlue)',
+//    })
 //});
 
 //沒登入的提醒JS

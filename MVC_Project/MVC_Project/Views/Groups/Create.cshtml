@@ -17,27 +17,26 @@
 @* SweetAlert2 *@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<br>
-<br>
 <div class="container">
     <h1 class="mt-5 fw-bold">個人揪團表單</h1>
     @if (@Context.Session.GetString("UserId") == null)
     {
         <h1 class="ml6">
-
+            <a style="text-decoration: none;" asp-action="login" asp-controller="home">
             <span class="text-wrapper">
                 <span class="letters login-warning">請登入</span>
             </span>
             <span class="text-wrapper">
                 <span class="letters login-warning login-warning-icon-color"><i class="fa-solid fa-location-arrow"></i></span>
             </span>
+            </a>
         </h1>
     }
     else
     {
         <div class="row row-aligned justify-content-center move-left-row">
             <div class="col-md-12 GroupForm">
-                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <form asp-action="Create" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this);">
                     <input type="hidden" asp-for="Organizer" value="@Context.Session.GetString("UserId")" />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row row-aligned">
