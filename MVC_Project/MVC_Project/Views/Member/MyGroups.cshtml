@@ -16,9 +16,11 @@
                         <h3 class="card-title">@group.GroupName</h3>
                         <p class="card-text">結束日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            <button class="blue-btn blue-btn-text-style edit-btn" data-id="@group.GroupID" asp-action="Groups" asp-controller="Create">
+                            <a class="blue-btn blue-btn-text-style edit-btn" data-action="Create" data-controller="Groups" asp-route-id="@group.GroupID">
                                 編輯
-                            </button>
+                            </a>
+
+
                             <button class="blue-btn blue-btn-text-style delete-btn" data-name="@group.GroupName" data-id="@group.GroupID" onclick="confirmDelete(this)">
                                 刪除活動
                             </button>
