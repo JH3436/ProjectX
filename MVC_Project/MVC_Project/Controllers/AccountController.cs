@@ -106,11 +106,58 @@ namespace MVC_Project.Controllers
             return RedirectToAction("Homepage", "MyActivity");
         }
 
-		///這邊是寄送驗證信的開始
-		/// <summary>
-		/// 取得授權的項目
-		/// </summary>
-		static string[] Scopes = { GmailService.Scope.GmailSend };
+		//忘記密碼開始
+		// GET 方法用於展示「忘記密碼」表單
+		[HttpGet]
+		public IActionResult ForgotPassword()
+		{
+			return View("~/Views/Home/ForgotPassword.cshtml");
+		}
+
+        // POST 方法用於處理「忘記密碼」請求
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(string account, string email)
+        {
+            // 假設 Member 是你的數據模型
+            var member = _context.Member.FirstOrDefault(m => m.Account == account && m.Email == email);
+            if (member != null)
+            {
+                // 發送重設密碼郵件
+                await SendResetPasswordEmail(email);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                // 處理失敗情況
+                return View("ForgotPassword", new { error = "帳號或電子郵件不正確" });
+            }
+        }
+
+        // 這是一個簡單的發送郵件方法，實際應用會更複雜
+        private async Task<bool> SendResetPasswordEmail(string email)
+        {
+            var member = _context.Member.FirstOrDefault(m => m.Email == email);
+            var service = await GetGmailService();
+
+            GmailMessage message = new GmailMessage
+            {
+                Subject = "重設密碼",
+                Body = $"<h1>你的密碼是：{member.Password}</h1>", // 從數據庫中獲取密碼
+                FromAddress = "lin0975408252@gmail.com",
+                IsHtml = true,
+                ToRecipients = email
+            };
+
+            SendEmail(message, service);
+            Console.WriteLine("Email sent.");
+            return true;
+        }
+
+        ///這邊是寄送驗證信的開始
+        /// <summary>
+        /// 取得授權的項目
+        /// </summary>
+        static string[] Scopes = { GmailService.Scope.GmailSend };
 
 		// 和登入 google 的帳號無關
 		// 任意值，若未來有使用者認証，可使用使用者編號或登入帳號。
