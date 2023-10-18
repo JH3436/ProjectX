@@ -107,7 +107,6 @@ if (userId = !0) {
 }
 
 function submitForm(form) {
-    // 使用AJAX提交表單
     $.ajax({
         type: "POST",
         url: form.action,
@@ -132,9 +131,11 @@ function submitForm(form) {
         error: function (data) {
             // 表單提交失敗
             Swal.fire({
-                title: '錯誤',
-                text: '資料寫入失敗。',
+                title: '提交錯誤',
+                text: '個人活動建立失敗，請檢查表單內容',
                 icon: 'error',
+                confirmButtonText: '檢查',
+                confirmButtonColor: 'var(--deepBlue)',
             });
         }
     });
