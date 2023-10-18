@@ -133,7 +133,7 @@ namespace MVC_Project.Controllers
             }
         }
 
-        // 這是一個簡單的發送郵件方法，實際應用會更複雜
+        
         private async Task<bool> SendResetPasswordEmail(string email)
         {
             var member = _context.Member.FirstOrDefault(m => m.Email == email);
@@ -249,27 +249,27 @@ namespace MVC_Project.Controllers
 			}
 		}
 
-		public async Task<bool> SendTestMail()
-		{
-			var service = await GetGmailService();
+		//public async Task<bool> SendTestMail()
+		//{
+		//	var service = await GetGmailService();
 
-			GmailMessage message = new GmailMessage();
-			message.Subject = "標題";
-			message.Body = $"<h1>內容</h1>";
-			message.FromAddress = "lin0975408252@gmail.com";
-			message.IsHtml = true;
-			message.ToRecipients = "wee06011@gmail.com";
-			message.Attachments = new List<Attachment>();
+		//	GmailMessage message = new GmailMessage();
+		//	message.Subject = "標題";
+		//	message.Body = $"<h1>內容</h1>";
+		//	message.FromAddress = "lin0975408252@gmail.com";
+		//	message.IsHtml = true;
+		//	message.ToRecipients = "wee06011@gmail.com";
+		//	message.Attachments = new List<Attachment>();
 
-			string filePath = @"C:\Users\User\Documents\GitHub\ProjectX\齊澤\Files\小黃人.png";    //要附加的檔案
-			Attachment attachment1 = new Attachment(filePath);
-			message.Attachments.Add(attachment1);
+		//	string filePath = @"C:\Users\User\Documents\GitHub\ProjectX\齊澤\Files\小黃人.png";    //要附加的檔案
+		//	Attachment attachment1 = new Attachment(filePath);
+		//	message.Attachments.Add(attachment1);
 
-			SendEmail(message, service);
-			Console.WriteLine("OK");
+		//	SendEmail(message, service);
+		//	Console.WriteLine("OK");
 
-			return true;
-		}
+		//	return true;
+		//}
 
 		async Task<GmailService> GetGmailService()
 		{
