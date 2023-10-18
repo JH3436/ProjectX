@@ -170,6 +170,7 @@ namespace MVC_Project.Controllers
             Console.WriteLine($"UserId: {userId}, ActivityId: {activityId}"); 
             return View();
         }
+
         //public IActionResult LikeRecord()
         //{
         //    var userId = 1; // 從當前登錄的使用者取得UserId
