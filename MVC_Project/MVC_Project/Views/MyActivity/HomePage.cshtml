@@ -201,7 +201,7 @@
             <section class="cards">
                 @foreach (var groups in Model.Groups)
                 {
-                    <article class="card">
+                    <article class="card" data-groupid ="@groups.GroupID">
                         <div class="card__info-hover">
                             <div class="card__clock-info">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512" class="card__clock">

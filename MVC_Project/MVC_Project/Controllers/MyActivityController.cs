@@ -135,6 +135,7 @@ namespace MVC_Project.Controllers
                             group new { g, pp, m } by g.GroupID into grouped
                             select new ResponseGroup
                             {
+                                GroupID = grouped.FirstOrDefault().g.GroupID,
                                 GroupName = grouped.FirstOrDefault().g.GroupName,
                                 GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
                                 GroupContent = grouped.FirstOrDefault().g.GroupContent,

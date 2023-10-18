@@ -27,7 +27,40 @@
 body {
     background-color: var(--deepBlue);
     color: var(--white);
+    overflow-y: hidden;
 }
+
+/*讓提示訊息撐高*/
+.login-warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34vh;
+}
+
+.login-warning-icon-color {
+    color: var(--orange);
+}
+/*Moving Letter*/
+.ml6 {
+    position: relative;
+    font-weight: 600;
+    font-size: 2.3em;
+}
+
+    .ml6 .text-wrapper {
+        position: relative;
+        display: inline-block;
+        padding-top: 0.2em;
+        padding-right: 0.05em;
+        padding-bottom: 0.1em;
+        overflow: hidden;
+    }
+
+    .ml6 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
 
 
 h1 {
