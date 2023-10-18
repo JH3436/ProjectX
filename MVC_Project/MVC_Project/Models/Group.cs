@@ -22,7 +22,6 @@ public partial class Group
     [Range(3, int.MaxValue, ErrorMessage = "人數下限最少3人")]
     public int? MinAttendee { get; set; }
 
-    [MaximumCheck("MinAttendee")]
     public int? MaxAttendee { get; set; }
 
     [Required(ErrorMessage = "請選擇活動起始日")]
