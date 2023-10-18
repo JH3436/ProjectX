@@ -34,7 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 36vh;
+    height: 25vh;
     color: var(--white);
 
 }

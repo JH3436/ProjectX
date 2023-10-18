@@ -290,9 +290,6 @@ body {
 /* 頁底設計 */
 footer {
     margin-top: 5%;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 .custom-btn {
