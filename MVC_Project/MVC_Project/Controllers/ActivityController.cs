@@ -23,10 +23,25 @@ namespace MVC_Project.Controllers
         }
 
         // GET: ActivityController
-        public IActionResult Index( int? id)
+        public IActionResult Index( int id)
         {
             //假設會員ID
-            var account = 1;
+            int? account = HttpContext.Session.GetString("UserId") != null ?
+                int.Parse(HttpContext.Session.GetString("UserId")) :
+                (int?)null;
+            if (account == null)
+            {
+                ViewBag.likedActivity = "noReturn";
+            }
+            else {
+                var likedActivity = _context.LikeRecord
+                .Where(lr => lr.UserID == account && lr.ActivityID == id)
+                .Select(lr => lr.ActivityID)
+                .ToList();
+                ViewBag.likedActivity = (likedActivity.Count() == 0 ? "false" : "true");
+            }
+            
+
 
             if (id == null || _context.MyActivity == null)
             {
@@ -69,12 +84,7 @@ namespace MVC_Project.Controllers
             ViewData["BreadcrumbNode"] = childNode3;
 
             //-----麵包屑結束-----
-            var likedActivity = _context.LikeRecord
-                .Where(lr => lr.UserID == account && lr.ActivityID == id)
-                .Select(lr => lr.ActivityID)
-                .ToList();
-            ViewBag.likedActivity = (likedActivity.Count() == 0 ? false : true);
-
+            
 
             var temp = data.ToList();
 

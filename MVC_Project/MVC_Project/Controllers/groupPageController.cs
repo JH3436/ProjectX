@@ -24,12 +24,31 @@ namespace MVC_Project.Controllers
         }
 
 
+        
+
         public IActionResult groupPage(int id)
         {
-            //if (id == null || _context.MyActivity == null)
-            //{
-            //    return NotFound();
-            //}
+            int? account = HttpContext.Session.GetString("UserId") != null ?
+                int.Parse(HttpContext.Session.GetString("UserId")) :
+                (int?)null;
+            if (account == null)
+            {
+                ViewBag.signOrNot = "noAccount";
+            }
+            else
+            {
+                var userInfo = from m in _context.Member
+                               where m.UserID == account
+                               select m;
+                ViewBag.userInfo = userInfo.ToList();
+
+
+                var signOrNot = _context.Registration
+                    .Where(lr => lr.ParticipantID == account && lr.GroupID == id)
+                    .Select(lr => lr.RegistrationID)
+                    .ToList();
+                ViewBag.signOrNot = (signOrNot.Count() == 0 ? "false" : "true");
+            }
             var data = from g in _context.Group
                        where g.GroupID == id
                        select new Group
@@ -71,68 +90,7 @@ namespace MVC_Project.Controllers
             ViewData["BreadcrumbNode"] = childNode3;
 
             //-----麵包屑結束----- 
-
-
-            var temp = data.ToList();
-
-            return View(temp);
-        }
-
-        public IActionResult groupPageAccount(int id, int account)
-        {
-            account = 1;
-            var data = from g in _context.Group
-                       where g.GroupID == id
-                       select new Group
-                       {
-                           GroupID = g.GroupID,
-                           GroupName = g.GroupName,
-                           GroupCategory = g.GroupCategory,
-                           GroupContent = g.GroupContent,
-                           MinAttendee = g.MinAttendee,
-                           MaxAttendee = g.MaxAttendee,
-                           StartDate = g.StartDate,
-                           EndDate = g.EndDate,
-                           Organizer = g.Organizer,
-                           Chat = (_context.Chat.Count(chat => chat.ActivityID == g.GroupID) > 0) ?
-                                                        _context.Chat.Where(chat => chat.ActivityID == g.GroupID)
-                                                        .Include(chat => chat.User)  // Include Member data related to Chat
-                                                        .ToList() : new List<Chat>(),
-                           OriginalActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == g.OriginalActivityID),
-                           PersonalPhoto = _context.PersonalPhoto.Where(pp => pp.GroupID == g.GroupID).ToList(),
-                           Registration = _context.Registration.Where(r => r.GroupID == g.GroupID).ToList()
-                       };
-
-            //-----麵包屑----- 
-
-            var childNode1 = new MvcBreadcrumbNode("ACT", "MyActivity", "所有活動");
-
-            var childNode2 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.Category")
-            {
-                OverwriteTitleOnExactMatch = true,
-                Parent = childNode1
-            };
-
-            var childNode3 = new MvcBreadcrumbNode("ACT", "MyActivity", "ViewData.ActivityName")
-            {
-                OverwriteTitleOnExactMatch = true,
-                Parent = childNode2
-            };
-
-            ViewData["BreadcrumbNode"] = childNode3;
-
-            //-----麵包屑結束----- 
-            var userInfo = from m in _context.Member
-                           where m.UserID == account
-                           select m;
-            ViewBag.userInfo = userInfo.ToList();
-
-            var signOrNot = _context.Registration
-                .Where(lr => lr.ParticipantID == account && lr.GroupID == id)
-                .Select(lr => lr.RegistrationID)
-                .ToList();
-            ViewBag.signOrNot = (signOrNot.Count() == 0 ? false : true);
-
+          
             var temp = data.ToList();
 
             return View(temp);

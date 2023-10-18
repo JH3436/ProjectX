@@ -71,6 +71,7 @@ body {
     }
 
 .alreadyRegister-btn {
+    height:3rem;
     width: fit-content;
     background-color: var(--black);
     border: var(--orange) 2px solid;
@@ -78,7 +79,27 @@ body {
     border-radius: 5px;
     transition: all 0.1s ease;
 }
+ .alreadyRegister-btn:hover + .hit-style {
+    display: block;
+}
 
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+alreadyRegister-btn
 /* 文字設計 */
 .register-btn-text-style {
     font-size: 1.5rem;
@@ -106,16 +127,25 @@ body {
 }
 
 .heart-inner {
-    margin-top: 10px;
+    margin-top: 1rem;
+    height: 2rem;
+    margin-bottom: 1.5rem;
+    margin-left:75%;
+    display:flex;
+}
+
+.heart-inner i{
+    transform: scale(1.1);
 }
 
 .hit-style {
     display: none;
-    margin-top: 10px;
+    margin-top: 15px;
     padding-left: 5.3px;
     font-size: 1rem;
     position: absolute;
     animation: bounceIn 0.4s ease forwards;
+    z-index:2;
 }
 
 .heart-inner .heart-icon:hover + .hit-style {
@@ -306,9 +336,10 @@ body {
     }
 
     .float i {
-        margin-top: 2rem;
+        margin-top: 1.65rem;
         height: 80%;
         width: 80%;
+        transform:scale(1.2);
     }
 
 .my-float {
@@ -603,6 +634,39 @@ a.float:hover + div.label-container {
         margin-right: 1rem;
     }
 
+#heartSignBtn {
+    height: 3rem;
+    width: 14rem;
+    display: inline-flex;
+    background-color: var(--lightBlue-bg);
+    border: var(--orange) 2px solid;
+    padding: 2.5px 12.5px;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: var(--orange);
+    transition: color 0.1s;
+}
+
+    #heartSignBtn i {
+        color: var(--white);
+    }
+
+    #heartSignBtn:hover {
+        color: var(--white);
+    }
+
+    #heartSignBtn:hover {
+        background-color: var(--brown);
+        border: var(--orange) 2px solid;
+    }
+
+    #heartSignBtn p {
+        margin-right: 1rem;
+    }
 
 #organizerNickname {
     color: var(--deepBlue);
