@@ -102,13 +102,16 @@ $(document).ready(function () {
 });
 
 
-//會員編輯用
-//$(document).ready(function () {
-//$('.edit-btn').click(function () {
-//    var groupId = $(this).data('id');
-//    window.location.href = '/Groups/Create?groupId=' + groupId;
-//});
-//});
 
-
-
+//跳轉
+$(document).ready(function () {
+    $('.edit-btn').click(function () {
+        var action = $(this).data('action');
+        var controller = $(this).data('controller');
+        var groupId = $(this).data('id'); // 改成使用 data-id
+        console.log(action, controller, groupId); // 印出來確認值是否正確
+        var newUrl = '/' + controller + '/' + action + '?groupId=' + groupId;
+        console.log("New URL:", newUrl); // 確認新的 URL 是否正確
+        window.location.href = newUrl;
+    });
+});

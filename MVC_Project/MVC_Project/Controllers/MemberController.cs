@@ -93,6 +93,8 @@ namespace MVC_Project.Controllers
 		////    return View();
 
 		////}
+       
+
 
 
 		[HttpPost]
@@ -195,6 +197,9 @@ namespace MVC_Project.Controllers
 
         //    return View();
         //}
+
+
+
 
         [HttpPost]
 		public IActionResult DeleteLikeRecord(int likeRecordID)
