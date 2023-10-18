@@ -65,22 +65,37 @@
             <div class="col-auto">
                 <!-- 點擊收藏 -->
                 <div class="heart-inner">
-                    
-                    @if (ViewBag.likedActivity)
+
+                @if (ViewBag.likedActivity == "noReturn")
+                    {   
+                    <button  style="display:inline-block" id="heartSignBtn" >
+                        <p class="h3">登入收藏活動</p>
+                    </button>
+                    }
+                else
+                {
+                    if (ViewBag.likedActivity == "false")
                     {
                         <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
                            data-activityid="@Model[0].ActivityID"></i>
+                        <div class="hit-style">
+                            <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
+                        </div>
                     }
-                    else
+                    else 
                     {
                         <i class="fa-regular fa-heart fa-2xl heart-icon"
                            data-activityid=@Model[0].ActivityID></i>
+                        <div class="hit-style">
+                            <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
+                        </div>
                     }
-                    @*<i class="fa-regular fa-heart fa-2xl"></i>*@
+                } 
+                @*<i class="fa-regular fa-heart fa-2xl"></i>*@
                     
-                    <div class="hit-style">
+                    @* <div class="hit-style">
                         <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                    </div>
+                    </div> *@
                 </div>
             </div>
         </div>
@@ -188,112 +203,8 @@
     </div>
 
 
-    <!-- 懸浮聊天室按鈕 -->
-
-
-    <a href="#" class="float btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa-solid fa-comment fa-2xl"></i>
-    </a>
-    <div class="label-container">
-        <div class="label-text">
-            點選開啟活動聊天室
-        </div>
-        <i class="fa fa-play label-arrow "></i>
-    </div>
-
-    <!-- 彈出Modal -->
-
-    @*<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content" id="dialogDiv">
-                <div>
-                    <div id="messageBoardTitle">
-                        <p class="h1">討論區</p>
-                        <div id="discussBtn">建立討論</div>
-                    </div>
-
-                    <!-- 討論輸入區 -->
-                    <div class="commentDiv" id="discussInput">
-                        <div class="userCommentDiv">
-                            <img class="profile" src="./Files/godtone.png" />
-                            <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">嘎痛</p>
-                                <div class="discuss-box align-self-start">
-                                    <textarea name="" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentBtnDiv">
-                            <div class="publishBtn">
-                                <p class="h3">發表</p>
-                                <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <!-- 討論區 -->
-                <div class="commentDiv">
-                    <div class="userCommentDiv">
-                        <img class="profile" src="~/IMG/ma.jpg" />
-                        <div class="userCommentDivRight">
-                            <p class="h3 align-self-center">馬英九</p>
-                            <div class="comment-box align-self-start">望有過現在立刻，自己都有點不非了好，大然就是。</div>
-                        </div>
-                    </div>
-                    <div class="commentBtnDiv">
-                        <div class="replyBtn" id="replyBtn">
-                            <p class="h3">回覆</p>
-                            <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
-                        </div>
-                    </div>
-                    <div class="replyDiv">
-                        <div class="userCommentDiv">
-                            <img class="profile" src="~/IMG/lai.jpg" />
-                            <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">ㄌㄨㄚˋ </p>
-                                <div class="comment-box align-self-start">嗚嗚還：分望有過現在立刻，自己都有點不非了好，大然就是。</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="replyDiv">
-                        <div class="userCommentDiv">
-                            <img class="profile" src="~/IMG/tsai2.jpg" />
-                            <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">ㄘㄨㄚˋ</p>
-                                <div class="comment-box align-self-start">這次一定不炸版</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="replyTextDiv">
-                        <div class="userCommentDiv">
-                            <img class="profile" src="~/IMG/godtone.png" />
-                            <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">嘎痛</p>
-                                <textarea name="" id="replyTextArea" class="col-auto" rows="1"></textarea>
-                                <div class="messageBtn">
-                                    <a class="messageBtn-text-style" href="#">
-                                        留言
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-                
-
-            </div>
-        </div>
-    </div>*@
-
+    
+    
 
 </body>
 <!-- JS連結 -->

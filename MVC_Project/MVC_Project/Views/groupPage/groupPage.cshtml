@@ -47,27 +47,53 @@
     <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
 
     <p type="hidden" name="groupId" class="groupid" data-groupid="@Model[0].GroupID" />
-    <!-- 導覽列設計 -->
     
+    <!-- 導覽列設計 -->
+
 
     <!-- 活動頁面設計 -->
     <div class="mycontainer">
         <div class="reg-and-like-btn row">
             <div class="col-auto">
                 <!-- 報名按鈕 -->
-               
+                @{
+                    if (ViewBag.signOrNot == "noAccount")
+                    {
+                        <button style="display:inline-block" id="heartSignBtn">
+                            <p class="h3">登入報名活動</p>
+                        </button>
+                    }else
+                    {
+                        var userInfo = ViewBag.userInfo;
+                        if (ViewBag.signOrNot == "false")
+                        {
+                            <form asp-action="register" method="post">
+                                <input type="hidden" name="groupId" value="@Model[0].GroupID" />
+                                <input type="hidden" name="userId" value=@userInfo[0].UserID />
+                                <button type="submit" class="register-btn">
+                                    <p class="register-btn-text-style" href="#" id="registerLink">
+                                        我要報名!
+                                    </p>
+                                </button>
+                            </form>
+                        }
+                        else 
+                        {
+                            <div class="alreadyRegister-btn">
+                                <p class="alreadyRegister-btn-text-style" href="#" id="registerLink">
+                                    已報名!
+                                </p>
+                            </div>
+                            <div class="hit-style">
+                                <i class="fa-solid fa-angle-up fa-lg">如欲取消報名請到會員中心</i>
+                            </div>
+
+                        }
+                    }
+                    
+                }
             </div>
-            @*<div class="col-auto">
-                <!-- 點擊收藏 -->
-                <div class="heart-inner">
-                    <div class="heart-icon">
-                        <i class="fa-regular fa-heart fa-2xl"></i>
-                    </div>
-                    <div class="hit-style">
-                        <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                    </div>
-                </div>
-            </div>*@
+            
         </div>
     </div>
 

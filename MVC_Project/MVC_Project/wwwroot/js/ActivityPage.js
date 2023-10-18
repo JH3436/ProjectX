@@ -69,7 +69,10 @@ $(document).on('toggle.bs.modal', '.modal fade', function () {
 //聊天室登入按鈕
 $(document).ready(function () {
     $(document).on('click', '#signBtn', function () {
-        window.location.href = '/member/member';
+        window.location.href = '/Home/Login';
+    });
+    $(document).on('click', '#heartSignBtn', function () {
+        window.location.href = '/Home/Login';
     });
 });
 
@@ -140,6 +143,7 @@ const heartIcons = document.querySelectorAll('.heart-icon');
 
 heartIcons.forEach(function (heartIcon) {
     heartIcon.addEventListener('click', function () {
+        let currentUserId = $('#currentUserId').val();
         const activityId = heartIcon.getAttribute('data-activityid');
         if (heartIcon.classList.contains('fa-regular')) {
             // 在此處執行AJAX POST請求，將activityId和userID（在這裡假設為1）發送到後端
@@ -148,7 +152,7 @@ heartIcons.forEach(function (heartIcon) {
                 url: '/MyActivity/LikeActivity',
                 data: {
                     activityId: activityId,
-                    userId: 1
+                    userId: currentUserId
                 },
                 success: function (data) {
                     console.log("處理成功的回應，可以更新UI或執行其他操作")
@@ -176,7 +180,7 @@ heartIcons.forEach(function (heartIcon) {
                 url: '/Activity/UnlikeActivity',
                 data: {
                     activityId: activityId,
-                    userId: 1
+                    userId: currentUserId
                 },
                 success: function (data) {
                     console.log("處理成功的回應，可以更新UI或執行其他操作delete")
@@ -340,14 +344,20 @@ function getUserInfo() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log('userInfo', data);
-            $('#discussInput .userCommentDiv p').text(data[0].Nickname);
-            $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
-            $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
-            $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
-        },
+                console.log('userInfo', data);
+                
+            },
         error: function (error) {
             console.error('Error:', error);
+            $('#replyTextDiv').remove();
+            console.log("$(`#replyTextDiv`).empty();")
+            $('.commentBtnDiv').remove();
+            $('#discussInput').remove();
+            $('#discussBtn').replaceWith(`
+                <button style="display:inline-block;margin-left: 60%;" id="heartSignBtn">
+                       <p class="h3">登入加入討論</p>
+                    </button>
+            `);
         }
     });
 }
