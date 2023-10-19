@@ -209,7 +209,7 @@ body {
 }
 */
 
-.heart-icon:hover {
+.vote-icon:hover {
     cursor: pointer;
 }
 
@@ -267,11 +267,12 @@ body {
     font-weight: 700;
 }
 
-.heart-icon:hover + .custom-title {
+.vote-icon:hover + .custom-title {
     visibility: visible;
 }
 
-.heart-icon.solid {
+/*這段是改啥的?*/
+.vote-icon.solid {
     opacity: 1;
     visibility: visible;
 }

@@ -1,14 +1,14 @@
 ﻿//活動方塊-愛心設計
-const heartIcons = document.querySelectorAll('.heart-icon');
+const VoteIcons = document.querySelectorAll('.vote-icon');
 
 //從body抓現在的使用者是誰(<input>裡面)
 let userId = $("#currentUserId").val();
 
-heartIcons.forEach(function (heartIcon) {
-    heartIcon.addEventListener('click', function () {
+VoteIcons.forEach(function (voteIcon) {
+    voteIcon.addEventListener('click', function () {
         if (userId != 0) {
-            const activityId = heartIcon.getAttribute('data-activityid');
-            if (heartIcon.classList.contains('fa-regular')) {
+            const activityId = voteIcon.getAttribute('data-activityid');
+            if (voteIcon.classList.contains('fa-envelope-open-text')) {
                 $.ajax({
                     type: 'POST',
                     url: '/MyActivity/LikeActivity',
@@ -18,14 +18,13 @@ heartIcons.forEach(function (heartIcon) {
                     },
                     success: function (data) {
                         // 處理成功的回應，可以更新UI或執行其他操作
-                        heartIcon.classList.remove('fa-regular');
-                        heartIcon.classList.add('fa-solid');
-                        heartIcon.style.color = "#B44163";
+                        voteIcon.classList.remove('fa-envelope-open-text');
+                        voteIcon.classList.add('fa-envelope-circle-check');
 
-                        const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
+                        const cardInfo = voteIcon.closest('.card').querySelector('.card__info');
 
                         const likedText = document.createElement('span');
-                        likedText.textContent = '已收藏';
+                        likedText.textContent = '已參與投票';
                         likedText.classList.add('card__liked-text');
 
                         cardInfo.appendChild(likedText);
@@ -45,12 +44,11 @@ heartIcons.forEach(function (heartIcon) {
                     },
                     success: function (data) {
                         // 處理成功的回應，可以更新UI或執行其他操作
-                        heartIcon.classList.remove('fa-solid');
-                        heartIcon.classList.add('fa-regular');
-                        heartIcon.style.color = "#1E3050";
+                        voteIcon.classList.remove('fa-envelope-circle-check');
+                        voteIcon.classList.add('fa-envelope-open-text');
 
                         // 移除已經存在的 "Liked" 文字
-                        const likedText = heartIcon.closest('.card').querySelector('.card__liked-text');
+                        const likedText = voteIcon.closest('.card').querySelector('.card__liked-text');
                         if (likedText) {
                             likedText.remove();
                         }
