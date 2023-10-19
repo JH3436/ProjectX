@@ -274,7 +274,13 @@ function updateChatInModal(chatList) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
             var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
             var chatContent = chat.ChatContent ? `<div class="comment-box align-self-start">${chat.ChatContent}</div>` : '';
-
+            var chatTime = new Date(chat.ChatTime).toLocaleString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
             var chatCommentDiv = `
             <div class="commentDiv">
                 <div class="userCommentDiv">
@@ -282,7 +288,7 @@ function updateChatInModal(chatList) {
                     <div class="userCommentDivRight">
                         <p class="h3 align-self-center">${chat.Nickname}</p>
                         ${chatContent}
-                        <p class="commentDatetime">${chat.ChatTime}</p>
+                        <p class="commentDatetime">${chatTime}</p>
                     </div>
                 </div>
                 <div class="commentBtnDiv" id =${chatId}>
@@ -293,6 +299,13 @@ function updateChatInModal(chatList) {
                 </div>`;
             chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
+                    var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
                     // 建立回覆的 HTML
                     var replyHtml = `
                     <div class="replyDiv">
@@ -301,7 +314,7 @@ function updateChatInModal(chatList) {
                             <div class="userCommentDivRight">
                                 <p class="h3 align-self-center">${reply.Nickname}</p>
                                 <div class="comment-box align-self-start">${reply.ChatContent}</div>
-                                <p class="commentDatetime">${reply.ChatTime}</p>
+                                <p class="commentDatetime">${replyTime}</p>
                             </div>
                         </div>
                     </div>`;
@@ -349,7 +362,7 @@ function getUserInfo() {
             $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
             $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
             $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
-
+            getUserIngroup();
             },
         error: function (error) {
             console.error('Error:', error);
@@ -365,8 +378,44 @@ function getUserInfo() {
         }
     });
 }
+//會員留言權限
+function getUserIngroup() {
+    let currentUserId = $('#currentUserId').val();
+    const id = getIdFromUrl();
+    console.log(`/api/getUserIngroup/${id}`);
+    $.ajax({
+        url: `/api/getUserIngroup/${id}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const dataArray = Object.values(data);
 
+            const currentUserId = $('#currentUserId').val(); // 获取currentUserId的值
 
+            const hasUser = dataArray.some(item => item.ParticipantID === currentUserId);
+
+            console.log(currentUserId)
+            console.log(data);
+            console.log(hasUser);
+            if (hasUser) {
+                console.log('找到匹配的用户:', match);
+            } else {
+                $('#replyTextDiv').remove();
+                console.log("$(`#replyTextDiv`).empty();")
+                $('.commentBtnDiv').remove();
+                $('#discussInput').remove();
+                $('#discussBtn').replaceWith(`
+                <h5 style = "margin-left:60%; margin-top:3rem; color:yellow;">討論區開放給報名團員使用!!</h5>
+            `);
+                console.log('没有找到匹配的用户。');
+            }
+           
+        },
+        error: function (error) {
+            
+        }
+    });
+}
 
 
 
