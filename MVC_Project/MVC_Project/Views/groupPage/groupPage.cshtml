@@ -91,10 +91,10 @@
 
                         }
                     }
-                    
+
                 }
             </div>
-            
+
         </div>
     </div>
 
@@ -110,28 +110,19 @@
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @{
+                            var aa = "";
+                            var i = 0;
                             var photoList = Model[0].PersonalPhoto.ToList();
-                            string photoBase64Image0 = Convert.ToBase64String(photoList[0].PhotoData);
-                            string photoBase64Image1 = Convert.ToBase64String(photoList[1].PhotoData);
-                            string photoBase64Image2 = Convert.ToBase64String(photoList[2].PhotoData);
-                            string photoBase64Image3 = Convert.ToBase64String(photoList[3].PhotoData);
+                            for (int j = 0; j < photoList.Count(); j++)
+                            {
+                                @if (j == 0) { aa = "active"; } else { aa = ""; };
+                                <div class="carousel-item @aa" data-slide-number="@i">
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(photoList[j].PhotoData)" class="d-block w-100" alt="..." data-type="image"
+                                         data-toggle="lightbox" data-gallery="example-gallery">
+                                </div>
+                                i++;
+                            }
                         }
-                        <div class="carousel-item active" data-slide-number="0">
-                            <img src="data:image/png;base64,@photoBase64Image0" class="d-block w-100" alt="..." data-type="image"
-                                 data-toggle="lightbox" data-gallery="example-gallery">
-                        </div>
-                        <div class="carousel-item" data-slide-number="1">
-                            <img src="data:image/png;base64,@photoBase64Image1" class="d-block w-100" alt="..." data-type="image"
-                                 data-toggle="lightbox" data-gallery="example-gallery">
-                        </div>
-                        <div class="carousel-item" data-slide-number="2">
-                            <img src="data:image/png;base64,@photoBase64Image2" class="d-block w-100" alt="..." data-type="image"
-                                 data-toggle="lightbox" data-gallery="example-gallery">
-                        </div>
-                        <div class="carousel-item" data-slide-number="3">
-                            <img src="data:image/png;base64,@photoBase64Image3" class="d-block w-100" alt="..." data-type="image"
-                                 data-toggle="lightbox" data-gallery="example-gallery">
-                        </div>
                     </div>
                 </div>
 
@@ -140,22 +131,19 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="row mx-0">
-                                <div id="carousel-selector-0" class="thumb col-sm-1 col-lg-3 px-1 py-2 selected"
-                                     data-target="#myCarousel" data-slide-to="0">
-                                    <img src="data:image/png;base64,@photoBase64Image0" class="img-fluid" alt="...">
-                                </div>
-                                <div id="carousel-selector-1" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
-                                     data-slide-to="1">
-                                    <img src="data:image/png;base64,@photoBase64Image1" class="img-fluid" alt="...">
-                                </div>
-                                <div id="carousel-selector-2" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
-                                     data-slide-to="2">
-                                    <img src="data:image/png;base64,@photoBase64Image2" class="img-fluid" alt="...">
-                                </div>
-                                <div id="carousel-selector-3" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
-                                     data-slide-to="3">
-                                    <img src="data:image/png;base64,@photoBase64Image3" class="img-fluid" alt="...">
-                                </div>
+                                @{
+                                    var bb = "";
+                                    var y = 0;
+                                    for (int x = 0; x < photoList.Count(); x++)
+                                    {
+                                        @if (x == 0) { bb = "selected"; } else { bb = ""; }
+                                        <div id="carousel-selector-@y" class="thumb col-sm-1 col-lg-3 px-1 py-2 @bb"
+                                             data-target="#myCarousel" data-slide-to="@y">
+                                            <img src="data:image/png;base64,@Convert.ToBase64String(photoList[@y].PhotoData)" class="img-fluid" alt="...">
+                                        </div>
+                                        y++;
+                                    }
+                                }
                             </div>
                         </div>
                     </div>

@@ -221,5 +221,24 @@ namespace MVC_Project.Controllers
             var UserIngroup = temp.ToList().Count()==0? false:true ;
             return Ok(UserIngroup);
         }
+        //活動參考圖片
+        [HttpGet("/api/photoGet/{id}")]
+        public IActionResult photoGet(int id)
+        {
+            var temp = from g in _context.Group
+                       join o in _context.OfficialPhoto
+                       on g.OriginalActivityID equals o.ActivityID
+                       where g.GroupID == id
+                       select new photoData
+                       {
+                           PhotoPath = o.PhotoPath
+                       };
+            if (temp.Count() == 0 ? false : true) 
+            { 
+                return Ok(temp);
+            }
+            else { return BadRequest(); }
+            
+        }
     }
 }

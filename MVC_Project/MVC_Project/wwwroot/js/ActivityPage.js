@@ -25,12 +25,19 @@ $(document).ready(function () {
 
 // handles the carousel thumbnails
 // https://stackoverflow.com/questions/25752187/bootstrap-carousel-with-thumbnails-multiple-carousel
-$('[id^=carousel-selector-]').click(function () {
+//$('[id^=carousel-selector-]').click(function () {
+//    var id_selector = $(this).attr('id');
+//    var id = parseInt(id_selector.substr(id_selector.lastIndexOf('-') + 1));
+//    $('#myCarousel').carousel(id);
+//    console.log("id_selector:" +id_selector);
+//    console.log("id:" +id);
+//});
+$(document).on('click', '[id^=carousel-selector-]', function () {
     var id_selector = $(this).attr('id');
     var id = parseInt(id_selector.substr(id_selector.lastIndexOf('-') + 1));
     $('#myCarousel').carousel(id);
-    console.log("id_selector:" +id_selector);
-    console.log("id:" +id);
+    console.log("id_selector:" + id_selector);
+    console.log("id:" + id);
 });
 // Only display 3 items in nav on mobile.
 if ($(window).width() < 575) {
@@ -45,6 +52,7 @@ if ($(window).width() < 575) {
 }
 
 $('#myCarousel').on('slide.bs.carousel', function (e) {
+    console.log('slide.bs.carousel');
     var id = parseInt($(e.relatedTarget).attr('data-slide-number'));
     $('[id^=carousel-selector-]').removeClass('selected');
     $('[id=carousel-selector-' + id + ']').addClass('selected');
@@ -471,6 +479,75 @@ function replyUpdate(chatId) {
             console.error('回覆時發生錯誤:', error);
             console.log(JSON.stringify(replyData));
             // 在這裡處理錯誤回應
+        }
+    });
+}
+
+//圖片API
+function getChatData() {
+    const id = getIdFromUrl();
+    
+    $.ajax({
+        url: `/api/photoGet/${id}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $(".carouselDiv").empty();
+            var carouselHTML = `
+                <div class="carousel-container position-relative  col-lg-8" id="pictureDiv">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-slide-number="0">
+                            <img src="${data[0].PhotoPath}" class="d-block w-100" alt="..." data-type="image"
+                                 data-toggle="lightbox" data-gallery="example-gallery">
+                        </div>
+                        <div class="carousel-item" data-slide-number="1">
+                            <img src="${data[1].PhotoPath}" class="d-block w-100" alt="..." data-type="image"
+                                 data-toggle="lightbox" data-gallery="example-gallery">
+                        </div>
+                        <div class="carousel-item" data-slide-number="2">
+                            <img src="${data[2].PhotoPath}" class="d-block w-100" alt="..." data-type="image"
+                                 data-toggle="lightbox" data-gallery="example-gallery">
+                        </div>
+                        <div class="carousel-item" data-slide-number="3">
+                            <img src="${data[3].PhotoPath}" class="d-block w-100" alt="..." data-type="image"
+                                 data-toggle="lightbox" data-gallery="example-gallery">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Navigation -->
+                <div id="carousel-thumbs" class="carousel slide " data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row mx-0">
+                                <div id="carousel-selector-0" class="thumb col-sm-1 col-lg-3 px-1 py-2 selected"
+                                     data-target="#myCarousel" data-slide-to="0">
+                                    <img src="${data[0].PhotoPath}" class="img-fluid" alt="...">
+                                </div>
+                                <div id="carousel-selector-1" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
+                                     data-slide-to="1">
+                                    <img src="${data[1].PhotoPath}" class="img-fluid" alt="...">
+                                </div>
+                                <div id="carousel-selector-2" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
+                                     data-slide-to="2">
+                                    <img src="${data[2].PhotoPath}" class="img-fluid" alt="...">
+                                </div>
+                                <div id="carousel-selector-3" class="thumb col-sm-1 col-lg-3 px-1 py-2" data-target="#myCarousel"
+                                     data-slide-to="3">
+                                    <img src="${data[3].PhotoPath}" class="img-fluid" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            $(".carouselDiv").append(carouselHTML);
+        },
+        error: function (error) {
+            console.error('Error:', error);
         }
     });
 }
