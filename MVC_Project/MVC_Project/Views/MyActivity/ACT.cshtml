@@ -44,13 +44,6 @@
                 @foreach (var activity in Model.Activities)
                 {
                 }
-                <a asp-area="" asp-controller="MyActivity" asp-action="ACT">ALL</a>
-                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=登山">登山</a>
-                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=潛水">潛水</a>
-                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=露營">露營</a>
-                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=溯溪">溯溪</a>
-                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=其他">其他</a>
-                &emsp;&emsp;
                 <div class="swi">
                     <div class="cktoggle">
                         <input type="checkbox" class="cktoggle_checkbox" id="cktoggle_id2" checked>
@@ -60,6 +53,13 @@
                         </label>
                     </div>
                 </div>
+                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=登山">登山</a>
+                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=潛水">潛水</a>
+                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=露營">露營</a>
+                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=溯溪">溯溪</a>
+                <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=其他">其他</a>
+               
+               
             </div>
         </div>
 
