@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using Microsoft.VisualBasic;
 using MVC_Project.Models;
 using NuGet.Protocol;
 using SmartBreadcrumbs.Nodes;
@@ -101,6 +102,7 @@ namespace MVC_Project.Controllers
         [HttpGet("api/chatData/{id}")]
         public IActionResult chatData(int id)
         {
+            string dateFormat = "yyyy-MM-dd HH:mm";
             var chatData = from c in _context.Chat
                            join m in _context.Member on c.UserID equals m.UserID
                            where c.ActivityID == id
@@ -112,7 +114,7 @@ namespace MVC_Project.Controllers
                                UserID = c.UserID,
                                ChatContent = c.ChatContent,
                                ToWhom = c.ToWhom,
-                               ChatTime = c.ChatTime,
+                               ChatTime = c.ChatTime, 
                                Nickname = m.Nickname,
                                UserPhoto = m.UserPhoto
                            };

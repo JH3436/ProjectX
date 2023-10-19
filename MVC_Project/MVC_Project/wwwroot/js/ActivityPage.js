@@ -274,7 +274,13 @@ function updateChatInModal(chatList) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
             var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
             var chatContent = chat.ChatContent ? `<div class="comment-box align-self-start">${chat.ChatContent}</div>` : '';
-
+            var chatTime = new Date(chat.ChatTime).toLocaleString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
             var chatCommentDiv = `
             <div class="commentDiv">
                 <div class="userCommentDiv">
@@ -282,7 +288,7 @@ function updateChatInModal(chatList) {
                     <div class="userCommentDivRight">
                         <p class="h3 align-self-center">${chat.Nickname}</p>
                         ${chatContent}
-                        <p class="commentDatetime">${chat.ChatTime}</p>
+                        <p class="commentDatetime">${chatTime}</p>
                     </div>
                 </div>
                 <div class="commentBtnDiv" id =${chatId}>
@@ -293,6 +299,13 @@ function updateChatInModal(chatList) {
                 </div>`;
             chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
+                    var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
                     // 建立回覆的 HTML
                     var replyHtml = `
                     <div class="replyDiv">
@@ -301,7 +314,7 @@ function updateChatInModal(chatList) {
                             <div class="userCommentDivRight">
                                 <p class="h3 align-self-center">${reply.Nickname}</p>
                                 <div class="comment-box align-self-start">${reply.ChatContent}</div>
-                                <p class="commentDatetime">${reply.ChatTime}</p>
+                                <p class="commentDatetime">${replyTime}</p>
                             </div>
                         </div>
                     </div>`;
@@ -349,7 +362,7 @@ function getUserInfo() {
             $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
             $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
             $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
-
+            getUserIngroup();
             },
         error: function (error) {
             console.error('Error:', error);
@@ -365,8 +378,44 @@ function getUserInfo() {
         }
     });
 }
+//會員留言權限
+function getUserIngroup() {
+    let currentUserId = $('#currentUserId').val();
+    const id = getIdFromUrl();
+    console.log(`/api/getUserIngroup/${id}`);
+    $.ajax({
+        url: `/api/getUserIngroup/${id}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            const dataArray = Object.values(data);
 
+            const currentUserId = $('#currentUserId').val(); // 获取currentUserId的值
 
+            const hasUser = dataArray.some(item => item.ParticipantID === currentUserId);
+
+            console.log(currentUserId)
+            console.log(data);
+            console.log(hasUser);
+            if (hasUser) {
+                console.log('找到匹配的用户:', match);
+            } else {
+                $('#replyTextDiv').remove();
+                console.log("$(`#replyTextDiv`).empty();")
+                $('.commentBtnDiv').remove();
+                $('#discussInput').remove();
+                $('#discussBtn').replaceWith(`
+                <h5 style = "margin-left:60%; margin-top:3rem; color:yellow;">討論區開放給報名團員使用!!</h5>
+            `);
+                console.log('没有找到匹配的用户。');
+            }
+           
+        },
+        error: function (error) {
+            
+        }
+    });
+}
 
 
 
@@ -489,6 +538,64 @@ $(document).ready(function () {
     $('.notification').on('click', 'i', function () {
         // 移除包含.notification--num的元素
         $(this).parent().find('.notification--num').remove();
+    });
+});
+
+
+
+//-------James家的--------------
+//麵包屑判斷導向哪個活動類別
+$(document).ready(function () {
+    $("nav ol li a").click(function (e) {
+        e.preventDefault(); // 阻止默認連結行為
+
+        var linkText = $(this).text();
+
+        // 使用switch語句根據不同的類別內容執行不同的操作
+        switch (linkText) {
+            case "登山":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=登山";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "溯溪":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=溯溪";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "潛水":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=潛水";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "露營":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=露營";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "其他":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=其他";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            default:
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+        }
     });
 });
 
