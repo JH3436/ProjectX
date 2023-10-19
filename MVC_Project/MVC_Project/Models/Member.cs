@@ -7,6 +7,7 @@ namespace MVC_Project.Models;
 
 public partial class Member
 {
+    public bool IsActive { get; set; } 
     public int UserID { get; set; }
 
     public string Nickname { get; set; }
