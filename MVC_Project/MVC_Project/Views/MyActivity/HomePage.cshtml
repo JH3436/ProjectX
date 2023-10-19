@@ -123,7 +123,7 @@
                     活動導覽
                 </h2>
                 <h4 class="activity-small-title">
-                    <p>官方熱門&nbsp;<span style="color:#fca311; font-weight: 500;">TOP&nbsp;3</span></p>
+                    <span>投票中活動 <i class="fa-solid fa-envelope-open-text" style="color:#fca311;"></i></span>
                 </h4>
             </div>
         </div>
@@ -141,20 +141,17 @@
                                 @* 判斷此使用者是否有收藏載入到首頁的活動 *@
                                 @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
                                 {
-                                    <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
-                                       data-activityid="@activity.ActivityID"></i>
+                                    <i class="fa-solid fa-envelope-circle-check fa-2xl vote-icon" data-activityid="@activity.ActivityID"></i>
                                 }
                                 else
                                 {
-                                    <i class="fa-regular fa-heart fa-2xl heart-icon"
-                                       data-activityid="@activity.ActivityID"></i>
+                                    <i class="fa-solid fa-envelope-open-text fa-2xl vote-icon" data-activityid="@activity.ActivityID"></i>
                                 }
                             }
                             else
                             {
-                                <i class="fa-regular fa-heart fa-2xl heart-icon disabled-icon"
-                                   data-activityid="@activity.ActivityID"></i>
-                                <span class="custom-title">登入後即可收藏</span>
+                                <i class="fa-solid fa-envelope-open-text fa-2xl vote-icon disabled-icon" data-activityid="@activity.ActivityID"></i>
+                                <span class="custom-title">登入後即可參與投票</span>
                             }
                         </div>
 
@@ -162,7 +159,7 @@
                         <a href="#" class="card_link">
                             <div class="card__img--hover" style="background-image: url('@activity.PhotoPath')"></div>
                         </a>
-                        <div class="category-box">官方活動</div>
+                        @* <div class="category-box">投票中</div> *@
                         <span class="card__VoteDate-text">投票日：<span style="color: var(--brown)">@activity.VoteDate?.ToString("M")</span></span>
                         <div class="card__info">
                             <span class="card__category">@activity.Category</span>
@@ -171,7 +168,7 @@
                             {
                                 @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
                                 {
-                                    <span class="card__liked-text">已收藏</span>
+                                    <span class="card__liked-text">已參與投票</span>
                                 }
                                 else { }
                             }
@@ -192,7 +189,7 @@
 
         <div class="activity-content">
             <h4 class="activity-small-title">
-                <p>個人揪團活動 <i class="bi bi-diagram-3" style="color:#fca311;font-size: 3.5rem;font-weight: 500;"></i></p>
+                <span>報名中活動 <i class="bi bi-diagram-3" style="color:#fca311;font-size: 3.5rem; font-weight: 500;"></i></span>
             </h4>
         </div>
 
@@ -216,7 +213,7 @@
                         <a href="#" class="card_link">
                             <div class="card__img--hover" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
                         </a>
-                        <div class="category-box">個人揪團</div>
+                        @* <div class="category-box">個人揪團</div> *@
                         <div class="card__info">
                             <span class="card__category">@groups.GroupCategory</span>
                             <h3 class="card__title">@groups.GroupName</h3>
