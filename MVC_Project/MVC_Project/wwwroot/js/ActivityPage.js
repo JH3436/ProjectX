@@ -484,7 +484,7 @@ function replyUpdate(chatId) {
 }
 
 //圖片API
-function getChatData() {
+function photoGet() {
     const id = getIdFromUrl();
     
     $.ajax({
