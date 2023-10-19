@@ -34,6 +34,8 @@ public partial class Group
 
     public int? OriginalActivityID { get; set; }
 
+    public bool HasSent { get; set; }   //10/19新增，確保不會重複寄送轉為"報名中"活動通知
+
     public virtual ICollection<Chat> Chat { get; set; } = new List<Chat>();
 
     public virtual Member OrganizerNavigation { get; set; }
