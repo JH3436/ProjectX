@@ -23,7 +23,7 @@
                             @if (activity.CanEdit)
                             {
                                 <a class="blue-btn blue-btn-text-style"
-                                   href="@Url.Action("EditActivity", "Member", new { userId = @ViewBag.UserId, activityId = activity.ActivityID })">
+                                   href="@Url.Action("SelectDatefromMember", "VoteRecords", new { userId = @ViewBag.UserId, activityId = activity.ActivityID })">
                                     選擇時段
                                 </a>
                             }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_Project.Models;
 using SmartBreadcrumbs.Attributes;
+using Microsoft.AspNetCore.Http;
 
 namespace MVC_Project.Controllers
 {
@@ -39,12 +40,34 @@ namespace MVC_Project.Controllers
             return View();
         }
 
+        //小胖拿過來給頁面
+        public IActionResult SelectDatefromMember(int? userId, int? activityId)
+        {
+            var activityID = activityId;
+
+            if (userId == null || activityID == null)
+            {
+                return NotFound();
+            }
+
+            var voteTimes = _context.VoteTime
+               .Where(vt => vt.ActivityID == activityID)
+               .ToList();
+
+            ViewBag.Dates = voteTimes.Select(vt => vt.StartDate).ToList();
+
+            return View("SelectDate");
+
+        }
+
         //取得使用者的投票紀錄
         [HttpGet]
         public IActionResult GetMemberVote(int? activityId)
         {
+
             //假設會員是1
-            var userId = 1;
+            var userIdString = HttpContext.Session.GetString("UserId");
+            int userId = int.Parse(userIdString);
 
             //查找是否已經投票(回傳True||False)
             var userHasVoted = _context.VoteRecord
@@ -74,8 +97,9 @@ namespace MVC_Project.Controllers
         [HttpPost]
         public IActionResult SaveVote(int activityId, string voteResult)
         {
-            // 假設會員是1
-            var userId = 1;
+            
+            var userIdString = HttpContext.Session.GetString("UserId");
+            int userId = int.Parse(userIdString);
 
             // 檢查是否已經投票
             var userHasVoted = _context.VoteRecord
