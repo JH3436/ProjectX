@@ -36,6 +36,9 @@ namespace MVC_Project.Controllers
             // 從Session取得當前登錄的用戶ID
             var userIdString = HttpContext.Session.GetString("UserId");
 
+            //檢查是否需要建立並傳送"報名中"活動通知，根據使用者是否有投票而定(並且MyActivity已寫入Group)
+            CheckAndUpdateActivities();
+
             //先在外部宣告viewModel
             HomePageViewModel viewModel = new HomePageViewModel();
 
@@ -250,7 +253,7 @@ namespace MVC_Project.Controllers
                 // 檢查 MinAttendee 是否大於所有使用者的收藏數量
                 if (activity.MinAttendee.HasValue && usersWhoLikedActivity.Count >= activity.MinAttendee)
                 {
-                    var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"已經可以進行投票。";
+                    var notificationContent = $"您參與投票的活動\"{activity.ActivityName}\"已經可以進行投票。";
                     var notification = new Notification
                     {
                         UserID = userId,
@@ -264,7 +267,7 @@ namespace MVC_Project.Controllers
                 }
                 else
                 {
-                    var notificationContent = $"您收藏的活動\"{activity.ActivityName}\"未達出團人數，已取消收藏。";
+                    var notificationContent = $"您參與投票的活動\"{activity.ActivityName}\"未達出團人數，已取消您的參與。";
                     var notification = new Notification
                     {
                         UserID = userId,
@@ -275,13 +278,15 @@ namespace MVC_Project.Controllers
                         NotificationToWhichActivityID = activity.ActivityID,
                     };
                     _context.Notification.Add(notification);
+
+                    //移除已建立通知之已收藏活動
+                    var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
+                    if (likeRecordEntry != null)
+                    {
+                        _context.LikeRecord.Remove(likeRecordEntry);
+                    }
                 }
-                //移除已處理通知建立之已收藏活動(如果沒有建立通知也會刪掉，因為投票時間到了)
-                var likeRecordEntry = _context.LikeRecord.SingleOrDefault(lr => lr.UserID == userId && lr.ActivityID == activity.ActivityID);
-                if (likeRecordEntry != null)
-                {
-                    _context.LikeRecord.Remove(likeRecordEntry);
-                }
+                
             }
 
             _context.SaveChanges();
@@ -435,7 +440,7 @@ namespace MVC_Project.Controllers
 
             return RedirectToAction("Homepage");
         }
-
+        
         // 透過 ActivityID (從Chat資料表來) 獲取 ActivityName (非官方活動)的方法
         private string GetActivityNameById(int? activityId)
         {
@@ -449,6 +454,55 @@ namespace MVC_Project.Controllers
             var user = _context.Member.FirstOrDefault(u => u.UserID == userId);
             return user != null ? user.Nickname : "Unknown User";
         }
+
+        //查看投票中活動是否轉為"報名中"
+        public IActionResult CheckAndUpdateActivities()
+        {
+            // 找到包含 originalActivityID 的活動
+            var activitiesWithOriginalID = _context.Group
+                .Where(g => g.OriginalActivityID != null && g.HasSent == false)
+                .ToList();
+
+            foreach (var activity in activitiesWithOriginalID)
+            {
+                // 找到對應的 MyActivity
+                var myActivity = _context.MyActivity.FirstOrDefault(a => a.ActivityID == activity.OriginalActivityID);
+
+                if (myActivity != null)
+                {
+                    // 找到對這個 MyActivity 投票的會員
+                    var voters = _context.VoteRecord
+                        .Where(vr => vr.ActivityID == myActivity.ActivityID)
+                        .Select(vr => vr.UserID)
+                        .ToList();
+
+                    // 建立通知並發送給投票的會員
+                    foreach (var userId in voters)
+                    {
+                        var notificationContent = $"您投票的活動\"{myActivity.ActivityName}\"已轉為\"報名中\"，可以開始報名!";
+                        var notification = new Notification
+                        {
+                            UserID = (int)userId,
+                            NotificationContent = notificationContent,
+                            IsRead = false,
+                            NotificationDate = DateTime.Now,
+                            NotificationType = "ActivityToGroup",
+                            NotificationToWhichActivityID = activity.GroupID,
+                        };
+                        _context.Notification.Add(notification);
+                    }
+
+                    // 設置 HasSent 為 True，避免重複處理
+                    activity.HasSent = true;
+                }
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("HomePage");
+        }
+
+
 
         //搜尋框@@@@@@@@@@@@@@@@@@@@@測試@@@@@@@@@@@@@@@@@@@@@@@
         //Note: with where()||where(), you can find two columns with your search Search string

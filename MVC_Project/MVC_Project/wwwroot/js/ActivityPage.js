@@ -380,7 +380,6 @@ function getUserInfo() {
 }
 //會員留言權限
 function getUserIngroup() {
-    let currentUserId = $('#currentUserId').val();
     const id = getIdFromUrl();
     console.log(`/api/getUserIngroup/${id}`);
     $.ajax({
@@ -388,18 +387,7 @@ function getUserIngroup() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            const dataArray = Object.values(data);
-
-            const currentUserId = $('#currentUserId').val(); // 获取currentUserId的值
-
-            const hasUser = dataArray.some(item => item.ParticipantID === currentUserId);
-
-            console.log(currentUserId)
-            console.log(data);
-            console.log(hasUser);
-            if (hasUser) {
-                console.log('找到匹配的用户:', match);
-            } else {
+            if (data == false) {
                 $('#replyTextDiv').remove();
                 console.log("$(`#replyTextDiv`).empty();")
                 $('.commentBtnDiv').remove();
@@ -407,9 +395,10 @@ function getUserIngroup() {
                 $('#discussBtn').replaceWith(`
                 <h5 style = "margin-left:60%; margin-top:3rem; color:yellow;">討論區開放給報名團員使用!!</h5>
             `);
-                console.log('没有找到匹配的用户。');
             }
-           
+            
+            console.log(currentUserId)
+            console.log(data);
         },
         error: function (error) {
             

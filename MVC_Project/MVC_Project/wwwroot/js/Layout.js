@@ -285,7 +285,7 @@ $(".notification-popup").on("click", ".popup-content", function () {
         if (notificationType === "Vote") {
             window.location.href = `/VoteRecords/selectDate/${notificationToActivityID}`; // 導向投票頁面
         }
-        else if (notificationType === "Reply") {
+        else if (notificationType === "Reply" || notificationType === "ActivityToGroup") {
             window.location.href = `/grouppage/grouppage/${notificationToActivityID}`; // 導向活動頁面
         }
         else if (notificationType === "Cancelled") {
