@@ -102,9 +102,9 @@ namespace MVC_Project.Controllers
         public IActionResult chatData(int id)
         {
             var chatData = from c in _context.Chat
-                           join m in _context.Member
-                           on c.UserID equals m.UserID
+                           join m in _context.Member on c.UserID equals m.UserID
                            where c.ActivityID == id
+                           orderby c.ChatTime descending // 添加排序操作，降序排序
                            select new responeChat
                            {
                                ChatID = c.ChatID,

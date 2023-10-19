@@ -209,7 +209,7 @@ body {
 }
 */
 
-.heart-icon:hover {
+.vote-icon:hover {
     cursor: pointer;
 }
 
@@ -267,11 +267,12 @@ body {
     font-weight: 700;
 }
 
-.heart-icon:hover + .custom-title {
+.vote-icon:hover + .custom-title {
     visibility: visible;
 }
 
-.heart-icon.solid {
+/*這段是改啥的?*/
+.vote-icon.solid {
     opacity: 1;
     visibility: visible;
 }
@@ -444,8 +445,7 @@ body {
     overflow: hidden;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-left: auto;
+    padding-left: 360px;
 }
 
     .topnav .cktoggle {
@@ -471,6 +471,7 @@ body {
             border-bottom: 2px solid #fca311;
         }
 
+        
        .pagination {
             position: absolute;
             left: 50%;
@@ -497,7 +498,7 @@ body {
 
 .swi {
     float: right;
-    width: 30%;
+    width: 17%;
     margin-top: -55px;
 }
 
