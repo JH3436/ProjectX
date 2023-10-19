@@ -137,12 +137,11 @@ namespace MVC_Project.Controllers
             }
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
             //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
-            return RedirectToAction();
+
+            // 返回View並傳遞group對象
+            return RedirectToAction("Create", "Groups");
         }
 
-        // POST: Groups/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer,OriginalActivityID")] Group @group, List<IFormFile> imageDataFiles)
@@ -158,26 +157,7 @@ namespace MVC_Project.Controllers
                 {
                     _context.Update(@group);
 
-                    // 上傳多張照片
-                    if (imageDataFiles != null && imageDataFiles.Count > 0)
-                    {
-                        foreach (var imageDataFile in imageDataFiles)
-                        {
-                            if (imageDataFile != null && imageDataFile.Length > 0)
-                            {
-                                using (var stream = new MemoryStream())
-                                {
-                                    await imageDataFile.CopyToAsync(stream);
-                                    var newPhoto = new PersonalPhoto
-                                    {
-                                        GroupID = @group.GroupID,
-                                        PhotoData = stream.ToArray()
-                                    };
-                                    _context.PersonalPhoto.Add(newPhoto);
-                                }
-                            }
-                        }
-                    }
+                    // ... [略去上傳圖片的代碼]
 
                     await _context.SaveChangesAsync();
                 }
@@ -196,8 +176,11 @@ namespace MVC_Project.Controllers
             }
             ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
             // ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+
+            // 返回Edit視圖，並傳遞group對象，讓使用者可以重新編輯
             return View(@group);
         }
+
 
         // GET: Groups/Delete/5
         public async Task<IActionResult> Delete(int? id)

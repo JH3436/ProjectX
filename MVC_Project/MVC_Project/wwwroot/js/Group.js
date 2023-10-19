@@ -160,15 +160,29 @@ textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='let
 //跳轉
 $(document).ready(function () {
     $('.edit-btn').click(function () {
-        var action = $(this).data('action');
-        var controller = $(this).data('controller');
-        var groupId = $(this).data('id'); // 改成使用 data-id
-        console.log(action, controller, groupId); // 印出來確認值是否正確
-        var newUrl = '/' + controller + '/' + action + '?groupId=' + groupId;
-        console.log("New URL:", newUrl); // 確認新的 URL 是否正確
-        window.location.href = newUrl;
+        var groupId = $(this).data('id'); // 獲取 ID
+
+        $.ajax({
+            url: '/Groups/Edit/' + groupId,
+            type: 'GET',
+            success: function (data) {
+                $('#groupName').text(data.groupName);
+
+                // 直接設定重定向到'Groups/Create'視圖的URL
+                var newUrl = '/Groups/Create?id=' + groupId;
+                window.location.href = newUrl;
+            },
+            error: function (xhr, status, error) {
+                console.error("Error: ", error);
+            }
+        });
     });
 });
+
+
+
+
+
 
 anime.timeline({ loop: true })
     .add({
