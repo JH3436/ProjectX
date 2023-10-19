@@ -1,4 +1,6 @@
-﻿namespace MVC_Project.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MVC_Project.Models
 {
     public class responeChat
     {
@@ -12,6 +14,7 @@
 
         public int? ToWhom { get; set; }
 
+        
         public DateTime? ChatTime { get; set; }
 
         public string? Nickname { get; set; }

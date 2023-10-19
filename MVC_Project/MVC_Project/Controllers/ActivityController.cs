@@ -132,5 +132,19 @@ namespace MVC_Project.Controllers
             return Json(new { success = false, error = "LikeRecord not found" });
         }
 
+        [HttpGet("/api/getUserIngroup/{id}")]
+        public IActionResult getUserIngroup(int id)
+        {
+            
+            var temp = from r in _context.Registration
+                       where r.GroupID == id
+                       select new groupMember 
+                       {
+                         ParticipantID = r.ParticipantID
+                       };
+                           
+            return Ok(temp);
+        }
+
     }
 }
