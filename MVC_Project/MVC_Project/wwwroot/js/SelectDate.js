@@ -2,7 +2,9 @@
 $(document).ready(function () {
 
     // 從URL中獲取ActivityId參數
-    var activityId = window.location.pathname.split('/').pop();
+    var urlParams = new URLSearchParams(window.location.search);
+    var activityId = urlParams.get('activityId');
+    var userId = urlParams.get('userId');
 
     $.ajax({
         url: '/VoteRecords/GetMemberVote',
@@ -23,7 +25,7 @@ $(document).ready(function () {
                 });
 
                 // 禁用"提交"按鈕
-                $('button[type="submit"]').prop('disabled', true);
+               /* $('button[type="submit"]').prop('disabled', true);*/
             } else {
                 // 禁用"提交"按鈕
                 $('button[type="submit"]').prop('disabled', true);
@@ -48,8 +50,9 @@ $('button[type="submit"]').click(function (e) {
     var selectedVote = $('input[type=radio]:checked').val();
 
     // 從URL中獲取ActivityId參數
-    var activityId = window.location.pathname.split('/').pop();
-
+    var urlParams = new URLSearchParams(window.location.search);
+    var activityId = urlParams.get('activityId');
+    console.log('Activity ID:', activityId);  // 除錯語句
 
     // 檢查是否有選擇投票選項
     if (selectedVote) {
@@ -61,6 +64,7 @@ $('button[type="submit"]').click(function (e) {
                 voteResult: selectedVote
             },
             success: function (UpdatedVoteStr) {
+                console.log('Server Response:', UpdatedVoteStr);  // 除錯語句
                 // 取消所有選項的選中狀態和禁用
                 $('input[type=radio]').prop('checked', false);
                 $('input[type=radio]').prop('disabled', false);
@@ -90,6 +94,7 @@ $('button[type="submit"]').click(function (e) {
                 })
             },
             error: function (error) {
+                console.log('Error:', error);
                 // 在這里處理保存失敗的情況
             }
         });
