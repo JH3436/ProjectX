@@ -205,7 +205,21 @@ namespace MVC_Project.Controllers
             _context.SaveChanges();
 
             // 返回成功的回應，例如JSON對象
-            return RedirectToAction("groupPageAccount", new { id, account });
+            return RedirectToAction("groupPage", new { id});
+        }
+
+        //活動參加者權限
+        [HttpGet("/api/getUserIngroup/{id}")]
+        public IActionResult getUserIngroup(int id)
+        {
+            int? account = HttpContext.Session.GetString("UserId") != null ?
+                int.Parse(HttpContext.Session.GetString("UserId")) :
+                (int?)null;
+            var temp = from r in _context.Registration
+                       where r.GroupID == id && r.ParticipantID == account
+                       select r;
+            var UserIngroup = temp.ToList().Count()==0? false:true ;
+            return Ok(UserIngroup);
         }
     }
 }
