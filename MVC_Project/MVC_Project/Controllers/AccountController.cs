@@ -9,6 +9,7 @@ using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Services;
 using MimeKit;
 using System.Net.Mail;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVC_Project.Controllers
 {
@@ -36,12 +37,19 @@ namespace MVC_Project.Controllers
 			return View("~/Views/Home/Register.cshtml");
 		}
 
-		[HttpPost]
+        [HttpPost]
         public IActionResult Login(string username, string password)
         {
             var member = _context.Member.FirstOrDefault(m => m.Account == username && m.Password == password);
             if (member != null)
             {
+                // 檢查用戶是否已經啟用
+                if (!member.IsActive)
+                {
+                    TempData["ErrorMessage"] = "此帳號尚未啟用。請先啟用帳號。";
+                    return View("~/Views/Home/Login.cshtml");
+                }
+
                 HttpContext.Session.SetString("UserId", member.UserID.ToString()); // 儲存使用者ID到 session
                 return RedirectToAction("Index", "Home");
             }
@@ -50,8 +58,8 @@ namespace MVC_Project.Controllers
             return View("~/Views/Home/Login.cshtml");
         }
 
-		[HttpPost]
-		public IActionResult Register(string account, string password, string comfirm_password, string nickname, string email)
+        [HttpPost]
+		public async Task<IActionResult> Register(string account, string password, string comfirm_password, string nickname, string email)
 		{
 			if (password != comfirm_password)
 			{
@@ -68,7 +76,8 @@ namespace MVC_Project.Controllers
 
 			var newUser = new Member
 			{
-				Account = account,
+                IsActive = false,  // 新增
+                Account = account,
 				Password = password, // 實際應用應使用加密存儲
 				Nickname = nickname,
 				Email = email,
@@ -79,14 +88,58 @@ namespace MVC_Project.Controllers
 			_context.Member.Add(newUser);
 			_context.SaveChanges();
 
-			// 登入用戶
-			HttpContext.Session.SetString("UserId", newUser.UserID.ToString());
 
-			return RedirectToAction("Index", "Home"); // 跳轉至主頁
+            // 發送驗證郵件
+            await SendVerificationEmail(email, newUser.UserID);  // 假設您已實現這個方法
+
+            return RedirectToAction("VerifyYourEmailPage", "Home");  // 跳轉到一個頁面，告知用戶需要驗證郵件
+
+
+   //                                                                  // 登入用戶
+   //         HttpContext.Session.SetString("UserId", newUser.UserID.ToString());
+
+			//return RedirectToAction("Index", "Home"); // 跳轉至主頁
 		}
 
-		////拿來看一下有沒有抓到，現在UserID是多少
-		public IActionResult CheckSession()
+        private async Task<bool> SendVerificationEmail(string email, int userId)
+        {
+            var service = await GetGmailService();
+            GmailMessage message = new GmailMessage
+            {
+                Subject = "請驗證您的電子郵件",
+                Body = $"<a href='https://localhost:7254/Account/ActivateAccount?userId={userId}'>點此啟用帳號</a>",
+                FromAddress = "lin0975408252@gmail.com",
+                IsHtml = true,
+                ToRecipients = email
+            };
+
+            SendEmail(message, service);
+            return true;
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> ActivateAccount(int userId)
+        {
+            Console.WriteLine($"Activating account for user ID: {userId}");  // Debug line
+            var member = await _context.Member.FindAsync(userId);
+            if (member != null)
+            {
+                Console.WriteLine("Member found, setting IsActive to true.");  // Debug line
+                member.IsActive = true;
+                _context.Update(member);
+                await _context.SaveChangesAsync();
+                return View("AccountActivated");
+            }
+            else
+            {
+                Console.WriteLine("Member not found.");  // Debug line
+                return View("ActivationFailed");
+            }
+        }
+        ////拿來看一下有沒有抓到，現在UserID是多少
+        public IActionResult CheckSession()
         {
             var userId = HttpContext.Session.GetString("UserId");
             if (!string.IsNullOrEmpty(userId))
