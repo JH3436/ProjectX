@@ -1,4 +1,4 @@
-﻿
+
 //輪播圖的JS好像會吃其他的，所以我放在最上面
 
 //愛心設計
@@ -345,7 +345,11 @@ function getUserInfo() {
         dataType: 'json',
         success: function (data) {
                 console.log('userInfo', data);
-                
+            $('#discussInput .userCommentDiv p').text(data[0].Nickname);
+            $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
+            $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
+            $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
+
             },
         error: function (error) {
             console.error('Error:', error);
