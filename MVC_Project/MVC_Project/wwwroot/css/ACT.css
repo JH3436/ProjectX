@@ -467,11 +467,12 @@ body {
             border-bottom: 2px solid #fca311;
         }
 
+
         .topnav a.active {
             border-bottom: 2px solid #fca311;
         }
 
-        
+               
        .pagination {
             position: absolute;
             left: 50%;

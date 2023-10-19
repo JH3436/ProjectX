@@ -160,9 +160,25 @@
                                 <span class="card__time">天數：@groups.DurationInDays 天</span>
                             </div>
                         </div>
-                        <div class="card__img" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
-                            <a href="/groupPage/groupPage/@groups.GroupID" class="card_link">
-                            <div class="card__img--hover" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
+                                                @if (groups.PhotoData != null && groups.PhotoData.Length > 0)
+                                                {
+                                <div class="card__img" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
+                                                }
+                                                else
+                                                {
+                                <div class="card__img" style="background-color: gray;"></div> <!-- 设置默认背景颜色或显示一个默认图像 -->
+                                                }
+
+                            <a href="/Grouppage/grouppage/@groups.GroupID" class="card_link">
+                                                    @if (groups.PhotoData != null && groups.PhotoData.Length > 0)
+                                                    {
+                                    <div class="card__img" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
+                                                    }
+                                                    else
+                                                    {
+                                    <div class="card__img" style="background-color: gray;"></div> <!-- 设置默认背景颜色或显示一个默认图像 -->
+                                                    }
+
                         </a>
                                             @* <div class="category-box">個人揪團</div> *@
                         <div class="card__info">
