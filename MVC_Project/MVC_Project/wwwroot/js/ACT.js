@@ -52,93 +52,45 @@ $(document).ready(function () {
     )
 });
 
-//網站介紹
-$(".option").click(function () {
-    $(".option").removeClass("active");
-    $(this).addClass("active");
-});
 
 
 
-// 聯絡我們-表單
-// 當按鈕點擊時，顯示 dialog
-document.getElementById("showContactButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.showModal();
-
-
-});
-
-// 當關閉按鈕被點擊時，關閉 dialog
-document.getElementById("closeDialogButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.close();
-});
-
-// 當 dialog 關閉時，重置表單
-document.getElementById("contactDialog").addEventListener("close", function () {
-    document.getElementById("myForm").reset();
-});
-
-
-
-
-//響應式表單
+//--------James加的-----------
+//麵包屑設計
 $(document).ready(function () {
-    $("#contactBox form input").on("input", function () {
-        if (this.checkValidity()) {
-            $(this).css("border", "0.2rem green solid");
-        } else {
-            $(this).css("border", "0.2rem red solid");
-        }
-    });
+    // 獲取當前URL
+    var encodedText = window.location.href;
+    var currentURL = decodeURIComponent(encodedText);
+    console.log(currentURL);
+
+    // 檢查URL的分類
+    switch (true) {
+        case currentURL.endsWith("登山"):
+            updateBreadcrumb("登山");
+            break;
+        case currentURL.endsWith("溯溪"):
+            updateBreadcrumb("溯溪");
+            break;
+        case currentURL.endsWith("潛水"):
+            updateBreadcrumb("潛水");
+            break;
+        case currentURL.endsWith("露營"):
+            updateBreadcrumb("露營");
+            break;
+        case currentURL.endsWith("其他"):
+            updateBreadcrumb("其他");
+            break;
+        default:
+            // 如果URL不符合任何分類，保持原有麵包屑
+            break;
+    }
 });
 
-//alert表單內容
-document.getElementById("myForm").onsubmit = function (event) {
-    // 獲取表單元素
-    var form = event.target;
-    // 獲取各input元素的值
-    var name = form.elements["name"].value;
-    var email = form.elements["email"].value;
-    var emailSubject = form.elements["emailSubject"].value;
-    var mobileNumber = form.elements["mobileNumber"].value;
-    var message = form.elements["message"].value;
-
-
-};
-
-
-const heartIcons = document.querySelectorAll('.heart-icon');
-
-heartIcons.forEach(function (heartIcon) {
-    heartIcon.addEventListener('click', function () {
-        if (heartIcon.classList.contains('fa-regular')) {
-            heartIcon.classList.remove('fa-regular');
-            heartIcon.classList.add('fa-solid');
-            heartIcon.style.color = "#B44163";
-
-            const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
-
-            const likedText = document.createElement('span');
-            likedText.textContent = '已收藏';
-            likedText.classList.add('liked-text');
-
-            cardInfo.appendChild(likedText);
-        } else {
-            heartIcon.classList.remove('fa-solid');
-            heartIcon.classList.add('fa-regular');
-            heartIcon.style.color = "#1E3050";
-            // 移除已經存在的 "Liked" 文字
-            const likedText = heartIcon.closest('.card').querySelector('.liked-text');
-            if (likedText) {
-                likedText.remove();
-            }
-        }
-    });
-});
-
-
+function updateBreadcrumb(category) {
+    // 更新麵包屑內容
+    $(".breadcrumb").append('<li class="separator">&nbsp;<i class="fa-solid fa-chevron-right"></i>&nbsp;</li>');
+    $(".breadcrumb").append('<li class="breadcrumb-item">' + category + '</li>');
+}
 
 
 

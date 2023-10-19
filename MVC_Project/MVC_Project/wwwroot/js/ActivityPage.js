@@ -492,3 +492,61 @@ $(document).ready(function () {
     });
 });
 
+
+
+//-------James家的--------------
+//麵包屑判斷導向哪個活動類別
+$(document).ready(function () {
+    $("nav ol li a").click(function (e) {
+        e.preventDefault(); // 阻止默認連結行為
+
+        var linkText = $(this).text();
+
+        // 使用switch語句根據不同的類別內容執行不同的操作
+        switch (linkText) {
+            case "登山":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=登山";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "溯溪":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=溯溪";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "潛水":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=潛水";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "露營":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=露營";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            case "其他":
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT?page=0&category=其他";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+            default:
+                // 更新href屬性
+                var newHref = "/MyActivity/ACT";
+                $(this).attr("href", newHref);
+                // 使用window.location進行重定向
+                window.location.href = newHref;
+                break;
+        }
+    });
+});
+
