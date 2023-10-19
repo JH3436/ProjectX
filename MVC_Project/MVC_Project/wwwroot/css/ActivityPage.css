@@ -57,6 +57,7 @@ body {
 }
 /* 報名按鈕 */
 .register-btn {
+    height:3rem;
     width: fit-content;
     background-color: var(--deepBlue);
     border: var(--orange) 2px solid;
@@ -99,7 +100,6 @@ body {
         opacity: 1;
     }
 }
-alreadyRegister-btn
 /* 文字設計 */
 .register-btn-text-style {
     font-size: 1.5rem;
