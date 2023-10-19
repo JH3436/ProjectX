@@ -495,17 +495,19 @@ namespace MVC_Project.Controllers
                  myActivityData = from m in _context.MyActivity
                                   join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
                                   where m.Category == category
+                                  group new { m, o } by m.ActivityID into grouped
                                   select new ResponseActivity
                                   {
-                                      ActivityID = m.ActivityID,
-                                      ActivityName = m.ActivityName,
-                                      Category = m.Category,
-                                      SuggestedAmount = m.SuggestedAmount,
-                                      ActivityContent = m.ActivityContent,
-                                      MinAttendee = m.MinAttendee,
-                                      VoteDate = m.VoteDate,
-                                      ExpectedDepartureMonth = m.ExpectedDepartureMonth,
-                                      PhotoPath = o.PhotoPath
+                                      ActivityID = grouped.FirstOrDefault().m.ActivityID,
+                                      ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                      Category = grouped.FirstOrDefault().m.Category,
+                                      SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                      ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                      MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                      VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                      ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                      // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
+                                      PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
                                   };
 
             //個人開團資料讀取
@@ -515,52 +517,61 @@ namespace MVC_Project.Controllers
                           join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                           from pp in personalPhotos.DefaultIfEmpty()
                           where ma.Category == category
+                          group new { g, pp, m } by g.GroupID into grouped
                           select new ResponseGroup
                           {
-                                 GroupName = g.GroupName,
-                                 GroupCategory = g.GroupCategory,
-                                 GroupContent = g.GroupContent,
-                                 MinAttendee = g.MinAttendee,
-                                 MaxAttendee = g.MaxAttendee,
-                                 StartDate = g.StartDate,
-                                 EndDate = g.EndDate,
-                                 Nickname = m.Nickname,
-                                 PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
-                             });
+                              GroupID = grouped.FirstOrDefault().g.GroupID,
+                              GroupName = grouped.FirstOrDefault().g.GroupName,
+                              GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
+                              GroupContent = grouped.FirstOrDefault().g.GroupContent,
+                              MinAttendee = grouped.FirstOrDefault().g.MinAttendee,
+                              MaxAttendee = grouped.FirstOrDefault().g.MaxAttendee,
+                              StartDate = grouped.FirstOrDefault().g.StartDate,
+                              EndDate = grouped.FirstOrDefault().g.EndDate,
+                              Nickname = grouped.FirstOrDefault().m.Nickname,
+                              // 在這裡對相同 GroupID 的照片進行隨機排序，然後選取第一張照片
+                              PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
+                          });
             }
             else
             {
                 myActivityData = from m in _context.MyActivity
                                  join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                 group new { m, o } by m.ActivityID into grouped
                                  select new ResponseActivity
                                  {
-                                     ActivityID = m.ActivityID,
-                                     ActivityName = m.ActivityName,
-                                      Category = m.Category,
-                                      SuggestedAmount = m.SuggestedAmount,
-                                      ActivityContent = m.ActivityContent,
-                                      MinAttendee = m.MinAttendee,
-                                      VoteDate = m.VoteDate,
-                                      ExpectedDepartureMonth = m.ExpectedDepartureMonth,
-                                      PhotoPath = o.PhotoPath
-                                  };
+                                     ActivityID = grouped.FirstOrDefault().m.ActivityID,
+                                     ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                     Category = grouped.FirstOrDefault().m.Category,
+                                     SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                     ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                     MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                     VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                     ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                     // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
+                                     PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
+                                 };
+
                 groupData = from g in _context.Group
                             join m in _context.Member on g.Organizer equals m.UserID
                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                             from pp in personalPhotos.DefaultIfEmpty()
                             where ma.Category == category
+                            group new { g, pp, m } by g.GroupID into grouped
                             select new ResponseGroup
                             {
-                                GroupName = g.GroupName,
-                                GroupCategory = g.GroupCategory,
-                                GroupContent = g.GroupContent,
-                                MinAttendee = g.MinAttendee,
-                                MaxAttendee = g.MaxAttendee,
-                                StartDate = g.StartDate,
-                                EndDate = g.EndDate,
-                                Nickname = m.Nickname,
-                                PhotoData = pp != null ? pp.PhotoData : null // PersonalPhoto 的 PhotoData，如果存在的話
+                                GroupID = grouped.FirstOrDefault().g.GroupID,
+                                GroupName = grouped.FirstOrDefault().g.GroupName,
+                                GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
+                                GroupContent = grouped.FirstOrDefault().g.GroupContent,
+                                MinAttendee = grouped.FirstOrDefault().g.MinAttendee,
+                                MaxAttendee = grouped.FirstOrDefault().g.MaxAttendee,
+                                StartDate = grouped.FirstOrDefault().g.StartDate,
+                                EndDate = grouped.FirstOrDefault().g.EndDate,
+                                Nickname = grouped.FirstOrDefault().m.Nickname,
+                                // 在這裡對相同 GroupID 的照片進行隨機排序，然後選取第一張照片
+                                PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
                             };
              }
 
