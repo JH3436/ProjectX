@@ -219,7 +219,8 @@ namespace MVC_Project.Controllers
         /// <summary>
         /// 存放 client_secret 和 credential 的地方
         /// </summary>
-        string SecretPath = Path.Combine(AppContext.BaseDirectory, "Resources", "client_secret.json");
+        
+        string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
 
         /// <summary>
         /// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
