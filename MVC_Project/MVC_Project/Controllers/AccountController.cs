@@ -210,6 +210,53 @@ public IActionResult Login(string username, string password, string returnUrl)
             return true;
         }
 
+		//齊澤寄信
+        [HttpPost]
+        public async Task<IActionResult> newContact(string fullName, string mail, string mobileNumber, string emailSubject, string wrotetext)
+        {
+            var newContact = new Contact
+            {
+                SenderName = fullName,
+                Email = mail,
+                Phone = mobileNumber,
+                EmailTitle = emailSubject,
+                FormContent = wrotetext,
+                SendTime = DateTime.Now
+            };
+
+            _context.Contact.Add(newContact);
+            await _context.SaveChangesAsync();
+
+            // 發送確認郵件
+            await SendConfirmationEmail(mail, newContact);
+
+
+            return Json(new { success = true });
+
+            
+        }
+
+
+        private async Task<bool> SendConfirmationEmail(string email, Contact contact)
+        {
+            var service = await GetGmailService();
+
+            GmailMessage message = new GmailMessage
+            {
+                Subject = "聯絡表單確認",
+                Body = $"<h1>親愛的 {contact.SenderName}，感謝您的留言。</h1><p>您的留言內容為：{contact.FormContent}</p>",
+                FromAddress = "lin0975408252@gmail.com",
+                IsHtml = true,
+                ToRecipients = email
+            };
+
+            SendEmail(message, service);
+            Console.WriteLine("Confirmation email sent.");
+            return true;
+        }
+
+
+
         ///這邊是寄送驗證信的開始
         /// <summary>
         /// 取得授權的項目
@@ -224,11 +271,11 @@ public IActionResult Login(string username, string password, string returnUrl)
 		/// 存放 client_secret 和 credential 的地方
 		/// </summary>
 
-		string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
+		string SecretPath = @"C:\Users\DORA\Documents\GitHub\ProjectX";
 		//string jsonFilePath = Path.Combine("wwwroot", "Resources", "client_secret.json");
 		/// <summary>
 		/// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
-		/// </summary>
+		/// </summary>ㄈ
 		string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
 
 		/// <summary>

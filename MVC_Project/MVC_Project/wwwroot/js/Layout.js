@@ -347,7 +347,37 @@ document.getElementById("contactDialog").addEventListener("close", function () {
 });
 
 
+//寄信後反應
+$(document).ready(function () {
+    $("form").on("submit", function (event) {
+        event.preventDefault();  // 阻止表單的預設提交行為
 
+        var formData = $(this).serialize();  // 獲取表單數據
+
+        $.post("/Account/newContact", formData, function (response) {
+            // 如果控制器操作成功，顯示 SweetAlert
+            Swal.fire(
+                '成功！',
+                '您的資料已成功送出。',
+                'success'
+            );
+
+            // 關閉 dialog
+            var dialog = document.getElementById("contactDialog");
+            dialog.close();
+
+            // 重置表單
+            document.getElementById("myForm").reset();
+        }).fail(function () {
+            // 如果出錯，顯示另一個 SweetAlert 或處理錯誤
+            Swal.fire(
+                '失敗！',
+                '出現了一些問題。',
+                'error'
+            );
+        });
+    });
+});
 
 //響應式表單
 $(document).ready(function () {
