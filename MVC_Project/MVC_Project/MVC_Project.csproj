@@ -22,4 +22,8 @@
     <PackageReference Include="SmartBreadcrumbs" Version="3.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Resources\" />
+  </ItemGroup>
+
 </Project>

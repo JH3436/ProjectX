@@ -216,15 +216,15 @@ namespace MVC_Project.Controllers
 		// 任意值，若未來有使用者認証，可使用使用者編號或登入帳號。
 		string Username = "ABC";
 
-		/// <summary>
-		/// 存放 client_secret 和 credential 的地方
-		/// </summary>
-		string SecretPath = @"C:\Users\User\Desktop\ProjectX";
+        /// <summary>
+        /// 存放 client_secret 和 credential 的地方
+        /// </summary>
+        string SecretPath = Path.Combine(AppContext.BaseDirectory, "Resources", "client_secret.json");
 
-		/// <summary>
-		/// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
-		/// </summary>
-		string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
+        /// <summary>
+        /// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
+        /// </summary>
+        string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
 
 		/// <summary>
 		/// 取得認証用的網址
