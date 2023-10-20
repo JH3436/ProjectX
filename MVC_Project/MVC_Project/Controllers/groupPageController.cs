@@ -242,33 +242,40 @@ namespace MVC_Project.Controllers
         }
 
         //刪除留言
-        // DELETE: api/groupPage/1
-        [HttpDelete("{id}")]
+        // DELETE: groupPage/Delete/1
+        [HttpPost]
+        [Route("/groupPage/Delete/{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                if (id <= 0)
-                {
-                    return BadRequest("Invalid ID");
-                }
+            var entityToDelete = _context.Chat.Find(id);
+            _context.Chat.Remove(entityToDelete);
+            _context.SaveChanges();
+            return NoContent();
+            
+        }
 
-                var entityToDelete = _context.Chat.Find(id);
-                if (entityToDelete != null)
-                {
-                    _context.Chat.Remove(entityToDelete);
-                    _context.SaveChanges();
-                    return NoContent();
-                }
-                else
-                {
-                    return NotFound(); // 返回 404 Not Found 表示未找到要删除的资源
-                }
-            }
-            catch (Exception ex)
+        //編輯留言
+        [HttpPost]
+        [Route("/groupPage/EditChat")]
+        public IActionResult EditChat([FromBody] Chat updatedChat)
+        {
+            var existingChat = _context.Chat.Find(updatedChat.ChatID);
+
+            if (existingChat == null)
             {
-                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+                // 如果找不到聊天，返回 NotFound 或其他适当的响应
+                return NotFound();
             }
+
+            // 更新原始聊天的内容
+            existingChat.ChatTime = DateTime.Now;
+            existingChat.ChatContent = updatedChat.ChatContent;
+
+            // 保存更改
+            _context.SaveChanges();
+
+            // 返回更新后的聊天
+            return NoContent();
         }
     }
 }
