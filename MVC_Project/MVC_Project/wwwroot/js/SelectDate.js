@@ -1,10 +1,19 @@
 ﻿// 獲取該會員在此活動的投票選項
 $(document).ready(function () {
 
-    // 從URL中獲取ActivityId參數
-    var urlParams = new URLSearchParams(window.location.search);
-    var activityId = urlParams.get('activityId');
-    var userId = urlParams.get('userId');
+    
+    // 檢查網址中是否包含'activityId'參數
+    if (window.location.search.includes('activityId')) {
+        // 使用方法B從URL參數中獲取activityId
+        var urlParams = new URLSearchParams(window.location.search);
+        var activityId = urlParams.get('activityId');
+    } else {
+        // 使用方法A從網址路徑中獲取activityId
+        var activityId = window.location.pathname.split('/').pop();
+    }
+
+    // 現在你可以使用activityId進行後續操作
+    console.log('獲取的activityId為：' + activityId);
 
     $.ajax({
         url: '/VoteRecords/GetMemberVote',
@@ -24,8 +33,8 @@ $(document).ready(function () {
                     }
                 });
 
-                // 禁用"提交"按鈕
-               /* $('button[type="submit"]').prop('disabled', true);*/
+                 /*禁用"提交"按鈕*/
+                $('button[type="submit"]').prop('disabled', true);
             } else {
                 // 禁用"提交"按鈕
                 $('button[type="submit"]').prop('disabled', true);
@@ -49,10 +58,18 @@ $('button[type="submit"]').click(function (e) {
     // 獲取選中的投票選項的值
     var selectedVote = $('input[type=radio]:checked').val();
 
-    // 從URL中獲取ActivityId參數
-    var urlParams = new URLSearchParams(window.location.search);
-    var activityId = urlParams.get('activityId');
-    console.log('Activity ID:', activityId);  // 除錯語句
+    // 檢查網址中是否包含'activityId'參數
+    if (window.location.search.includes('activityId')) {
+        // 使用方法B從URL參數中獲取activityId
+        var urlParams = new URLSearchParams(window.location.search);
+        var activityId = urlParams.get('activityId');
+    } else {
+        // 使用方法A從網址路徑中獲取activityId
+        var activityId = window.location.pathname.split('/').pop();
+    }
+
+    // 現在你可以使用activityId進行後續操作
+    console.log('獲取的activityId為：' + activityId);
 
     // 檢查是否有選擇投票選項
     if (selectedVote) {
