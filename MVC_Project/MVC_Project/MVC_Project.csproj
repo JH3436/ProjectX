@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\ForgotPassword.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.62.1" />
     <PackageReference Include="Google.Apis.Gmail.v1" Version="1.62.1.3196" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.22" />
@@ -20,6 +24,10 @@
     <PackageReference Include="MimeKit" Version="4.2.0" />
     <PackageReference Include="MoreLinq" Version="3.4.2" />
     <PackageReference Include="SmartBreadcrumbs" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Resources\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
 
 
 *{
@@ -6,21 +6,34 @@
     font-family: "Roboto", sans-serif;
 }
 
+/*James加的*/
+.navbar {
+    margin-left: 10%;
+    margin-right: 10%;
+    color: var(--white);
+    font-size: 1.75rem;
+    font-weight: bolder;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 /*:root {
+/* 主題顏色宣告 */
+:root {
     --black: #000000;
-    --deepBlue: #5d73a3;
+    --deepBlue: #14213d;
     --blue: #416ac2;
     --orange: #fca311;
     --lightGray: #e5e5e5;
     --white: #ffffff;
     --brown: #AD7D52;
     --heart: #B44163;
-    --lightBlue-bg: rgb(45, 68, 119);
-}*/
+    --lightBlue-bg: rgba(45, 68, 119, 0.486);
+}
 
-/*body {
-    color: #fca311;
-}*/
+/* 頁面背景色 */
+body {
+    background-color:var(--deepBlue)
+}
 
 /*麵包屑*/
 nav {
@@ -226,6 +239,7 @@ figure figcaption {
     padding: 2.5px 12.5px;
     border-radius: 5px;
     transition: all 0.1s ease;
+    background-color:var(--deepBlue);
 }
 
     .org-btn:hover {
@@ -273,7 +287,10 @@ figure figcaption {
         color: var(--deepBlue);
     }
 
-
+.abutton {
+    padding: 8.2px 20.5px;
+    margin-right: 5px;
+}
 #introABC {
     font-family: "Noto Sans TC", sans-serif;
     font-family: "Roboto", sans-serif;
@@ -404,4 +421,8 @@ label {
     --bs-pagination-color: var(--deepBlue);
     --bs-pagination-bg: var(--white);
     --bs-pagination-font-size:1.2rem;
+}
+
+.form-label {
+color:var(--white)
 }
