@@ -124,23 +124,36 @@ namespace MVC_Project.Controllers
 
         // GET: Groups/Edit/5
         public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Group == null)
-            {
-                return NotFound();
-            }
+{
+    if (id == null || _context.Group == null)
+    {
+        return NotFound();
+    }
 
-            var @group = await _context.Group.FindAsync(id);
-            if (@group == null)
-            {
-                return NotFound();
-            }
-            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group.Organizer);
-            //ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
+    var @group = await _context.Group.FindAsync(id);
 
-            // 返回View並傳遞group對象
-            return RedirectToAction("Create", "Groups");
-        }
+    if (@group == null)
+    {
+        return NotFound();
+    }
+
+    MemberUseViewModel model = new MemberUseViewModel();
+    model.GroupID = @group.GroupID;
+
+    // 其他需要的初始化...
+
+    if (_context.Member != null)
+    {
+        ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID", @group?.Organizer);
+    }
+
+    return View("Create", model);  // 注意這裡傳遞的是 model，而不是 @group
+}
+
+
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -178,7 +191,7 @@ namespace MVC_Project.Controllers
             // ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID", @group.OriginalActivityID);
 
             // 返回Edit視圖，並傳遞group對象，讓使用者可以重新編輯
-            return View(@group);
+            return View("Create", "Groups");
         }
 
 

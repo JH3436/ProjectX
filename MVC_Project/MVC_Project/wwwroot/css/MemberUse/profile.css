@@ -1,4 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@200&family=Roboto:ital,wght@1,300&display=swap");
 
 
 *{
@@ -6,6 +6,17 @@
     font-family: "Roboto", sans-serif;
 }
 
+/*James加的*/
+.navbar {
+    margin-left: 10%;
+    margin-right: 10%;
+    color: var(--white);
+    font-size: 1.75rem;
+    font-weight: bolder;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+/*:root {
 /* 主題顏色宣告 */
 :root {
     --black: #000000;

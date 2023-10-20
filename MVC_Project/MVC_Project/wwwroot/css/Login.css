@@ -575,3 +575,9 @@ margin:0 auto;
         cursor: pointer;
         color: #9f9e9e;
     }
+
+
+.input-container {
+    display: flex;
+    align-items: center;
+}

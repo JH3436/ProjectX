@@ -10,7 +10,7 @@
 	}
 }
 <body>
-	
+
 	<div class="container-loginandregister">
 
 		<!-- 登入-->
@@ -33,31 +33,25 @@
 				</div>
 			</form>
 			<div class="quicklogin">
-				<h2> - 快速登入 - </h2>
-				<form action="">
+				<h2> ------ </h2>
 
-					<button class="button">使用Google登入</button>
-				</form>
-				<button class="button">使用Line登入</button>
+
+				<button id="forgotPasswordBtn" class="button">忘記密碼</button>
+				
+				<a style="display:inline-block ;text-decoration: none;" class="button" href="/Home/Register">註冊帳號</a>
 			</div>
 
 			<!-- 切換 -->
 
-			<div class="forget">
-				<a href="/Account/ForgotPassword">忘記密碼</a>
-			</div>
-			<div class="register-link">
-				<a href="/Home/Register">註冊帳號</a>
-			</div>
 
 		</div>
 
 		<!-- 註冊 -->
-		
-		
+
+
 	</div>
 
-	
+
 
 </body>
 <script>
@@ -75,9 +69,56 @@
 		}
 	});
 </script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		document.getElementById('forgotPasswordBtn').addEventListener('click', () => {
+			const form = document.createElement('form');
+			form.innerHTML = `
+			<div class="input-container">
+			<div class="alertaccount">
+				<label for="account">帳號：</label>
+			<input type="text" id="account" name="account" required>
+			</div>
+			</br>
+			<div class="alertemail">
+				<label for="email">信箱：</label>
+			<input type="email" id="email" name="email" required>
+			</div>
+			</div>
+				</br>
+					`;
+
+			swal({
+				title: "忘記密碼",
+				content: form,
+				buttons: ["取消", "提交"]
+			}).then((willSubmit) => {
+				if (willSubmit) {
+					const account = form.querySelector('#account').value;
+					const email = form.querySelector('#email').value;
+
+					// 使用 Ajax 提交這些值
+					$.post("/Account/ForgotPassword", { account, email })
+						.done(() => {
+							swal("成功", "請查看您的電子郵件來重設密碼", "success");
+						})
+						.fail(() => {
+							swal("失敗", "帳號或電子郵件不正確", "error");
+						});
+				}
+			});
+		});
+	});
+</script>
 <!-- bar-js -->
 <!-- JS連結 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="~/js/MemberUse/login.js"></script>
+<!-- SweetAlert 2 的 CSS 和 JavaScript -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<!-- 引入 jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
