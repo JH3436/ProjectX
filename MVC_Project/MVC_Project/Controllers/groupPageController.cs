@@ -248,6 +248,7 @@ namespace MVC_Project.Controllers
         public IActionResult Delete(int id)
         {
             var entityToDelete = _context.Chat.Find(id);
+            //var replyToDelete = _context.Chat.
             _context.Chat.Remove(entityToDelete);
             _context.SaveChanges();
             return NoContent();

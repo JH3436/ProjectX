@@ -113,11 +113,31 @@ $(document).ready(function () {
     function simulateClick() {
         var temp = $("#discussTextArea").val();
         if (temp == "") {
-            alert("請輸入文字");
+            Swal.fire('請輸入文字');
+
         } else {
-            var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
+            Swal.fire({
+                title: '提交討論?',
+                text: "確定提交嗎?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '確定',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    discussUpdate();
+                    Swal.fire({
+                        icon: 'success',
+                        title: '成功',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            })
         }
-        discussUpdate();
+        
     }
 });
 
@@ -127,12 +147,29 @@ $(document).on("click", ".messageBtn", function () {
 
     var temp = $(this).parent().children("textarea[name='ChatContent']").val();
     if (temp == "") {
-        alert("請輸入文字");
+        Swal.fire('請輸入文字');
     } else {
-        var sure = confirm("確定提交留言\n\n" + temp);
+        Swal.fire({
+            title: '提交留言?',
+            text: "確定提交嗎?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定',
+            cancelButtonText: '取消'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                replyUpdate(chatId);
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+        })
     }
-    replyUpdate(chatId);
-    console.log(chatId);
 });
 
 
@@ -485,12 +522,11 @@ $(document).on('click', '.deleteA', function () {
 
 
 
-/*$.fn.modal.Constructor.prototype._enforceFocus = function () { };*/
 $(document).on('click', '.editA', function () {
     console.log("OK");
     Swal.fire({
-        title: "An input!",
-        text: "Write something interesting:",
+        title: "編輯",
+        text: "留言:",
         input: 'text',
         showCancelButton: true
     }).then((result) => {
