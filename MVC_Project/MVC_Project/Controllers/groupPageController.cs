@@ -240,5 +240,35 @@ namespace MVC_Project.Controllers
             else { return BadRequest(); }
             
         }
+
+        //刪除留言
+        // DELETE: api/groupPage/1
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                if (id <= 0)
+                {
+                    return BadRequest("Invalid ID");
+                }
+
+                var entityToDelete = _context.Chat.Find(id);
+                if (entityToDelete != null)
+                {
+                    _context.Chat.Remove(entityToDelete);
+                    _context.SaveChanges();
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound(); // 返回 404 Not Found 表示未找到要删除的资源
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
     }
 }

@@ -296,6 +296,9 @@ function updateChatInModal(chatList) {
                     <div class="userCommentDivRight">
                         <p class="h3 align-self-center">${chat.Nickname}</p>
                         ${chatContent}
+                        <a id="editA" class="editA" value="${chat.UserID}">編輯</a>
+                        <a>&nbsp;</a>
+                        <a id="deleteA" class="deleteA" value="${chat.UserID}">刪除</a>
                         <p class="commentDatetime">${chatTime}</p>
                     </div>
                 </div>
@@ -322,6 +325,9 @@ function updateChatInModal(chatList) {
                             <div class="userCommentDivRight">
                                 <p class="h3 align-self-center">${reply.Nickname}</p>
                                 <div class="comment-box align-self-start">${reply.ChatContent}</div>
+                                <a id="editA" class="editA"  value="${reply.UserID}">編輯</a>
+                                <a>&nbsp;</a>
+                                <a id="deleteA" class="deleteA" value="${reply.UserID}">刪除</a>
                                 <p class="commentDatetime">${replyTime}</p>
                             </div>
                         </div>
@@ -353,8 +359,23 @@ function updateChatInModal(chatList) {
         }
     });
     getUserInfo();
+     userEditDelete();
 }
 //會員讀取自訂函式
+function userEditDelete() {
+    const currentUserId = $('#currentUserId').val(); // 使用者id
+    $('.editA, .deleteA').each(function () {
+        const editLink = $(this);
+        const chatUserId = editLink.attr('value');
+
+        // 检查条件，如果当前用户的ID等于聊天用户的ID，则显示链接
+        if (currentUserId === chatUserId) {
+            editLink.css('display', 'inline-block');
+        } else {
+            editLink.css('display', 'none');
+        }
+    });
+}
 
 function getUserInfo() {
     let currentUserId = $('#currentUserId').val();
@@ -413,6 +434,38 @@ function getUserIngroup() {
         }
     });
 }
+
+//刪除留言請求
+$(document).on('click', '.deleteA', function () {
+        const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
+        const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
+        if (currentUserId === replyUserId) {
+            const replyId = $(this).attr('replyId'); // 获取要删除的留言的 ID
+            console.log(replyId);
+            // 发送 DELETE 请求到后端 API 来删除留言
+            fetch(`/api/groupPage/${replyId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Reply deleted successfully.');
+                    } else {
+                        console.error('Failed to delete reply.');
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
+        } else {
+            // 不允许删除
+            console.log('You are not allowed to delete this reply.');
+        }
+ });
+
+
 
 
 
