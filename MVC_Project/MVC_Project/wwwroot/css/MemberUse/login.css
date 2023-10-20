@@ -176,5 +176,27 @@ form {
   cursor: pointer;
   color: #9f9e9e;
 
-}body {
+}
+
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    color: var(--deepBlue);
+    font-weight: bold;
+    font-size: 1.5rem;
+   
+}
+.alertemail {
+padding-right:30px;
+}
+.alertaccount {
+    padding-right: 30px;
+}
+
+.swal-title {
+    font-size: 3rem;
+}
+.input-container input {
+    border-radius: 8px; /* 您可以根據需要調整這個值 */
 }

@@ -22,10 +22,12 @@
 
                             @if (activity.CanEdit)
                             {
-                                <a class="blue-btn blue-btn-text-style"
+                                
+                                <a class="abutton blue-btn blue-btn-text-style"
                                    href="@Url.Action("SelectDatefromMember", "VoteRecords", new { userId = @ViewBag.UserId, activityId = activity.ActivityID })">
                                     選擇時段
                                 </a>
+
                             }
                                 <button class="blue-btn blue-btn-text-style delete-btn" data-id="@activity.LikeRecordID">取消收藏</button>
                             

@@ -16,8 +16,10 @@
                         <h3 class="card-title">@group.GroupName</h3>
                         <p class="card-text">結束日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
-                            <button class="blue-btn blue-btn-text-style edit-btn" data-action="Edit" data-controller="Groups" data-id="@group.GroupID">
-                                編輯</button>
+                            <a class="abutton blue-btn blue-btn-text-style"
+                               href="@Url.Action("Edit", "Groups", new { groupId = @group.GroupID })">
+                                編輯
+                            </a>
 
 
 

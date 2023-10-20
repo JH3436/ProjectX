@@ -38,25 +38,29 @@ namespace MVC_Project.Controllers
 		}
 
         [HttpPost]
-        public IActionResult Login(string username, string password)
+public IActionResult Login(string username, string password, string returnUrl)
+{
+    var member = _context.Member.FirstOrDefault(m => m.Account == username && m.Password == password);
+    if (member != null)
+    {
+        // 檢查用戶是否已經啟用
+        if (!member.IsActive)
         {
-            var member = _context.Member.FirstOrDefault(m => m.Account == username && m.Password == password);
-            if (member != null)
-            {
-                // 檢查用戶是否已經啟用
-                if (!member.IsActive)
-                {
-                    TempData["ErrorMessage"] = "此帳號尚未啟用。請先啟用帳號。";
-                    return View("~/Views/Home/Login.cshtml");
-                }
-
-                HttpContext.Session.SetString("UserId", member.UserID.ToString()); // 儲存使用者ID到 session
-                return RedirectToAction("Index", "Home");
-            }
-
-            TempData["ErrorMessage"] = "帳號或密碼錯誤";
+            TempData["ErrorMessage"] = "此帳號尚未啟用，請先啟用帳號。";
             return View("~/Views/Home/Login.cshtml");
         }
+
+        HttpContext.Session.SetString("UserId", member.UserID.ToString()); // 儲存使用者ID到 session
+
+				// 檢查 returnUrl 是否存在並且是一個有效的 URL
+
+				return Redirect("https://localhost:7254/");
+
+			}
+
+    TempData["ErrorMessage"] = "帳號或密碼錯誤";
+    return View("~/Views/Home/Login.cshtml");
+}
 
         [HttpPost]
 		public async Task<IActionResult> Register(string account, string password, string comfirm_password, string nickname, string email)
@@ -216,16 +220,16 @@ namespace MVC_Project.Controllers
 		// 任意值，若未來有使用者認証，可使用使用者編號或登入帳號。
 		string Username = "ABC";
 
-        /// <summary>
-        /// 存放 client_secret 和 credential 的地方
-        /// </summary>
-        
-        string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
+		/// <summary>
+		/// 存放 client_secret 和 credential 的地方
+		/// </summary>
 
-        /// <summary>
-        /// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
-        /// </summary>
-        string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
+		string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
+		//string jsonFilePath = Path.Combine("wwwroot", "Resources", "client_secret.json");
+		/// <summary>
+		/// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
+		/// </summary>
+		string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
 
 		/// <summary>
 		/// 取得認証用的網址
