@@ -304,16 +304,16 @@ $(".notification-popup").on("click", ".popup-content", function () {
 $(".searchInputWrapper").on("keydown", "input[type='text']", function (e) {
     if (e.key === "Enter") {
         $("form").submit();
-        console.log(activities); // 輸出 JSON 數據到控制台
-        console.log(JSON.stringify(activities, null, 2)); // 格式化 JSON 數據
+        console.log(finalResults); // 輸出 JSON 數據到控制台
+        console.log(JSON.stringify(finalResults, null, 2)); // 格式化 JSON 數據
     }
 });
 
 // 透過點擊按鈕觸發搜索
 $(".searchInputWrapper").on("click", "#search-icon", function () {
     $("form").submit();
-    console.log(activities); // 輸出 JSON 數據到控制台
-    console.log(JSON.stringify(activities, null, 2)); // 格式化 JSON 數據
+    console.log(finalResults); // 輸出 JSON 數據到控制台
+    console.log(JSON.stringify(finalResults, null, 2)); // 格式化 JSON 數據
 });
 
 

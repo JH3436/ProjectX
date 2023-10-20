@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MoreLinq;
 using MVC_Project.Models;
 using SmartBreadcrumbs.Attributes;
 using static NuGet.Packaging.PackagingConstants;
@@ -512,25 +513,100 @@ namespace MVC_Project.Controllers
 
 
 
-        //搜尋框@@@@@@@@@@@@@@@@@@@@@測試@@@@@@@@@@@@@@@@@@@@@@@
-        //Note: with where()||where(), you can find two columns with your search Search string
-        public IActionResult Searchfunction(string searchString)
+        //搜尋框功能
+        public IActionResult SearchResult(string searchString)
         {
-            if (_context.MyActivity == null)
+            var myActivityResults = _context.MyActivity
+            .Where(m => m.ActivityName.Contains(searchString))
+            .Select(m => new
             {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+                ID = m.ActivityID,
+                NAME = m.ActivityName,
+            })
+            .ToList();
+
+            var groupResults = _context.Group
+                .Where(g => g.GroupName.Contains(searchString))
+                .Select(g => new
+                {
+                    ID = g.GroupID,
+                    NAME = g.GroupName,
+                })
+            .ToList();
+
+            //把兩個變數合在一起
+            var combinedResults = myActivityResults.Concat(groupResults);
+
+            //宣告一個List接查到的資料
+            var finalResults = new List<object>();
+
+            foreach (var result in combinedResults)
+            {
+                var myActivityData = Enumerable.Empty<object>(); // 初始化 myActivityData 變數
+                var groupData = Enumerable.Empty<object>(); // 初始化 groupData 變數
+
+                var myActivityResult = _context.MyActivity.FirstOrDefault(m => m.ActivityID == result.ID && m.ActivityName == result.NAME);
+                if (myActivityResult != null)
+                {
+                    myActivityData = (from m in _context.MyActivity
+                                     join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                     where m.ActivityID == myActivityResult.ActivityID
+                                     group new { m, o } by m.ActivityID into grouped
+                                     select new
+                                     {
+                                         ActivityID = grouped.FirstOrDefault().m.ActivityID,
+                                         ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                         Category = grouped.FirstOrDefault().m.Category,
+                                         SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                         ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                         MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                         VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                         ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                         PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
+                                     }).ToList();
+                }
+
+
+                var GroupResult = _context.Group.FirstOrDefault(g => g.GroupName == result.NAME && g.GroupID == result.ID);
+                if (GroupResult != null)
+                {
+                    groupData = (from g in _context.Group
+                                join m in _context.Member on g.Organizer equals m.UserID
+                                join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                                from pp in personalPhotos.DefaultIfEmpty()
+                                where g.GroupID == GroupResult.GroupID
+                                group new { g, pp, m } by g.GroupID into grouped
+                                select new
+                                {
+                                    GroupID = grouped.FirstOrDefault().g.GroupID,
+                                    GroupName = grouped.FirstOrDefault().g.GroupName,
+                                    GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
+                                    GroupContent = grouped.FirstOrDefault().g.GroupContent,
+                                    MinAttendee = grouped.FirstOrDefault().g.MinAttendee,
+                                    MaxAttendee = grouped.FirstOrDefault().g.MaxAttendee,
+                                    StartDate = grouped.FirstOrDefault().g.StartDate,
+                                    EndDate = grouped.FirstOrDefault().g.EndDate,
+                                    Nickname = grouped.FirstOrDefault().m.Nickname,
+                                    //Photos = grouped.Select(item => item.pp.PhotoData).ToList() // 收集照片到集合
+                                    PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
+                                }).ToList();
+                }
+                if (myActivityData.Any())
+                {
+                    finalResults.Add(myActivityData);
+                }
+                else
+                {
+                    finalResults.Add(groupData);
+                }
             }
 
-            var activities = from m in _context.MyActivity
-                             select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                activities = activities.Where(m => m.ActivityName!.Contains(searchString));
-            }
-
-            return Json(activities);
+            return Json(finalResults);
         }
+
+
+
+
 
 
 

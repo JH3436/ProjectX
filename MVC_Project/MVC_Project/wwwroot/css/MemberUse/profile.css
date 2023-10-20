@@ -6,6 +6,16 @@
     font-family: "Roboto", sans-serif;
 }
 
+/*James加的*/
+.navbar {
+    margin-left: 10%;
+    margin-right: 10%;
+    color: var(--white);
+    font-size: 1.75rem;
+    font-weight: bolder;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 /*:root {
     --black: #000000;
     --deepBlue: #5d73a3;
