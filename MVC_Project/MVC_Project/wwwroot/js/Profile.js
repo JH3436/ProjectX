@@ -132,55 +132,6 @@ heartIcons.forEach(function (heartIcon) {
     });
 });
 
-// 聯絡我們-表單
-// 當按鈕點擊時，顯示 dialog
-$(document).ready(function () {
-    // 表單驗證的代碼
-    $("#contactBox form input").on("input", function () {
-        if (this.checkValidity()) {
-            $(this).css("border", "0.2rem green solid");
-        } else {
-            $(this).css("border", "0.2rem red solid");
-        }
-    });
-
-    // 表單提交的代碼
-    $("#myForm").on("submit", function (event) {
-        event.preventDefault();
-
-        var formData = $(this).serialize();
-
-        $.post("/Account/newContact", formData, function (response) {
-            Swal.fire(
-                '成功！',
-                '您的資料已成功送出。',
-                'success'
-            );
-            var dialog = document.getElementById("contactDialog");
-            dialog.close();
-            document.getElementById("myForm").reset();
-        }).fail(function () {
-            Swal.fire(
-                '失敗！',
-                '出現了一些問題。',
-                'error'
-            );
-        });
-    });
-});
-
-// 其他非 jQuery 的代碼
-document.getElementById("showContactButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.showModal();
-});
-document.getElementById("closeDialogButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.close();
-});
-document.getElementById("contactDialog").addEventListener("close", function () {
-    document.getElementById("myForm").reset();
-});
 
 
 

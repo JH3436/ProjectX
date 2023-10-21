@@ -38,8 +38,8 @@ namespace MVC_Project.Controllers
 		}
 
         [HttpPost]
-public IActionResult Login(string username, string password, string returnUrl)
-{
+	public IActionResult Login(string username, string password, string returnUrl)
+	{
     var member = _context.Member.FirstOrDefault(m => m.Account == username && m.Password == password);
     if (member != null)
     {
