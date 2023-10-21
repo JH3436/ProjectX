@@ -191,16 +191,16 @@
                         <td>無</td>
                     </tr>
                     
-                    @* <tr>
-                        <td>主揪</td>
-                        <td>@Model[0].Organizer</td>
-                    </tr> *@
-
                     <tr>
+                        <td>主揪</td>
+                        <td id="Organizer"></td>
+                    </tr>
+
+                    @* <tr>
                         <td>主揪</td>
                         <!-- 注意這裡添加了一個class和一個data-attribute來儲存organizer的ID -->
                         <td class="organizer-info" data-organizer-id="@Model[0].Organizer">@Model[0].Organizer</td>
-                    </tr>
+                    </tr> *@
                 </table>
             </div>
         </div>

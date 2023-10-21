@@ -244,6 +244,32 @@ heartIcons.forEach(function (heartIcon) {
     });
 });
 
+//主揪資訊
+
+$(document).ready(function () {
+    Organizer();
+
+});
+function Organizer() {
+    const id = getIdFromUrl();
+
+    console.log(`/api/Organizer/${id}`);
+    $.ajax({
+        url: `/api/Organizer/${id}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data[0].Nickname);
+            $('#Organizer').text(data[0].Nickname);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+            
+        }
+    });
+
+}
+
 /*抓取groupid*/
 function getIdFromUrl() {
     const groupidElement = document.querySelector('.groupid');  // 選取具有 class 為 groupid 的元素
@@ -406,7 +432,7 @@ function userEditDelete() {
         const chatUserId = editLink.attr('value');
 
         // 检查条件，如果当前用户的ID等于聊天用户的ID，则显示链接
-        if (currentUserId === chatUserId) {
+        if (currentUserId === chatUserId || currentUserId == 1) {
             editLink.css('display', 'inline-block');
         } else {
             editLink.css('display', 'none');
@@ -487,7 +513,7 @@ $(document).on('click', '.deleteA', function () {
         if (result.isConfirmed) {
             const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
             const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
-            if (currentUserId === replyUserId) {
+            if (currentUserId === replyUserId || currentUserId == 1) {
                 const ChatID = $(this).attr('ChatID'); // 获取要删除的留言的 ID
                 console.log(ChatID);
 
