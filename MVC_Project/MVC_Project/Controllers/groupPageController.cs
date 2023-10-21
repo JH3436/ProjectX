@@ -25,7 +25,7 @@ namespace MVC_Project.Controllers
         }
 
 
-        
+
 
         public IActionResult groupPage(int id)
         {
@@ -91,7 +91,7 @@ namespace MVC_Project.Controllers
             ViewData["BreadcrumbNode"] = childNode3;
 
             //-----麵包屑結束----- 
-          
+
             var temp = data.ToList();
 
             return View(temp);
@@ -114,7 +114,7 @@ namespace MVC_Project.Controllers
                                UserID = c.UserID,
                                ChatContent = c.ChatContent,
                                ToWhom = c.ToWhom,
-                               ChatTime = c.ChatTime, 
+                               ChatTime = c.ChatTime,
                                Nickname = m.Nickname,
                                UserPhoto = m.UserPhoto
                            };
@@ -173,7 +173,7 @@ namespace MVC_Project.Controllers
             return RedirectToAction("groupPage", new { id });
         }
 
-        
+
 
 
         [HttpPost]
@@ -189,9 +189,9 @@ namespace MVC_Project.Controllers
 
             return RedirectToAction("groupPage", new { id });
         }
-       
+
         [HttpPost]
-        public IActionResult register(int groupId, int userId )
+        public IActionResult register(int groupId, int userId)
         {
             int id = groupId;
             int account = userId;
@@ -205,7 +205,7 @@ namespace MVC_Project.Controllers
             _context.SaveChanges();
 
             // 返回成功的回應，例如JSON對象
-            return RedirectToAction("groupPage", new { id});
+            return RedirectToAction("groupPage", new { id });
         }
 
         //活動參加者權限
@@ -218,7 +218,7 @@ namespace MVC_Project.Controllers
             var temp = from r in _context.Registration
                        where r.GroupID == id && r.ParticipantID == account
                        select r;
-            var UserIngroup = temp.ToList().Count()==0? false:true ;
+            var UserIngroup = temp.ToList().Count()==0 ? false : true;
             return Ok(UserIngroup);
         }
         //活動參考圖片
@@ -233,12 +233,12 @@ namespace MVC_Project.Controllers
                        {
                            PhotoPath = o.PhotoPath
                        };
-            if (temp.Count() == 0 ? false : true) 
-            { 
+            if (temp.Count() == 0 ? false : true)
+            {
                 return Ok(temp);
             }
             else { return BadRequest(); }
-            
+
         }
 
         //刪除留言
@@ -270,5 +270,32 @@ namespace MVC_Project.Controllers
                 return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
+
+        //取消報名 (James 10/21新增)
+        public IActionResult DeleteRegistration(int groupId, int userId)
+        {
+            try
+            {
+                var registration = _context.Registration
+                    .FirstOrDefault(r => r.GroupID == groupId && r.ParticipantID == userId);
+
+                if (registration != null)
+                {
+                    _context.Registration.Remove(registration);
+                    _context.SaveChanges();
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "找不到要刪除的記錄" });
+                }
+            }
+            catch (Exception ex)
+            {
+                // 在這裡處理例外情況，例如資料庫錯誤
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }

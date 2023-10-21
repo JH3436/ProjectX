@@ -388,7 +388,7 @@ body {
     opacity: 0;
 }
 
-    /*未登入狀態下的愛心icon*/
+    /*未登入狀態下的投票icon*/
     .card__info-hover .disabled-icon {
         opacity: 0.5;
         cursor: not-allowed;

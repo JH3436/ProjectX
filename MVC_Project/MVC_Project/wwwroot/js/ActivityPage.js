@@ -1,19 +1,5 @@
 
-//輪播圖的JS好像會吃其他的，所以我放在最上面
 
-//愛心設計
-$(document).ready(function () {
-    // 監聽心形圖標的點擊事件
-    $(".heart-icon").click(function () {
-        // 切換圖標的類名和樣式
-        var heartIcon = $(this).find("i");
-        if (heartIcon.hasClass("fa-regular fa-heart")) {
-            heartIcon.removeClass("fa-regular fa-heart").addClass("fa-solid fa-heart").css("color", "#b44163");
-        } else {
-            heartIcon.removeClass("fa-solid fa-heart").addClass("fa-regular fa-heart").css("color", "");
-        }
-    });
-});
 
 
 // $('#myCarousel').carousel({
@@ -146,66 +132,97 @@ $(document).on("keydown", "#replyTextArea", function (event) {
 
 
 
-/*收藏API*/
-const heartIcons = document.querySelectorAll('.heart-icon');
+/*收藏API (James 10/21改)*/
+const VoteIcons = document.querySelectorAll('.vote-icon');
 
-heartIcons.forEach(function (heartIcon) {
-    heartIcon.addEventListener('click', function () {
+VoteIcons.forEach(function (voteIcon) {
+    voteIcon.addEventListener('click', function () {
         let currentUserId = $('#currentUserId').val();
-        const activityId = heartIcon.getAttribute('data-activityid');
-        if (heartIcon.classList.contains('fa-regular')) {
-            // 在此處執行AJAX POST請求，將activityId和userID（在這裡假設為1）發送到後端
+        if (currentUserId != 0) {
+            const activityId = voteIcon.getAttribute('data-activityid');
+            if (voteIcon.classList.contains('fa-envelope-open-text')) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/MyActivity/LikeActivity',
+                    data: {
+                        activityId: activityId,
+                        userId: currentUserId
+                    },
+                    success: function (data) {
+                        voteIcon.classList.remove('fa-envelope-open-text');
+                        voteIcon.classList.add('fa-envelope-circle-check');
+                        // 添加 padding-left 屬性
+                        voteIcon.setAttribute('style', 'padding-left: 3px');
+                        // 找到 custom-title 元素並更改其內容
+                        var customTitle = document.querySelector('.custom-title');
+                        customTitle.textContent = '已參與投票';
+                    },
+                    error: function (error) {
+                        // 處理錯誤，如果有錯誤發生
+                    }
+                });
+            } else {
+                // 在此處執行AJAX DELETE請求，從"LikeRecord"資料表中刪除對應的記錄
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/Activity/UnlikeActivity',
+                    data: {
+                        activityId: activityId,
+                        userId: currentUserId
+                    },
+                    success: function (data) {
+                        voteIcon.classList.remove('fa-envelope-circle-check');
+                        voteIcon.classList.add('fa-envelope-open-text');
+                        // 移除 padding-left 屬性
+                        voteIcon.removeAttribute('style');
+                        // 找到 custom-title 元素並更改其內容
+                        var customTitle = document.querySelector('.custom-title');
+                        customTitle.textContent = '參與投票';
+                    },
+                    error: function (error) {
+                        // 處理錯誤，如果有錯誤發生
+                    }
+                });
+            }
+        }
+    });
+});
+
+
+//group page取消報名 (James 10/21新增)
+$(document).ready(function () {
+    $('#registerLink').on('click', function () {
+        // 檢查按鈕是否包含fa-user-check類別(已報名狀態)
+        if ($(this).find('.fa-user-check').length > 0) {
+            // 收集groupId和userId
+            var groupId = $('input[name="groupId"]').val();
+            var userId = $('input[name="userId"]').val();
+
+            // 執行刪除操作
             $.ajax({
+                url: '/groupPage/DeleteRegistration',
                 type: 'POST',
-                url: '/MyActivity/LikeActivity',
                 data: {
-                    activityId: activityId,
-                    userId: currentUserId
+                    groupId: groupId,
+                    userId: userId
                 },
-                success: function (data) {
-                    console.log("處理成功的回應，可以更新UI或執行其他操作")
-                    // 處理成功的回應，可以更新UI或執行其他操作
-                    heartIcon.classList.remove('fa-regular');
-                    heartIcon.classList.add('fa-solid');
-                    heartIcon.style.color = "#B44163";
+                success: function (response) {
+                    if (response.success) {
+                        var customTitle = document.querySelector('.custom-title');
+                        customTitle.textContent = '';
+                        // 修改i元素的圖示
+                        $('#registerLink').removeClass('fa-user-check').addClass('fa-user-plus');
+                        // 修改表單的 action
+                        $('#registerForm').attr('asp-action', '/grouppage/Register'); 
 
-                    //const cardInfo = heartIcon.closest('.card').querySelector('.card__info');
-
-                    //const likedText = document.createElement('span');
-                    //likedText.textContent = '已收藏';
-                    //likedText.classList.add('liked-text');
-
-                    /*cardInfo.appendChild(likedText);*/
-                },
-                error: function (error) {
-                    // 處理錯誤，如果有錯誤發生
-                }
-            });
-        } else {
-            // 在此處執行AJAX DELETE請求，從"LikeRecord"資料表中刪除對應的記錄
-            $.ajax({
-                type: 'DELETE',
-                url: '/Activity/UnlikeActivity',
-                data: {
-                    activityId: activityId,
-                    userId: currentUserId
-                },
-                success: function (data) {
-                    console.log("處理成功的回應，可以更新UI或執行其他操作delete")
-                    // 處理成功的回應，可以更新UI或執行其他操作
-                    heartIcon.classList.remove('fa-solid');
-                    heartIcon.classList.add('fa-regular');
-                    heartIcon.style.color = "#1E3050";
-
-                    
-                },
-                error: function (error) {
-                    // 處理錯誤，如果有錯誤發生
+                    } else {
+                    }
                 }
             });
         }
     });
 });
+
 
 /*抓取groupid*/
 function getIdFromUrl() {
@@ -332,7 +349,7 @@ function updateChatInModal(chatList) {
                             </div>
                         </div>
                     </div>`;
-                    chatCommentDiv = chatCommentDiv + replyHtml; 
+                    chatCommentDiv = chatCommentDiv + replyHtml;
                 }
             });
             var replyTextDiv = `
@@ -359,7 +376,7 @@ function updateChatInModal(chatList) {
         }
     });
     getUserInfo();
-     userEditDelete();
+    userEditDelete();
 }
 //會員讀取自訂函式
 function userEditDelete() {
@@ -386,13 +403,13 @@ function getUserInfo() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-                console.log('userInfo', data);
+            console.log('userInfo', data);
             $('#discussInput .userCommentDiv p').text(data[0].Nickname);
             $('#discussInput .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
             $('.replyTextDiv .userCommentDiv #userInfoNickname').text(data[0].Nickname);
             $('.replyTextDiv .userCommentDiv .profile').attr('src', 'data:image/png;base64,' + data[0].UserPhoto);
             getUserIngroup();
-            },
+        },
         error: function (error) {
             console.error('Error:', error);
             $('#replyTextDiv').remove();
@@ -425,45 +442,45 @@ function getUserIngroup() {
                 <h5 style = "margin-left:60%; margin-top:3rem; color:yellow;">討論區開放給報名團員使用!!</h5>
             `);
             }
-            
+
             console.log(currentUserId)
             console.log(data);
         },
         error: function (error) {
-            
+
         }
     });
 }
 
 //刪除留言請求
 $(document).on('click', '.deleteA', function () {
-        const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
-        const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
-        if (currentUserId === replyUserId) {
-            const replyId = $(this).attr('replyId'); // 获取要删除的留言的 ID
-            console.log(replyId);
-            // 发送 DELETE 请求到后端 API 来删除留言
-            fetch(`/api/groupPage/${replyId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+    const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
+    const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
+    if (currentUserId === replyUserId) {
+        const replyId = $(this).attr('replyId'); // 获取要删除的留言的 ID
+        console.log(replyId);
+        // 发送 DELETE 请求到后端 API 来删除留言
+        fetch(`/api/groupPage/${replyId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Reply deleted successfully.');
+                } else {
+                    console.error('Failed to delete reply.');
+                }
             })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Reply deleted successfully.');
-                    } else {
-                        console.error('Failed to delete reply.');
-                    }
-                })
-                .catch(error => {
-                    console.error('An error occurred:', error);
-                });
-        } else {
-            // 不允许删除
-            console.log('You are not allowed to delete this reply.');
-        }
- });
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+    } else {
+        // 不允许删除
+        console.log('You are not allowed to delete this reply.');
+    }
+});
 
 
 
@@ -539,7 +556,7 @@ function replyUpdate(chatId) {
 //圖片API
 function photoGet() {
     const id = getIdFromUrl();
-    
+
     $.ajax({
         url: `/api/photoGet/${id}`,
         type: 'GET',
@@ -662,7 +679,7 @@ $(document).ready(function () {
 
 
 
-//-------James家的--------------
+//-------James加的--------------
 //麵包屑判斷導向哪個活動類別
 $(document).ready(function () {
     $("nav ol li a").click(function (e) {

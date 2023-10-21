@@ -48,57 +48,38 @@
     <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
 
     <!-- 導覽列設計 -->
-    
-
     <!-- 活動頁面設計 -->
-    <div class="mycontainer">
-
-        @*<div class="reg-and-like-btn row">
-            <div class="col-auto">
-                <!-- 報名按鈕 -->
-                <div class="register-btn">
-                    <a class="register-btn-text-style" href="#">
-                        我要報名!
-                    </a>
-                </div>
-            </div>*@
-            <div class="col-auto">
-                <!-- 點擊收藏 -->
-                <div class="heart-inner">
-
-                @if (ViewBag.likedActivity == "noReturn")
-                    {   
-                    <button  style="display:inline-block" id="heartSignBtn" >
-                        <p class="h3">登入收藏活動</p>
-                    </button>
-                    }
-                else
-                {
-                    if (ViewBag.likedActivity == "false")
-                    {
-                        <i class="fa-solid fa-heart fa-2xl heart-icon" style="color:#B44163"
-                           data-activityid="@Model[0].ActivityID"></i>
-                        <div class="hit-style">
-                            <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                        </div>
-                    }
-                    else 
-                    {
-                        <i class="fa-regular fa-heart fa-2xl heart-icon"
-                           data-activityid=@Model[0].ActivityID></i>
-                        <div class="hit-style">
-                            <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                        </div>
-                    }
-                } 
-                @*<i class="fa-regular fa-heart fa-2xl"></i>*@
-                    
-                    @* <div class="hit-style">
-                        <i class="fa-solid fa-angle-up fa-lg"> 點擊收藏，不錯過活動通知 !</i>
-                    </div> *@
-                </div>
+    <div class="vote-div">
+        @if (ViewBag.likedActivity == "noReturn")
+        {
+            <div class="voteicon-container">
+                <i class="fa-solid fa-envelope-open-text fa-2xl disabled-icon vote-icon"></i>
             </div>
-        </div>
+            <span class="custom-title">登入後可參與投票</span>
+        }
+        else
+        {
+            if (ViewBag.likedActivity == "false")
+            {
+                <div class="voteicon-container">
+                    <i class="fa-solid fa-envelope-open-text fa-2xl vote-icon" data-activityid=@Model[0].ActivityID></i>
+                </div>
+                <span class="custom-title">參與投票</span>
+
+
+
+            }
+            else
+            {
+                <div class="voteicon-container">
+                    <i class="fa-solid fa-envelope-circle-check fa-2xl vote-icon" style="padding-left: 3px;" data-activityid="@Model[0].ActivityID"></i>
+                </div>
+                <span class="custom-title">已參與投票</span>
+
+
+            }
+        }
+    </div>
 
 
 
@@ -112,7 +93,7 @@
             <div class="carousel-container position-relative  col-lg-8" id="pictureDiv">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                         <div class="carousel-item active" data-slide-number="0">
+                        <div class="carousel-item active" data-slide-number="0">
                             <img src="@Model[0].PhotoPath" class="d-block w-100" alt="..." data-type="image"
                                  data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
@@ -126,7 +107,7 @@
                         </div>
                         <div class="carousel-item" data-slide-number="3">
                             <img src="@Model[3].PhotoPath" class="d-block w-100" alt="..." data-type="image"
-                                 data-toggle="lightbox" data-gallery="example-gallery"> 
+                                 data-toggle="lightbox" data-gallery="example-gallery">
                         </div>
                     </div>
                 </div>
@@ -170,7 +151,7 @@
                 <h1>活動介紹</h1>
                 <h3>@Model[0].ActivityContent </h3>
 
-                
+
             </div>
 
             <div class="col-5 activity_info">
@@ -192,7 +173,7 @@
                         <td>建議攜帶金額：</td>
                         <td>@Model[0].SuggestedAmount</td>
                     </tr>
-                    
+
                     <tr>
                         <td>預計出發月份：</td>
                         <td>@Model[0].ExpectedDepartureMonth?.ToString("yyyy-MM")</td>
@@ -203,8 +184,8 @@
     </div>
 
 
-    
-    
+
+
 
 </body>
 <!-- JS連結 -->

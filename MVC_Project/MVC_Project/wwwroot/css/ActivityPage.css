@@ -20,7 +20,7 @@ body {
 /* 導覽列 */
 /*.header {
     background-color: rgba(45, 68, 119, 0.486);
-}
+}*/
 
 .navbar {
     margin-left: 10%;
@@ -30,13 +30,154 @@ body {
     font-weight: bolder;
     padding-top: 1rem;
     padding-bottom: 1rem;
-}*/
+}
 
 .mycontainer {
     padding-left: 15%;
     padding-right: 15%;
 }
 
+/*投票icon*/
+.vote-div {
+    position: sticky;
+    top: 10%;
+    margin-left: 74%;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.voteicon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid 3px var(--orange);
+    background-color: var(--deepBlue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2px;
+}
+
+.vote-div .vote-icon {
+    cursor: pointer;
+}
+
+
+.vote-div .disabled-icon {
+    cursor: not-allowed;
+}
+
+/*未登入點擊提醒*/
+.custom-title {
+    visibility: hidden;
+    opacity: 0.8;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.vote-div:hover .custom-title {
+    visibility: visible;
+}
+
+/*Group page報名按鈕*/
+.register-div {
+    position: sticky;
+    top: 10%;
+    margin-left: 74%;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items:center;
+}
+
+.registericon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid 3px var(--orange);
+    background-color: var(--deepBlue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2px;
+}
+
+.register-div .register-icon {
+    cursor: pointer;
+    color: var(--white);
+}
+
+.register-div:hover .custom-title {
+    visibility: visible;
+}
+
+/* 懸浮聊天室按鈕 */
+
+.label-container {
+    position: fixed;
+    bottom: 3rem;
+    right: 15rem;
+    display: table;
+    visibility: hidden;
+}
+
+.label-text {
+    color: #FFF;
+    background: rgba(51,51,51,0.5);
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.label-arrow {
+    display: table-cell;
+    vertical-align: middle;
+    color: #333;
+    opacity: 0.5;
+}
+
+.float {
+    position: fixed;
+    width: 4rem;
+    height: 4rem;
+    bottom: 3rem;
+    right: 10rem;
+    background-color: var(--orange);
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+}
+
+    .float:hover {
+        opacity: 0.8;
+    }
+
+    .float i {
+        margin-top: 1.65rem;
+        height: 80%;
+        width: 80%;
+        transform: scale(1.2);
+    }
+
+.my-float {
+    font-size: 24px;
+    margin-top: 18px;
+}
+
+a.float + div.label-container {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease;
+}
+
+a.float:hover + div.label-container {
+    visibility: visible;
+    opacity: 1;
+}
 
 /* 麵包屑 */
 #linkWordDiv {
@@ -55,120 +196,6 @@ body {
     margin-right: 12%;
     margin-bottom: 2%;
 }
-/* 報名按鈕 */
-.register-btn {
-    height:3rem;
-    width: fit-content;
-    background-color: var(--deepBlue);
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-}
-
-    .register-btn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
-    }
-
-.alreadyRegister-btn {
-    height:3rem;
-    width: fit-content;
-    background-color: var(--black);
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-}
- .alreadyRegister-btn:hover + .hit-style {
-    display: block;
-}
-
-@keyframes bounceIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    70% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-/* 文字設計 */
-.register-btn-text-style {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
-    transition: color 0.1s;
-}
-
-    .register-btn-text-style:hover {
-        color: var(--white);
-    }
-
-.alreadyRegister-btn-text-style {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-decoration: none;
-    color: var(--lightGray);
-    transition: color 0.1s;
-}
-
-/* 點擊愛心 */
-.heart-inner .heart-icon {
-    cursor: pointer;
-}
-
-.heart-inner {
-    margin-top: 1rem;
-    height: 2rem;
-    margin-bottom: 1.5rem;
-    margin-left:75%;
-    display:flex;
-}
-
-.heart-inner i{
-    transform: scale(1.1);
-}
-
-.hit-style {
-    display: none;
-    margin-top: 15px;
-    padding-left: 5.3px;
-    font-size: 1rem;
-    position: absolute;
-    animation: bounceIn 0.4s ease forwards;
-    z-index:2;
-}
-
-.heart-inner .heart-icon:hover + .hit-style {
-    display: block;
-}
-
-@keyframes bounceIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-
-    70% {
-        transform: scale(1.1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
 
 /* 輪播圖 */
 .carouselDiv {
@@ -239,9 +266,6 @@ body {
     }
 }
 
-/* 圖片手動修改 */
-
-
 
 /* 活動內容資訊 */
 
@@ -292,71 +316,7 @@ body {
 
 
 
-/* 懸浮聊天室按鈕 */
 
-.label-container {
-    position: fixed;
-    bottom: 3rem;
-    right: 15rem;
-    display: table;
-    visibility: hidden;
-}
-
-.label-text {
-    color: #FFF;
-    background: rgba(51,51,51,0.5);
-    display: table-cell;
-    vertical-align: middle;
-    padding: 10px;
-    border-radius: 3px;
-}
-
-.label-arrow {
-    display: table-cell;
-    vertical-align: middle;
-    color: #333;
-    opacity: 0.5;
-}
-
-.float {
-    position: fixed;
-    width: 4rem;
-    height: 4rem;
-    bottom: 3rem;
-    right: 10rem;
-    background-color: var(--orange);
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px #999;
-}
-
-    .float:hover {
-        opacity: 0.8;
-    }
-
-    .float i {
-        margin-top: 1.65rem;
-        height: 80%;
-        width: 80%;
-        transform:scale(1.2);
-    }
-
-.my-float {
-    font-size: 24px;
-    margin-top: 18px;
-}
-
-a.float + div.label-container {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s ease;
-}
-
-a.float:hover + div.label-container {
-    visibility: visible;
-    opacity: 1;
-}
 
 /* 聊天室彈出 */
 
@@ -641,40 +601,6 @@ a.float:hover + div.label-container {
 
     #editA:hover, #deleteA:hover {
         color: lightgray
-    }
-
-    #heartSignBtn {
-        height: 3rem;
-        width: 14rem;
-        display: inline-flex;
-        background-color: var(--lightBlue-bg);
-        border: var(--orange) 2px solid;
-        padding: 2.5px 12.5px;
-        border-radius: 5px;
-        transition: all 0.1s ease;
-        float: right;
-        font-size: 1.5rem;
-        font-weight: bolder;
-        text-decoration: none;
-        color: var(--orange);
-        transition: color 0.1s;
-    }
-
-    #heartSignBtn i {
-        color: var(--white);
-    }
-
-    #heartSignBtn:hover {
-        color: var(--white);
-    }
-
-    #heartSignBtn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
-    }
-
-    #heartSignBtn p {
-        margin-right: 1rem;
     }
 
 #organizerNickname {

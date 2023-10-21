@@ -48,55 +48,57 @@
     <input type="hidden" id="currentUserId" value="@Context.Session.GetString("UserId")" />
 
     <p type="hidden" name="groupId" class="groupid" data-groupid="@Model[0].GroupID" />
-    
-    <!-- 導覽列設計 -->
 
-
-    <!-- 活動頁面設計 -->
-    <div class="mycontainer">
-        <div class="reg-and-like-btn row">
-            <div class="col-auto">
-                <!-- 報名按鈕 -->
-                @{
-                    if (ViewBag.signOrNot == "noAccount")
-                    {
-                        <button style="display:inline-block" id="heartSignBtn">
-                            <p class="h3">登入報名活動</p>
+    <!-- 報名按鈕 -->
+    <div class="register-div">
+        @{
+            if (ViewBag.signOrNot == "noAccount")
+            {
+                <div class="registericon-container" id="heartSignBtn">
+                    <i class="fa-solid fa-user-plus fa-xl register-icon"></i>
+                </div>
+                <span class="custom-title">登入後可報名</span>
+            }
+            else
+            {
+                var userInfo = ViewBag.userInfo;
+                if (ViewBag.signOrNot == "false")
+                {
+                    <form asp-action="register" method="post">
+                        <input type="hidden" name="groupId" value="@Model[0].GroupID" />
+                        <input type="hidden" name="userId" value=@userInfo[0].UserID />
+                        <button type="submit" class="registericon-container" id="registerLink">
+                            <i class="fa-solid fa-user-plus fa-xl register-icon"></i>
                         </button>
-                    }else
-                    {
-                        var userInfo = ViewBag.userInfo;
-                        if (ViewBag.signOrNot == "false")
-                        {
-                            <form asp-action="register" method="post">
-                                <input type="hidden" name="groupId" value="@Model[0].GroupID" />
-                                <input type="hidden" name="userId" value=@userInfo[0].UserID />
-                                <button type="submit" class="register-btn">
-                                    <p class="register-btn-text-style" href="#" id="registerLink">
-                                        我要報名!
-                                    </p>
-                                </button>
-                            </form>
-                        }
-                        else 
-                        {
-                            <div class="alreadyRegister-btn">
-                                <p class="alreadyRegister-btn-text-style" href="#" id="registerLink">
-                                    已報名!
-                                </p>
-                            </div>
-                            <div class="hit-style">
-                                <i class="fa-solid fa-angle-up fa-lg">如欲取消報名請到會員中心</i>
-                            </div>
-
-                        }
-                    }
-
+                    </form>
+                    <span class="custom-title">報名</span>
                 }
-            </div>
-
-        </div>
+                else
+                {
+                    <form id="registerForm">
+                        <input type="hidden" name="groupId" value="@Model[0].GroupID" />
+                        <input type="hidden" name="userId" value="@userInfo[0].UserID" />
+                        <button type="submit" class="registericon-container" id="registerLink">
+                            <i class="fa-solid fa-user-check fa-xl register-icon"></i>
+                        </button>
+                    </form>
+                    <span class="custom-title">已報名</span>
+                }
+            }
+        }
     </div>
+
+    <!-- 懸浮聊天室按鈕 -->
+    <a href="#" class="float btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa-solid fa-comment fa-2xl"></i>
+    </a>
+    <div class="label-container">
+        <div class="label-text">
+            點選開啟活動聊天室
+        </div>
+        <i class="fa fa-play label-arrow "></i>
+    </div>
+
 
 
 
@@ -188,10 +190,10 @@
                         <td>建議自備：</td>
                         <td>無</td>
                     </tr>
-                    
+
                     @* <tr>
-                        <td>主揪</td>
-                        <td>@Model[0].Organizer</td>
+                    <td>主揪</td>
+                    <td>@Model[0].Organizer</td>
                     </tr> *@
 
                     <tr>
@@ -240,18 +242,7 @@
         });
     </script>
 
-    <!-- 懸浮聊天室按鈕 -->
 
-
-    <a href="#" class="float btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa-solid fa-comment fa-2xl"></i>
-    </a>
-    <div class="label-container">
-        <div class="label-text">
-            點選開啟活動聊天室
-        </div>
-        <i class="fa fa-play label-arrow "></i>
-    </div>
 
     <!-- 彈出Modal -->
 
@@ -265,10 +256,10 @@
                     </div>
 
                     <!-- 討論輸入區 -->
-                    <div class="commentDiv" id="discussInput" >
+                    <div class="commentDiv" id="discussInput">
                         <div class="commentBtnDiv">
                             <p class="h3" style="display:inline-block">你還沒登入會員!</p>
-                            <button class="signBtn"  style="display:inline-block" id="signBtn">
+                            <button class="signBtn" style="display:inline-block" id="signBtn">
                                 <p class="h3">登入發表討論</p>
                             </button>
                         </div>
