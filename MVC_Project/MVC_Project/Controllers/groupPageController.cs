@@ -258,7 +258,13 @@ namespace MVC_Project.Controllers
         public IActionResult Delete(int id)
         {
             var entityToDelete = _context.Chat.Find(id);
-            //var replyToDelete = _context.Chat.
+            var repliesToDelete = _context.Chat.Where(chat => chat.ToWhom == id).ToList();
+
+            // 逐个删除记录
+            foreach (var replyToDelete in repliesToDelete)
+            {
+                _context.Chat.Remove(replyToDelete);
+            }
             _context.Chat.Remove(entityToDelete);
             _context.SaveChanges();
             return NoContent();
