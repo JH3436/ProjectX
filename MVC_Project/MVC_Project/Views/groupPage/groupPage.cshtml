@@ -193,16 +193,16 @@
                         <td>無</td>
                     </tr>
                     
-                    <tr>
+                    @* <tr>
                         <td>主揪</td>
                         <td id="Organizer"></td>
-                    </tr>
+                    </tr> *@
 
                     <tr>
                         <td>主揪</td>
                         <!-- 注意這裡添加了一個class和一個data-attribute來儲存organizer的ID -->
-                        <td class="organizer-info" data-organizer-id="@Model[0].Organizer">@Model[0].Organizer</td>
-                    </tr>
+                        <td class="organizer-info" data-organizer-id="@Model[0].Organizer" style="cursor: pointer; ">@Model[0].Organizer</td>
+                    </tr> 
                 </table>
             </div>
         </div>
@@ -211,38 +211,21 @@
     <!-- 主揪Modal結構 -->
     <div class="modal fade" id="organizerModal" tabindex="-1" aria-labelledby="organizerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" >
                 <div class="modal-header">
-                    <h1 class="modal-title" id="organizerNickname">暱稱</h1>
+                    <h1 class="modal-title " id="organizerNickname" style="margin-left:10rem;">暱稱</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img id="organizerImage" src="" alt="大頭貼" />
-                    <p id="organizerIntro">自我介紹</p>
+                    <img id="organizerImage" src="" alt="大頭貼" style="margin-left:5rem;" />
+                    <br>
+                    <br>
+                    <p id="organizerIntro" class="h3">自我介紹</p>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $(".organizer-info").click(function () {
-                var organizerId = $(this).data('organizer-id');
-
-                $.ajax({
-                    url: '/Member/GetOrganizerInfo',  // 請更換成你的Controller和Action名稱
-                    method: 'GET',
-                    data: { userId: organizerId },
-                    success: function (response) {
-                        // 顯示彈出窗，並在裡面填充主揪的資訊
-                        $('#organizerNickname').text(response.Nickname);
-                        $('#organizerIntro').text(response.Intro);
-                        $('#organizerImage').attr('src', response.imageUrl);
-                        $('#organizerModal').modal('show');
-                    }
-                });
-            });
-        });
-    </script>
+    
 
 
 

@@ -313,6 +313,9 @@ a.float:hover + div.label-container {
         font-weight: 700;
         padding-bottom: 1%;
     }
+.organizer-info:hover {
+    color: var(--orange); /* 指定所需的文本颜色 */
+}
 
 
 
@@ -600,7 +603,8 @@ a.float:hover + div.label-container {
 }
 
     #editA:hover, #deleteA:hover {
-        color: lightgray
+        color: lightgray;
+        cursor: pointer;
     }
 
 #organizerNickname {

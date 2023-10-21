@@ -276,7 +276,7 @@ function Organizer() {
         dataType: 'json',
         success: function (data) {
             console.log(data[0].Nickname);
-            $('#Organizer').text(data[0].Nickname);
+            $('.organizer-info').text(data[0].Nickname);
         },
         error: function (error) {
             console.error('Error:', error);
@@ -802,7 +802,24 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $(".organizer-info").click(function () {
+        var organizerId = $(this).data('organizer-id');
 
+        $.ajax({
+            url: '/Member/GetOrganizerInfo',  // 請更換成你的Controller和Action名稱
+            method: 'GET',
+            data: { userId: organizerId },
+            success: function (response) {
+                // 顯示彈出窗，並在裡面填充主揪的資訊
+                $('#organizerNickname').text(response.Nickname);
+                $('#organizerIntro').text(response.Intro);
+                $('#organizerImage').attr('src', response.imageUrl);
+                $('#organizerModal').modal('show');
+            }
+        });
+    });
+});
 
 //-------James加的--------------
 //麵包屑判斷導向哪個活動類別
