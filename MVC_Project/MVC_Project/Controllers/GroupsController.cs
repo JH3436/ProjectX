@@ -79,6 +79,14 @@ namespace MVC_Project.Controllers
                                          "人數上限不可小於人數下限");
             }
 
+            var existingGroup = await _context.Group
+                                      .Where(g => g.GroupName == @group.GroupName && g.Organizer == @group.Organizer)
+                                      .FirstOrDefaultAsync();
+            if (existingGroup != null)
+            {
+                ModelState.AddModelError(nameof(group.GroupName), "已存在同名活動");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(@group);
@@ -119,8 +127,7 @@ namespace MVC_Project.Controllers
 
 
 
-
-        //----------------------------------以下沒用到的-----------------------------------
+        //--------------------------------------------發現用不到---------------------------------------------------------------
 
         // GET: Groups/Edit/5
         public async Task<IActionResult> Edit(int? id)
