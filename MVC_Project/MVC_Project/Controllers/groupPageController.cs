@@ -97,6 +97,16 @@ namespace MVC_Project.Controllers
             return View(temp);
         }
 
+        //主揪資訊
+        [HttpGet("api/Organizer/{id}")]
+        public IActionResult Organizer(int id) {
+            var OrganizerData = from g in _context.Group
+                                join m in _context.Member
+                                on g.Organizer equals m.UserID
+                                where g.GroupID == id
+                                select m;
+            return Ok(OrganizerData);
+        }
 
         //留言API
         [HttpGet("api/chatData/{id}")]
