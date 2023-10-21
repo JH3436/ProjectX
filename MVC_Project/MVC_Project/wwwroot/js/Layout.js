@@ -338,7 +338,7 @@ $(document).ready(function () {
         }
     });
 
-     表單提交的代碼
+     /*表單提交的代碼*/
     $("#myFormforContact").on("submit", function (event) {
         event.preventDefault();
 
