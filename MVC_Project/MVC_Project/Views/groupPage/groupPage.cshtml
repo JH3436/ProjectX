@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http
 @model List<MVC_Project.Models.Group>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -37,6 +37,8 @@
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js"
@@ -190,11 +192,11 @@
                         <td>建議自備：</td>
                         <td>無</td>
                     </tr>
-
-                    @* <tr>
-                    <td>主揪</td>
-                    <td>@Model[0].Organizer</td>
-                    </tr> *@
+                    
+                    <tr>
+                        <td>主揪</td>
+                        <td id="Organizer"></td>
+                    </tr>
 
                     <tr>
                         <td>主揪</td>
@@ -246,7 +248,7 @@
 
     <!-- 彈出Modal -->
 
-    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true" data-bs-focus="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content" id="dialogDiv">
                 <div>

@@ -99,11 +99,31 @@ $(document).ready(function () {
     function simulateClick() {
         var temp = $("#discussTextArea").val();
         if (temp == "") {
-            alert("請輸入文字");
+            Swal.fire('請輸入文字');
+
         } else {
-            var sure = confirm("確定提交嗎討論\n\n" + $("#discussTextArea").val());
+            Swal.fire({
+                title: '提交討論?',
+                text: "確定提交嗎?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '確定',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    discussUpdate();
+                    Swal.fire({
+                        icon: 'success',
+                        title: '成功',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            })
         }
-        discussUpdate();
+        
     }
 });
 
@@ -113,12 +133,29 @@ $(document).on("click", ".messageBtn", function () {
 
     var temp = $(this).parent().children("textarea[name='ChatContent']").val();
     if (temp == "") {
-        alert("請輸入文字");
+        Swal.fire('請輸入文字');
     } else {
-        var sure = confirm("確定提交留言\n\n" + temp);
+        Swal.fire({
+            title: '提交留言?',
+            text: "確定提交嗎?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定',
+            cancelButtonText: '取消'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                replyUpdate(chatId);
+                Swal.fire({
+                    icon: 'success',
+                    title: '成功',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
+        })
     }
-    replyUpdate(chatId);
-    console.log(chatId);
 });
 
 
@@ -223,6 +260,31 @@ $(document).ready(function () {
     });
 });
 
+//主揪資訊
+
+$(document).ready(function () {
+    Organizer();
+
+});
+function Organizer() {
+    const id = getIdFromUrl();
+
+    console.log(`/api/Organizer/${id}`);
+    $.ajax({
+        url: `/api/Organizer/${id}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data[0].Nickname);
+            $('#Organizer').text(data[0].Nickname);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+            
+        }
+    });
+
+}
 
 /*抓取groupid*/
 function getIdFromUrl() {
@@ -313,9 +375,9 @@ function updateChatInModal(chatList) {
                     <div class="userCommentDivRight">
                         <p class="h3 align-self-center">${chat.Nickname}</p>
                         ${chatContent}
-                        <a id="editA" class="editA" value="${chat.UserID}">編輯</a>
+                        <a id="editA" class="editA" value="${chat.UserID}" ChatID = "${chat.ChatID}" chatToWhom = "${chat.ToWhom}">編輯</a>
                         <a>&nbsp;</a>
-                        <a id="deleteA" class="deleteA" value="${chat.UserID}">刪除</a>
+                        <a id="deleteA" class="deleteA" value="${chat.UserID}" ChatID = "${chat.ChatID}">刪除</a>
                         <p class="commentDatetime">${chatTime}</p>
                     </div>
                 </div>
@@ -342,9 +404,9 @@ function updateChatInModal(chatList) {
                             <div class="userCommentDivRight">
                                 <p class="h3 align-self-center">${reply.Nickname}</p>
                                 <div class="comment-box align-self-start">${reply.ChatContent}</div>
-                                <a id="editA" class="editA"  value="${reply.UserID}">編輯</a>
+                                <a id="editA" class="editA"  value="${reply.UserID}" ChatID = "${reply.ChatID}" chatToWhom = "${reply.ToWhom}">編輯</a>
                                 <a>&nbsp;</a>
-                                <a id="deleteA" class="deleteA" value="${reply.UserID}">刪除</a>
+                                <a id="deleteA" class="deleteA" value="${reply.UserID}" ChatID = "${reply.ChatID}">刪除</a>
                                 <p class="commentDatetime">${replyTime}</p>
                             </div>
                         </div>
@@ -386,7 +448,7 @@ function userEditDelete() {
         const chatUserId = editLink.attr('value');
 
         // 检查条件，如果当前用户的ID等于聊天用户的ID，则显示链接
-        if (currentUserId === chatUserId) {
+        if (currentUserId === chatUserId || currentUserId == 1) {
             editLink.css('display', 'inline-block');
         } else {
             editLink.css('display', 'none');
@@ -454,33 +516,96 @@ function getUserIngroup() {
 
 //刪除留言請求
 $(document).on('click', '.deleteA', function () {
-    const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
-    const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
-    if (currentUserId === replyUserId) {
-        const replyId = $(this).attr('replyId'); // 获取要删除的留言的 ID
-        console.log(replyId);
-        // 发送 DELETE 请求到后端 API 来删除留言
-        fetch(`/api/groupPage/${replyId}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Reply deleted successfully.');
-                } else {
-                    console.error('Failed to delete reply.');
-                }
-            })
-            .catch(error => {
-                console.error('An error occurred:', error);
-            });
-    } else {
-        // 不允许删除
-        console.log('You are not allowed to delete this reply.');
-    }
+    Swal.fire({
+        title: '確定要刪除留言嗎?',
+        text: "刪除後無法回復",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '確認',
+        cancelButtonText: '取消'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
+            const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
+            if (currentUserId === replyUserId || currentUserId == 1) {
+                const ChatID = $(this).attr('ChatID'); // 获取要删除的留言的 ID
+                console.log(ChatID);
+
+                // 发送 DELETE 请求到后端 API 来删除留言
+                fetch(`/groupPage/Delete/${ChatID}`, {
+                    method: 'Post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => {
+                        Swal.fire(
+                            '刪除留言',
+                            '刪除成功',
+                            'success'
+                        )
+                        getChatData();
+                    })
+                    .catch(error => {
+                        console.error('An error occurred:', error);
+                    });
+            } else {
+                console.log('You are not allowed to delete this reply.');
+            }
+            
+        }
+    })
 });
+
+
+//編輯留言請求
+
+
+
+$(document).on('click', '.editA', function () {
+    console.log("OK");
+    Swal.fire({
+        title: "編輯",
+        text: "留言:",
+        input: 'text',
+        showCancelButton: true
+    }).then((result) => {
+        if (result.value) {
+            const id = getIdFromUrl();
+            const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
+            const ChatID = $(this).attr('ChatID');
+            const Content = result.value;
+            const chatToWhom = $(this).attr('chatToWhom');;
+            var editData = {
+                ChatID: ChatID,
+                ActivityID: id,
+                UserID: currentUserId,
+                ChatContent: Content,
+                
+            };
+            console.log(editData)
+            $.ajax({
+                url: '/groupPage/EditChat',
+                type: 'POST',
+                data: JSON.stringify(editData),
+                contentType: 'application/json; charset=utf-8',
+                success: function (response) {
+                    Swal.fire('編輯成功');
+                    getChatData();
+
+                },
+                error: function (error) {
+                }
+            });
+        } else {
+            alert("未輸入");
+        }
+    
+    })
+});
+
 
 
 

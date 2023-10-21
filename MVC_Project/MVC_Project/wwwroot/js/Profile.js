@@ -132,51 +132,6 @@ heartIcons.forEach(function (heartIcon) {
     });
 });
 
-// 聯絡我們-表單
-// 當按鈕點擊時，顯示 dialog
-document.getElementById("showContactButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.showModal();
-
-});
-
-// 當關閉按鈕被點擊時，關閉 dialog
-document.getElementById("closeDialogButton").addEventListener("click", function () {
-    var dialog = document.getElementById("contactDialog");
-    dialog.close();
-});
-
-// 當 dialog 關閉時，重置表單
-document.getElementById("contactDialog").addEventListener("close", function () {
-    document.getElementById("myForm").reset();
-});
-
-
-
-
-//響應式表單
-$(document).ready(function () {
-    $("#contactBox form input").on("input", function () {
-        if (this.checkValidity()) {
-            $(this).css("border", "0.2rem green solid");
-        } else {
-            $(this).css("border", "0.2rem red solid");
-        }
-    });
-});
-
-//alert表單內容
-document.getElementById("myForm").onsubmit = function (event) {
-    // 獲取表單元素
-    var form = event.target;
-    // 獲取各input元素的值
-    var name = form.elements["name"].value;
-    var email = form.elements["email"].value;
-    var emailSubject = form.elements["emailSubject"].value;
-    var mobileNumber = form.elements["mobileNumber"].value;
-    var message = form.elements["message"].value;
-
-};
 
 
 
