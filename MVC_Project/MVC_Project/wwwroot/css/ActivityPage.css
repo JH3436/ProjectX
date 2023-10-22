@@ -52,18 +52,27 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: solid 3px var(--orange);
+    border: solid 3px var(--white);
     background-color: var(--deepBlue);
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 2px;
+    transition: all 0.15s ease-in-out;
 }
 
 .vote-div .vote-icon {
     cursor: pointer;
+    color: var(--white);
 }
 
+.vote-div:hover .voteicon-container {
+    border-color: var(--orange);
+}
+
+.vote-div:hover i {
+    color: var(--orange);
+}
 
 .vote-div .disabled-icon {
     cursor: not-allowed;
@@ -85,6 +94,7 @@ body {
 .register-div {
     position: sticky;
     top: 10%;
+    margin-top: 2%;
     margin-left: 74%;
     display: flex;
     flex-direction: row;
@@ -96,12 +106,13 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    border: solid 3px var(--orange);
+    border: solid 3px var(--white);
     background-color: var(--deepBlue);
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 2px;
+    transition: all 0.15s ease-in-out;
 }
 
 .register-div .register-icon {
@@ -113,70 +124,57 @@ body {
     visibility: visible;
 }
 
-/* 懸浮聊天室按鈕 */
-
-.label-container {
-    position: fixed;
-    bottom: 3rem;
-    right: 15rem;
-    display: table;
-    visibility: hidden;
+.register-div:hover .registericon-container{
+    border-color: var(--orange);
 }
 
-.label-text {
-    color: #FFF;
-    background: rgba(51,51,51,0.5);
-    display: table-cell;
-    vertical-align: middle;
-    padding: 10px;
-    border-radius: 3px;
+.register-div:hover i {
+    color: var(--orange);
 }
 
-.label-arrow {
-    display: table-cell;
-    vertical-align: middle;
-    color: #333;
-    opacity: 0.5;
+/* 懸浮討論區按鈕 */
+.chat-div {
+    position: sticky;
+    top: 18%;
+    margin-top:10px;
+    margin-left: 74%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
 }
 
-.float {
-    position: fixed;
-    width: 4rem;
-    height: 4rem;
-    bottom: 3rem;
-    right: 10rem;
-    background-color: var(--orange);
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px #999;
+.chaticon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: solid 3px var(--white);
+    background-color: var(--deepBlue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease-in-out;
 }
 
-    .float:hover {
-        opacity: 0.8;
-    }
-
-    .float i {
-        margin-top: 1.65rem;
-        height: 80%;
-        width: 80%;
-        transform: scale(1.2);
-    }
-
-.my-float {
-    font-size: 24px;
-    margin-top: 18px;
+.chat-div .chat-icon {
+    cursor: pointer;
+    color: var(--white);
 }
 
-a.float + div.label-container {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s ease;
-}
-
-a.float:hover + div.label-container {
+.chat-div:hover .custom-title {
     visibility: visible;
-    opacity: 1;
+}
+
+.chat-div:hover .chaticon-container {
+    border-color: var(--orange);
+}
+
+.chat-div:hover i {
+    color: var(--orange);
+}
+
+.chat-div a {
+    text-decoration: none;
 }
 
 /* 麵包屑 */
@@ -201,6 +199,7 @@ a.float:hover + div.label-container {
 .carouselDiv {
     display: flex;
     justify-content: center;
+    margin-top: -6.5%;
 }
 
 /* 圖片 */
@@ -320,60 +319,53 @@ a.float:hover + div.label-container {
 
 /* 聊天室彈出 */
 
-
-
 #dialogDiv {
-    background-color: var(--black);
+    background-color: var(--white);
     height: auto;
     margin-top: 10rem;
-    padding: 5rem;
+    padding: 2rem;
+    margin-left: 19%;
+    width: 65%;
 }
 
-/* 聊天室 */
-
-
-
+/* 討論區 */
+/*討論區標題*/
 #messageBoardTitle {
     width: 100%;
     height: 6rem;
-    border-bottom: 0.5rem solid var(--white);
+    border-bottom: 0.5rem solid var(--lightBlue-bg);
     padding: 1rem;
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#discussInput {
-    display: none
-}
-
-#discussBtn {
-    width: fit-content;
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-    margin-left: 70%;
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
-    transition: color 0.1s;
-}
-
-    #discussBtn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
+    #messageBoardTitle .h1{
+        margin: 0;
+        color: var(--deepBlue);
+        font-weight: 600;
     }
 
+    #discussInput {
+        display: none
+    }
+
+/*留言按鈕*/
 #discussBtn {
     font-size: 1.5rem;
     font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
-    transition: color 0.1s;
+    cursor: pointer;
+    width: fit-content;
+    padding: 2.5px 20.5px;
+    border-radius: 12px;
+    background-color: var(--deepBlue);
+    transition: all 0.1s ease;
 }
 
     #discussBtn:hover {
-        color: var(--white);
+        border: var(--deepBlue) 2px solid;
+        background-color: var(--white);
+        color: var(--deepBlue);
     }
 
 .discuss-box {
@@ -425,88 +417,89 @@ a.float:hover + div.label-container {
     .publishBtn p {
         margin-right: 1rem;
     }
-/* 討論區 */
+
+/* 討論區-對話框 */
 .commentDiv {
     display: block;
     height: auto;
     margin-top: 2rem;
-    border: 1px solid var(--white);
-    background-color: var(--black);
-    padding: 2rem;
+    border: 3px solid var(--lightBlue-bg);
+    border-radius: 0.5rem;
+    background-color: var(--white);
+    padding: 1.5rem;
+    overflow-y: auto;
 }
 
 .userCommentDiv {
     width: 100%;
     height: auto;
-    /* margin-top: 1rem; */
     display: inline-flex;
-    background-color: var(--black);
+    gap: 10px;
+    background-color: var(--white);
+    
 }
 
 
 .profile {
-    background-image: center;
-    background-position: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    margin: 0 2% 3% 2%;
+    border: 2px solid var(--orange);
+    margin: 1%;
     position: relative;
 }
 
 .comment-box {
-    height: auto;
-    width: 75%;
     margin-bottom: 1rem;
-    /* background: gray; */
     overflow-wrap: break-word;
-    /* padding: 1rem; */
 }
 
-.commentBtnDiv {
-    width: 100%;
-    height: 3rem;
-    /* background-color: #B44163; */
-}
+
 
 
 .userCommentDivRight {
-    width: 80%;
+    color: var(--deepBlue);
+    background-color: var(--lightGray);
+    border-radius: 1rem;
+    width: auto;
+    height: fit-content;
+    padding: 1% 2% 1% 2%;
 }
+
+.editDelete-div {
+    display: flex;
+    color: var(--deepBlue);
+    margin-left: 15%;
+}
+
+.Datetime-div {
+    display: flex;
+    color: var(--deepBlue);
+    margin-left: 15%;
+}
+
+.commentDatetime {
+    font-size: medium;
+    margin: 0;
+}
+
+.commentBtnDiv {
+    display: flex;
+    color: var(--deepBlue);
+}
+
+
 
 .replyBtn {
-    height: 100%;
-    width: auto;
-    display: inline-flex;
-    background-color: var(--black);
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-    float: right;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
     transition: color 0.1s;
+    cursor: pointer;
 }
 
-    .replyBtn i {
-        color: var(--white);
-    }
-
-    .replyBtn:hover {
-        color: var(--white);
-    }
-
-    .replyBtn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
-    }
-
-    .replyBtn p {
-        margin-right: 1rem;
-    }
+    
 
 .replyDiv {
     width: 80%;
@@ -528,9 +521,7 @@ a.float:hover + div.label-container {
         background-color: gray;
     }
 
-.commentDatetime {
-    font-size:xx-small;
-}
+
 /* 留言按鈕 */
 .messageBtn {
     width: fit-content;

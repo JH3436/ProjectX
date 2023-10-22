@@ -123,7 +123,7 @@ $(document).ready(function () {
                 }
             })
         }
-        
+
     }
 });
 
@@ -250,7 +250,7 @@ $(document).ready(function () {
                         // 修改i元素的圖示
                         $('#registerLink').removeClass('fa-user-check').addClass('fa-user-plus');
                         // 修改表單的 action
-                        $('#registerForm').attr('asp-action', '/grouppage/Register'); 
+                        $('#registerForm').attr('asp-action', '/grouppage/Register');
 
                     } else {
                     }
@@ -280,7 +280,7 @@ function Organizer() {
         },
         error: function (error) {
             console.error('Error:', error);
-            
+
         }
     });
 
@@ -331,8 +331,10 @@ function updateChatInModal(chatList) {
     // 將新的聊天資料插入到討論區
     var chatBoardHTML = `<div>
                     <div id="messageBoardTitle">
-                        <p class="h1">討論區</p>
-                        <div id="discussBtn">建立討論</div>
+                        <span class="h1">討論區</span>
+                        <div id="discussBtn">
+                        <i class="fa-regular fa-message"></i>  留言
+                        </div>
                     </div>
 
                     <!-- 討論輸入區 -->
@@ -375,18 +377,21 @@ function updateChatInModal(chatList) {
                     <div class="userCommentDivRight">
                         <p class="h3 align-self-center">${chat.Nickname}</p>
                         ${chatContent}
-                        <a id="editA" class="editA" value="${chat.UserID}" ChatID = "${chat.ChatID}" chatToWhom = "${chat.ToWhom}">編輯</a>
-                        <a>&nbsp;</a>
-                        <a id="deleteA" class="deleteA" value="${chat.UserID}" ChatID = "${chat.ChatID}">刪除</a>
-                        <p class="commentDatetime">${chatTime}</p>
-                    </div>
                 </div>
-                <div class="commentBtnDiv" id =${chatId}>
+            </div>
+            <div class="editDelete-div">
+            <a id="editA" class="editA" value="${chat.UserID}" ChatID = "${chat.ChatID}" chatToWhom = "${chat.ToWhom}">編輯</a>
+            <a id="deleteA" class="deleteA" value="${chat.UserID}" ChatID = "${chat.ChatID}">刪除</a>
+            </div>
+            <div class="Datetime-div">
+                <p class="commentDatetime">${chatTime}</p>
+            </div>
+            <div class="commentBtnDiv" id =${chatId}>
                     <div class="replyBtn" id="replyBtn">
-                        <p class="h3">回覆</p>
-                        <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                        <p>回覆</p>
                     </div>
-                </div>`;
+            </div>
+            `;
             chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
                     var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
@@ -440,6 +445,7 @@ function updateChatInModal(chatList) {
     getUserInfo();
     userEditDelete();
 }
+
 //會員讀取自訂函式
 function userEditDelete() {
     const currentUserId = $('#currentUserId').val(); // 使用者id
@@ -554,15 +560,13 @@ $(document).on('click', '.deleteA', function () {
             } else {
                 console.log('You are not allowed to delete this reply.');
             }
-            
+
         }
     })
 });
 
 
 //編輯留言請求
-
-
 
 $(document).on('click', '.editA', function () {
     console.log("OK");
@@ -583,7 +587,7 @@ $(document).on('click', '.editA', function () {
                 ActivityID: id,
                 UserID: currentUserId,
                 ChatContent: Content,
-                
+
             };
             console.log(editData)
             $.ajax({
@@ -602,7 +606,7 @@ $(document).on('click', '.editA', function () {
         } else {
             alert("未輸入");
         }
-    
+
     })
 });
 
@@ -746,62 +750,6 @@ function photoGet() {
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function () {
-    // 選取探索按鈕
-    var exploreLink = $("#explore-link");
-    // 選取下拉內容
-    var exploreDropdown = $("#explore-dropdown");
-    //選取揪團按鈕
-    var groupBtn = $("#group-link");
-
-    exploreLink.hover(
-        function () {
-            // 滑鼠進入時顯示下拉內容
-            exploreDropdown.css("display", "block");
-
-        });
-
-    exploreDropdown.hover(
-        function () {
-            // 滑鼠進入下拉內容時保持顯示
-            exploreDropdown.css("display", "block");
-        },
-        function () {
-            // 滑鼠離開下拉內容時隱藏
-            exploreDropdown.css("display", "none");
-        }
-    );
-    //滑鼠移動到揪團也會讓下拉消失
-    groupBtn.hover(
-        function () {
-            exploreDropdown.css("display", "none")
-        }
-    )
-
-    //點擊鈴鐺後，數字通知消失
-    // 使用事件委託，當點擊<i>元素時執行以下操作
-    $('.notification').on('click', 'i', function () {
-        // 移除包含.notification--num的元素
-        $(this).parent().find('.notification--num').remove();
-    });
-});
-
 
 
 //-------James加的--------------
