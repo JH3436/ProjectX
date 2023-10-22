@@ -87,7 +87,12 @@ $('#cropImageBtn').on('click', function (ev) {
             },
             success: function (response) {
                 if (response.success) {
-                    alert('Photo updated successfully');
+                    Swal.fire({
+                        title: '編輯成功',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
                 } else {
                     alert('Failed to update photo: ' + response.message);
                 }

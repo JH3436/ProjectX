@@ -41,6 +41,7 @@ body {
 .vote-div {
     position: sticky;
     top: 10%;
+    margin-top: 2%;
     margin-left: 74%;
     display: flex;
     flex-direction: row;
@@ -202,6 +203,11 @@ body {
     margin-top: -6.5%;
 }
 
+.carouselDiv-forIndex {
+    display: flex;
+    justify-content: center;
+    margin-top: -3%;
+}
 /* 圖片 */
 #pictureDiv {
     box-shadow: 0 10px 50px 0 rgba(129, 128, 128, 0.66), inset 0 0 0 50px #333, inset 0 0 0 6px rgba(255, 255, 255, 0.5);

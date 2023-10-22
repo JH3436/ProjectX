@@ -366,8 +366,8 @@ figure figcaption {
 .modal-dialog {
     max-width: 400px; /* 調整這個數值以適應你的需求 */
     position: absolute;
-    top: 33%;
-    left: 33%
+    top: 28%;
+    left: 45%
 }
 
 figure {
