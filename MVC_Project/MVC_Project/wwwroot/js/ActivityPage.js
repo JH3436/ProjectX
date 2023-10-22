@@ -103,14 +103,7 @@ $(document).ready(function () {
 
         } else {
             Swal.fire({
-                title: '提交討論?',
-                text: "確定提交嗎?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '確定',
-                cancelButtonText: '取消'
+                title: '提交留言',                text: "確定提交嗎?",                icon: 'question',                showCancelButton: true,                confirmButtonColor: '#3085d6',                cancelButtonColor: '#d33',                cancelButtonText: '取消',                confirmButtonText: '確定',                reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     discussUpdate();
@@ -345,16 +338,16 @@ function updateChatInModal(chatList) {
                                 <div class="userCommentDivRight">
                                     <p class="h3 align-self-center"></p>
                                     <div class="discuss-box align-self-start" name="ChatContent">
-                                        <textarea name="ChatContent" id="discussTextArea" class="col-auto" rows="3" placeholder="討論串輸入框"></textarea>
+                                        <textarea name="ChatContent" id="discussTextArea" class="col-auto myTextarea" rows="3" placeholder="留言....."></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="commentBtnDiv">
+                                <div class="commentBtnDiv">
                                 <button class="publishBtn" type="submit">
-                                    <p class="h3">發表</p>
-                                    <i class="fa-solid fa-comment fa-2xl align-self-center"></i>
+                                    <i class="fa-regular fa-paper-plane"></i>
                                 </button>
                             </div>
+                            </div>
+                            
                     </div>
                 </div>`;
     $('#dialogDiv').append(chatBoardHTML);
@@ -363,74 +356,116 @@ function updateChatInModal(chatList) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
             var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
             var chatContent = chat.ChatContent ? `<div class="comment-box align-self-start">${chat.ChatContent}</div>` : '';
-            var chatTime = new Date(chat.ChatTime).toLocaleString('en-US', {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+
+            // 計算留言時間與系統時間的差距
+            var chatTime = new Date(chat.ChatTime);
+            var currentTime = new Date();
+            var timeDiff = currentTime - chatTime;
+            var timeText = '';
+
+            if (timeDiff < 60000) {
+                // 小於1分鐘
+                timeText = '現在';
+            } else if (timeDiff < 3600000) {
+                // 小於60分鐘
+                var minutes = Math.floor(timeDiff / 60000);
+                timeText = minutes + ' 分鐘前';
+            } else if (timeDiff < 86400000) {
+                // 小於24小時
+                var hours = Math.floor(timeDiff / 3600000);
+                timeText = hours + ' 小時前';
+            } else {
+                // 大於24小時
+                var days = Math.floor(timeDiff / 86400000);
+                timeText = days + ' 天前';
+            }
+
             var chatCommentDiv = `
             <div class="commentDiv">
                 <div class="userCommentDiv">
                     ${userPhoto}
                     <div class="userCommentDivRight">
-                        <p class="h3 align-self-center">${chat.Nickname}</p>
+                        <p class="ChatTitle align-self-center">${chat.Nickname}</p>
                         ${chatContent}
                 </div>
             </div>
-            <div class="editDelete-div">
-            <a id="editA" class="editA" value="${chat.UserID}" ChatID = "${chat.ChatID}" chatToWhom = "${chat.ToWhom}">編輯</a>
-            <a id="deleteA" class="deleteA" value="${chat.UserID}" ChatID = "${chat.ChatID}">刪除</a>
+            <div class="editDeleteTime-div">
+                <a id="editA" class="editA" value="${chat.UserID}" ChatID = "${chat.ChatID}" chatToWhom = "${chat.ToWhom}">編輯</a>
+                <a id="deleteA" class="deleteA" value="${chat.UserID}" ChatID = "${chat.ChatID}">刪除</a>
+                <p class="commentDatetime">${timeText}</p>
+
+                <div class="commentBtnDiv replyBtn" id =${chatId}>
+                    <div id="replyBtn">
+                        <span>回覆</span>
+                </div>
             </div>
-            <div class="Datetime-div">
-                <p class="commentDatetime">${chatTime}</p>
-            </div>
-            <div class="commentBtnDiv" id =${chatId}>
-                    <div class="replyBtn" id="replyBtn">
-                        <p>回覆</p>
-                    </div>
             </div>
             `;
             chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
-                    var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
+                    //var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
+                    //    year: 'numeric',
+                    //    month: '2-digit',
+                    //    day: '2-digit',
+                    //    hour: '2-digit',
+                    //    minute: '2-digit'
+                    //});
+                    // 計算留言時間與系統時間的差距
+                    var replyTime = new Date(reply.ChatTime);
+                    var currentTime = new Date();
+                    var timeDiff = currentTime - replyTime;
+                    var timeText = '';
+
+                    if (timeDiff < 60000) {
+                        // 小於1分鐘
+                        timeText = '現在';
+                    } else if (timeDiff < 3600000) {
+                        // 小於60分鐘
+                        var minutes = Math.floor(timeDiff / 60000);
+                        timeText = minutes + ' 分鐘前';
+                    } else if (timeDiff < 86400000) {
+                        // 小於24小時
+                        var hours = Math.floor(timeDiff / 3600000);
+                        timeText = hours + ' 小時前';
+                    } else {
+                        // 大於24小時
+                        var days = Math.floor(timeDiff / 86400000);
+                        timeText = days + ' 天前';
+                    }
+
+
                     // 建立回覆的 HTML
                     var replyHtml = `
                     <div class="replyDiv">
                         <div class="userCommentDiv">
-                            <img src="data:image/png;base64,${reply.UserPhoto}" class="profile" />
+                            <img src="data:image/png;base64,${reply.UserPhoto}" class="profile-toReply" />
                             <div class="userCommentDivRight">
-                                <p class="h3 align-self-center">${reply.Nickname}</p>
-                                <div class="comment-box align-self-start">${reply.ChatContent}</div>
-                                <a id="editA" class="editA"  value="${reply.UserID}" ChatID = "${reply.ChatID}" chatToWhom = "${reply.ToWhom}">編輯</a>
-                                <a>&nbsp;</a>
-                                <a id="deleteA" class="deleteA" value="${reply.UserID}" ChatID = "${reply.ChatID}">刪除</a>
-                                <p class="commentDatetime">${replyTime}</p>
-                            </div>
+                                <p class="ChatTitle align-self-center">${reply.Nickname}</p>
+                                ${reply.ChatContent}
                         </div>
-                    </div>`;
+                    </div>
+                    <div class="editDeleteTime-div">
+                        <a id="editA" class="editA"  value="${reply.UserID}" ChatID = "${reply.ChatID}" chatToWhom = "${reply.ToWhom}">編輯</a>
+                        <a id="deleteA" class="deleteA" value="${reply.UserID}" ChatID = "${reply.ChatID}">刪除</a>
+                        <p class="commentDatetime">${timeText}</p>
+                    </div>
+                </div>`;
+
                     chatCommentDiv = chatCommentDiv + replyHtml;
                 }
             });
             var replyTextDiv = `
                 <div class="replyTextDiv" id="replyTextDiv${chatId}">
-                    <input type="hidden" id="replyTextDivId" value="${chatId}" />
+                    <input type="hidden" id="replyTextDivId" value="${chatId}"/>
                     <div class="userCommentDiv">
-                        <img class="profile" src="" />
+                        <img class="profile" src=""/>
                         <div class="userCommentDivRight">
                             <p class="h3 align-self-center" id="userInfoNickname"></p>
-                            <textarea name="ChatContent" id="replyTextArea" class="col-auto" rows="1"></textarea>
+                            <textarea name="ChatContent" id="replyTextArea" class="col-auto myTextarea" rows="1" placeholder="留言....."></textarea>
+                        </div>
+                        <div class="commentBtnDiv">
                             <button class="messageBtn" type="submit">
-                                <p class="messageBtn-text-style" href="#">
-                                    留言
-                                </p>
+                                <i class="fa-regular fa-paper-plane"></i>    
                             </button>
                         </div>
                     </div>
@@ -507,7 +542,7 @@ function getUserIngroup() {
                 $('.commentBtnDiv').remove();
                 $('#discussInput').remove();
                 $('#discussBtn').replaceWith(`
-                <h5 style = "margin-left:60%; margin-top:3rem; color:yellow;">討論區開放給報名團員使用!!</h5>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名以參與討論</span>
             `);
             }
 
@@ -530,7 +565,8 @@ $(document).on('click', '.deleteA', function () {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: '確認',
-        cancelButtonText: '取消'
+        cancelButtonText: '取消',
+        reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
             const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
@@ -547,11 +583,12 @@ $(document).on('click', '.deleteA', function () {
                     },
                 })
                     .then(response => {
-                        Swal.fire(
-                            '刪除留言',
-                            '刪除成功',
-                            'success'
-                        )
+                        Swal.fire({
+                            title: '刪除留言',
+                            text: '刪除成功',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1000                        })
                         getChatData();
                     })
                     .catch(error => {
@@ -572,9 +609,13 @@ $(document).on('click', '.editA', function () {
     console.log("OK");
     Swal.fire({
         title: "編輯",
-        text: "留言:",
+        html:
+            '<b>更改留言：</b>',
         input: 'text',
-        showCancelButton: true
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        reverseButtons: true
     }).then((result) => {
         if (result.value) {
             const id = getIdFromUrl();
@@ -596,15 +637,26 @@ $(document).on('click', '.editA', function () {
                 data: JSON.stringify(editData),
                 contentType: 'application/json; charset=utf-8',
                 success: function (response) {
-                    Swal.fire('編輯成功');
+                    Swal.fire({
+                        title: '編輯成功',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1000
+                        });
                     getChatData();
 
                 },
                 error: function (error) {
+                   
                 }
             });
         } else {
-            alert("未輸入");
+            Swal.fire({
+                title: '未更改',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1000
+            });
         }
 
     })
@@ -753,58 +805,6 @@ function photoGet() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function () {
-    // 選取探索按鈕
-    var exploreLink = $("#explore-link");
-    // 選取下拉內容
-    var exploreDropdown = $("#explore-dropdown");
-    //選取揪團按鈕
-    var groupBtn = $("#group-link");
-
-    exploreLink.hover(
-        function () {
-            // 滑鼠進入時顯示下拉內容
-            exploreDropdown.css("display", "block");
-
-        });
-
-    exploreDropdown.hover(
-        function () {
-            // 滑鼠進入下拉內容時保持顯示
-            exploreDropdown.css("display", "block");
-        },
-        function () {
-            // 滑鼠離開下拉內容時隱藏
-            exploreDropdown.css("display", "none");
-        }
-    );
-    //滑鼠移動到揪團也會讓下拉消失
-    groupBtn.hover(
-        function () {
-            exploreDropdown.css("display", "none")
-        }
-    )
-
-    //點擊鈴鐺後，數字通知消失
-    // 使用事件委託，當點擊<i>元素時執行以下操作
-    $('.notification').on('click', 'i', function () {
-        // 移除包含.notification--num的元素
-        $(this).parent().find('.notification--num').remove();
-    });
-});
 
 $(document).ready(function () {
     $(".organizer-info").click(function () {

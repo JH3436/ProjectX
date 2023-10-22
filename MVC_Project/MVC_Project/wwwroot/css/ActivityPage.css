@@ -99,7 +99,7 @@ body {
     display: flex;
     flex-direction: row;
     gap: 15px;
-    align-items:center;
+    align-items: center;
 }
 
 .registericon-container {
@@ -124,7 +124,7 @@ body {
     visibility: visible;
 }
 
-.register-div:hover .registericon-container{
+.register-div:hover .registericon-container {
     border-color: var(--orange);
 }
 
@@ -136,7 +136,7 @@ body {
 .chat-div {
     position: sticky;
     top: 18%;
-    margin-top:10px;
+    margin-top: 10px;
     margin-left: 74%;
     display: flex;
     flex-direction: row;
@@ -312,6 +312,7 @@ body {
         font-weight: 700;
         padding-bottom: 1%;
     }
+
 .organizer-info:hover {
     color: var(--orange); /* 指定所需的文本颜色 */
 }
@@ -343,15 +344,15 @@ body {
     align-items: center;
 }
 
-    #messageBoardTitle .h1{
+    #messageBoardTitle .h1 {
         margin: 0;
         color: var(--deepBlue);
         font-weight: 600;
     }
 
-    #discussInput {
-        display: none
-    }
+#discussInput {
+    display: none
+}
 
 /*留言按鈕*/
 #discussBtn {
@@ -371,6 +372,13 @@ body {
         color: var(--deepBlue);
     }
 
+/*報名才能討論提醒文字*/
+.registertodiscuss {
+    color: var(--deepBlue);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .discuss-box {
     height: auto;
     width: 100%;
@@ -385,42 +393,67 @@ body {
     }
 
 
-/* 討論輸入按鈕 */
-
+/*發送按鈕*/
 .publishBtn {
-    height: 100%;
-    width: auto;
-    display: inline-flex;
-    background-color: var(--black);
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-    float: right;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
-    transition: color 0.1s;
+    cursor: pointer;
+    width: fit-content;
+    padding: 2.5px 20.5px;
+    margin-top: 200%;
+    border-radius: 12px;
+    background-color: var(--deepBlue);
+    transition: all 0.1s ease;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--white);
 }
 
-    .publishBtn i {
-        color: var(--white);
-    }
-
     .publishBtn:hover {
-        color: var(--white);
+        border: var(--deepBlue) 2px solid;
+        background-color: var(--white);
+        color: var(--deepBlue);
     }
 
-    .publishBtn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
+
+/* 留言按鈕 */
+.messageBtn {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    cursor: pointer;
+    width: fit-content;
+    padding: 2.5px 20.5px;
+    margin-top: 100%;
+    border-radius: 12px;
+    background-color: var(--deepBlue);
+    transition: all 0.1s ease;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--white);
+}
+
+    .messageBtn:hover {
+        border: var(--deepBlue) 2px solid;
+        background-color: var(--white);
+        color: var(--deepBlue);
     }
 
-    .publishBtn p {
-        margin-right: 1rem;
-    }
 
+/*留言輸入框設計*/
+.myTextarea {
+    background-color: var(--lightGray);
+    border: double var(--lightBlue-bg) 2px;
+    border-radius: 0.5rem;
+}
+
+    .myTextarea:focus {
+        border: double var(--orange) 2px;
+        outline: none; /* 這將移除焦點時的外框 */
+    }
 /* 討論區-對話框 */
 .commentDiv {
     display: block;
@@ -429,7 +462,7 @@ body {
     border: 3px solid var(--lightBlue-bg);
     border-radius: 0.5rem;
     background-color: var(--white);
-    padding: 1.5rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 
@@ -439,7 +472,6 @@ body {
     display: inline-flex;
     gap: 10px;
     background-color: var(--white);
-    
 }
 
 
@@ -454,9 +486,29 @@ body {
     position: relative;
 }
 
+/*回覆者頭貼小一點*/
+.profile-toReply {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    border: 2px solid var(--orange);
+    margin: 1%;
+    position: relative;
+}
+
+/*留言文字大小*/
+.ChatTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5%;
+}
+
 .comment-box {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5%;
     overflow-wrap: break-word;
+    font-size: 1.25rem;
 }
 
 
@@ -471,42 +523,42 @@ body {
     padding: 1% 2% 1% 2%;
 }
 
-.editDelete-div {
+.editDeleteTime-div {
+    margin: 5px 0 5px 0;
     display: flex;
     color: var(--deepBlue);
     margin-left: 15%;
+    gap: 10px;
+    font-size: 1rem;
 }
 
-.Datetime-div {
-    display: flex;
-    color: var(--deepBlue);
-    margin-left: 15%;
-}
 
 .commentDatetime {
-    font-size: medium;
     margin: 0;
-}
-
-.commentBtnDiv {
-    display: flex;
     color: var(--deepBlue);
 }
 
+/*回覆按鈕設計*/
+.commentBtnDiv {
+    color: var(--deepBlue);
+}
 
-
-.replyBtn {
-    font-size: 1rem;
-    font-weight: bolder;
+#replyBtn {
     transition: color 0.1s;
     cursor: pointer;
 }
 
-    
+    #replyBtn:hover span {
+        color: var(--orange);
+    }
+
+
+/*-------設計結束*/
+
 
 .replyDiv {
     width: 80%;
-    margin-left: 5%;
+    margin-left: 15%;
     /* margin: 3% 0 0 0;  */
     /* border-radius: 20px; */
     /* display: inline-flex; */
@@ -519,39 +571,6 @@ body {
     display: none;
 }
 
-    .replyTextDiv textarea {
-        width: 80%;
-        background-color: gray;
-    }
-
-
-/* 留言按鈕 */
-.messageBtn {
-    width: fit-content;
-    background-color: var(--black);
-    border: var(--orange) 2px solid;
-    padding: 2.5px 12.5px;
-    border-radius: 5px;
-    transition: all 0.1s ease;
-    float: right;
-}
-
-    .messageBtn:hover {
-        background-color: var(--brown);
-        border: var(--orange) 2px solid;
-    }
-
-.messageBtn-text-style {
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-decoration: none;
-    color: var(--orange);
-    transition: color 0.1s;
-}
-
-    .messageBtn-text-style:hover {
-        color: var(--white);
-    }
 
 
 .signBtn {
@@ -587,14 +606,14 @@ body {
     .signBtn p {
         margin-right: 1rem;
     }
-  /*會員刪除編輯權限*/
+/*會員刪除編輯權限*/
 #editA, #deleteA {
-    font-size: xx-small;
-    color: orange;
+    color: var(--deepBlue);
+    text-decoration: none;
 }
 
     #editA:hover, #deleteA:hover {
-        color: lightgray;
+        color: var(--orange);
         cursor: pointer;
     }
 
@@ -605,3 +624,6 @@ body {
 #organizerIntro {
     color: var(--deepBlue);
 }
+
+
+
