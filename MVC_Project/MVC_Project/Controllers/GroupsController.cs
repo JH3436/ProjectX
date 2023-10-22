@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,15 @@ namespace MVC_Project.Controllers
                 var existingGroup = await _context.Group.FindAsync(id.Value);
                 if (existingGroup != null)
                 {
+                    ViewData["GroupID"] = existingGroup.GroupID;
+                    ViewData["GroupName"] = existingGroup.GroupName;
+                    ViewData["GroupCategory"] = existingGroup.GroupCategory;
+                    ViewData["GroupContent"] = existingGroup.GroupContent;
+                    ViewData["MinAttendee"] = existingGroup.MinAttendee;
+                    ViewData["MaxAttendee"] = existingGroup.MaxAttendee;
+                    ViewData["StartDate"] = existingGroup.StartDate;
+                    ViewData["EndDate"] = existingGroup.EndDate;
+
                     return View(existingGroup);
                 }
             }
