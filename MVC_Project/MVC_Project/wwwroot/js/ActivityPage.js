@@ -276,7 +276,7 @@ function Organizer() {
         dataType: 'json',
         success: function (data) {
             console.log(data[0].Nickname);
-            $('#Organizer').text(data[0].Nickname);
+            $('.organizer-info').text(data[0].Nickname);
         },
         error: function (error) {
             console.error('Error:', error);
@@ -751,6 +751,79 @@ function photoGet() {
     });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function () {
+    // 選取探索按鈕
+    var exploreLink = $("#explore-link");
+    // 選取下拉內容
+    var exploreDropdown = $("#explore-dropdown");
+    //選取揪團按鈕
+    var groupBtn = $("#group-link");
+
+    exploreLink.hover(
+        function () {
+            // 滑鼠進入時顯示下拉內容
+            exploreDropdown.css("display", "block");
+
+        });
+
+    exploreDropdown.hover(
+        function () {
+            // 滑鼠進入下拉內容時保持顯示
+            exploreDropdown.css("display", "block");
+        },
+        function () {
+            // 滑鼠離開下拉內容時隱藏
+            exploreDropdown.css("display", "none");
+        }
+    );
+    //滑鼠移動到揪團也會讓下拉消失
+    groupBtn.hover(
+        function () {
+            exploreDropdown.css("display", "none")
+        }
+    )
+
+    //點擊鈴鐺後，數字通知消失
+    // 使用事件委託，當點擊<i>元素時執行以下操作
+    $('.notification').on('click', 'i', function () {
+        // 移除包含.notification--num的元素
+        $(this).parent().find('.notification--num').remove();
+    });
+});
+
+$(document).ready(function () {
+    $(".organizer-info").click(function () {
+        var organizerId = $(this).data('organizer-id');
+
+        $.ajax({
+            url: '/Member/GetOrganizerInfo',  // 請更換成你的Controller和Action名稱
+            method: 'GET',
+            data: { userId: organizerId },
+            success: function (response) {
+                // 顯示彈出窗，並在裡面填充主揪的資訊
+                $('#organizerNickname').text(response.Nickname);
+                $('#organizerIntro').text(response.Intro);
+                $('#organizerImage').attr('src', response.imageUrl);
+                $('#organizerModal').modal('show');
+            }
+        });
+    });
+});
 
 //-------James加的--------------
 //麵包屑判斷導向哪個活動類別
