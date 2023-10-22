@@ -86,13 +86,20 @@ namespace MVC_Project.Controllers
             // 根據GroupID從資料庫中獲取要編輯的活動
             var group = await _context.Group.FindAsync(groupID);
 
+
+            var photos = await _context.PersonalPhoto
+                               .Where(p => p.GroupID == groupID)
+                               .ToListAsync();
+            ViewData["Photos"] = photos;
+
+
             if (group == null)
             {
                 return NotFound();
             }
 
             // 這裡可以將編輯頁面的 View 返回給用戶，讓用戶進行編輯操作
-            return View(group);
+            return View("Create", group);
         }
 
         //James 10/22加的
@@ -100,27 +107,23 @@ namespace MVC_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group)
         {
+
             if (ModelState.IsValid)
             {
-                // 根據GroupID查找現有的活動
-                var existingGroup = await _context.Group.FindAsync(@group.GroupID);
-
-                if (existingGroup != null)
+                try
                 {
-                    // 更新現有的活動
-                    existingGroup.GroupName = @group.GroupName;
-                    existingGroup.GroupCategory = @group.GroupCategory;
-                    // 更新其他字段...
-
-                    _context.Update(existingGroup);
+                    _context.Update(@group);  // Entity Framework會根據GroupID自動處理更新
                     await _context.SaveChangesAsync();
-
-                    return RedirectToAction("Create"); // 返回到Create頁面或其他頁面
                 }
-            }
+                catch (DbUpdateConcurrencyException)
+                {
+                    // 處理當多個用戶同時更新時的異常
+                    return NotFound();
+                }
 
-            // 如果有驗證錯誤，返回到編輯頁面
-            return RedirectToAction("Create"); // 返回到Create頁面或其他頁面
+                return RedirectToAction(nameof(Index));  // 返回到合適的頁面，比如列表頁
+            }
+            return View("Create", @group);  // 驗證失敗，返回到編輯頁面
         }
 
 
