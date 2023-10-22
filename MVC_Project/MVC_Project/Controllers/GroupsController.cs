@@ -75,6 +75,58 @@ namespace MVC_Project.Controllers
             return View(new Group());
         }
 
+        //James 10/22加的
+        public async Task<IActionResult> myEdit(int? groupID)
+        {
+            if (groupID == null)
+            {
+                return NotFound();
+            }
+
+            // 根據GroupID從資料庫中獲取要編輯的活動
+            var group = await _context.Group.FindAsync(groupID);
+
+            if (group == null)
+            {
+                return NotFound();
+            }
+
+            // 這裡可以將編輯頁面的 View 返回給用戶，讓用戶進行編輯操作
+            return View(group);
+        }
+
+        //James 10/22加的
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group)
+        {
+            if (ModelState.IsValid)
+            {
+                // 根據GroupID查找現有的活動
+                var existingGroup = await _context.Group.FindAsync(@group.GroupID);
+
+                if (existingGroup != null)
+                {
+                    // 更新現有的活動
+                    existingGroup.GroupName = @group.GroupName;
+                    existingGroup.GroupCategory = @group.GroupCategory;
+                    // 更新其他字段...
+
+                    _context.Update(existingGroup);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Create"); // 返回到Create頁面或其他頁面
+                }
+            }
+
+            // 如果有驗證錯誤，返回到編輯頁面
+            return RedirectToAction("Create"); // 返回到Create頁面或其他頁面
+        }
+
+
+
+
+
         // POST: Groups/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

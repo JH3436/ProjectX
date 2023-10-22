@@ -19,7 +19,7 @@
                         <div class="card-button-container">
                             @*<button class="blue-btn blue-btn-text-style edit-btn" data-action="Edit" data-controller="Groups" data-id="@group.GroupID">
                                 編輯</button>*@
-                            <a class="blue-btn blue-btn-text-style edit-btn" href="@Url.Action("Create", "Groups", new { GroupID = @group.GroupID })">
+                            <a class="blue-btn blue-btn-text-style edit-btn" href="@Url.Action("myEdit", "Groups", new { GroupID = @group.GroupID })">
                                 編輯
                             </a>
                            
