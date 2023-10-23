@@ -99,21 +99,42 @@ $(document).ready(function () {
     function simulateClick() {
         var temp = $("#discussTextArea").val();
         if (temp == "") {
-            Swal.fire('請輸入文字');
+            Swal.fire('請輸入文字');
+
 
         } else {
-            Swal.fire({
-                title: '提交留言',                text: "確定提交嗎?",                icon: 'question',                showCancelButton: true,                confirmButtonColor: '#3085d6',                cancelButtonColor: '#d33',                cancelButtonText: '取消',                confirmButtonText: '確定',                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    discussUpdate();
-                    Swal.fire({
-                        icon: 'success',
-                        title: '成功',
-                        showConfirmButton: false,
-                        timer: 1000
-                    })
-                }
+            Swal.fire({
+
+                title: '提交留言',
+                text: "確定提交嗎?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: '取消',
+                confirmButtonText: '確定',
+                reverseButtons: true
+
+            }).then((result) => {
+
+                if (result.isConfirmed) {
+
+                    discussUpdate();
+
+                    Swal.fire({
+
+                        icon: 'success',
+
+                        title: '成功',
+
+                        showConfirmButton: false,
+
+                        timer: 1000
+
+                    })
+
+                }
+
             })
         }
 
@@ -128,25 +149,44 @@ $(document).on("click", ".messageBtn", function () {
     if (temp == "") {
         Swal.fire('請輸入文字');
     } else {
-        Swal.fire({
-            title: '提交留言?',
-            text: "確定提交嗎?",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '確定',
-            cancelButtonText: '取消'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                replyUpdate(chatId);
-                Swal.fire({
-                    icon: 'success',
-                    title: '成功',
-                    showConfirmButton: false,
-                    timer: 1000
-                })
-            }
+        Swal.fire({
+
+            title: '提交留言?',
+
+            text: "確定提交嗎?",
+
+            icon: 'question',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#3085d6',
+
+            cancelButtonColor: '#d33',
+
+            confirmButtonText: '確定',
+
+            cancelButtonText: '取消'
+
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                replyUpdate(chatId);
+
+                Swal.fire({
+
+                    icon: 'success',
+
+                    title: '成功',
+
+                    showConfirmButton: false,
+
+                    timer: 1000
+
+                })
+
+            }
+
         })
     }
 });
@@ -255,9 +295,11 @@ $(document).ready(function () {
 
 //主揪資訊
 
-$(document).ready(function () {
+$(document).ready(function () {
+
     Organizer();
-
+
+
 });
 function Organizer() {
     const id = getIdFromUrl();
@@ -588,7 +630,8 @@ $(document).on('click', '.deleteA', function () {
                             text: '刪除成功',
                             icon: 'success',
                             showConfirmButton: false,
-                            timer: 1000                        })
+                            timer: 1000
+                        })
                         getChatData();
                     })
                     .catch(error => {
@@ -631,11 +674,16 @@ $(document).on('click', '.editA', function () {
 
             };
             console.log(editData)
-            $.ajax({
-                url: '/groupPage/EditChat',
-                type: 'POST',
-                data: JSON.stringify(editData),
-                contentType: 'application/json; charset=utf-8',
+            $.ajax({
+
+                url: '/groupPage/EditChat',
+
+                type: 'POST',
+
+                data: JSON.stringify(editData),
+
+                contentType: 'application/json; charset=utf-8',
+
                 success: function (response) {
                     Swal.fire({
                         title: '編輯成功',

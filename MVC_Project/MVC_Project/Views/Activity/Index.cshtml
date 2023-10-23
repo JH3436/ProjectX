@@ -168,14 +168,9 @@
                         <td>@Model[0].VoteDate?.ToString("yyyy-MM-dd")</td>
                     </tr>
                     <tr>
-                        <td>建議自備：</td>
-                        <td>無</td>
-                    </tr>
-                    <tr>
                         <td>建議攜帶金額：</td>
-                        <td>@Model[0].SuggestedAmount</td>
+                        <td>@Model[0].SuggestedAmount?.ToString("F0")</td>
                     </tr>
-
                     <tr>
                         <td>預計出發月份：</td>
                         <td>@Model[0].ExpectedDepartureMonth?.ToString("yyyy-MM")</td>
