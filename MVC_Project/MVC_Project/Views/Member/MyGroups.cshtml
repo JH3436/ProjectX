@@ -14,7 +14,7 @@
             <div class="col">
                 <div class="card my-3">
                     <div class="card-body">
-                        <h3 class="card-title">@group.GroupName</h3>
+                        <h3 class="card-title"><a href="/Grouppage/grouppage/@group.GroupID">@group.GroupName</a></h3>
                         <p class="card-text">出團日期:@group.EndDate?.ToString("yyyy-MM-dd")</p>
                         <div class="card-button-container">
                             @*<button class="blue-btn blue-btn-text-style edit-btn" data-action="Edit" data-controller="Groups" data-id="@group.GroupID">
@@ -22,8 +22,8 @@
                             <a class="abutton blue-btn blue-btn-text-style edit-btn" href="@Url.Action("myEdit", "Groups", new { GroupID = @group.GroupID })">
                                 編輯
                             </a>
-                           
 
+                            
 
                             <button class="blue-btn blue-btn-text-style delete-btn" data-name="@group.GroupName" data-id="@group.GroupID" onclick="confirmDelete(this)">
                                 刪除活動

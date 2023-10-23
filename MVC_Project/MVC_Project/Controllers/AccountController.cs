@@ -116,7 +116,7 @@ namespace MVC_Project.Controllers
             {
                 Subject = "請驗證您的電子郵件",
                 Body = $"<a href='https://localhost:7254/Account/ActivateAccount?userId={userId}'>點此啟用帳號</a>",
-                FromAddress = "lin0975408252@gmail.com",
+                FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
             };
@@ -205,7 +205,7 @@ namespace MVC_Project.Controllers
             {
                 Subject = "重設密碼",
                 Body = $"<h1>你的密碼是：{member.Password}</h1>", // 從數據庫中獲取密碼
-                FromAddress = "lin0975408252@gmail.com",
+                FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
             };
@@ -250,7 +250,7 @@ namespace MVC_Project.Controllers
             {
                 Subject = "聯絡表單確認",
                 Body = $"<h1>親愛的 {contact.SenderName}，感謝您的留言。</h1><p>您的留言內容為：{contact.FormContent}</p>",
-                FromAddress = "lin0975408252@gmail.com",
+                FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
             };

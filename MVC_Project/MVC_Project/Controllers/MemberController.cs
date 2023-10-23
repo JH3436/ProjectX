@@ -53,7 +53,8 @@ namespace MVC_Project.Controllers
 				{
 					RegistrationID = r.RegistrationID,
 					GroupName = r.Group.GroupName,
-					EndDate = r.Group.EndDate
+					EndDate = r.Group.EndDate,
+                    GroupID=r.Group.GroupID
 				})
 				.Skip(skip)
 				.Take(pageSize)
