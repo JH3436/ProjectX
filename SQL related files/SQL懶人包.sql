@@ -2,124 +2,8 @@
 use ProjectX
 go
 
-TRUNCATE TABLE Chat;
-TRUNCATE TABLE Contact;
-TRUNCATE TABLE LikeRecord;
-TRUNCATE TABLE MyActivity;
-TRUNCATE TABLE [dbo].[Notification];
-TRUNCATE TABLE [dbo].[Member];
-TRUNCATE TABLE OfficialPhoto;
-TRUNCATE TABLE PersonalPhoto;
-TRUNCATE TABLE Registration;
-TRUNCATE TABLE VoteRecord ;
-TRUNCATE TABLE VoteTime;
-TRUNCATE TABLE [dbo].[Group];
-DELETE FROM [dbo].[Group];
-DELETE FROM [dbo].[Member];
-DELETE FROM MyActivity;
 
---group資料表
-CREATE TABLE [dbo].[Group](
-	[GroupID] [int] IDENTITY(1,1) NOT NULL,
-	[GroupName] [nvarchar](255) NULL,
-	[GroupCategory] [nvarchar](50) NULL,
-	[GroupContent] [nvarchar](max) NULL,
-	[MinAttendee] [int] NULL,
-	[MaxAttendee] [int] NULL,
-	[StartDate] [date] NULL,
-	[EndDate] [date] NULL,
-	[Organizer] [int] NULL,
-	[OriginalActivityID] [int] NULL,
-	[HasSent] [bit] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[GroupID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[GroupName] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[Group] ADD  DEFAULT ((0)) FOR [HasSent]
-GO
-
-ALTER TABLE [dbo].[Group]  WITH CHECK ADD  CONSTRAINT [FK_Organizer] FOREIGN KEY([Organizer])
-REFERENCES [dbo].[Member] ([UserID])
-GO
-
-ALTER TABLE [dbo].[Group] CHECK CONSTRAINT [FK_Organizer]
-GO
-
-ALTER TABLE [dbo].[Group]  WITH CHECK ADD  CONSTRAINT [FK_OriginalActivity] FOREIGN KEY([OriginalActivityID])
-REFERENCES [dbo].[MyActivity] ([ActivityID])
-GO
-
-ALTER TABLE [dbo].[Group] CHECK CONSTRAINT [FK_OriginalActivity]
-GO
-
--- member資料表
-
-CREATE TABLE [dbo].[Member](
-	[UserID] [int] IDENTITY(1,1) NOT NULL,
-	[Nickname] [nvarchar](50) NULL,
-	[Account] [nvarchar](50) NULL,
-	[Password] [nvarchar](255) NULL,
-	[Email] [nvarchar](255) NULL,
-	[Phone] [nvarchar](20) NULL,
-	[Intro] [nvarchar](max) NULL,
-	[UserPhoto] [varbinary](max) NULL,
-	[IsActive] [bit] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[UserID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Phone] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Email] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Account] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Nickname] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-ALTER TABLE [dbo].[Member] ADD  DEFAULT ((0)) FOR [IsActive]
-GO
-
---官方活動
-CREATE TABLE [dbo].[MyActivity](
-	[ActivityID] [int] IDENTITY(1,1) NOT NULL,
-	[ActivityName] [nvarchar](255) NULL,
-	[Category] [nvarchar](255) NULL,
-	[SuggestedAmount] [money] NULL,
-	[ActivityContent] [nvarchar](max) NULL,
-	[MinAttendee] [int] NULL,
-	[VoteDate] [smalldatetime] NULL,
-	[ExpectedDepartureMonth] [date] NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[ActivityID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[ActivityName] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-
-
---假資料
+--假資料--這邊直接下指令
 
 INSERT INTO [dbo].[MyActivity]
            ([ActivityName]
@@ -241,7 +125,7 @@ GO
 
 
 
---官方活動照片資料表
+--官方活動照片資料表--編號要改一下
 INSERT INTO [dbo].[OfficialPhoto]
            ([ActivityID]
            ,[PhotoPath])
@@ -323,11 +207,11 @@ INSERT INTO [dbo].[Member]
            ,[UserPhoto]
            ,[IsActive])
      VALUES
-	 ('吳大偉', '00000', '00000', '00000@gmail.com', 0911111111, NULL, NULL,1),
-	 ('陳小明', '00001', '000011', 'chenxiaoming@email.com', 0911111111, NULL, NULL, 1),
-	 ('林美玲', '00002', '00002', 'linmeiling@email.com', 0911111111, NULL, NULL, 1),
-	 ('王雅琪', '00003', '00003', 'wangyaqi@email.com', 0911111111, NULL, NULL, 1),
-	 ('黃志成', '00004', '00004', 'huangzhicheng@email.com', 0911111111, NULL, NULL, 1)
+	 ('吳大偉', '00000', '00000', '00000@gmail.com', 0911111111, '管理員帳號', NULL,1),
+	 ('陳小明', '00001', '000011', 'chenxiaoming@email.com', 0922222222, '大家好，我是陳小明號使用者。我專注於軟體開發，尤其在網路應用程式開發方面有豐富經驗。', NULL, 1),
+	 ('林美玲', '00002', '00002', 'linmeiling@email.com', 0933333333, '大家好，我是林美玲號使用者。我專注於軟體開發，尤其在網路應用程式開發方面有豐富經驗。', NULL, 1),
+	 ('王雅琪', '00003', '00003', 'wangyaqi@email.com', 0944444444, '大家好，我是王雅琪號使用者。我專注於軟體開發，尤其在網路應用程式開發方面有豐富經驗。', NULL, 1),
+	 ('黃志成', '00004', '00004', 'huangzhicheng@email.com', 0955555555, '大家好，我是黃志成號使用者。我專注於軟體開發，尤其在網路應用程式開發方面有豐富經驗。', NULL, 1)
 
 
 GO
