@@ -55,6 +55,7 @@
                         </label>
                     </div>
                 </div>
+
                 <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=登山">登山</a>
                 <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=潛水">潛水</a>
                 <a href="/MyActivity/ACT?page=@Model.CurrentPage&category=露營">露營</a>
@@ -64,29 +65,6 @@
 
             </div>
         </div>
-
-        @* <script>
-        // 使用jQuery來簡化AJAX請求
-        $('.cktoggle_checkbox').change(function () {
-        var isChecked = $(this).prop('checked');
-        var category = isChecked ? '' : 'yourCategory'; // 根據checkbox的狀態設定篩選條件，這裡假設您有一個特定的category需要篩選
-
-        // 發送AJAX請求
-        $.ajax({
-        url: '/MyActi/ACT',
-        type: 'GET',
-        data: {
-        category: category
-        },
-        success: function (result) {
-        // 更新顯示資料的部分，您可以使用JavaScript來操作DOM
-        },
-        error: function (error) {
-        console.error(error);
-        }
-        });
-        });
-        </script>*@
 
     </section>
 
@@ -227,7 +205,6 @@
 
 
     <!-- JS連結 -->
-    <script src ="~/js/Layout.js"></script>
     <script src="~/js/ACTheart.js"></script>
     <script src="~/js/ACT.js"></script>
 

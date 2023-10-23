@@ -5,8 +5,9 @@
 
 
 @{
-    ViewData["Title"] = (Model.GroupID == 0) ? "Create" : "Update";
+    ViewData["Title"] = "Create";
 }
+
 
 @{
     var photos = ViewData["Photos"] as List<PersonalPhoto>;
@@ -41,9 +42,10 @@
     {
         <div class="row row-aligned justify-content-center move-left-row">
             <div class="col-md-12 GroupForm">
-                <form asp-action="Create" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this);">
+                <form id="catdog" asp-action="Create" method="post" enctype="multipart/form-data" onsubmit="return submitForm(this);">
                     <input type="hidden" asp-for="Organizer" value="@Context.Session.GetString("UserId")" />
                     <input type="hidden" asp-for="GroupID" />
+
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row row-aligned">
                         <div class="col-md-8 wide-column col-aligned">
@@ -99,7 +101,7 @@
                                             {
                                                 var base64 = Convert.ToBase64String(photo.PhotoData);
                                                 var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                                <img src="@imgSrc" alt="Personal Photo" />
+                                                <img src="@imgSrc" alt="Personal Photo" style="width: 300px; height: 200px;" />
                                             }
                                         }
                                         </div>

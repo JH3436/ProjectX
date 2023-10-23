@@ -105,7 +105,7 @@ if (userId = !0) {
 
     });
 }
-
+//沒壞的
 function submitForm(form) {
     $.ajax({
         type: "POST",
@@ -143,6 +143,60 @@ function submitForm(form) {
     // 防止表單正常提交
     return false;
 }
+
+
+
+
+
+
+
+
+
+
+//更新用
+function updateGroup(form) {
+    var formData = new FormData(form); // 使用原生的 FormData API
+    console.log("用到了"); // 確保這行可以在瀏覽器控制台看到
+
+    $.ajax({
+        url: '/Groups/myUpdate',  // 你的更新API路由
+        type: 'POST',
+        data: formData,  // 不再需要 JSON.stringify
+        processData: false,  // 這裡設為false，不讓jQuery對數據進行處理
+        contentType: false,  // 設為false，jQuery就不會添加Content-Type頭
+        success: function (response) {
+            if (response.status === "success") {
+                Swal.fire({
+                    title: '更新成功!',
+                    text: '個人活動已更新',
+                    icon: 'success',
+                    confirmButtonText: 'Ok!',
+                    confirmButtonColor: 'var(--deepBlue)',
+                }).then(function () {
+                    window.location.href = "/Member/MyGroups";
+                });
+            } else {
+                Swal.fire({
+                    title: '更新錯誤',
+                    text: '請檢查表單內容',
+                    icon: 'error',
+                    confirmButtonText: '檢查',
+                    confirmButtonColor: 'var(--deepBlue)',
+                });
+            }
+        },
+        error: function () {
+            alert('An error occurred while updating.');
+        }
+    });
+
+    return false;  // 防止表單正常提交
+}
+
+
+
+
+
 
 //    // 假設處理成功
 //    Swal.fire({

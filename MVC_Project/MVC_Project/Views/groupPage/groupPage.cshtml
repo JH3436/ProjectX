@@ -239,11 +239,11 @@
         float maxNumber = (float)Model.FirstOrDefault().MaxAttendee;
         float temp = memberCount / maxNumber * 100;
     }
-    <div class ="mycontainer">
-        <p class="h1" style="text-align:left; color:#fca311; font-weight:1000;">目前參加人數</p>
-        <p class="h3" style="text-align:right">最大人數:@Model[0].MaxAttendee</p>
-        <div class="progress" style="height: 50px;">
-            <div class="progress-bar bg-warning " role="progressbar" style="width: @temp%; font-size:x-large; color:black;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@memberCount 人</div>
+    <div class ="mycontainer" style="padding: 0 20% 0 20%">
+        <p class="h1" style="text-align:left; color: var(--orange); font-weight:700;">目前報名人數</p>
+        <p class="h3" style="text-align:right; color: white; font-weight: 600; font-size: 1.6rem;">人數上限:@Model[0].MaxAttendee 人</p>
+        <div class="progress" style="height: 35px;">
+            <div class="progress-bar bg-warning " role="progressbar" style="width: @temp%; color:black; font-size: 1.6rem; font-weight: 600;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@memberCount 人</div>
         </div>
     </div>
 

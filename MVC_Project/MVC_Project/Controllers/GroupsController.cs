@@ -47,33 +47,7 @@ namespace MVC_Project.Controllers
             return View(@group);
         }
 
-        // GET: Groups/Create
-        [Breadcrumb("個人揪團", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
-        public async Task<IActionResult> Create(int? id)
-        {
-            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID");
-            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID");
-
-            if (id.HasValue)
-            {
-                var existingGroup = await _context.Group.FindAsync(id.Value);
-                if (existingGroup != null)
-                {
-                    ViewData["GroupID"] = existingGroup.GroupID;
-                    ViewData["GroupName"] = existingGroup.GroupName;
-                    ViewData["GroupCategory"] = existingGroup.GroupCategory;
-                    ViewData["GroupContent"] = existingGroup.GroupContent;
-                    ViewData["MinAttendee"] = existingGroup.MinAttendee;
-                    ViewData["MaxAttendee"] = existingGroup.MaxAttendee;
-                    ViewData["StartDate"] = existingGroup.StartDate;
-                    ViewData["EndDate"] = existingGroup.EndDate;
-
-                    return View(existingGroup);
-                }
-            }
-
-            return View(new Group());
-        }
+        
 
         //James 10/22加的
         public async Task<IActionResult> myEdit(int? groupID)
@@ -102,32 +76,48 @@ namespace MVC_Project.Controllers
             return View("Create", group);
         }
 
-        //James 10/22加的
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group)
+		//James 10/22加的
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group)
+		{
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					_context.Update(@group);  // Entity Framework會根據GroupID自動處理更新
+					await _context.SaveChangesAsync();
+					return Json(new { status = "success" });  // 返回一個明確的'success'狀態
+				}
+				catch (DbUpdateConcurrencyException)
+				{
+					// 處理當多個用戶同時更新時的異常
+					return Json(new { status = "error", message = "Concurrency Exception" });
+				}
+			}
+			return Json(new { status = "error", message = "Model validation failed" });  // 驗證失敗，返回一個明確的'error'狀態和錯誤信息
+		}
+
+
+
+		// GET: Groups/Create
+		[Breadcrumb("個人揪團", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
+        public async Task<IActionResult> Create(int? id)
         {
+            ViewData["Organizer"] = new SelectList(_context.Member, "UserID", "UserID");
+            ViewData["OriginalActivityID"] = new SelectList(_context.MyActivity, "ActivityID", "ActivityID");
 
-            if (ModelState.IsValid)
+            if (id.HasValue)
             {
-                try
+                var existingGroup = await _context.Group.FindAsync(id.Value);
+                if (existingGroup != null)
                 {
-                    _context.Update(@group);  // Entity Framework會根據GroupID自動處理更新
-                    await _context.SaveChangesAsync();
+                    return View(existingGroup);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    // 處理當多個用戶同時更新時的異常
-                    return NotFound();
-                }
-
-                return RedirectToAction(nameof(Index));  // 返回到合適的頁面，比如列表頁
             }
-            return View("Create", @group);  // 驗證失敗，返回到編輯頁面
+
+            return View(new Group());
         }
-
-
-
 
 
         // POST: Groups/Create
@@ -137,7 +127,6 @@ namespace MVC_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
         {
-
             if (group.MaxAttendee <= group.MinAttendee)
             {
                 ModelState.AddModelError(nameof(group.MaxAttendee),

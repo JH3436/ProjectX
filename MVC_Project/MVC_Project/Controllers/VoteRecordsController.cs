@@ -39,22 +39,27 @@ namespace MVC_Project.Controllers
 
 
             //剩餘天數
-            var temp = from v in _context.VoteRecord
-                       join m in _context.MyActivity on v.ActivityID equals m.ActivityID
-                       where v.ActivityID == id
-                       select m;
-            var remainingDays = temp.FirstOrDefault();
+            var voteDate = (from m in _context.MyActivity
+                            where m.ActivityID == activityId
+                            select m.VoteDate).FirstOrDefault();
+
             DateTime currentDate = DateTime.Now;
+            var RemainingDays = voteDate;
 
-            if (remainingDays != null)
+            if (voteDate != null)
             {
-                TimeSpan? timeSpanNullable = remainingDays.VoteDate - currentDate;
+                DateTime voteEndDate = voteDate.Value.AddDays(5);
+                TimeSpan timeRemaining = voteEndDate - currentDate;
 
-                if (timeSpanNullable.HasValue)
+                if (timeRemaining.TotalDays == 0)
                 {
-                    int days = timeSpanNullable.Value.Days;
-                    var viewDays =  days <= 0 ? "已過期" : days.ToString();
-                    ViewBag.viewDays = viewDays;
+                    // 投票已截止
+                    ViewBag.RemainingDays = "投票已截止";
+                }
+                else
+                {
+                    // 顯示剩餘投票天數
+                    ViewBag.RemainingDays = $"剩餘投票天數：{Convert.ToInt32(timeRemaining.TotalDays)} 天";
                 }
             }
 

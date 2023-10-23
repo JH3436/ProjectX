@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MoreLinq;
 using MVC_Project.Models;
+using NuGet.ContentModel;
 using SmartBreadcrumbs.Attributes;
 using static NuGet.Packaging.PackagingConstants;
 
@@ -611,11 +612,8 @@ namespace MVC_Project.Controllers
 
 
         //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
-
-
-
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
-        public IActionResult ACT(int? page, string category)
+        public IActionResult ACT(int? page, string getData, string category)
         {
 
             int pageSize = 9;             // 計算要跳過的項目數量
@@ -627,8 +625,55 @@ namespace MVC_Project.Controllers
             IQueryable<ResponseActivity> myActivityData;
             IQueryable<ResponseGroup> groupData;
 
-            // 根据类别进行筛选
-            if (!string.IsNullOrEmpty(category))
+            if (getData == "group")
+            {
+                groupData = (from g in _context.Group
+                             join m in _context.Member on g.Organizer equals m.UserID
+                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
+                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
+                             from pp in personalPhotos.DefaultIfEmpty()
+                             where ma.Category == category
+                             group new { g, pp, m } by g.GroupID into grouped
+                             select new ResponseGroup
+                             {
+                                 GroupID = grouped.FirstOrDefault().g.GroupID,
+                                 GroupName = grouped.FirstOrDefault().g.GroupName,
+                                 GroupCategory = grouped.FirstOrDefault().g.GroupCategory,
+                                 GroupContent = grouped.FirstOrDefault().g.GroupContent,
+                                 MinAttendee = grouped.FirstOrDefault().g.MinAttendee,
+                                 MaxAttendee = grouped.FirstOrDefault().g.MaxAttendee,
+                                 StartDate = grouped.FirstOrDefault().g.StartDate,
+                                 EndDate = grouped.FirstOrDefault().g.EndDate,
+                                 Nickname = grouped.FirstOrDefault().m.Nickname,
+                                 // 在這裡對相同 GroupID 的照片進行隨機排序，然後選取第一張照片
+                                 PhotoData = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().pp.PhotoData
+                             });
+
+                myActivityData = Enumerable.Empty<ResponseActivity>().AsQueryable();
+            }
+            else
+            {
+                myActivityData = from m in _context.MyActivity
+                                 join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
+                                 where m.Category == category
+                                 group new { m, o } by m.ActivityID into grouped
+                                 select new ResponseActivity
+                                 {
+                                     ActivityID = grouped.FirstOrDefault().m.ActivityID,
+                                     ActivityName = grouped.FirstOrDefault().m.ActivityName,
+                                     Category = grouped.FirstOrDefault().m.Category,
+                                     SuggestedAmount = grouped.FirstOrDefault().m.SuggestedAmount,
+                                     ActivityContent = grouped.FirstOrDefault().m.ActivityContent,
+                                     MinAttendee = grouped.FirstOrDefault().m.MinAttendee,
+                                     VoteDate = grouped.FirstOrDefault().m.VoteDate,
+                                     ExpectedDepartureMonth = grouped.FirstOrDefault().m.ExpectedDepartureMonth,
+                                     // 在這裡對相同 ActivityID 的照片進行隨機排序，然後選取第一張照片
+                                     PhotoPath = grouped.OrderBy(x => Guid.NewGuid()).FirstOrDefault().o.PhotoPath
+                                 };
+                groupData = Enumerable.Empty<ResponseGroup>().AsQueryable(); 
+            }
+                // 根据类别进行筛选
+                if (!string.IsNullOrEmpty(category))
             {
                 myActivityData = from m in _context.MyActivity
                                  join o in _context.OfficialPhoto on m.ActivityID equals o.ActivityID
@@ -762,7 +807,40 @@ namespace MVC_Project.Controllers
             return View(viewModel);
         }
 
+        [HttpGet("api/loadData")]
+        public IActionResult loadData()
+        {
+            var Data = from g in _context.Group
+                       join m in _context.Member
+                       on g.Organizer equals m.UserID
+                       join p in _context.PersonalPhoto
+                       on g.GroupID equals p.GroupID
+                       select new getGroupData {
+                           GroupID = g.GroupID,
+                           GroupName = g.GroupName,
+                           GroupCategory = g.GroupCategory,
+                           GroupContent = g.GroupContent,
+                           MinAttendee = g.MinAttendee,
+                           MaxAttendee = g.MaxAttendee,
+                           StartDate = g.StartDate,
+                           EndDate = g.EndDate,
+                           Organizer = g.Organizer,
+                           OriginalActivityID = g.OriginalActivityID,
+                           HasSent = g.HasSent,
+                           UserID = m.UserID,
+                           Nickname = m.Nickname,
+                           PhotoData = p.PhotoData
+                       } ;
+            return Ok(Data);
+        }
 
+        [HttpGet("api/loadActivityData")]
+        public IActionResult loadActivityData()
+        {
+            var Data = from m in _context.MyActivity
+                       select m;
+            return Ok(Data);
+        }
 
         // ?---------------------------------------------------?
 
