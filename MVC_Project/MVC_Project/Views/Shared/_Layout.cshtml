@@ -210,4 +210,14 @@
     <script src="~/js/Layout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+<script>
+    $(document).ready(function () {
+        // 獲取當前路徑
+        var currentPath = window.location.pathname;
+
+        // 為對應的選項加上 'active-menu-item' 類別
+        $('a[href="' + currentPath + '"]').addClass('active-menu-item');
+    });
+</script>
 </html>

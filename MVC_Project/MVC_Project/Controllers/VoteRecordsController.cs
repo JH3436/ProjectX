@@ -37,6 +37,27 @@ namespace MVC_Project.Controllers
 
             ViewBag.Dates = voteTimes.Select(vt => vt.StartDate).ToList();
 
+
+            //剩餘天數
+            var temp = from v in _context.VoteRecord
+                       join m in _context.MyActivity on v.ActivityID equals m.ActivityID
+                       where v.ActivityID == id
+                       select m;
+            var remainingDays = temp.FirstOrDefault();
+            DateTime currentDate = DateTime.Now;
+
+            if (remainingDays != null)
+            {
+                TimeSpan? timeSpanNullable = remainingDays.VoteDate - currentDate;
+
+                if (timeSpanNullable.HasValue)
+                {
+                    int days = timeSpanNullable.Value.Days;
+                    var viewDays =  days <= 0 ? "已過期" : days.ToString();
+                    ViewBag.viewDays = viewDays;
+                }
+            }
+
             return View();
         }
 

@@ -17,7 +17,7 @@
 
 input::placeholder {
   color: #9f9e9e;
-  font-size: 1.5em;
+  font-size: 1.2em;
 
 
 }
@@ -63,7 +63,7 @@ form {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   width: 12rem;
-  font-size: 1rem;
+  font-size: 1.3rem;
 
 }
 
@@ -161,8 +161,9 @@ form {
   color: #9f9e9e;
 }
 
-.quicklogin{
-  margin-top:20px ;
+.quicklogin {
+    margin-top: 20px;
+    font-size: 1.5rem;
 }
 
 .forget {
@@ -199,4 +200,24 @@ padding-right:30px;
 }
 .input-container input {
     border-radius: 8px; /* 您可以根據需要調整這個值 */
+}
+
+.headerforwelcome > h1 {
+    color: #14213d;
+    font-size: 3rem;
+}
+
+.headerforwelcome > p {
+    color: #14213d;
+    font-size: 1.5rem;
+}
+
+.headerforregister h1 {
+    color: #14213d;
+    font-size: 3rem;
+}
+
+.headerforregister p {
+    color: #14213d;
+    font-size: 1.5rem;
 }

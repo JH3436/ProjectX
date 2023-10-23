@@ -93,19 +93,23 @@ namespace MVC_Project.Controllers
 			_context.SaveChanges();
 
 
-            // 發送驗證郵件
-            await SendVerificationEmail(email, newUser.UserID);  // 假設您已實現這個方法
+			// 發送驗證郵件
 
-            return RedirectToAction("VerifyYourEmailPage", "Home");  // 跳轉到一個頁面，告知用戶需要驗證郵件
+			// 在成功的情況下
+			await SendVerificationEmail(email, newUser.UserID);
+			TempData["SuccessMessage"] = "已發送驗證信，請檢查您的信箱。";
+			return View("~/Views/Home/Register.cshtml");
 
 
-   //                                                                  // 登入用戶
-   //         HttpContext.Session.SetString("UserId", newUser.UserID.ToString());
+
+
+			//                                                                  // 登入用戶
+			//         HttpContext.Session.SetString("UserId", newUser.UserID.ToString());
 
 			//return RedirectToAction("Index", "Home"); // 跳轉至主頁
 		}
 
-        private async Task<bool> SendVerificationEmail(string email, int userId)
+		private async Task<bool> SendVerificationEmail(string email, int userId)
         {
             var service = await GetGmailService();
             GmailMessage message = new GmailMessage
@@ -134,7 +138,8 @@ namespace MVC_Project.Controllers
                 member.IsActive = true;
                 _context.Update(member);
                 await _context.SaveChangesAsync();
-                return View("AccountActivated");
+				TempData["ActivationSuccess"] = "帳戶已開通，現在可以登入了哦！";
+                return View("~/Views/Home/AccountActivated.cshtml");
             }
             else
             {
@@ -271,11 +276,11 @@ namespace MVC_Project.Controllers
 		/// 存放 client_secret 和 credential 的地方
 		/// </summary>
 
-		string SecretPath = @"C:\Users\DORA\Documents\GitHub\ProjectX";
+		string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
 		//string jsonFilePath = Path.Combine("wwwroot", "Resources", "client_secret.json");
 		/// <summary>
 		/// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。
-		/// </summary>ㄈ
+		/// </summary>
 		string RedirectUri = $"https://localhost:7254/Account/AuthReturn";
 
 		/// <summary>

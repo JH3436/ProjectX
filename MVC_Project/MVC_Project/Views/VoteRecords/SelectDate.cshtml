@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    @ViewBag.viewDays
     <div id="container1">
         <form asp-action="SelectDate" asp-controller="VoteRecords" method="post" class="login" id="login">
             <div class="header1">
@@ -25,6 +26,15 @@
                 <p style="font-size: 21px;">系統將根據最多人選擇的時段來安排活動出發日。</p>
                 <p style="font-size: 21px;">如果最終活動時間與您所選的時間不符，將不自動報名此活動。</p>
                 <p style="font-size: 21px;">但您可以再次考慮活動出發日，再決定是否報名。</p>
+                @if (@ViewBag.viewDays == "已過期")
+                {
+                    <p class="h1" style="font-weight:300 ; color:red;">@ViewBag.viewDays!!</p>
+                }
+                else
+                {
+                    <p class="h1" style="font-weight:300 ; color:red;">距離投票結束還有 @ViewBag.viewDays 天!!</p>
+                }
+
 
                 <div class="selectDateContainer">
                     @if (ViewBag.Dates != null)

@@ -695,7 +695,6 @@ namespace MVC_Project.Controllers
                             join ma in _context.MyActivity on g.OriginalActivityID equals ma.ActivityID
                             join pp in _context.PersonalPhoto on g.GroupID equals pp.GroupID into personalPhotos
                             from pp in personalPhotos.DefaultIfEmpty()
-                            where ma.Category == category
                             group new { g, pp, m } by g.GroupID into grouped
                             select new ResponseGroup
                             {
