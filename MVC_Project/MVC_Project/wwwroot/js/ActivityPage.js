@@ -562,9 +562,7 @@ function getUserInfo() {
             $('.commentBtnDiv').remove();
             $('#discussInput').remove();
             $('#discussBtn').replaceWith(`
-                <button style="display:inline-block;margin-left: 60%;" id="heartSignBtn">
-                       <p class="h3">登入加入討論</p>
-                    </button>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 登入以參與討論</span>
             `);
         }
     });
