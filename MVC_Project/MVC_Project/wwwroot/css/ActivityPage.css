@@ -631,5 +631,10 @@ body {
     color: var(--deepBlue);
 }
 
-
+/*10/23James加的*/
+.myModalHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 

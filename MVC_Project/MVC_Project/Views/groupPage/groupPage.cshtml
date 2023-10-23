@@ -181,16 +181,6 @@
                         <td>@Model[0].EndDate?.ToString("yyyy-MM-dd")</td>
                     </tr>
                     <tr>
-                        <td>建議自備：</td>
-                        <td>無</td>
-                    </tr>
-                    
-                    @* <tr>
-                        <td>主揪</td>
-                        <td id="Organizer"></td>
-                    </tr> *@
-
-                    <tr>
                         <td>主揪</td>
                         <!-- 注意這裡添加了一個class和一個data-attribute來儲存organizer的ID -->
                         <td class="organizer-info" data-organizer-id="@Model[0].Organizer" style="cursor: pointer; ">@Model[0].Organizer</td>
@@ -204,8 +194,9 @@
     <div class="modal fade" id="organizerModal" tabindex="-1" aria-labelledby="organizerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" >
-                <div class="modal-header">
-                    <h1 class="modal-title " id="organizerNickname" style="margin-left:10rem;">暱稱</h1>
+                <div class="modal-header myModalHeader">
+                    <h1 style="color: white">heyyyyy</h1>
+                    <h1 class="modal-title " id="organizerNickname">暱稱</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
