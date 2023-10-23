@@ -33,8 +33,10 @@
 		<div class="button-container">
 			<button type="submit" class="button">註冊</button>
 		</div>
+			<h1> ------ </h1>
 		<div class="login-link">
-				<a style="display:inline-block ;text-decoration: none;" class="button" href="/Home/Login">註冊帳號</a>
+
+				<a style="display:inline-block ;text-decoration: none;" class="button" href="/Home/Login">已有帳號登入</a>
 		</div>
 	</form>
 	</div>
@@ -54,4 +56,30 @@
 			}
 		});
 	});
+
+	$(document).ready(function () {
+		var successMessage = '@Html.Raw(TempData["SuccessMessage"])';
+		var errorMessage = '@Html.Raw(TempData["ErrorMessage"])';
+
+		if (successMessage && successMessage !== '') {
+			Swal.fire({
+				icon: 'success',
+				title: successMessage,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: '確定'
+			});
+		} else if (errorMessage && errorMessage !== '') {
+			Swal.fire({
+				icon: 'error',
+				title: errorMessage,
+				confirmButtonColor: '#3085d6',
+				confirmButtonText: '確定'
+			});
+		}
+	});
 </script>
+<!-- SweetAlert 2 的 CSS 和 JavaScript -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<!-- 引入 jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
