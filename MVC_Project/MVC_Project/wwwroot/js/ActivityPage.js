@@ -367,7 +367,7 @@ function updateChatInModal(chatList) {
     // 將新的聊天資料插入到討論區
     var chatBoardHTML = `<div>
                     <div id="messageBoardTitle">
-                        <span class="h1">討論區</span>
+                        <span class="h1">留言板</span>
                         <div id="discussBtn">
                         <i class="fa-regular fa-message"></i>  留言
                         </div>

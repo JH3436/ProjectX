@@ -32,8 +32,8 @@ namespace MVC_Project.Models
         public int UserID { get; set; }
 
         public string? Nickname { get; set; }
-        public byte[]? PhotoData { get; set; }
-
+        public List<PersonalPhoto> PhotoData { get; set; } = new List<PersonalPhoto>();// 將 PhotoData 改為 List<byte[]>
     }
+
 
 }

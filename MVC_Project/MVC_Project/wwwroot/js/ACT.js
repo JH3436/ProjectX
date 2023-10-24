@@ -63,9 +63,9 @@ checkbox.addEventListener("change", function () {
                         day: '2-digit'
 
                     });
-                    
-                    var photo = item.PhotoData;
-                   
+                    /*console.log(item.PhotoData[0].PhotoData);*/
+                    var photo = `<img class='card__img--hover' src = 'data: image/png;base64,${item.PhotoData[0].PhotoData}'></img>`
+
                     var cardHtml = `
             <article class="card card--${item.GroupID}">
                 <div class="card__info-hover">
@@ -75,8 +75,8 @@ checkbox.addEventListener("change", function () {
                     </div>
                 </div>
                 <div class="card__img"></div>
-                <a href="#" class="card_link">
-                    <div class="card__img--hover"></div>
+                <a href="/groupPage/groupPage/${item.GroupID}" class="card_link">
+                    ${photo}
                 </a>
                 <div class="card__info">
                     <span class="card__category">${item.GroupCategory}</span>
@@ -107,7 +107,8 @@ checkbox.addEventListener("change", function () {
                 console.log(data);
                 $('.cards').empty();
                 data.forEach(function (item) {
-                    var photo = item.PhotoData;
+                    var photo = item.OfficialPhoto[0].PhotoPath;
+                    console.log(photo);
                     var VoteMonth = new Date(item.VoteDate).toLocaleString('en-US', {
                         month: '2-digit'
                     });
@@ -122,6 +123,7 @@ checkbox.addEventListener("change", function () {
                     var ExpectedMonth = new Date(item.ExpectedDepartureMonth).toLocaleString('en-US', {
                         month: '2-digit'
                     });
+                    
 
                                         var cardHtml = `
             <article class="card card--${item.ActivityID}">
@@ -132,9 +134,9 @@ checkbox.addEventListener("change", function () {
               </div>
           </div>
 
-          <div class="card__img"></div>
-          <a href="Activity/Index/${item.ActivityID}" class="card_link">
-            <div class="card__img--hover"></div>
+          <div class="card__img" style="background-image: url(${photo})"></div>
+          <a href="/Activity/Index/${item.ActivityID}" class="card_link">
+            <div class="card__img--hover" style="background-image: url(${photo})"></div>
           </a>
           <span class="card__VoteDate-text">投票日：<span style="color: var(--brown)">${VoteMonth}月${VoteDay}日</span></span>
           <div class="card__info">
