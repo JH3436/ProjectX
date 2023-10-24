@@ -443,7 +443,7 @@ function updateChatInModal(chatList) {
             </div>
             </div>
             `;
-            chatList.forEach(function (reply) {
+            chatList.reverse().forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
                     //var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
                     //    year: 'numeric',
