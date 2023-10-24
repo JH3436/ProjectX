@@ -363,6 +363,7 @@ function updateChatInModal(chatList) {
     // 清空原有的討論區內容
     $("#dialogDiv").empty();
 
+    var replyList = chatList.slice().reverse();
     // 將新的聊天資料插入到討論區
     var chatBoardHTML = `<div>
                     <div id="messageBoardTitle">
@@ -393,7 +394,7 @@ function updateChatInModal(chatList) {
                     </div>
                 </div>`;
     $('#dialogDiv').append(chatBoardHTML);
-    chatList.forEach(function (chat) {
+    replyList.forEach(function (chat) {
         if (chat.ToWhom === null) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
             var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
@@ -443,7 +444,7 @@ function updateChatInModal(chatList) {
             </div>
             </div>
             `;
-            chatList.reverse().forEach(function (reply) {
+            chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
                     //var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
                     //    year: 'numeric',
