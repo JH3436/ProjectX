@@ -69,8 +69,8 @@ checkbox.addEventListener("change", function () {
                     var cardHtml = `
             <article class="card card--${item.GroupID}">
                 <div class="card__info-hover">
+                
                     <div class="card__clock-info">
-                        <img src="">
                                
                     </div>
                 </div>
@@ -108,23 +108,39 @@ checkbox.addEventListener("change", function () {
                 $('.cards').empty();
                 data.forEach(function (item) {
                     var photo = item.PhotoData;
+                    var VoteMonth = new Date(item.VoteDate).toLocaleString('en-US', {
+                        month: '2-digit'
+                    });
+                    var VoteDay = new Date(item.VoteDate).toLocaleString('en-US', {
+                        day: '2-digit'
+
+                    });
+                    var ExpectedYear = new Date(item.ExpectedDepartureMonth).toLocaleString('en-US', {
+                        year: 'numeric',
+                    });
+
+                    var ExpectedMonth = new Date(item.ExpectedDepartureMonth).toLocaleString('en-US', {
+                        month: '2-digit'
+                    });
+
                                         var cardHtml = `
             <article class="card card--${item.ActivityID}">
           <div class="card__info-hover">
-            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+            <i class="fa-solid fa-envelope-open-text fa-2xl vote-icon"></i>
             <div class="card__clock-info">
               <div class="card__img">${item.OfficialPhotoID}</div>
-             
-            </div>
+              </div>
           </div>
 
           <div class="card__img"></div>
-          <a href="#" class="card_link">
+          <a href="Activity/Index/${item.ActivityID}" class="card_link">
             <div class="card__img--hover"></div>
           </a>
+          <span class="card__VoteDate-text">投票日：<span style="color: var(--brown)">${VoteMonth}月${VoteDay}日</span></span>
           <div class="card__info">
             <span class="card__category">${item.Category}</span>
             <h3 class="card__title">${item.ActivityName}</h3>
+            <span class="card__ExpectedMonth">${ExpectedYear}-${ExpectedMonth} 月活動</span>
           </div>
         </article>
 `;
