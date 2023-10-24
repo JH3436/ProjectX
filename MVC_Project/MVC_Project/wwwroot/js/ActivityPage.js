@@ -559,8 +559,7 @@ function getUserInfo() {
         error: function (error) {
             console.error('Error:', error);
             $('#replyTextDiv').remove();
-            console.log("$(`#replyTextDiv`).empty();")
-            $('.commentBtnDiv').remove();
+            $('.commentDiv').remove();
             $('#discussInput').remove();
             $('#discussBtn').replaceWith(`
                 <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 登入以參與討論</span>
