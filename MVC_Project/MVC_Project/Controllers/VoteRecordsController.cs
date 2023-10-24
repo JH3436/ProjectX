@@ -66,9 +66,35 @@ namespace MVC_Project.Controllers
             return View();
         }
 
+        [Breadcrumb("官方活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
         //小胖拿過來給頁面
         public IActionResult SelectDatefromMember(int? userId, int? activityId)
         {
+            //剩餘天數
+            var voteDate = (from m in _context.MyActivity
+                            where m.ActivityID == activityId
+                            select m.VoteDate).FirstOrDefault();
+
+            DateTime currentDate = DateTime.Now;
+            var RemainingDays = voteDate;
+
+            if (voteDate != null)
+            {
+                DateTime voteEndDate = voteDate.Value.AddDays(5);
+                TimeSpan timeRemaining = voteEndDate - currentDate;
+
+                if (timeRemaining.TotalDays == 0)
+                {
+                    // 投票已截止
+                    ViewBag.RemainingDays = "投票已截止";
+                }
+                else
+                {
+                    // 顯示剩餘投票天數
+                    ViewBag.RemainingDays = $"剩餘投票天數：{Convert.ToInt32(timeRemaining.TotalDays)} 天";
+                }
+            }
+
             var activityID = activityId;
 
             if (userId == null || activityID == null)
