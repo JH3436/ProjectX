@@ -65,16 +65,16 @@ checkbox.addEventListener("change", function () {
                     });
                     
                     var photo = item.PhotoData;
-                    console.log(photo);
+                   
                     var cardHtml = `
             <article class="card card--${item.GroupID}">
                 <div class="card__info-hover">
                     <div class="card__clock-info">
-                        <img src="Grouppage/grouppage/${item.GroupID}">
-                                <span class="card__time">天數：${EndDate - StartDate} 天</span>
+                        <img src="">
+                               
                     </div>
                 </div>
-                <div class="card__img">${item.PersonalPhotoID}</div>
+                <div class="card__img"></div>
                 <a href="#" class="card_link">
                     <div class="card__img--hover"></div>
                 </a>
@@ -89,6 +89,7 @@ checkbox.addEventListener("change", function () {
                     $('.cards').append(cardHtml); // 將生成的卡片添加到.cards元素中
                 });
                 
+
             },
             error: function (error) {
                 console.error(error);
@@ -98,6 +99,45 @@ checkbox.addEventListener("change", function () {
     } else {
         // checkbox 未被選中
         console.log("Checkbox 未選中");
+        $.ajax({
+            url: '/api/loadActivityData', // 控制器的路徑
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $('.cards').empty();
+                data.forEach(function (item) {
+                    var photo = item.PhotoData;
+                                        var cardHtml = `
+            <article class="card card--${item.ActivityID}">
+          <div class="card__info-hover">
+            <i class="fa-regular fa-heart fa-2xl heart-icon"></i>
+            <div class="card__clock-info">
+              <div class="card__img">${item.OfficialPhotoID}</div>
+             
+            </div>
+          </div>
+
+          <div class="card__img"></div>
+          <a href="#" class="card_link">
+            <div class="card__img--hover"></div>
+          </a>
+          <div class="card__info">
+            <span class="card__category">${item.Category}</span>
+            <h3 class="card__title">${item.ActivityName}</h3>
+          </div>
+        </article>
+`;
+                    $('.cards').append(cardHtml); // 將生成的卡片添加到.cards元素中
+                });
+
+
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+
     }
 });
 

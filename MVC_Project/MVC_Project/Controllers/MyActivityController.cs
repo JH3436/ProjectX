@@ -610,7 +610,7 @@ namespace MVC_Project.Controllers
 
 
 
-
+        
         //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT(int? page, string getData, string category)
@@ -834,6 +834,8 @@ namespace MVC_Project.Controllers
             return Ok(Data);
         }
 
+
+
         [HttpGet("api/loadActivityData")]
         public IActionResult loadActivityData()
         {
@@ -841,6 +843,8 @@ namespace MVC_Project.Controllers
                        select m;
             return Ok(Data);
         }
+
+      
 
         // ?---------------------------------------------------?
 
