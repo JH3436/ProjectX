@@ -576,7 +576,7 @@ function getUserIngroup() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            if (data == false) {
+            if (data == false ) {
                 $('#replyTextDiv').remove();
                 console.log("$(`#replyTextDiv`).empty();")
                 $('.commentBtnDiv').remove();
