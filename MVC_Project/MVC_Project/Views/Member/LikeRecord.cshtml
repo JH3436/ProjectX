@@ -104,14 +104,14 @@
 
 <script>
 
-  
+
 
     $('.delete-btn').click(function () {
         var id = $(this).data('id');
 
         swal({
-            title: "確定要取消收藏嗎？",
-            
+            title: "確定要取消參與嗎？",
+            text: "取消就無法參與投票囉！",
             icon: "warning",
             buttons: true,
             dangerMode: true
@@ -119,13 +119,27 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.post("/Member/DeleteLikeRecord", { likeRecordID: id }, function () {
-                        // 呼叫成功後的操作，例如重新載入頁面
-                        swal("成功！", "已成功刪除紀錄！", "success").then(() => {
+                        // 呼叫成功後的操作，例如顯示一秒的成功訊息
+                        swal({
+                            title: "成功！",
+                            text: "已成功刪除紀錄！",
+                            icon: "success",
+                            buttons: false,
+                            timer: 1000,  // 1秒後自動關閉
+                            timerProgressBar: true
+                        }).then(() => {
                             location.reload();
                         });
                     })
                         .fail(function () {
-                            swal("錯誤！", "刪除過程中發生錯誤！", "error");
+                            swal({
+                                title: "錯誤！",
+                                text: "刪除過程中發生錯誤！",
+                                icon: "error",
+                                buttons: false,
+                                timer: 1000,  // 1秒後自動關閉
+                                timerProgressBar: true
+                            });
                         });
                 } else {
                     location.reload();

@@ -79,21 +79,43 @@
                     // 使用AJAX調用DeleteGroup方法
                     $.post("/Member/DeleteGroup", { GroupID: groupId }, function (data) {
                         if (data.success) {
-                            swal("成功！", "已成功刪除活動！", "success").then(() => {
+                            swal({
+                                title: "成功！",
+                                text: "已成功刪除活動！",
+                                icon: "success",
+                                buttons: false,
+                                timer: 1000,
+                                timerProgressBar: true
+                            }).then(() => {
                                 // 刷新頁面或刪除該活動的元素
                                 location.reload();
                             });
                         } else {
-                            swal("錯誤！", "刪除過程中發生錯誤！", "error");
+                            swal({
+                                title: "錯誤！",
+                                text: "刪除過程中發生錯誤！",
+                                icon: "error",
+                                buttons: false,
+                                timer: 1000,
+                                timerProgressBar: true
+                            });
                         }
                     });
                 } else if (value === null) {
                     // 使用者點擊了取消按鈕，不執行任何操作
                 } else {
-                    swal("錯誤！", "輸入錯誤活動名稱，請重新操作", "error");
+                    swal({
+                        title: "錯誤！",
+                        text: "輸入錯誤活動名稱，請重新操作",
+                        icon: "error",
+                        buttons: false,
+                        timer: 1000,
+                        timerProgressBar: true
+                    });
                 }
             });
     }
+
 
     // $('.delete-btn').click(function () {
     //     var groupId = $(this).data('id');

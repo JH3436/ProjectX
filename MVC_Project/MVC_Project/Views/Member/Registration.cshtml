@@ -74,7 +74,6 @@
 
 
 <script>
-
     $('.delete-btn').click(function () {
         var id = $(this).data('id');
 
@@ -87,10 +86,27 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.post("/Member/DeleteRegistration", { RegistrationID: id }, function () {
-                        swal("成功！", "已成功刪除紀錄！", "success").then(() => {
+                        swal({
+                            title: "成功！",
+                            text: "已成功刪除紀錄！",
+                            icon: "success",
+                            buttons: false,  // 隱藏按鈕
+                            timer: 1000,  // 1秒後自動關閉
+                            timerProgressBar: true
+                        }).then(() => {
                             location.reload();
                         });
-                    });
+                    })
+                        .fail(function () {
+                            swal({
+                                title: "錯誤！",
+                                text: "刪除過程中發生錯誤！",
+                                icon: "error",
+                                buttons: false,  // 隱藏按鈕
+                                timer: 1000,  // 1秒後自動關閉
+                                timerProgressBar: true
+                            });
+                        });
                 } else {
                     location.reload();
                 }

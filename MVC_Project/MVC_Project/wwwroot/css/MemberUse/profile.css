@@ -430,3 +430,13 @@ color:var(--white)
 .active-menu-item {
     color: var(--orange); /* 橘色 */
 }
+
+.card-title > a {
+    text-decoration: none; /* 移除底線 */
+    color: var(--deepBlue);
+}
+
+.card-title > a:hover{
+    text-decoration: none; /* 移除底線 */
+    color: var(--orange);
+}

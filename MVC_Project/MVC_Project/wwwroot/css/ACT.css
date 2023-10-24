@@ -555,7 +555,7 @@ body {
 
     /* OFF */
     .cktoggle_inner:after {
-        content: "    待成團";
+        content: "    投票中";
         padding-right: 30px;
         background-color: #EEEEEE;
         color: #14213d;

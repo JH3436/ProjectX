@@ -73,7 +73,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
         </div>
  
 
-<form method="post" action="/Member/UpdateProfile">
+<form method="post" id="updateProfileForm" action="/Member/UpdateProfile">
         <div class="container">
             <!-- 暱稱 -->
             <div class="mb-3 col-4  ">
@@ -99,8 +99,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 
 
     <div class="container">
-     
-        <form method="post" action="/Member/ChangePassword">
+
+                <form method="post" id="changePasswordForm" action="/Member/ChangePassword">
             
             <div class=" col-4 mb-3">
                 <label for="oldPassword" class="form-label">舊密碼：</label>
@@ -177,4 +177,88 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
         }
     });
 
+
+
+    $(document).ready(function () {
+        $("#updateProfileForm").submit(function (event) {
+            event.preventDefault(); // 阻止表單的預設提交行為
+
+            // 取得表單數據
+            var formData = $(this).serialize();
+
+            // 使用 Ajax 提交表單
+            $.post("/Member/UpdateProfile", formData, function (response) {
+                // 如果成功，顯示成功的 SweetAlert
+                swal({
+                    title: "成功！",
+                    text: "資料已儲存！",
+                    icon: "success",
+                    buttons: false,
+                    timer: 1000,
+                    timerProgressBar: true
+                }).then(() => {
+                    location.reload(); // 或其他你想做的操作
+                });
+            })
+                .fail(function () {
+                    // 如果失敗，顯示失敗的 SweetAlert
+                    swal({
+                        title: "錯誤！",
+                        text: "儲存過程中發生錯誤！",
+                        icon: "error",
+                        buttons: false,
+                        timer: 1000,
+                        timerProgressBar: true
+                    });
+                });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#changePasswordForm").submit(function (event) {
+            event.preventDefault(); // 阻止表單的預設提交行為
+
+            // 驗證新密碼和確認密碼是否相同
+            var newPassword = $("#newPassword").val();
+            var confirmPassword = $("#confirmPassword").val();
+
+            if (newPassword !== confirmPassword) {
+                $("#passwordMismatch").show(); // 顯示不符合的警告
+                return;
+            }
+            $("#passwordMismatch").hide(); // 隱藏不符合的警告
+
+            // 取得表單數據
+            var formData = $(this).serialize();
+
+            // 使用 Ajax 提交表單
+            $.post("/Member/ChangePassword", formData, function (response) {
+                // 如果成功，顯示成功的 SweetAlert
+                swal({
+                    title: "成功！",
+                    text: "密碼已更改！",
+                    icon: "success",
+                    buttons: false,
+                    timer: 1000,
+                    timerProgressBar: true
+                }).then(() => {
+                    location.reload(); // 或其他你想做的操作
+                });
+            })
+                .fail(function () {
+                    // 如果失敗，顯示失敗的 SweetAlert
+                    swal({
+                        title: "錯誤！",
+                        text: "更改密碼過程中發生錯誤！",
+                        icon: "error",
+                        buttons: false,
+                        timer: 1000,
+                        timerProgressBar: true
+                    });
+                });
+        });
+    });
+
 </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
