@@ -1,7 +1,11 @@
 ﻿@model MVC_Project.Models.Group
 
+@* 查找目前使用者 *@
+@using Microsoft.AspNetCore.Http
+
+
 @{
-	ViewData["Title"] = "myEdit";
+	ViewData["Title"] = "Edit";
 }
 @{
 	var photos = ViewData["Photos"] as List<PersonalPhoto>;
@@ -37,7 +41,10 @@
 	{
 		<div class="row row-aligned justify-content-center move-left-row">
 			<div class="col-md-12 GroupForm">
-				<form id="catdog" asp-action="myEdit" method="post" enctype="multipart/form-data" onsubmit="return updateGroup(this);">
+
+				@*<form id="catdog" asp-action="myEdit" method="post" enctype="multipart/form-data" onsubmit="return updateGroup(this);">*@
+				<form id="catdog" enctype="multipart/form-data">
+
 					<input type="hidden" asp-for="Organizer" value="@Context.Session.GetString("UserId")" />
 					<input type="hidden" asp-for="GroupID" />
 
@@ -120,7 +127,10 @@
 					<div class="row" style="margin-right:8px">
 						<div class="col-md-12 text-center BtnMove">
 							<div class="form-group">
-								<input type="submit" value="更新" class="btn submit fw-bold" />
+								
+								@*<input type="submit" value="更新" class="btn submit fw-bold" />*@
+								<button type="button" class="btn submit fw-bold" onclick="updateGroup(catdog)">更新</button>
+
 							</div>
 						</div>
 					</div>
@@ -130,9 +140,7 @@
 		</div>
 
 	}
-	<div>
-		<a asp-action="Index">Back to List</a>
-	</div>
+	
 </div>
 <!-- JS連結 -->
 <script src="~/js/Group.js"></script>

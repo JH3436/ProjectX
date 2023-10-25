@@ -610,7 +610,7 @@ namespace MVC_Project.Controllers
 
 
 
-
+        
         //-----------------------------^^^^我的程式碼結束^^^^----------------------------------
         [Breadcrumb("所有活動", FromAction = nameof(MyActivityController.HomePage), FromController = typeof(MyActivityController))]
         public IActionResult ACT(int? page, string getData, string category)
@@ -811,11 +811,10 @@ namespace MVC_Project.Controllers
         public IActionResult loadData()
         {
             var Data = from g in _context.Group
-                       join m in _context.Member
-                       on g.Organizer equals m.UserID
-                       join p in _context.PersonalPhoto
-                       on g.GroupID equals p.GroupID
-                       select new getGroupData {
+                       join m in _context.Member on g.Organizer equals m.UserID
+                       join p in _context.PersonalPhoto on g.GroupID equals p.GroupID into photos
+                       select new getGroupData
+                       {
                            GroupID = g.GroupID,
                            GroupName = g.GroupName,
                            GroupCategory = g.GroupCategory,
@@ -829,18 +828,35 @@ namespace MVC_Project.Controllers
                            HasSent = g.HasSent,
                            UserID = m.UserID,
                            Nickname = m.Nickname,
-                           PhotoData = p.PhotoData
-                       } ;
+                           PhotoData = photos.ToList()
+                       };
             return Ok(Data);
         }
+
+
 
         [HttpGet("api/loadActivityData")]
         public IActionResult loadActivityData()
         {
             var Data = from m in _context.MyActivity
-                       select m;
+                       join o in _context.OfficialPhoto
+                       on m.ActivityID equals o.ActivityID into photos
+                       select new getActivityData
+                       {
+                           ActivityID = m.ActivityID,
+                           ActivityName = m.ActivityName,
+                           Category = m.Category,
+                           SuggestedAmount = m.SuggestedAmount,
+                           ActivityContent = m.ActivityContent,
+                           MinAttendee = m.MinAttendee,
+                           VoteDate = m.VoteDate,
+                           ExpectedDepartureMonth = m.ExpectedDepartureMonth,
+                           OfficialPhoto = photos.ToList() // 存成 List
+                       };
             return Ok(Data);
         }
+
+      
 
         // ?---------------------------------------------------?
 

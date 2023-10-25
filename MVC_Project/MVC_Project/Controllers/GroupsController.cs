@@ -21,6 +21,27 @@ namespace MVC_Project.Controllers
             _context = context;
         }
 
+		[HttpPost]
+		public async Task<IActionResult> ispan([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
+		{
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@group);  
+                    await _context.SaveChangesAsync();
+                   /* return Ok("全部更新成功 爽拉");*/ 
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    // 處理當多個用戶同時更新時的異常
+                    return Ok(ModelState);
+                }
+            }
+
+            return Ok(ModelState);
+        }
+
         // GET: Groups
         public async Task<IActionResult> Index()
         {
@@ -73,30 +94,30 @@ namespace MVC_Project.Controllers
             }
 
             // 這裡可以將編輯頁面的 View 返回給用戶，讓用戶進行編輯操作
-            return View("Create", group);
+            return View("Edit", group);
         }
 
 		//James 10/22加的
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group)
+		public async Task<IActionResult> myUpdate([Bind("GroupID,GroupName,GroupCategory,GroupContent,MinAttendee,MaxAttendee,StartDate,EndDate,Organizer")] Group @group, List<IFormFile> imageDataFiles)
 		{
-			if (ModelState.IsValid)
-			{
-				try
-				{
-					_context.Update(@group);  // Entity Framework會根據GroupID自動處理更新
-					await _context.SaveChangesAsync();
-					return Json(new { status = "success" });  // 返回一個明確的'success'狀態
-				}
-				catch (DbUpdateConcurrencyException)
-				{
-					// 處理當多個用戶同時更新時的異常
-					return Json(new { status = "error", message = "Concurrency Exception" });
-				}
-			}
-			return Json(new { status = "error", message = "Model validation failed" });  // 驗證失敗，返回一個明確的'error'狀態和錯誤信息
-		}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@group);  // Entity Framework會根據GroupID自動處理更新
+                    await _context.SaveChangesAsync();
+                    return Json(new { status = "success" });  // 返回一個明確的'success'狀態
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    // 處理當多個用戶同時更新時的異常
+                    return Ok(ModelState);
+                }
+            }
+            return Ok(ModelState);  // 驗證失敗，返回一個明確的'error'狀態和錯誤信息
+        }
 
 
 

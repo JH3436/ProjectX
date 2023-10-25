@@ -217,8 +217,8 @@
             <div class="modal-content" id="dialogDiv">
                 <div>
                     <div id="messageBoardTitle">
-                        <p class="h1">討論區</p>
-                        <div id="discussBtn">建立討論</div>
+                        <p class="h1">留言板</p>
+                        <div id="discussBtn">留言</div>
                     </div>
 
                     <!-- 討論輸入區 -->
@@ -234,18 +234,29 @@
             </div>
         </div>
     </div>
-    @{
+    @* @{
         float memberCount = @Model.FirstOrDefault().Registration.Count();
         float maxNumber = (float)Model.FirstOrDefault().MaxAttendee;
         float temp = memberCount / maxNumber * 100;
+        if(maxNumber)
+    } *@
+    @{
+        float? memberCount = Model.FirstOrDefault()?.Registration.Count();
+        float? maxNumber = Model.FirstOrDefault()?.MaxAttendee;
+
+        if (maxNumber.HasValue)
+        {
+            float temp = (memberCount ?? 0) / maxNumber.Value * 100;
+            <div class="mycontainer" style="padding: 0 20% 0 20%">
+                <p class="h1" style="text-align:left; color: var(--orange); font-weight:700;">目前報名人數</p>
+                <p class="h3" style="text-align:right; color: white; font-weight: 600; font-size: 1.6rem;">人數上限:@Model[0].MaxAttendee 人</p>
+                <div class="progress" style="height: 35px;">
+                    <div class="progress-bar bg-warning " role="progressbar" style="width: @temp%; color:black; font-size: 1.6rem; font-weight: 600;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@memberCount 人</div>
+                </div>
+            </div>
+        }
     }
-    <div class ="mycontainer" style="padding: 0 20% 0 20%">
-        <p class="h1" style="text-align:left; color: var(--orange); font-weight:700;">目前報名人數</p>
-        <p class="h3" style="text-align:right; color: white; font-weight: 600; font-size: 1.6rem;">人數上限:@Model[0].MaxAttendee 人</p>
-        <div class="progress" style="height: 35px;">
-            <div class="progress-bar bg-warning " role="progressbar" style="width: @temp%; color:black; font-size: 1.6rem; font-weight: 600;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">@memberCount 人</div>
-        </div>
-    </div>
+    
 
 </body>
 <!-- JS連結 -->

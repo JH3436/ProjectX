@@ -116,7 +116,7 @@ namespace MVC_Project.Controllers
             var chatData = from c in _context.Chat
                            join m in _context.Member on c.UserID equals m.UserID
                            where c.ActivityID == id
-                           orderby c.ChatTime descending // 添加排序操作，降序排序
+                           orderby c.ChatTime /*descending*/ // 添加排序操作，降序排序
                            select new responeChat
                            {
                                ChatID = c.ChatID,
@@ -225,11 +225,17 @@ namespace MVC_Project.Controllers
             int? account = HttpContext.Session.GetString("UserId") != null ?
                 int.Parse(HttpContext.Session.GetString("UserId")) :
                 (int?)null;
-            var temp = from r in _context.Registration
-                       where r.GroupID == id && r.ParticipantID == account
-                       select r;
-            var UserIngroup = temp.ToList().Count()==0 ? false : true;
-            return Ok(UserIngroup);
+            if (account == 1) 
+            { 
+                return Ok(true); 
+            } else {
+                var temp = from r in _context.Registration
+                           where r.GroupID == id && r.ParticipantID == account
+                           select r;
+                var UserIngroup = temp.ToList().Count() == 0 ? false : true;
+                return Ok(UserIngroup);
+            }
+            
         }
         //活動參考圖片
         [HttpGet("/api/photoGet/{id}")]

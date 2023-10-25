@@ -363,10 +363,11 @@ function updateChatInModal(chatList) {
     // 清空原有的討論區內容
     $("#dialogDiv").empty();
 
+    var replyList = chatList.slice().reverse();
     // 將新的聊天資料插入到討論區
     var chatBoardHTML = `<div>
                     <div id="messageBoardTitle">
-                        <span class="h1">討論區</span>
+                        <span class="h1">留言板</span>
                         <div id="discussBtn">
                         <i class="fa-regular fa-message"></i>  留言
                         </div>
@@ -393,7 +394,7 @@ function updateChatInModal(chatList) {
                     </div>
                 </div>`;
     $('#dialogDiv').append(chatBoardHTML);
-    chatList.forEach(function (chat) {
+    replyList.forEach(function (chat) {
         if (chat.ToWhom === null) {
             var chatId = chat.ChatID;  // 注意這裡要使用 ChatID，而不是 chatId
             var userPhoto = chat.UserPhoto ? `<img src="data:image/png;base64,${chat.UserPhoto}" class="profile" />` : '';
@@ -443,7 +444,7 @@ function updateChatInModal(chatList) {
             </div>
             </div>
             `;
-            chatList.reverse().forEach(function (reply) {
+            chatList.forEach(function (reply) {
                 if (reply.ToWhom !== null && reply.ToWhom === chatId) {
                     //var replyTime = new Date(reply.ChatTime).toLocaleString('en-US', {
                     //    year: 'numeric',
@@ -558,8 +559,7 @@ function getUserInfo() {
         error: function (error) {
             console.error('Error:', error);
             $('#replyTextDiv').remove();
-            console.log("$(`#replyTextDiv`).empty();")
-            $('.commentBtnDiv').remove();
+            $('.commentDiv').remove();
             $('#discussInput').remove();
             $('#discussBtn').replaceWith(`
                 <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 登入以參與討論</span>
@@ -576,7 +576,7 @@ function getUserIngroup() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            if (data == false) {
+            if (data == false ) {
                 $('#replyTextDiv').remove();
                 console.log("$(`#replyTextDiv`).empty();")
                 $('.commentBtnDiv').remove();
