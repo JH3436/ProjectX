@@ -444,7 +444,7 @@ color:var(--white)
 
 .field-icon {
     float: right;
-    margin-left: -25px;
+    margin-right: 15px;
     margin-top: -25px;
     position: relative;
     z-index: 2;
