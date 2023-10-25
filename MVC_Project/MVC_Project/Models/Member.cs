@@ -7,6 +7,8 @@ namespace MVC_Project.Models;
 
 public partial class Member
 {
+    public string ResetToken { get; set; } // 用於存儲重置密碼令牌
+    public DateTime? ResetTokenExpiration { get; set; } // 用於存儲重置密碼令牌的到期時間
     public string PasswordHash { get; set; } // 修改這裡：用於存儲哈希後的密碼
     public byte[] Salt { get; set; } // 新增這裡：用於存儲密碼的鹽
     public bool IsActive { get; set; } 

@@ -221,3 +221,23 @@ padding-right:30px;
     color: #14213d;
     font-size: 1.5rem;
 }
+
+.password-container {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.swal-button--confirm {
+    background-color: var(--deepBlue);
+}
+
+.swal-button {
+font-size:1.2rem;
+}
