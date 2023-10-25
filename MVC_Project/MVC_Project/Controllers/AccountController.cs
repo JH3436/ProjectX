@@ -194,13 +194,13 @@ namespace MVC_Project.Controllers
             return RedirectToAction("Homepage", "MyActivity");
         }
 
-		//忘記密碼開始
-		// GET 方法用於展示「忘記密碼」表單
-		[HttpGet]
-		public IActionResult ForgotPassword()
-		{
-			return View("~/Views/Home/ForgotPassword.cshtml");
-		}
+
+		//忘記密碼
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View("~/Views/Home/ForgotPassword.cshtml");
+        }
 
         // POST 方法用於處理「忘記密碼」請求
         [HttpPost]
@@ -210,8 +210,20 @@ namespace MVC_Project.Controllers
             var member = _context.Member.FirstOrDefault(m => m.Account == account && m.Email == email);
             if (member != null)
             {
-                // 發送重設密碼郵件
-                await SendResetPasswordEmail(email);
+                // 生成重設密碼令牌和過期時間
+                string resetToken = Guid.NewGuid().ToString();
+                DateTime expirationTime = DateTime.UtcNow.AddHours(2);  // 令牌在2小時後過期
+
+                member.ResetToken = resetToken;
+                member.ResetTokenExpiration = expirationTime;
+
+                _context.Update(member);
+                await _context.SaveChangesAsync();
+
+                // 發送帶有重設令牌的重設密碼郵件
+                string resetLink = $"https://localhost:7254/Account/ResetPassword?token={resetToken}"; // 生成重設密碼的鏈接
+                await SendResetPasswordEmail(email, resetLink);
+
                 return RedirectToAction("Login");
             }
             else
@@ -221,16 +233,15 @@ namespace MVC_Project.Controllers
             }
         }
 
-        
-        private async Task<bool> SendResetPasswordEmail(string email)
+        private async Task<bool> SendResetPasswordEmail(string email, string resetLink)
         {
             var member = _context.Member.FirstOrDefault(m => m.Email == email);
             var service = await GetGmailService();
 
             GmailMessage message = new GmailMessage
             {
-                Subject = "重設密碼",
-                Body = $"<h1>你的密碼是：{member.PasswordHash}</h1>", // 從數據庫中獲取密碼
+                Subject = "JO!N會員重設密碼",
+                Body = $"<h1>請點擊以下連接重設您的密碼：</h1><a href='{resetLink}'>重設密碼</a>",
                 FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
@@ -241,7 +252,58 @@ namespace MVC_Project.Controllers
             return true;
         }
 
-		//齊澤寄信
+        [HttpGet]
+        public IActionResult ResetPassword(string token, bool success = false)
+        {
+            if (success)
+            {
+                ViewData["ResetSuccess"] = "True";
+            }
+            return View("~/Views/Home/ResetPassword.cshtml", new ResetPasswordViewModel { Token = token });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var member = _context.Member.FirstOrDefault(m => m.ResetToken == model.Token && m.ResetTokenExpiration >= DateTime.UtcNow);
+
+                if (member == null)
+                {
+                    return View("Error", new { error = "無效或過期的令牌" });
+                }
+
+                // 重設密碼（這裡只是一個示例，你應該使用更安全的哈希方法）
+                // 哈希新密碼
+                string hashedNewPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                    password: model.NewPassword,
+                    salt: member.Salt,
+                    prf: KeyDerivationPrf.HMACSHA1,
+                    iterationCount: 10000,
+                    numBytesRequested: 256 / 8));
+
+                member.PasswordHash = hashedNewPassword;
+                _context.SaveChanges();
+
+                // 清除重設令牌和過期時間
+                member.ResetToken = null;
+                member.ResetTokenExpiration = null;
+
+                _context.Update(member);
+                await _context.SaveChangesAsync();
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("ResetPassword", "Account", new { success = true });
+
+            }
+
+            
+            return View("~/Views/Home/index");
+        }
+
+
+        //齊澤寄信
         [HttpPost]
         public async Task<IActionResult> newContact(string fullName, string mail, string mobileNumber, string emailSubject, string wrotetext)
         {
@@ -275,7 +337,7 @@ namespace MVC_Project.Controllers
             GmailMessage message = new GmailMessage
             {
                 Subject = "聯絡表單確認",
-                Body = $"<h1>親愛的 {contact.SenderName}，感謝您的留言。</h1><p>您的留言內容為：{contact.FormContent}</p>",
+                Body = $"<h1>親愛的 {contact.SenderName}，感謝您的留言。<br/></h1><p>您的留言內容為：<br/> {contact.FormContent}<br/>我們將迅速回復您</p>",
                 FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
