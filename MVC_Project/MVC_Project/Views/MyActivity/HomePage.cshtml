@@ -163,7 +163,7 @@
                             else
                             {
                                 <i class="fa-solid fa-envelope-open-text fa-2xl vote-icon disabled-icon" data-activityid="@activity.ActivityID"></i>
-                                <span class="custom-title">登入後即可參與投票</span>
+                                <span class="custom-title">登入後可點擊</span>
                             }
                         </div>
 
@@ -180,7 +180,7 @@
                             {
                                 @if (ViewBag.LikedActivityIds.Contains(@activity.ActivityID))
                                 {
-                                    <span class="card__liked-text">已參與投票</span>
+                                    <span class="card__liked-text">已取得投票資格</span>
                                 }
                                 else { }
                             }
