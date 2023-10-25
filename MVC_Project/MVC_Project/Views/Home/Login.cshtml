@@ -27,8 +27,11 @@
 				<div>
 					<input type="text" name="username" placeholder="帳號" />
 					<div class="tab"></div>
-					<input type="password" name="password" placeholder="密碼" />
-
+					
+					<div class="password-container">
+						<input type="password" id="Password" name="password" placeholder="密碼" />
+						<span toggle="#Password" class="fa fa-fw fa-eye field-icon toggle-password  eye-icon"></span>
+					</div>
 					<button type="submit" class="button">登入</button>
 				</div>
 
@@ -53,6 +56,16 @@
 
 
 </body>
+<script>
+$(".toggle-password").click(function () {
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") === "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+});
+</script>
 <script>
 
 	$(document).ready(function () {

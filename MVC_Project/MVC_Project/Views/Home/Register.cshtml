@@ -19,10 +19,19 @@
 
 		<input type="text" id="username2" name="account" placeholder="帳號" required>
 		<div class="tab"></div>
-		<input type="password" id="password2" name="password" placeholder="密碼" required>
-		<div class="tab"></div>
-		<input type="password" id="comfirm_password" name="comfirm_password" placeholder="確認密碼" required>
-		<span id="passwordMismatch" style="color: red; display: none;">輸入與新密碼不符合</span>
+
+			<div class="password-container">
+				<input type="password" id="password2" name="password" placeholder="密碼" required>
+				<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password eye-icon"></span>
+			</div>
+			<div class="tab"></div>
+			<div class="password-container">
+				<input type="password" id="comfirm_password" name="comfirm_password" placeholder="確認密碼" required>
+				<span id="passwordMismatch" style="color: red; display: none;">輸入與新密碼不符合</span>
+				
+			</div>
+		
+		
 
 		<div class="tab"></div>
 		<input type="text" id="fullname" name="nickname" placeholder="暱稱" required>
@@ -43,6 +52,18 @@
 </div>
 
 <script>
+
+	$(document).ready(function () {
+		$(".toggle-password").click(function () {
+			var input = $($(this).attr("toggle"));
+			if (input.attr("type") === "password") {
+				input.attr("type", "text");
+			} else {
+				input.attr("type", "password");
+			}
+		});
+	});
+
 	window.addEventListener('DOMContentLoaded', function () {
 		var password = document.getElementById('password2');
 		var confirmPassword = document.getElementById('comfirm_password');
