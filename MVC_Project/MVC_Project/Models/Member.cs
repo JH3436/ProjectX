@@ -7,14 +7,14 @@ namespace MVC_Project.Models;
 
 public partial class Member
 {
+    public string PasswordHash { get; set; } // 修改這裡：用於存儲哈希後的密碼
+    public byte[] Salt { get; set; } // 新增這裡：用於存儲密碼的鹽
     public bool IsActive { get; set; } 
     public int UserID { get; set; }
 
     public string Nickname { get; set; }
 
     public string Account { get; set; }
-
-    public string Password { get; set; }
 
     public string Email { get; set; }
 

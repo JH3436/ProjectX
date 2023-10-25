@@ -133,7 +133,7 @@ public partial class ProjectXContext : DbContext
             entity.Property(e => e.Account).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.Nickname).HasMaxLength(50);
-            entity.Property(e => e.Password).HasMaxLength(255);
+            entity.Property(e => e.PasswordHash).HasMaxLength(255);
             entity.Property(e => e.Phone).HasMaxLength(20);
         });
 
