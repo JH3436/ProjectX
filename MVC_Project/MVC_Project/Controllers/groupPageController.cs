@@ -225,7 +225,7 @@ namespace MVC_Project.Controllers
             int? account = HttpContext.Session.GetString("UserId") != null ?
                 int.Parse(HttpContext.Session.GetString("UserId")) :
                 (int?)null;
-            if (account == 1) 
+            if (account == 7) 
             { 
                 return Ok(true); 
             } else {

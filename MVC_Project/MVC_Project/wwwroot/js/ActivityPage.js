@@ -532,7 +532,7 @@ function userEditDelete() {
         const chatUserId = editLink.attr('value');
 
         // 检查条件，如果当前用户的ID等于聊天用户的ID，则显示链接
-        if (currentUserId === chatUserId || currentUserId == 1) {
+        if (currentUserId === chatUserId || currentUserId == 7) {
             editLink.css('display', 'inline-block');
         } else {
             editLink.css('display', 'none');
@@ -562,7 +562,7 @@ function getUserInfo() {
             $('.commentDiv').remove();
             $('#discussInput').remove();
             $('#discussBtn').replaceWith(`
-                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 登入以參與討論</span>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名後顯示內容</span>
             `);
         }
     });
@@ -582,7 +582,7 @@ function getUserIngroup() {
                 $('.commentBtnDiv').remove();
                 $('#discussInput').remove();
                 $('#discussBtn').replaceWith(`
-                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名以參與討論</span>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名後開放留言功能</span>
             `);
             }
 
@@ -611,7 +611,7 @@ $(document).on('click', '.deleteA', function () {
         if (result.isConfirmed) {
             const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
             const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
-            if (currentUserId === replyUserId || currentUserId == 1) {
+            if (currentUserId === replyUserId || currentUserId == 7) {
                 const ChatID = $(this).attr('ChatID'); // 获取要删除的留言的 ID
                 console.log(ChatID);
 
