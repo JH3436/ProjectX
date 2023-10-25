@@ -562,7 +562,7 @@ function getUserInfo() {
             $('.commentDiv').remove();
             $('#discussInput').remove();
             $('#discussBtn').replaceWith(`
-                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 登入以參與討論</span>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名後顯示內容</span>
             `);
         }
     });
@@ -582,7 +582,7 @@ function getUserIngroup() {
                 $('.commentBtnDiv').remove();
                 $('#discussInput').remove();
                 $('#discussBtn').replaceWith(`
-                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名以參與討論</span>
+                <span class="registertodiscuss"><i class="fa-solid fa-triangle-exclamation fa-lg" style="color: #eed21b;"></i> 報名後開放留言功能</span>
             `);
             }
 
