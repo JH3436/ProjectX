@@ -10,6 +10,8 @@ using Google.Apis.Services;
 using MimeKit;
 using System.Net.Mail;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 namespace MVC_Project.Controllers
 {
@@ -37,30 +39,34 @@ namespace MVC_Project.Controllers
 			return View("~/Views/Home/Register.cshtml");
 		}
 
+
+
         [HttpPost]
-	public IActionResult Login(string username, string password, string returnUrl)
-	{
-    var member = _context.Member.FirstOrDefault(m => m.Account == username && m.Password == password);
-    if (member != null)
-    {
-        // 檢查用戶是否已經啟用
-        if (!member.IsActive)
+        public IActionResult Login(string username, string password, string returnUrl)
         {
-            TempData["ErrorMessage"] = "此帳號尚未啟用，請先啟用帳號。";
+            var member = _context.Member.FirstOrDefault(m => m.Account == username);
+            if (member != null)
+            {
+                // 哈希輸入的密碼和存儲的salt，然後與存儲的哈希密碼進行比較
+                string hashedInputPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                    password: password,
+                    salt: member.Salt,  // 從數據庫中獲取salt
+                    prf: KeyDerivationPrf.HMACSHA1,
+                    iterationCount: 10000,
+                    numBytesRequested: 256 / 8));
+
+                if (hashedInputPassword == member.PasswordHash)  // 注意這裡改成了 PasswordHash
+                {
+                    // 密碼驗證成功，執行後續操作
+                    HttpContext.Session.SetString("UserId", member.UserID.ToString());
+                    return Redirect("https://localhost:7254/");
+                }
+            }
+
+            TempData["ErrorMessage"] = "帳號或密碼錯誤";
             return View("~/Views/Home/Login.cshtml");
         }
 
-        HttpContext.Session.SetString("UserId", member.UserID.ToString()); // 儲存使用者ID到 session
-
-				// 檢查 returnUrl 是否存在並且是一個有效的 URL
-
-				return Redirect("https://localhost:7254/");
-
-			}
-
-    TempData["ErrorMessage"] = "帳號或密碼錯誤";
-    return View("~/Views/Home/Login.cshtml");
-}
 
         [HttpPost]
 		public async Task<IActionResult> Register(string account, string password, string comfirm_password, string nickname, string email)
@@ -78,12 +84,27 @@ namespace MVC_Project.Controllers
 				return View("~/Views/Home/Register.cshtml", new { error = "使用者已存在" });
 			}
 
-			var newUser = new Member
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            // 使用密碼和salt進行哈希
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            var newUser = new Member
 			{
                 IsActive = false,  // 新增
                 Account = account,
-				Password = password, // 實際應用應使用加密存儲
-				Nickname = nickname,
+                PasswordHash = hashedPassword,  // 更新這裡
+                Salt = salt,  // 更新這裡
+                Nickname = nickname,
 				Email = email,
 				Phone=account,
 			
@@ -204,7 +225,7 @@ namespace MVC_Project.Controllers
             GmailMessage message = new GmailMessage
             {
                 Subject = "重設密碼",
-                Body = $"<h1>你的密碼是：{member.Password}</h1>", // 從數據庫中獲取密碼
+                Body = $"<h1>你的密碼是：{member.PasswordHash}</h1>", // 從數據庫中獲取密碼
                 FromAddress = "JO!N <lin0975408252@gmail.com>",
                 IsHtml = true,
                 ToRecipients = email
@@ -276,7 +297,7 @@ namespace MVC_Project.Controllers
 		/// 存放 client_secret 和 credential 的地方
 		/// </summary>
 
-		string SecretPath = @"C:\Users\DORA\Documents\GitHub\ProjectX";
+		string SecretPath = @"C:\Users\User\Documents\GitHub\ProjectX";
 		//string jsonFilePath = Path.Combine("wwwroot", "Resources", "client_secret.json");
 		/// <summary>
 		/// 認証完成後回傳的網址, 必需和 OAuth 2.0 Client Id 中填寫的 "已授權的重新導向 URI" 相同。

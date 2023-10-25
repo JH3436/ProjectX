@@ -9,6 +9,7 @@ using System.Text;
 using SmartBreadcrumbs.Attributes;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace MVC_Project.Controllers
 
@@ -315,13 +316,11 @@ namespace MVC_Project.Controllers
         [HttpPost]
         public IActionResult ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            //var memberId = 1/* 取得已登入會員ID的方式 */;
-
             var userIdString = HttpContext.Session.GetString("UserId");
             if (!int.TryParse(userIdString, out var memberId))
             {
                 TempData["ErrorMessage"] = "未登錄或Session已過期";
-                return RedirectToAction("Login", "Home"); // Redirect to login page or any error page
+                return RedirectToAction("Login", "Home");
             }
 
             var member = _context.Member.Find(memberId);
@@ -330,25 +329,39 @@ namespace MVC_Project.Controllers
                 return View("Error", "未找到會員資料");
             }
 
-            if (member.Password != oldPassword)
+            // 驗證舊密碼
+            string hashedOldPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: oldPassword,
+                salt: member.Salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            if (hashedOldPassword != member.PasswordHash)
             {
-                // 密碼錯誤，顯示錯誤訊息
                 TempData["PasswordChangeError"] = "舊密碼不正確";
-                return RedirectToAction("Member");  // 重導到會員頁面
+                return RedirectToAction("Member");
             }
 
             if (newPassword != confirmPassword)
             {
-                // 密碼不符合，不過這種情況不太可能發生，因為前端已經有檢查
                 TempData["PasswordChangeError"] = "新密碼與確認密碼不符合";
-                return RedirectToAction("Member");  // 重導到會員頁面
+                return RedirectToAction("Member");
             }
 
-            member.Password = newPassword;
+            // 哈希新密碼
+            string hashedNewPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: newPassword,
+                salt: member.Salt,  // 通常新密碼應該使用新的Salt，但為了簡單起見在這裡我們用了舊的Salt
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            member.PasswordHash = hashedNewPassword;
             _context.SaveChanges();
 
             TempData["PasswordChangeSuccess"] = "密碼已成功更改";
-            return RedirectToAction("Member");  // 重導到會員頁面
+            return RedirectToAction("Member");
         }
 
         [HttpPost]
