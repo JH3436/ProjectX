@@ -47,6 +47,11 @@ namespace MVC_Project.Controllers
             var member = _context.Member.FirstOrDefault(m => m.Account == username);
             if (member != null)
             {
+                if (!member.IsActive)
+                {
+                    TempData["ErrorMessage"] = "此帳號尚未啟用，請先啟用帳號。";
+                    return View("~/Views/Home/Login.cshtml");
+                }
                 // 哈希輸入的密碼和存儲的salt，然後與存儲的哈希密碼進行比較
                 string hashedInputPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                     password: password,
