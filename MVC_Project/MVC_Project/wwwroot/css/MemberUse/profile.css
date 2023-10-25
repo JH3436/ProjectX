@@ -420,7 +420,8 @@ label {
     --bs-pagination-active-border-color: var(--orange);
     --bs-pagination-color: var(--deepBlue);
     --bs-pagination-bg: var(--white);
-    --bs-pagination-font-size:1.2rem;
+    --bs-pagination-font-size: 1.2rem;
+    --bs-pagination-disabled-bg: #ced4da;
 }
 
 .form-label {
@@ -439,4 +440,13 @@ color:var(--white)
 .card-title > a:hover{
     text-decoration: none; /* 移除底線 */
     color: var(--orange);
+}
+
+.field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
 }

@@ -104,12 +104,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
             
             <div class=" col-4 mb-3">
                 <label for="oldPassword" class="form-label">舊密碼：</label>
-                <input type="password" class="form-control" id="oldPassword" name="oldPassword" required />               
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" required />
+                        <span toggle="#oldPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
             </div>
 
             <div class="col-4 mb-3">
                 <label for="newPassword" class="form-label">新密碼：</label>
                 <input type="password" class="form-control" id="newPassword" name="newPassword" required />
+                        <span toggle="#newPassword" class="fa fa-fw fa-eye field-icon toggle-password"></span>
             </div>
 
             <div class="col-4 mb-3">
@@ -133,6 +135,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.min.css
 
 
 <script>
+
+    // 使用 jQuery
+    $(".toggle-password").click(function () {
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
     document.getElementById('confirmPassword').addEventListener('input', function () {
         var newPassword = document.getElementById('newPassword').value;
         var confirmPassword = document.getElementById('confirmPassword').value;
