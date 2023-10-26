@@ -780,10 +780,14 @@ function replyUpdate(chatId) {
     });
 }
 
+
+$(document).ready(function () {
+    photoGet();
+    console.log("getphoto");
+    });
 //圖片API
 function photoGet() {
     const id = getIdFromUrl();
-
     $.ajax({
         url: `/api/photoGet/${id}`,
         type: 'GET',
