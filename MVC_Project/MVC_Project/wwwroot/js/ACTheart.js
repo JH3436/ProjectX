@@ -24,7 +24,7 @@ VoteIcons.forEach(function (voteIcon) {
                         const cardInfo = voteIcon.closest('.card').querySelector('.card__info');
 
                         const likedText = document.createElement('span');
-                        likedText.textContent = '已參與投票';
+                        likedText.textContent = '已取得投票資格';
                         likedText.classList.add('card__liked-text');
 
                         cardInfo.appendChild(likedText);
