@@ -637,4 +637,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+.progress:hover {
+    cursor: pointer;
+}

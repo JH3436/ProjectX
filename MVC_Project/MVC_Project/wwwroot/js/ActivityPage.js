@@ -527,6 +527,10 @@ function updateChatInModal(chatList) {
 //會員讀取自訂函式
 function userEditDelete() {
     const currentUserId = $('#currentUserId').val(); // 使用者id
+    const organizerId = organizerInfoElement.getAttribute("data-organizer-id");
+    console.log(organizerId);
+    console.log(currentUserId);
+
     $('.editA, .deleteA').each(function () {
         const editLink = $(this);
         const chatUserId = editLink.attr('value');
@@ -611,6 +615,7 @@ $(document).on('click', '.deleteA', function () {
         if (result.isConfirmed) {
             const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
             const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
+            const organizerId = organizerInfoElement.getAttribute("data-organizer-id");
             if (currentUserId === replyUserId || currentUserId == 7) {
                 const ChatID = $(this).attr('ChatID'); // 获取要删除的留言的 ID
                 console.log(ChatID);
@@ -931,3 +936,29 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    const id = getIdFromUrl();
+    $.ajax({
+        url: `/api/registration/${id}`,  
+        method: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            var RegistrationHTML = "";
+            var count = 0;
+            response.forEach(function (responseList) {
+                count ++ ;
+                var tr = `<tr>
+                            <th scope="row">${count}</th>
+                            <td>${responseList.Nickname}</td>
+                            </tr>`
+                RegistrationHTML = RegistrationHTML + tr;
+            });
+            $("#RegistrationName").append(RegistrationHTML);
+        }
+    });
+    
+    $(".progress").click(function () {
+        console.log("showmodal");
+        $("#registrationModal").modal("show");
+    });
+});

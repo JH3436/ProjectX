@@ -256,6 +256,17 @@ namespace MVC_Project.Controllers
             else { return BadRequest(); }
 
         }
+        [HttpGet("/api/registration/{id}")]
+        public IActionResult registration(int id)
+        {
+            var temp = from r in _context.Registration
+                       join m in _context.Member
+                       on r.ParticipantID equals m.UserID
+                       where r.GroupID == id
+                       select m;
+            return Ok(temp);
+                
+        }
 
         //刪除留言
         // DELETE: groupPage/Delete/1
