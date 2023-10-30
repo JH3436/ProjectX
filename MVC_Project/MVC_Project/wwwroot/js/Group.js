@@ -10,7 +10,7 @@ if (userId = !0) {
 
         let today = new Date();
         let nextMonth = new Date(today);
-        nextMonth.setMonth(today.getMonth() + 1);
+        nextMonth.setMonth(today.getMonth() );
 
         startDate.min = formatDate(nextMonth);
 
