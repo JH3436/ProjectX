@@ -101,7 +101,7 @@ $('#cropImageBtn').on('click', function (ev) {
     });
 });
 
-
+ 
     
 });
 

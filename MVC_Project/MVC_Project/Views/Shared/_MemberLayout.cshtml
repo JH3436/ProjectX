@@ -1,4 +1,6 @@
-﻿@*
+﻿@using Microsoft.AspNetCore.Http
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -150,6 +152,15 @@
                         <div class="menu-item-container">
                             <a href="/Member/MyGroups" class="menu-item" data-content="delete">個人揪團</a>
                         </div>
+                            @{
+                                var UserID = Context.Session.GetString("UserId");
+                                if (UserID == "7") 
+                                {
+                                    <div class="menu-item-container">
+                                        <a href="/Member/Admin" class="menu-item" data-content="admin" id="adminBtn">管理員專區</a>
+                                    </div>
+                                }
+                            }
                     </div>
                         </div>
                 </div>

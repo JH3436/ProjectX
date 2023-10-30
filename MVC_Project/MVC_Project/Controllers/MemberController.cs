@@ -175,6 +175,42 @@ namespace MVC_Project.Controllers
             return View();
         }
 
+
+        //管理員
+        public IActionResult Admin()
+        {
+            return View();
+        }
+
+        [HttpGet("/api/getChatData")]
+        public IActionResult getChatData()
+        {
+            var temp = from c in _context.Chat
+                       select new adminChat {
+                           ChatID = c.ChatID,
+                           ActivityID = c.ActivityID,
+                           UserID = c.UserID,
+                           ChatContent = c.ChatContent
+                       };
+            return Ok(temp);
+        }
+
+        [HttpGet("/api/getGroupData")]
+        public IActionResult getGroupData()
+        {
+            var temp = from g in _context.Group
+                       select g;
+            return Ok(temp);
+        }
+
+        [HttpGet("/api/getActivityData")]
+        public IActionResult getActivityData()
+        {
+            var temp = from m in _context.MyActivity
+                       select m;
+            return Ok(temp);
+        }
+
         //public IActionResult LikeRecord()
         //{
         //    var userId = 1; // 從當前登錄的使用者取得UserId
