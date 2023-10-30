@@ -225,7 +225,7 @@ VoteIcons.forEach(function (voteIcon) {
                         voteIcon.setAttribute('style', 'padding-left: 3px');
                         // 找到 custom-title 元素並更改其內容
                         var customTitle = document.querySelector('.custom-title');
-                        customTitle.textContent = '已參與投票';
+                        customTitle.textContent = '已取得投票資格';
                     },
                     error: function (error) {
                         // 處理錯誤，如果有錯誤發生
@@ -247,7 +247,7 @@ VoteIcons.forEach(function (voteIcon) {
                         voteIcon.removeAttribute('style');
                         // 找到 custom-title 元素並更改其內容
                         var customTitle = document.querySelector('.custom-title');
-                        customTitle.textContent = '參與投票';
+                        customTitle.textContent = '已取得投票資格';
                     },
                     error: function (error) {
                         // 處理錯誤，如果有錯誤發生
