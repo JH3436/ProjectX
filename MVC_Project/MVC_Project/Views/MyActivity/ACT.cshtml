@@ -125,9 +125,9 @@
 
     @*個人*@
 
-    <div class="card-div">
+    @* <div class="card-div">
         <section class="cards">
-            @foreach (var groups in Model.Groups)
+            @foreach (var groups in @Model.Groups)
             {
                 <article class="card" data-groupid="@groups.GroupID">
                     <div class="card__info-hover">
@@ -145,7 +145,7 @@
                         <div class="card__img--hover" style="background-image: url('data:image/png;base64,@Convert.ToBase64String(groups.PhotoData)');"></div>
                     </a>
                     @* <div class="category-box">個人揪團</div> *@
-                    <div class="card__info">
+                    @* <div class="card__info">
                         <span class="card__category">@groups.GroupCategory</span>
                         <h3 class="card__title">@groups.GroupName</h3>
                         <p class="card__period">@groups.StartDate?.ToString("yyyy-MM-dd") ~ @groups.EndDate?.ToString("yyyy-MM-dd")</p>
@@ -154,9 +154,9 @@
                 </article>
             }
         </section>
-    </div>
+    </div> *@
 
-
+ 
     <br>
     <br>
     <!-- 分頁 -->
