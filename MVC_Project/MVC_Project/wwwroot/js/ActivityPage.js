@@ -527,9 +527,6 @@ function updateChatInModal(chatList) {
 //會員讀取自訂函式
 function userEditDelete() {
     const currentUserId = $('#currentUserId').val(); // 使用者id
-    const organizerId = organizerInfoElement.getAttribute("data-organizer-id");
-    console.log(organizerId);
-    console.log(currentUserId);
 
     $('.editA, .deleteA').each(function () {
         const editLink = $(this);
@@ -615,7 +612,6 @@ $(document).on('click', '.deleteA', function () {
         if (result.isConfirmed) {
             const currentUserId = $('#currentUserId').val(); // 当前用户的 ID
             const replyUserId = $(this).attr('value'); // 获取要删除的留言的用户 ID
-            const organizerId = organizerInfoElement.getAttribute("data-organizer-id");
             if (currentUserId === replyUserId || currentUserId == 7) {
                 const ChatID = $(this).attr('ChatID'); // 获取要删除的留言的 ID
                 console.log(ChatID);
