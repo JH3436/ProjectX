@@ -24,7 +24,7 @@ namespace MVC_Project.Controllers
 
         //根據活動ID查找要顯示的投票選項
         // GET: /VoteRecords/SelectDate/{ActivityId}
-        [Breadcrumb("官方活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
+        [Breadcrumb("預設活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
         public IActionResult SelectDate(int? id)
         {
             //接收來自點擊通知的ActivityID
@@ -66,7 +66,7 @@ namespace MVC_Project.Controllers
             return View();
         }
 
-        [Breadcrumb("官方活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
+        [Breadcrumb("預設活動投票", FromAction = nameof(MemberController.Member), FromController = typeof(MemberController))]
         //小胖拿過來給頁面
         public IActionResult SelectDatefromMember(int? userId, int? activityId)
         {
